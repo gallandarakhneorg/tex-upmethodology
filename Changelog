@@ -1,0 +1,131 @@
+2013-05-18 Stéphane GALLAND <galland@arakhne.org>
+	* upmethodology-fmt.sty: Replace the image extension 'pstex_t' by 'pdftex_t'.
+
+2013-05-17 Stéphane GALLAND <galland@arakhne.org>
+	* upmethodology-p-common.sty: fixing the name of the provided package.
+	* upmethodology-document.cls: Replace the option 'pdftex=true' by 'pdftex' for hyperref package.
+	* upmethodology-fmt.sty: Define the default graphic extensions: pdf, png, jpg, jpeg, tiff, gif.
+	* upmethodology-fmt.sty: Define the default graphic search path to the current directory.
+
+2013-04-28 Stéphane GALLAND <galland@arakhne.org>
+	* upmethodology-p-common.sty: include the package
+          "xcolor.sty" in place of "color.sty".
+
+2013-04-01 Stéphane GALLAND <galland@arakhne.org>
+	* upmethodology-fmt.sty: Do not put the default
+	  bibliography style if it was already given
+	  by the expanding of \bibliographystyle.
+
+2012-10-02 Stéphane GALLAND <galland@arakhne.org>
+	* upmethodology-document.cls: Process the class options in
+          the order given by the caller and not in the order given
+          in the ".cls" file.
+
+2012-09-21 Stéphane GALLAND <galland@arakhne.org>
+	* upmethodology-extension.sty: Replace "(c)" by "\copyright"
+
+2012-09-17 Stéphane GALLAND <galland@arakhne.org>
+	* upmethodology-fmt.sty: Bug fix in the macros \makename and \upmmakename. The size of the
+                                 first name is now relative to the size of the name.
+
+2009-12-30 Stéphane GALLAND <galland@arakhne.org>
+	* upmethodology-version.sty: major version number incrementation must reset the minor version number.
+
+2009-11-19 Stéphane GALLAND <galland@arakhne.org>
+	* upmethodology-fmt.sty: Update inline enumeration to allow \label inside.
+
+2009-11-03 Stéphane GALLAND <galland@arakhne.org>
+	* upmethodology-document.sty: Add star-ed macros for author, informed people
+                                      and validator addition macros.
+	* upmethodology-p-common.sty: \If* macros are marked with \long.
+	* upmethodology-extension.sty: \If* macros are marked with \long.
+
+2009-11-02 Stéphane GALLAND <galland@arakhne.org>
+	* upmethodology-fmt.sty: Fixing footnote macros to allow to put any character as id.
+	* upmethodology-fmt.sty: Add macros: \prname, \drname, \phdname, \scdname, 
+                                 \mdname, \pename, \iename.
+
+2009-10-30 Stéphane GALLAND <galland@arakhne.org>
+	* upmethodology-fmt.sty: Add support for book and report classes.
+	* upmethodology-document.cls: Add "book", "report" and "article" options.
+	* upmethodology-document.sty: Allow to override the default document font.
+	* upmethodology-document.sty: Add "book", "report" and "article" support.
+	* upmethodology-backpage.sty: Rename \setbacklayout to \setbackcover.
+	* upmethodology-backpage.sty: Add \makebackcover.
+	* upmethodology-extension.sty: Bug fix: provides "upmethodology-extension"
+	                               insteed of "upmethodology-document".
+	* upmethodology-frontpage.sty: Clean code.
+	* upmethodology-p-common.sty: First public release.
+
+2009-10-29 Stéphane GALLAND <galland@arakhne.org>
+	* upmethodology-frontpage.sty: Major bug fix: invert order of the \setfrontillustration parameters.
+	* upmethodology-document.sty: Allow to override the default document font.
+
+2009-10-28 Stéphane GALLAND <galland@arakhne.org>
+	* upmethodology-fmt.sty: add \parskip.
+	* upmethodology-fmt.sty: add \setpdfcolor.
+	* upmethodology-document.sty: Fixing major bug on PDF bookmarks.
+	* upmethodology-document.cls: Fixing major bug on PDF bookmarks.
+
+2009-10-27 Stéphane GALLAND <galland@arakhne.org>
+	* upmethodology-extension.sty: Clean the extension API.
+	* upmethodology-extension.sty: Add publication page.
+	* upmethodology-frontpage.sty: Clean the extension API.
+	* upmethodology-document.sty: Clean the extension API.
+	* upmethodology-document.sty: Fixing document synoptic.
+	* upmethodology-document.sty: Add publication page.
+	* upmethodology-document.cls: Add publication page.
+	* upmethodology-fmt.cls: Add framedminipage environment.
+
+2009-10-25 Stéphane GALLAND <galland@arakhne.org>
+	* upmethodology-document.sty: Add abstract and keywords.
+
+2009-10-24 Stéphane GALLAND <galland@arakhne.org>
+	* upmethodology-extension.sty: first public release.
+
+2009-10-23 Stéphane GALLAND <galland@arakhne.org>
+	* upmethodology-document.sty: add front/back pages in extensions.
+	* upmethodology-document.sty: add \if commands on extension's values.
+	* upmethodology-frontpage.sty: add support for front page UPM extensions.
+	* upmethodology-backpage.sty: first public release.
+	* upmethodology-document.cls: add back page support.
+
+2009-10-09 Stéphane GALLAND <galland@arakhne.org>
+	* upmethodology-document.cls: add "nodocumentinfo" option.
+
+2009-06-25 Stéphane GALLAND <galland@arakhne.org>
+	* upmethodology-fmt.sty: Add \tablenote in mtable environment.
+
+2009-06-24 Stéphane GALLAND <galland@arakhne.org>
+	* upmethodology-version.sty: Update English words.
+	* upmethodology-document.sty: Add automatic watermarks.
+
+2009-06-23 Stéphane GALLAND <galland@arakhne.org>
+	* upmethodology-fmt.sty: Add upmcaution, upminfo and upmquestion environments.
+
+2009-05-08 Stéphane GALLAND <galland@arakhne.org>
+	* upmethodology-fmt.sty: Remove CR character
+        * upmethodology-fmt.sty: Add \arakhneorg command
+
+2009-04-29 Stéphane GALLAND <galland@arakhne.org>
+	* upmethodology-fmt.sty: Include package pifont (texlive distribution)
+
+2007-08-12 Stéphane GALLAND <galland@arakhne.org>
+	* Split the sources to extract the extentions
+          inside another tarball.
+
+2007-07-07 Stéphane GALLAND <galland@arakhne.org>
+	* Provide commands to change the bibliography style
+
+2007-07-06 Stéphane GALLAND <galland@arakhne.org>
+	* Bug fix: use varioref for the footnote references.
+
+2007-07-05 Stéphane GALLAND <galland@arakhne.org>
+	* Add people name formatting function.
+
+2007-07-04 Stéphane GALLAND <galland@arakhne.org>
+	* Bug fix: front page layout
+
+2007-07-03 Stéphane GALLAND <galland@arakhne.org>
+	* First public release
+

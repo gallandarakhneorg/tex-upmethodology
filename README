@@ -1,0 +1,30 @@
+-------------------
+TETEX-UPMETHODOLOGY
+-------------------
+
+tetex-upmethodology is a (La)TeX style which permits to create Unified Process methodology (UP or RUP) based documents (document version, history, authors, validators, specification, task management, helping tools...).
+
+-------------------
+INSTALL
+-------------------
+
+1) Copy the content of the directory inside one of your texmf directory (us
+ually /usr/share/texmf/tex/latex/upmethodology or $HOME/.texmf)
+
+2) Update the LaTeX databases:
+   $> mktexlsr
+   $> update-updmap --quiet
+
+-------------------
+AUTHOR
+-------------------
+
+Stéphane GALLAND <galland@arakhne.org>
+
+-------------------
+LICENSE
+-------------------
+
+GNU LESSER GENERAL PUBLIC LICENSE (see COPYING)
+
+
