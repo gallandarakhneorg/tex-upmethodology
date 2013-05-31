@@ -19,6 +19,8 @@
 %
 % Creation date: 2006-04-06
 % Modifications (lastest first):
+%   2013-05-31   Add the extensions 'pdf_tex' and 'ps_tex' in the default list of extensions
+%                for \includegraphicswtex.
 %   2013-05-30   Add macro \includegraphicswtex, which is supporting 'pdftex_t' and 'pstex_t'.
 %   2013-05-18   Replace the image extension 'pstex_t' by 'pdftex_t'.
 %   2013-05-17   Define the default graphic extensions: pdf, png, jpg, jpeg, tiff, gif.
@@ -53,7 +55,7 @@
 %                Bug fix: centering table's headers.
 %
 
-\global\edef\upm@package@fmt@ver{2013/05/30}
+\global\edef\upm@package@fmt@ver{2013/05/31}
 
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
 \ProvidesPackage{upmethodology-fmt}[\upm@package@fmt@ver]
@@ -255,6 +257,11 @@
 % IMAGES INCLUDING TeX EXPRESSIONS
 %----------------------------------------
 
+%
+% This section is copied from the AutoLaTeX package
+% http://www.arakhne.org/autolatex
+%
+
 % Private macros for \includegraphicswtex
 \providecommand{\upm@figtex@includewtex@extensions}{}
 \define@key{upmethodologyincludewtex}{width}{%
@@ -284,7 +291,7 @@
 \providecommand{\DeclareGraphicsExtensionsWtex}[1]{%
 	\xdef\upm@figtex@includewtex@extensions{\zap@space#1 \@empty}%
 }
-\DeclareGraphicsExtensionsWtex{.pdftex_t,.pstex_t}
+\DeclareGraphicsExtensionsWtex{.pdftex_t,.pstex_t,.pdf_tex,.ps_tex}
 
 %-----
 %\includefigurewtex{width=xx,height=yy}{filename}
