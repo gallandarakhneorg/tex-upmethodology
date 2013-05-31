@@ -10,12 +10,13 @@
 \incversion{\makedate{28}{04}{2013}}{Replace the package inclusion of \texttt{color.sty} by \texttt{xcolor.sty}}{\upmpublic}
 \incversion{\makedate{17}{05}{2013}}{Add a section on the default configuration of the package \texttt{graphicx}}{\upmpublic}
 \incversion{\makedate{30}{05}{2013}}{Add the macros \texttt{{\textbackslash}includegraphicswtex} and \texttt{{\textbackslash}DeclareGraphicsExtensionsWtex}}{\upmpublic}
+\incsubversion{\makedate{31}{05}{2013}}{Fixing some grammar and syntax problems.}{\upmpublic}
 
 \addauthorvalidator*[galland@arakhne.org]{St{\'e}phane}{Galland}{Original Author}
 
 \setdockeywords{\LaTeX, Methodology Document Style, User Documentation, Extensible}
 
-\setdocabstract{Packages upmethodology permis to write documents according to Unified Process Methodology or other methodology. It was initially wittren by St\'ephane \textsc{Galland} from Systems and Transport laboratory and is distributed by the \arakhneorg website.}
+\setdocabstract{Packages upmethodology permis to write documents according to Unified Process Methodology or other methodology. It was initially wittren by St\'ephane \textsc{Galland} from the laboratory ``Syst\`emes et Transports'' and is distributed by the \arakhneorg website.}
 
 \makeatletter
 \let\VERversion\upm@package@version@ver
@@ -33,7 +34,7 @@
 \setcopyrighter{St\'ephane GALLAND}
 \setprintingaddress{France}
 \defupmlogo{arakhne_org_logo}
-\defupmsmalllogo{small_arakhne_org_logo}
+\defupmsmalllogo{arakhne_org_logo}
 
 %\tracingmacros=2
 %\tracingcommands=1
@@ -50,7 +51,8 @@
 
 \chapter{Introduction}
 
-This set of package permits to write documents according to Unified Process Methodology. It was initially wittren by St\'ephane \textsc{Galland} from Systems and Transport laboratory\savefootnote{Systems and Transport Laboratory, University of Technology of Belfort-Montb{\'e}liard, France, \href{http://set.utbm.fr/}{http://set.utbm.fr/}}{foot:setlab} and is distributed by the \arakhneorg website.
+This set of package permits to write documents according to Unified Process Methodology. It was initially wittren by St\'ephane \textsc{Galland} from the laboratory ``Syst\`emes et Transports''\savefootnote{Laboratory \emph{Syst\`emes et Transport} (IRTES-SET), Institut de Recherche sur le Transport, l'\'Energie et la Soci\'et\'e (ITRTES), Universit\'e de Technologie de Belfort-Montb{\'e}liard (UTBM), France, \href{http://set.utbm.fr/}{http://set.utbm.fr/}}{foot:setlab} and is distributed by the \arakhneorg website.
+The provided packages and classes may also be used for other types of documents (reports, thesis...) Since 2012, it is used to support the layout and the style for the PhD thesis of the Doctoral School SPIM\footnote{Doctoral School on the Sciences for enginers, and microtechnics, \href{http://ed-spim.univ-fcomte.fr/}{http://ed-spim.univ-fcomte.fr/}}.
 
 Packages are:
 \begin{itemize}
@@ -101,7 +103,7 @@ It is not required to rebuild the system-wide \LaTeX\ databases because the user
 
 \section{Debian Package Installation}
 
-Debian packages are available on \arakhneorg website: \url{http://www.arakhne.org/download.html}. Please follow the given rules.
+Debian packages are available on \arakhneorg website: \url{http://www.arakhne.org/ubuntu.html}. Please follow the given rules.
 
 \section{Package Dependencies}
 
@@ -174,6 +176,7 @@ This section contains the list of all the package dependencies for the \texttt{u
 \item \texttt{pifont}
 \item \texttt{setspace}
 \item \texttt{txfonts}
+\item \texttt{keyval}
 \end{itemize}
 
 \subsection{upmethdology-frontpage.sty}
@@ -229,17 +232,17 @@ This section contains the list of all the package dependencies for the \texttt{u
 	\texttt{Version: \VERdocclazz}
 \end{center}
 
-The \LaTeX\ class \texttt{upmethodology-document} provides the basic configuration for a document. According to an option, this class is able to extend the standard \texttt{book}, \texttt{report} or \texttt{article} \LaTeX\ classes. It also include a snipset of the other \texttt{upmethdology} packages.
+The \LaTeX\ class \texttt{upmethodology-document} provides the basic configuration for a document. According to an option, this class is able to extend the standard \texttt{book}, \texttt{report} or \texttt{article} \LaTeX\ classes. It also include several of the other \texttt{upmethdology} packages.
 
 \section{Types of documents}\label{section:documentclass:doctype}
 
-\texttt{upmethodology-document} supports three special options which permits to set the type of document:
+\texttt{upmethodology-document} supports three particular options, which permit to set the type of document:
 \begin{itemize}
 \item \texttt{book}: A book-specification is a two-sided document composed of parts and chapters, and with a copyright page and document information page. This option indicates to \texttt{upmethodology-document} to load the \LaTeX\ standard \texttt{book} class. In addition the \texttt{{\textbackslash}part} and \texttt{{\textbackslash}chapter} macros are supported, and the following macros are automatically expanded: \texttt{{\textbackslash}makefrontcover}, \texttt{{\textbackslash}upmpublicationpage}, \texttt{{\textbackslash}upmdocumentsummary}, \texttt{{\textbackslash}makebackcover}. This behaviour may be overridden by the other class options.
 
 \item \texttt{report}: A report-specification is a one-sided document composed of chapters (no part), and with a document information page. This option indicates to \texttt{upmethodology-document} to load the \LaTeX\ standard \texttt{report} class. In addition the \texttt{{\textbackslash}part} macro is ignored\savefootnote{The macro is redefined to print a warning message when used, no error message is generated.}{ignoretexmacro} and \texttt{{\textbackslash}chapter} macro is supported, and the following macros are automatically expanded: \texttt{{\textbackslash}makefrontcover}, \texttt{{\textbackslash}upmdocumentsummary}, \texttt{{\textbackslash}makebackcover}. This behaviour may be overridden by the other class options.
 
-\item \texttt{article}: An article-specification is a one-sided document composed of sections (no part nor chapter). This option indicates to \texttt{upmethodology-document} to load the \LaTeX\ standard \texttt{article} class. In addition the \texttt{{\textbackslash}part}and \texttt{{\textbackslash}chapter} macros are ignored\reffootnote{ignoretexmacro}, and the following macros are automatically expanded: \texttt{{\textbackslash}makefrontcover}, \texttt{{\textbackslash}makebackcover}. This behaviour may be overridden by the other class options.
+\item \texttt{article}: An article-specification is a one-sided document composed of sections (no part nor chapter). This option indicates to \texttt{upmethodology-document} to load the \LaTeX\ standard \texttt{article} class. In addition the \texttt{{\textbackslash}part} and \texttt{{\textbackslash}chapter} macros are ignored\reffootnote{ignoretexmacro}, and the following macros are automatically expanded: \texttt{{\textbackslash}makefrontcover}, \texttt{{\textbackslash}makebackcover}. This behaviour may be overridden by the other class options.
 
 \end{itemize}
 
@@ -313,9 +316,9 @@ The package \texttt{upmethodology-version} permits to set the version and the st
 Some \LaTeXe\xspace variables provides strings that describe the status of the document. They can be used in functions such as \texttt{{\textbackslash}updateversion}.
 \begin{itemize}
 \item \texttt{{\textbackslash}upmrestricted}: the document is under a restricted access, generally corresponding to the list of authors;
-\item \texttt{{\textbackslash}upmvalidable}: authors indicates with this tathat the document could be sent to validators;
-\item \texttt{{\textbackslash}upmvalidated}: the document was validated, but not published and published by all people;
-\item \texttt{{\textbackslash}upmpublic}: the document published and accessible by all people;
+\item \texttt{{\textbackslash}upmvalidable}: authors indicates with this flag that the document could be sent to validators;
+\item \texttt{{\textbackslash}upmvalidated}: the document was validated, but not published;
+\item \texttt{{\textbackslash}upmpublic}: the document published and accessible to all people;
 \end{itemize}
 
 \subsection{Information about the Document}
@@ -341,7 +344,7 @@ The following functions permit to access to the informations about the document:
 
 The package \texttt{upmethodology-version} permits to register revisions for building an history. The available functions are:
 \begin{itemize}
-\item \texttt{{\textbackslash}updateversion\{version\}\{date\}\{description\}\{status\}}: registers an revision for the document. The revision indicates that the given version was produced at the given date. A small description of the changes and the resulting document's status must be also provided. The function \texttt{{\textbackslash}updateversion} is a generalization of the following functions;
+\item \texttt{{\textbackslash}updateversion\{version\}\{date\}\{description\}\{status\}}: registers a revision for the document. The revision indicates that the given version was produced at the given date. A small description of the changes and the resulting document's status must be also provided. The function \texttt{{\textbackslash}updateversion} is a generalization of the following functions;
 
 \item \texttt{{\textbackslash}initialversion[version]\{date\}\{description\}\{status\}}: registers the initial version of the document. If not given, the version is assumed to be \texttt{0.1};
 
@@ -374,29 +377,33 @@ The following macros defines some localized strings used by \texttt{upmethodolog
 	\texttt{Version: \VERfmt}
 \end{center}
 
-The package \texttt{upmethodology-fmt} provides some usefull facilities to format an UP document.
+The package \texttt{upmethodology-fmt} provides some usefull facilities to format a document.
 
 \section{Default Configuration for the Package \texttt{graphicx}}
 
 The package \texttt{graphicx} is included, and the following configuration is applied:
 \begin{description}
-\item[Image extensions] By default, the supported image extensions ar, in the preference order: \texttt{pdf}, \texttt{png}, \texttt{jpg}, \texttt{jpef}, \texttt{tiff}, \texttt{gif}. To redefine these extensions, you must invoke:\\
+\item[Image extensions] By default, the supported image extensions ar, in the preference order: \texttt{pdf}, \texttt{png}, \texttt{jpg}, \texttt{jpeg}, \texttt{tiff}, \texttt{gif}. Note that, the \texttt{tiff} picture format is not always supported by the \TeX\ tools.
+
+To redefine these extensions, you must invoke:\\
 	\texttt{{\textbackslash}DeclareGraphicsExtensions\{extensions\}} \\
-	where \texttt{extensions} must be replaced by a list of extensions separated by comas.
+	where \texttt{extensions} must be replaced by a list of extensions separated by comas. \\
+	Example: \texttt{{\textbackslash}DeclareGraphicsExtensions\{.pdf,.png,.eps\}} \\
 \item[Image search path] By default, the images are search inside the path "\texttt{./}". To redefine the search paths, you must invoke:
 	\texttt{{\textbackslash}graphicspath\{\{path1\},\{path2\},\{path3\}...\}} \\
-	where \texttt{path1}, \texttt{path2}, \texttt{path2}, etc. must be replaced by the names of the directories in which the images are located. The paths in the list are separated by comas.
+	where \texttt{path1}, \texttt{path2}, \texttt{path2}, etc. must be replaced by the names of the directories in which the images are located. The paths in the list are separated by comas. \emph{Do not forget to write a slash or a backslash character (depending on the path naming conventions for your operating system) at the end of each path.} \\
+	Example: \texttt{{\textbackslash}graphicspath\{\{./imgs/\},\{./imgs/auto/\}\}} \\
 \end{description}
 
 \section{Figures}
 
-You could include a figure inside your document with the following macros: \\
+It may be verbose to put \LaTeX\ code to include a figure inside your document. To simplify your life, you could include a figure with the following macros: \\
 \texttt{{\textbackslash}mfigure[position]\{options\}\{filename\}\{caption\}\{label\}} \\
 \texttt{{\textbackslash}mfigure*[position]\{options\}\{filename\}\{caption\}\{label\}} \\
 
 These two macros permits to include an image in your document. The parameters are:
 \begin{itemize}
-\item \texttt{position}: is the desired position of the figure (see {\textbackslash}begin{figure}[position]). It could be \texttt{t} (top of the page), \texttt{b} (bottom of the page), \texttt{h} (at the macro location if possible) or \texttt{H} (at macro location);
+\item \texttt{position}: is the desired position of the figure (see {\textbackslash}begin\{figure\}[position]). It could be \texttt{t} (top of the page), \texttt{b} (bottom of the page), \texttt{h} (at the macro location if possible) or \texttt{H} (at macro location);
 
 \item \texttt{options}: are the options passed to \texttt{{\textbackslash}includegraphics};
 
@@ -415,13 +422,13 @@ Because the two macros above register a label with string starting with \texttt{
 \item \texttt{{\textbackslash}figpageref\{label\}}: is equivalent to \texttt{{\textbackslash}pageref\{fig:label\}}.
 \end{itemize}
 
-The figure~\figref{example:mfigure} page~\figpageref{example:mfigure} is obtained with the macro: \texttt{{\textbackslash}mfigure[ht]\{width=.6{\textbackslash}linewidth\}\{slogo\}\{Example of figure inclusion with {\textbackslash}texttt\{\{{\textbackslash}textbackslash\}mfigure\}\}\{example:mfigure\}}. The reference and page reference are obtained with \texttt{{\textbackslash}figref\{example:mfigure\}} and \texttt{{\textbackslash}figpageref\{example:mfigure\}}.
+The figure~\figref{example:mfigure} page~\figpageref{example:mfigure} is obtained with the macro: \texttt{{\textbackslash}mfigure[ht]\{width=.4{\textbackslash}linewidth\}\{slogo\}\{Example of figure inclusion with {\textbackslash}texttt\{\{{\textbackslash}textbackslash\}mfigure\}\}\{example:mfigure\}}. The reference and page reference are obtained with \texttt{{\textbackslash}figref\{example:mfigure\}} and \texttt{{\textbackslash}figpageref\{example:mfigure\}}.
 
-\mfigure[ht]{width=.6\linewidth}{arakhne_org_logo}{Example of figure inclusion with \texttt{{\textbackslash}mfigure}}{example:mfigure}
+\mfigure[ht]{width=.4\linewidth}{arakhne_org_logo}{Example of figure inclusion with \texttt{{\textbackslash}mfigure}}{example:mfigure}
 
 \section{Sub-figures}
 
-In some case, it is usefull to put several images inside the same picture, but without lousing the possibility to reference each subfigure. This feature was proposed by the package \texttt{subfigure}. The following environments provides helper functions for \texttt{subfigure}:
+In some case, it is usefull to put several images inside the same floating figure, but without loosing the possibility to reference each of the subfigures. This feature was proposed by the package \texttt{subfigure}. The following environments provides helper functions for \texttt{subfigure}:
 \texttt{{\textbackslash}begin\{mfigures\}[position]\{caption\}\{label\}\\
 ...\\
 {\textbackslash}end\{mfigures\}} \\
@@ -431,20 +438,20 @@ In some case, it is usefull to put several images inside the same picture, but w
 
 These two macros permits to include an image in your document.The parameters are:
 \begin{itemize}
-\item \texttt{position}: is the desired position of the figure (see {\textbackslash}begin{figure}[position]). It could be \texttt{t} (top of the page), \texttt{b} (bottom of the page), \texttt{h} (at the macro location if possible) or \texttt{H} (at macro location);
+\item \texttt{position}: is the desired position of the figure (see {\textbackslash}begin\{figure\}[position]). It could be \texttt{t} (top of the page), \texttt{b} (bottom of the page), \texttt{h} (at the macro location if possible) or \texttt{H} (at macro location);
 
 \item \texttt{caption}: is the caption of the figure (see {\textbackslash}caption\{caption\});
 
 \item \texttt{label}: is the label used to reference the figure (see {\textbackslash}label\{fig:label\}).
 \end{itemize}
 
-Inside the environment \texttt{{\textbackslash}mfigures[*]}, you could use the macro \texttt{{\textbackslash}mfigure} to properly include a subfigure (the first optional parameter is ignored) or you could use the macro \texttt{{\textbackslash}msubfigure\{options\}\{file\}\{caption\}}.
+Inside the environment \texttt{{\textbackslash}mfigures[*]}, you could use the macro \texttt{{\textbackslash}mfigure} to properly include a subfigure (the first optional parameter is ignored), or you could use the macro \texttt{{\textbackslash}msubfigure\{options\}\{file\}\{caption\}}.
 
 The figure~\figref{example:msubfigure} page~\figpageref{example:msubfigure} is obtained with the environment:\\
 \texttt{{\textbackslash}begin\{mfigures\}\{Example of subfigures with {\textbackslash}texttt\{mfigures\}\}\{example:msubfigure\}}\\
-\texttt{{\textbackslash}mfigure\{width=.4{\textbackslash}linewidth\}\{logo\}\{First subfigure\}\{example:firstsubfigure\}} \\
+\texttt{{\textbackslash}mfigure\{width=.4{\textbackslash}linewidth\}\{img1\}\{First subfigure\}\{example:firstsubfigure\}} \\
 \texttt{{\textbackslash}hfill} \\
-\texttt{{\textbackslash}msubfigure\{width=.4{\textbackslash}linewidth\}\{smalllogo\}\{Second subfigure\}} \\
+\texttt{{\textbackslash}msubfigure\{width=.4{\textbackslash}linewidth\}\{img2\}\{Second subfigure\}} \\
 \texttt{{\textbackslash}end\{mfigures\}}
 
 The reference and page reference are obtained with \texttt{{\textbackslash}figref\{example:msubfigure\}} and \texttt{{\textbackslash}figpageref\{example:msubfigure\}}.
@@ -452,7 +459,7 @@ The reference and page reference are obtained with \texttt{{\textbackslash}figre
 \begin{mfigures}{Example of subfigures with \texttt{mfigures}}{example:msubfigure}
 	\mfigure{width=.4\linewidth}{arakhne_org_logo}{First subfigure}{example:firstsubfigure}
 	\hfill
-	\msubfigure{width=.4\linewidth}{small_arakhne_org_logo}{Second subfigure}
+	\msubfigure{width=.4\linewidth}{figure_and_tex}{Second subfigure}
 \end{mfigures}
 
 The references to the subfigures could be obtained in two way:\nopagebreak\begin{itemize}
@@ -462,7 +469,11 @@ The references to the subfigures could be obtained in two way:\nopagebreak\begin
 
 \section{Figures with embedded \TeX\xspace macros}
 
-In several case it is usefull to include \TeX\xspace macros inside a figure. It is possible with the files \texttt{.pstex\_t}/\texttt{.pdftex\_t}, exported from a software such as \texttt{xfig}, \texttt{inkscape}, or \texttt{GNU Plot}.
+In several case it is usefull to include \TeX\xspace macros inside a figure. It is possible to combine figures and \TeX\ macros. Several figure editors provide exporting features to obtain combined figures: \texttt{xfig}, \texttt{inkscape}, \texttt{GNU Plot}, etc. Basically, these tools create two files per source figure: \begin{itemize}
+\item the figure in PDF or Postscript format (filename extensions, \texttt{.pdf} or \texttt{.ps}); and
+\item a \TeX\ file that contains the macros to put over the figure, and that is including the generated figure. Its filename extension depends on the type of the figure: \texttt{.pdftex\_t} or \texttt{.pdf\_tex} for PDF, and \texttt{.pstex\_t} or \texttt{.ps\_tex} for Postscript.
+\end{itemize}
+To include this combined figure in your document, you simply need to include the generated \TeX\ file (see below for details).
 
 \subsection{Include a Combined Picture/\TeX\ Figure}
 
@@ -471,18 +482,21 @@ To include a figure with \TeX\ macros inside, you must have: \begin{enumerate}
 \item a PDF figure (\texttt{.pdf}), and a \TeX\ file \texttt{.pdftex\_t} related to the PDF figure.
 \end{enumerate}
 
-The inclusion of the figure with embedded \TeX\ macros is similar to the inclusion of figures with \texttt{{\textbackslash}includegraphics}. You must type the following macro: \\
+With the \texttt{upmethodology-fmt} package, the inclusion of the figure with embedded \TeX\ macros is similar to the inclusion of figures with \texttt{{\textbackslash}includegraphics}. You must type the following macro: \\
 \texttt{{\textbackslash}includegraphicswtex[options]\{filename\}} \\
 where \texttt{options} must be one or more of: \begin{itemize}
 \item \texttt{width=xxx}: specification of the width of the figure (\texttt{xxx} must be replaced by the length);
 \item \texttt{height=xxx}: specification of the height of the figure (\texttt{xxx} must be replaced by the length);
 \end{itemize}
 
-If the \texttt{filename} given to the macro \texttt{{\textbackslash}includegraphicswtex} does not specify an file extension, the macro tries to add the extensions \texttt{.pdftex\_t} and \texttt{.pstex\_t}, by default. If you want to specify other file extensions, you must use the macro:
+If the \texttt{filename} given to the macro \texttt{{\textbackslash}includegraphicswtex} does not specify a filename extension, the macro tries to add the extensions \texttt{.pdftex\_t}, \texttt{.pstex\_t}, \texttt{.pdf\_tex}, or \texttt{.ps\_tex}, by default. If you want to specify other file extensions, you must use the macro:
 \texttt{{\textbackslash}DeclareGraphicsExtensionsWtex\{extensions\}} \\
-where the \texttt{extensions} is a list of file extensions (including the point character), separated by coma characters.
+where the \texttt{extensions} is a list of file extensions (including the point character), separated by coma characters. \\
+Example: \texttt{{\textbackslash}DeclareGraphicsExtensionsWtex\{.pdftex,.pstex\}}
 
-If the \texttt{filename} does not correspond to a file on the disk, the macro \texttt{{\textbackslash}includegraphicswtex} tries to find the file in the directories specified in \texttt{{\textbackslash}graphicspath} (declared in the package \texttt{graphicx} for example).
+If the \texttt{filename} does not correspond to a file on the disk, the macro \texttt{{\textbackslash}includegraphicswtex} tries to find the file in the directories specified in \texttt{{\textbackslash}graphicspath} (declared in the package \texttt{graphicx} for example). \\
+Example: \texttt{{\textbackslash}graphicspath\{\{./imgs/\},\{./imgs/additional/\}\}} \\
+\emph{Note that each of the given directories must be finished by the separation character of your operating system: \texttt{/} on Unix, \texttt{\textbackslash} on Windows. You must always use the Unix standard because it is assumed by a lot of \TeX\ compilers, even on Windows platforms.}
 
 Figure~\figref{figure_and_tex} gives an example of a floating figure combined with \TeX\ macros, which is using the macro \texttt{{\textbackslash}includegraphicswtex}.
 
@@ -691,7 +705,7 @@ The package \texttt{upmethodology-fmt} provides an environment which permits to 
 	put the specified picture on the side of the given text. The optional parameter \texttt{width} corresponds to the desired width ofthe picture. By default it is \texttt{.5{\textbackslash}linewidth}.
 \end{itemize}
 
-\begin{umlinpar}{small_arakhne_org_logo}
+\begin{umlinpar}{figure_and_tex}
 	This paragraph is an typical example of the usage of the environment \texttt{umlinpar}. To obtain it, the following \LaTeX\ code was typed: \\
 \texttt{{\textbackslash}begin\{umlinpar\}\{smalllogo\}} \\
 \texttt{This paragraph is an typical example of the usage of the environment {\textbackslash}texttt\{umlinpar\}.} \\
