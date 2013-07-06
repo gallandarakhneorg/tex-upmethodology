@@ -19,6 +19,7 @@
 %
 % Creation date: 2006-04-06
 % Modifications (lastest first):
+%   2013-07-06   Redefine the \underline macro.
 %   2013-05-31   Add the extensions 'pdf_tex' and 'ps_tex' in the default list of extensions
 %                for \includegraphicswtex.
 %   2013-05-30   Add macro \includegraphicswtex, which is supporting 'pdftex_t' and 'pstex_t'.
@@ -1005,5 +1006,12 @@
 
 \newcommand{\url}[2][]{\texttt{#2}}
 \newcommand{\href}[3][]{\texttt{#3}}
+
+%----------------------------------------
+% UNDERLINE
+%----------------------------------------
+
+\let\upm@oldunderline\underline
+\renewcommand{\underline}[1]{\upm@oldunderline{\smash{#1}}}
 
 \endinput
