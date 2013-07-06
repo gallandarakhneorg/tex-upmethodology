@@ -11,6 +11,7 @@
 \incversion{\makedate{17}{05}{2013}}{Add a section on the default configuration of the package \texttt{graphicx}}{\upmpublic}
 \incversion{\makedate{30}{05}{2013}}{Add the macros \texttt{{\textbackslash}includegraphicswtex} and \texttt{{\textbackslash}DeclareGraphicsExtensionsWtex}}{\upmpublic}
 \incsubversion{\makedate{31}{05}{2013}}{Fixing some grammar and syntax problems.}{\upmpublic}
+\incsubversion{\makedate{06}{07}{2013}}{Add the macri \texttt{{\textbackslash}ifdocumentauthor}.}{\upmpublic}
 
 \addauthorvalidator*[galland@arakhne.org]{St{\'e}phane}{Galland}{Original Author}
 
@@ -1019,6 +1020,13 @@ The list of the authors is accessible by two means:
 \begin{itemize}
 \item \texttt{{\textbackslash}theauthorlist} is a coma-separated list of the authors' names;
 \item \texttt{{\textbackslash}upmdocumentauthors} procudes an array of all the authors (see below for an example).
+\end{itemize}
+
+\upmdocumentauthors
+
+You could test if a string is the name of the author with:
+\begin{itemize}
+\item \texttt{{\textbackslash}ifdocumentauthor\{lowercasename\}\{then\}\{else\}}; the first parameter \textbf{must} be lower case. If the \texttt{lowercasename} is the name of one of the authors, then the \texttt{then} clause is expanded, otherwise the \texttt{else} clause is expanded.
 \end{itemize}
 
 \upmdocumentauthors
