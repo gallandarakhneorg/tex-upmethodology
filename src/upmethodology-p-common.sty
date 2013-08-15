@@ -15,16 +15,8 @@
 % write to the Free Software Foundation, Inc., 59 Temple Place - Suite
 % 330, Boston, MA 02111-1307, USA.
 %
-% Creation date: 2009-10-30
-% Modifications (lastest first):
-%    2013-05-17   Fixing the name of the provided package.
-%    2013-04-28   Include xcolor.sty in place of color.sty.
-%    2012-09-21   Move \copyright from upmethodology-fmt.sty
-%    2009-11-03   \If* macros are marked with \long
-%    2009-11-02   Add internal commands for footnotes.
-%
 
-\global\edef\upm@package@private@doctype@ver{2013/05/17}
+\global\edef\upm@package@private@doctype@ver{2013/08/15}
 
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
 \ProvidesPackage{upmethodology-p-common}[\upm@package@private@doctype@ver]
@@ -136,11 +128,5 @@
 \def\upm@textsubscript#1{%
   {\m@th\ensuremath{_{\mbox{\fontsize\sf@size\z@#1}}}}}
 
-
-%----------------------------------------
-% SYMBOLS
-%----------------------------------------
-\let\upm@format@copyright\copyright
-\renewcommand{\copyright}{\upm@format@copyright\xspace}
 
 \endinput
