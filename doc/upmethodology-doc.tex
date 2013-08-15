@@ -11,7 +11,8 @@
 \incversion{\makedate{17}{05}{2013}}{Add a section on the default configuration of the package \texttt{graphicx}}{\upmpublic}
 \incversion{\makedate{30}{05}{2013}}{Add the macros \texttt{{\textbackslash}includegraphicswtex} and \texttt{{\textbackslash}DeclareGraphicsExtensionsWtex}}{\upmpublic}
 \incsubversion{\makedate{31}{05}{2013}}{Fixing some grammar and syntax problems.}{\upmpublic}
-\incsubversion{\makedate{06}{07}{2013}}{Add the macri \texttt{{\textbackslash}ifdocumentauthor}.}{\upmpublic}
+\incsubversion{\makedate{06}{07}{2013}}{Add the macro \texttt{{\textbackslash}ifdocumentauthor}.}{\upmpublic}
+\incsubversion{\makedate{15}{08}{2013}}{Add the macros: \texttt{{\textbackslash}textup}, \texttt{{\textbackslash}textsubscript}, \texttt{{\textbackslash}textdown}, \texttt{{\textbackslash}textsubscript}, \texttt{{\textbackslash}Emph}. Add the environments \texttt{enumdescription}, \texttt{enumdescriptionx}.}{\upmpublic}
 
 \addauthorvalidator*[galland@arakhne.org]{St{\'e}phane}{Galland}{Original Author}
 
@@ -178,6 +179,7 @@ This section contains the list of all the package dependencies for the \texttt{u
 \item \texttt{setspace}
 \item \texttt{txfonts}
 \item \texttt{keyval}
+\item \texttt{hyphenat}
 \end{itemize}
 
 \subsection{upmethdology-frontpage.sty}
@@ -659,18 +661,139 @@ Caution: only once counter could be saved at a given time.
 
 \subsection{Inline Enumeration}
 
-In several document, an enumeration of things is written inside a paragraph instead of inside a list of points. A simple example is:
-\begin{inlineenumeration}
+In several document, an enumeration of things is written inside a paragraph instead of inside a list of points.
+
+\paragraph{Exemple:} The following \LaTeX~code produces the result below:
+\begin{verbatim}
+This is a text: \begin{inlineenumeration}
 \item first thing;
 \item second thing;
 \item etc.
-\end{inlineenumeration}
-And it is produced by the \LaTeX~code: \\
-\texttt{{\textbackslash}begin\{inlineenumeration\}}\\
-\texttt{{\textbackslash}item first thing;}\\
-\texttt{{\textbackslash}item second thing;}\\
-\texttt{{\textbackslash}item etc.}\\
-\texttt{{\textbackslash}end\{inlineenumeration\}}\\
+\end{inlineenumeration} This is the text after.
+\end{verbatim}
+
+This is a text: \begin{inlineenumeration}
+\item first thing;
+\item second thing;
+\item etc.
+\end{inlineenumeration} This is the text after.
+
+\section{Descriptions in conjonction with enumeration}
+
+It may be helpful to put a list of descriptions in conjonction with an enumeration.
+In other words, the following environment provides a mix between the standards \LaTeX~environments \texttt{description} and \texttt{enumerate}.
+
+\subsection{Environment \texttt{enumdescription}}
+
+The environment \texttt{enumdescription} is:
+\begin{verbatim}
+\begin{enumdescription}[type]
+\item[desc] text
+\end{enumdescription}
+\end{verbatim}
+where the \texttt{type} is the type of the enumeration. It may be one of:
+\begin{itemize}
+\item ``\texttt{i}'': for an enumeration with roman numbers (this is the default),
+\item ``\texttt{1}'': for an enumeration with arabic numbers,
+\item ``\texttt{a}'': for an enumeration with letters.
+\end{itemize}
+The text put in place of \texttt{desc} represents the text which may be emphazed in the description item.
+
+
+To change the rendering of the labels, you must redefined the macro as:
+\begin{verbatim}
+\renewcommand{\enumdescriptionlabel}[1]{ ... #1 ... }
+\end{verbatim}
+
+
+\paragraph{Example~1:} The following \LaTeX~code, using roman numbers, produces the enumerated description just below:
+\begin{verbatim}
+\begin{enumdescription}
+\item[first thing] this is a text for the first thing;
+\item[second thing] this is a text for the second thing;
+\item[more] etc.
+\end{enumdescription}
+\end{verbatim}
+
+\begin{enumdescription}
+\item[first thing] this is a text for the first thing;
+\item[second thing] this is a text for the second thing;
+\item[more] etc.
+\end{enumdescription}
+
+\paragraph{Example~2:} The following \LaTeX~code, using numeric numbers, produces the enumerated description just below:
+\begin{verbatim}
+\begin{enumdescription}[1]
+\item[first thing] this is a text for the first thing;
+\item[second thing] this is a text for the second thing;
+\item[more] etc.
+\end{enumdescription}
+\end{verbatim}
+
+\begin{enumdescription}[1]
+\item[first thing] this is a text for the first thing;
+\item[second thing] this is a text for the second thing;
+\item[more] etc.
+\end{enumdescription}
+
+\paragraph{Example~3:} The following \LaTeX~code, using letter numbers, produces the enumerated description just below:
+\begin{verbatim}
+\begin{enumdescription}[a]
+\item[first thing] this is a text for the first thing;
+\item[second thing] this is a text for the second thing;
+\item[more] etc.
+\end{enumdescription}
+\end{verbatim}
+
+\begin{enumdescription}[a]
+\item[first thing] this is a text for the first thing;
+\item[second thing] this is a text for the second thing;
+\item[more] etc.
+\end{enumdescription}
+
+\subsection{Environment \texttt{enumdescriptionx}}
+
+The environment \texttt{enumdescriptionx} extends the environment \texttt{enumdescription} by enabling a finer configuration with more parameters.
+
+
+The environment \texttt{enumdescriptionx} is:
+\begin{verbatim}
+\begin{enumdescriptionx}[type]{counter\_prefix}{counter\_postfix}
+\item[desc] text
+\end{enumdescriptionx}
+\end{verbatim}
+where the \texttt{type} is the type of the enumeration. It may be one of:
+\begin{itemize}
+\item ``\texttt{i}'': for an enumeration with roman numbers (this is the default),
+\item ``\texttt{1}'': for an enumeration with arabic numbers,
+\item ``\texttt{a}'': for an enumeration with letters.
+\end{itemize}
+The text put in place of \texttt{desc} represents the text which may be emphazed in the description item.
+The text \texttt{counter\_prefix} is put before all the counter values in the enumeration.
+The text \texttt{counter\_postfix} is put after all the counter values in the enumeration.
+
+
+To change the rendering of the labels, you must redefined the macro as:
+\begin{verbatim}
+\renewcommand{\enumdescriptionlabel}[1]{ ... #1 ... }
+\end{verbatim}
+
+
+\paragraph{Example:} The following \LaTeX~code, using letter numbers, produces the enumerated description just below:
+\begin{verbatim}
+\begin{enumdescriptionx}[a]{$\langle$}{$\rangle$}
+\item[first thing] this is a text for the first thing;
+\item[second thing] this is a text for the second thing;
+\item[more] etc.
+\end{enumdescriptionx}
+\end{verbatim}
+
+\begin{enumdescriptionx}[a]{$\langle$}{$\rangle$}
+\item[first thing] this is a text for the first thing;
+\item[second thing] this is a text for the second thing;
+\item[more] etc.
+\end{enumdescriptionx}
+
 
 \section{Footnotes}
 
@@ -748,11 +871,23 @@ The package \texttt{upmethodology-fmt} provides a set of macros to format the te
 
 \begin{itemize}
 \item \texttt{{\textbackslash}textsup\{text\}} \\
-	put a text as exponent in text mode instead of the basic \LaTeX exponent in math mode. \\
-	Example: \texttt{{\textbackslash}textsup\{this is an exponent\}}\textsup{this is an exponent};
+	put a text as exponent in text mode instead of the basic \LaTeX exponent in math mode. In opposite to the standard \LaTeX\ macro \texttt{{\textbackslash}textsuperscript}, this macro adds an extra space after the macro when needed. \\
+	Example: \texttt{{\textbackslash}textsup\{this is an exponent\}}\textsup{this is an exponent}this is the following text;
+\item \texttt{{\textbackslash}textup\{text\}} \\
+	same as \texttt{{\textbackslash}textsup}.
 \item \texttt{{\textbackslash}textsub\{text\}} \\
-	put a text as indice in text mode instead of the basic \LaTeX indice in math mode. \\
-	Example: \texttt{{\textbackslash}textsub\{this is an indice\}}\textsub{this is an indice};
+	put a text as indice in text mode instead of the basic \LaTeX indice in math mode. In opposite to \texttt{{\textbackslash}textsubscript}, this macro adds an extra space after the macro when needed. In opposite to \texttt{{\textbackslash}textdown}, the size of the text is not changed in the text down. \\
+	Example: \texttt{{\textbackslash}textsub\{this is an indice\}}\textsub{this is an indice}this is the following text;
+\item \texttt{{\textbackslash}textdown\{text\}} \\
+	put a text as indice in text mode instead of the basic \LaTeX indice in math mode. In opposite to \texttt{{\textbackslash}textsubscript}, this macro adds an extra space after the macro when needed. In opposite to \texttt{{\textbackslash}textsub}, the size of the text is changed in the text down. \\
+	Example: \texttt{{\textbackslash}textdown\{this is an indice\}}\textdown{this is an indice}this is the following text;
+\item \texttt{{\textbackslash}textsubscript\{text\}} \\
+	put a text as indice in text mode instead of the basic \LaTeX indice in math mode. As for the standard \LaTeX\ macro \texttt{{\textbackslash}textsuperscript}, this macro does not add an extra space after the macro. \\
+	Example: \texttt{{\textbackslash}textsubscript\{this is an indice\}}\textsubscript{this is an indice}this is the following text;
+\item \texttt{{\textbackslash}Emph\{text\}} \\
+	put a \emph{very important} text. This macro is similar to the standard \LaTeX\ macro \texttt{{\textbackslash}emph}. The difference is: \texttt{{\textbackslash}emph} is for ``important things''; and \texttt{{\textbackslash}Emph} is for ``very important things''.\\
+	Example: This text is \texttt{{\textbackslash}emph\{important\}}, but this one is \texttt{{\textbackslash}Emph\{very important\}} \\
+	gives: This text is \emph{important}, but this one is \Emph{very important};
 \item \texttt{{\textbackslash}makename[von]\{first name\}\{last name\}} \\
 	format the specified people name components according to the document standards. By default, the format \texttt{first von last} is used. \\
 	Example: \texttt{{\textbackslash}makename[von]\{Ludwig Otto Frederik Wilhelm\}\{Wittelsbach\}},\\
