@@ -1,6 +1,6 @@
 % Document class for Unified Process Methodology
 %
-% Copyright (c) 2006-2009 Stephane GALLAND <galland@arakhne.org>
+% Copyright (c) 2006-2013 Stephane GALLAND <galland@arakhne.org>
 % 
 % This program is free library; you can redistribute it and/or modify
 % it under the terms of the GNU Lesser General Public License as
@@ -17,7 +17,7 @@
 % write to the Free Software Foundation, Inc., 59 Temple Place - Suite
 % 330, Boston, MA 02111-1307, USA.
 
-\global\edef\upm@package@docclazz@ver{2013/05/17}
+\global\edef\upm@package@docclazz@ver{2013/08/15}
 
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
 \ProvidesClass{upmethodology-document}[\upm@package@docclazz@ver]
