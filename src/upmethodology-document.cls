@@ -16,24 +16,6 @@
 % License along with this library; see the file COPYING.  If not,
 % write to the Free Software Foundation, Inc., 59 Temple Place - Suite
 % 330, Boston, MA 02111-1307, USA.
-%
-% Creation date: 2006-04-06
-% Modifications:
-%   2013-05-17   Replace the option 'pdftex=true' by 'pdftex' for hyperref package.
-%   2012-10-02   Process the class options in the order given by the caller.
-%   2009-10-30   Add "book", "report" and "article" options.
-%   2009-10-28   Add hyperref declarations.
-%   2009-10-27   Add publication page.
-%   2009-10-22   Add back page.
-%   2009-10-09   Add option to hide the document informations
-%   2007-07-03   Force the height of the small logo in headers.
-%                Remove the copyright date building function.
-%   2007-03-19   Add localization.
-%   2006-04-19   Add version number.
-%   2006-04-20   Add task package.
-%   2006-04-21   Add specification package.
-%   2006-04-22   Remove task and specification packages.
-%
 
 \global\edef\upm@package@docclazz@ver{2013/05/17}
 
