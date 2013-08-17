@@ -13,6 +13,7 @@
 \incsubversion{\makedate{31}{05}{2013}}{Fixing some grammar and syntax problems.}{\upmpublic}
 \incsubversion{\makedate{06}{07}{2013}}{Add the macro \texttt{{\textbackslash}ifdocumentauthor}.}{\upmpublic}
 \incsubversion{\makedate{15}{08}{2013}}{Add the macros: \texttt{{\textbackslash}textup}, \texttt{{\textbackslash}textsubscript}, \texttt{{\textbackslash}textdown}, \texttt{{\textbackslash}textsubscript}, \texttt{{\textbackslash}Emph}. Add the environments \texttt{enumdescription}, \texttt{enumdescriptionx}.}{\upmpublic}
+\incsubversion{\makedate{17}{08}{2013}}{Update the second parameter of \texttt{{\textbackslash}mfigurewtex} to have the same semantic as for \texttt{{\textbackslash}mfigure}.}{\upmpublic}
 
 \addauthorvalidator*[galland@arakhne.org]{St{\'e}phane}{Galland}{Original Author}
 
@@ -178,7 +179,7 @@ This section contains the list of all the package dependencies for the \texttt{u
 \item \texttt{pifont}
 \item \texttt{setspace}
 \item \texttt{txfonts}
-\item \texttt{keyval}
+\item \texttt{xkeyval}
 \item \texttt{hyphenat}
 \end{itemize}
 
@@ -401,14 +402,14 @@ To redefine these extensions, you must invoke:\\
 \section{Figures}
 
 It may be verbose to put \LaTeX\ code to include a figure inside your document. To simplify your life, you could include a figure with the following macros: \\
-\texttt{{\textbackslash}mfigure[position]\{options\}\{filename\}\{caption\}\{label\}} \\
-\texttt{{\textbackslash}mfigure*[position]\{options\}\{filename\}\{caption\}\{label\}} \\
+\texttt{{\textbackslash}mfigure[position]\{include\_graphics\_options\}\{filename\}\{caption\}\{label\}} \\
+\texttt{{\textbackslash}mfigure*[position]\{include\_graphics\_options\}\{filename\}\{caption\}\{label\}} \\
 
 These two macros permits to include an image in your document. The parameters are:
 \begin{itemize}
 \item \texttt{position}: is the desired position of the figure (see {\textbackslash}begin\{figure\}[position]). It could be \texttt{t} (top of the page), \texttt{b} (bottom of the page), \texttt{h} (at the macro location if possible) or \texttt{H} (at macro location);
 
-\item \texttt{options}: are the options passed to \texttt{{\textbackslash}includegraphics};
+\item \texttt{include\_graphics\_options}: are the options passed to \texttt{{\textbackslash}includegraphics};
 
 \item \texttt{filename}: is the filename passed to \texttt{{\textbackslash}includegraphics};
 
@@ -506,14 +507,14 @@ Figure~\figref{figure_and_tex} gives an example of a floating figure combined wi
 \subsection{Floating figure with embedded \TeX\ macros}
 
 To put a floating figure with \TeX\xspace macro inside, you may use one of the macros:
-\texttt{{\textbackslash}mfigurewtex[position]\{width\}\{filename\}\{caption\}\{label\}} \\
-\texttt{{\textbackslash}mfigurewtex*[position]\{width\}\{filename\}\{caption\}\{label\}}
+\texttt{{\textbackslash}mfigurewtex[position]\{include\_graphics\_options\}\{filename\}\{caption\}\{label\}} \\
+\texttt{{\textbackslash}mfigurewtex*[position]\{include\_graphics\_options\}\{filename\}\{caption\}\{label\}}
 
 The parameters are:
 \begin{itemize}
 \item \texttt{position}: is the desired position of the figure (see {\textbackslash}begin{figure}[position]). It could be \texttt{t} (top of the page), \texttt{b} (bottom of the page), \texttt{h} (at the macro location if possible) or \texttt{H} (at macro location);
 
-\item \texttt{width}: is the width length of the figure;
+\item \texttt{include\_graphics\_options}: are the options to pass to \texttt{{\textbackslash}includegraphicswtex}. For ascendent compatibility, if you pass a length without a key, e.g. \texttt{\{.8{\textbackslash}linewidth\}, the length is assumed to be the width of the figure;
 
 \item \texttt{filename}: is the name of the file of the figure (see \texttt{{\textbackslash}includegraphicswtex} for details);
 

@@ -17,7 +17,7 @@
 % write to the Free Software Foundation, Inc., 59 Temple Place - Suite
 % 330, Boston, MA 02111-1307, USA.
 
-\global\edef\upm@package@fmt@ver{2013/08/15}
+\global\edef\upm@package@fmt@ver{2013/08/17}
 
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
 \ProvidesPackage{upmethodology-fmt}[\upm@package@fmt@ver]
@@ -84,7 +84,7 @@
 \upm@lang@@
 
 
-\RequirePackage[final]{graphicx}
+\RequirePackage{graphicx}
 \RequirePackage{subfigure}
 \RequirePackage{tabularx}
 \RequirePackage{multicol}
@@ -96,7 +96,7 @@
 \RequirePackage{varioref}
 \RequirePackage{txfonts}
 \RequirePackage{relsize}
-\RequirePackage{keyval}
+\RequirePackage{xkeyval}
 \RequirePackage{hyphenat}
 
 %----------------------------------------
@@ -230,63 +230,64 @@
 % http://www.arakhne.org/autolatex
 %
 
-% Private macros for \includegraphicswtex
-\providecommand{\upm@figtex@includewtex@extensions}{}
-\define@key{upmethodologyincludewtex}{width}{%
-	\gdef\upm@figtex@includewtex@width{#1}%
+%-----
+%\DeclareGraphicsExtensionsWtex{coma separated extensions}
+\providecommand{\DeclareGraphicsExtensionsWtex}[1]{%
+	\xdef\@autolatex@wtfig@extensions{\zap@space#1 \@empty}%
 }
-\define@key{upmethodologyincludewtex}{height}{%
-	\gdef\upm@figtex@includewtex@height{#1}%
-}
+\DeclareGraphicsExtensionsWtex{.pdftex_t,.pstex_t,.pdf_tex,.ps_tex}
 
-% 
-\newcommand{\upm@figtex@includewtex@searchinpath}[1]{%
+\providecommand{\@autolatex@wtfig@searchinpath}[1]{%
 	\IfFileExists{#1}{%
-		\protected@edef\upm@figtex@includewtex@cmd{\protect\resizebox{\upm@figtex@includewtex@width}{\upm@figtex@includewtex@height}{\protect\input{#1}}}%
+		\protected@edef\@autolatex@wtfig@tmp{\protect\resizebox{\@autolatex@wtfig@width}{\@autolatex@wtfig@height}{\protect\input{#1}}}%
 	}{%
-		\@for\upm@figtex@includewtex@pathtmp:=\Ginput@path\do{%
-			\ifx\upm@figtex@includewtex@cmd\relax%
-				\IfFileExists{\upm@figtex@includewtex@pathtmp#1}{%
-					\protected@edef\upm@figtex@includewtex@cmd{\protect\resizebox{\upm@figtex@includewtex@width}{\upm@figtex@includewtex@height}{\protect\input{\upm@figtex@includewtex@pathtmp#1}}}%
+		\@for\@autolatex@wtfig@pathtmp:=\Ginput@path\do{%
+			\ifx\@autolatex@wtfig@tmp\relax%
+				\IfFileExists{\@autolatex@wtfig@pathtmp#1}{%
+					\protected@edef\@autolatex@wtfig@tmp{\protect\resizebox{\@autolatex@wtfig@width}{\@autolatex@wtfig@height}{\protect\input{\@autolatex@wtfig@pathtmp#1}}}%
 				}{}%
 			\fi%
 		}%
 	}%
 }
 
-%-----
-%\DeclareGraphicsExtensionsWtex{coma separated extensions}
-\providecommand{\DeclareGraphicsExtensionsWtex}[1]{%
-	\xdef\upm@figtex@includewtex@extensions{\zap@space#1 \@empty}%
+\define@key[autolatex]{withtex}{width}{%
+	\gdef\@autolatex@wtfig@width{#1}%
 }
-\DeclareGraphicsExtensionsWtex{.pdftex_t,.pstex_t,.pdf_tex,.ps_tex}
+\define@key[autolatex]{withtex}{height}{%
+	\gdef\@autolatex@wtfig@height{#1}%
+}
 
 %-----
-%\includefigurewtex{width=xx,height=yy}{filename}
-\providecommand{\includegraphicswtex}[2][width=\linewidth]{%
+%\includefigurewtex[width=xx,height=yy]{filename}
+\providecommand{\includefigurewtex}[2][width=\linewidth]{%
 	\begingroup%
-	\gdef\upm@figtex@includewtex@width{!}
-	\gdef\upm@figtex@includewtex@height{!}
-	\setkeys{upmethodologyincludewtex}{#1}%
+	\gdef\@autolatex@wtfig@width{!}%
+	\gdef\@autolatex@wtfig@height{!}%
+	\setkeys[autolatex]{withtex}{#1}%
 	%
-	\global\let\upm@figtex@includewtex@cmd\relax%
+	\global\let\@autolatex@wtfig@tmp\relax%
+	\global\let\@autolatex@wtfig@ext\relax%
+	\global\let\@autolatex@wtfig@path\relax%
 	\filename@parse{#2}%
 	\ifx\filename@ext\relax%
-		\@for\upm@figtex@includewtex@exttmp:=\upm@figtex@includewtex@extensions\do{%
-			\upm@figtex@includewtex@searchinpath{#2\upm@figtex@includewtex@exttmp}%
+		\@for\@autolatex@wtfig@exttmp:=\@autolatex@wtfig@extensions\do{%
+			\@autolatex@wtfig@searchinpath{#2\@autolatex@wtfig@exttmp}%
 		}%
 	\else%
-		\upm@figtex@includewtex@searchinpath{#2}%
+		\@autolatex@wtfig@searchinpath{#2\@autolatex@wtfig@exttmp}%
 	\fi%
 	%
-	\ifx\upm@figtex@includewtex@cmd\relax%
+	\ifx\@autolatex@wtfig@tmp\relax%
 		\errmessage{Package autolatex: File not found '#2', needed for figure inclusion.}%
 	\else%
-		\upm@figtex@includewtex@cmd%
+		\@autolatex@wtfig@tmp%
 	\fi%
 	%
 	\endgroup%
 }
+
+\global\let\includegraphicswtex\includefigurewtex
 
 %----------------------------------------
 % ENVIRONMENT FOR IMAGES INCLUDING TeX EXPRESSIONS
@@ -313,10 +314,21 @@
 	\global\protected@edef\upm@figtex@dyncaption@remove{\upm@figtex@dyncaption@remove\protect\upm@figtex@figremove{#1}}%
 }
 
+\let\upm@fmt@figtex@nil\@nil
+\def\upm@fmt@figtex@parseparams#1=#2\upm@fmt@figtex@nil{\gdef\@tmp{#2}}
+
 \newcommand{\upm@mfigurewtex}[5][ht]{
 	\begin{figure}[#1]%
 		\begin{center}%
-			\includegraphicswtex[width=#2]{#3}%
+			% Providing an ascendent compatibility on the second parameter:
+			% - Prefered value of the parameter: a list of key/value pairs;
+			% - Old fashion value of the parameter: the value for the "width" key.
+			{\upm@fmt@figtex@parseparams #2====\upm@fmt@figtex@nil}%
+			\ifthenelse{\equal{\@tmp}{===}}{%
+				\includegraphicswtex[width=#2]{#3}%
+			}{%
+				\includegraphicswtex[#2]{#3}%
+			}%
 			\caption{#4}%
 			\label{fig:#5}%
 		\end{center}%
@@ -326,7 +338,15 @@
 \newcommand{\upm@mfigurewtexstar}[5][ht]{
 	\begin{figure*}[#1]%
 		\begin{center}%
-			\includegraphicswtex[width=#2]{#3}%
+			% Providing an ascendent compatibility on the second parameter:
+			% - Prefered value of the parameter: a list of key/value pairs;
+			% - Old fashion value of the parameter: the value for the "width" key.
+			{\upm@fmt@figtex@parseparams #2====\upm@fmt@figtex@nil}%
+			\ifthenelse{\equal{\@tmp}{===}}{%
+				\includegraphicswtex[width=#2]{#3}%
+			}{%
+				\includegraphicswtex[#2]{#3}%
+			}%
 			\caption{#4}%
 			\label{fig:#5}%
 		\end{center}%
@@ -334,7 +354,7 @@
 	\upm@figtex@restore%
 }
 %-----
-%\mfigurewtex[position]{width}{filename}{caption}{label}
+%\mfigurewtex[position]{options}{filename}{caption}{label}
 \def\mfigurewtex{\@ifstar\upm@mfigurewtexstar\upm@mfigurewtex}
 
 
