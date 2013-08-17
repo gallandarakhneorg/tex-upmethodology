@@ -1,0 +1,36 @@
+-----------------
+TEX-UPMETHODOLOGY
+-----------------
+
+1. Presentation
+---------------
+
+tex-upmethodology is a (La)TeX style which permits to create Unified Process methodology (UP or RUP) based documents (document version, history, authors, validators, specification, task management, helping tools...)
+
+Because the tex-upmethodology package is based on external definitions of layouts and styles, it is also succesfully used as a base to write scientific documents such as reports, engineering thesis, master thesis, and PhD thesis. An example of PhD thesis styles may be found at: http://www.multiagent.fr/ThesisStyle
+
+
+2. Installation
+---------------
+
+a) Copy the content of the directory inside one of your texmf directory, usually "/usr/share/texmf/tex/latex/upmethodology" or "$HOME/.texmf" on Unix operating systems.
+
+b) Update the LaTeX databases from the command line:
+
+ $> mktexlsr
+ $> update-updmap --quiet
+
+
+3. Author
+---------
+
+Stéphane GALLAND <galland@arakhne.org>
+http://www.arakhne.org/homes/galland.html
+
+
+4. License
+----------
+
+GNU LESSER GENERAL PUBLIC LICENSE.
+
+
