@@ -17,7 +17,7 @@
 % write to the Free Software Foundation, Inc., 59 Temple Place - Suite
 % 330, Boston, MA 02111-1307, USA.
 
-\global\edef\upm@package@fmt@ver{2013/08/17}
+\global\edef\upm@package@fmt@ver{2013/08/23}
 
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
 \ProvidesPackage{upmethodology-fmt}[\upm@package@fmt@ver]
@@ -279,7 +279,7 @@
 	\fi%
 	%
 	\ifx\@autolatex@wtfig@tmp\relax%
-		\errmessage{Package autolatex: File not found '#2', needed for figure inclusion.}%
+		\errmessage{Package upmethodology-fmt: File not found '#2', needed for figure inclusion}%
 	\else%
 		\@autolatex@wtfig@tmp%
 	\fi%
@@ -507,7 +507,7 @@
 			\vskip 20\p@
 		    \fi\fi
 		    \interlinepenalty\@M
-		    \ifupmbookformat\doublespacing\fi
+		    %\ifupmbookformat\doublespacing\fi
 		    \upm@format@chaptertitle{\nohyphens{#2}}\par\nobreak
 		    \vskip 80\p@
 		  }
