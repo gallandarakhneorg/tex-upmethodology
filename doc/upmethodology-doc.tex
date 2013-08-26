@@ -14,7 +14,7 @@
 \incsubversion{\makedate{06}{07}{2013}}{Add the macro \texttt{{\textbackslash}ifdocumentauthor}.}{\upmpublic}
 \incsubversion{\makedate{15}{08}{2013}}{Add the macros: \texttt{{\textbackslash}textup}, \texttt{{\textbackslash}textsubscript}, \texttt{{\textbackslash}textdown}, \texttt{{\textbackslash}textsubscript}, \texttt{{\textbackslash}Emph}. Add the environments \texttt{enumdescription}, \texttt{enumdescriptionx}.}{\upmpublic}
 \incsubversion{\makedate{17}{08}{2013}}{Update the second parameter of \texttt{{\textbackslash}mfigurewtex} to have the same semantic as for \texttt{{\textbackslash}mfigure}.}{\upmpublic}
-\incsubversion{\makedate{26}{08}{2013}}{Major bug fixes in the environments \texttt{mtabular} and \texttt{mtable}. \newline Add the macro \texttt{{\textbackslash}tabulartitlespec}.}{\upmpublic}
+\incsubversion{\makedate{26}{08}{2013}}{Major bug fixes in the environments \texttt{mtabular} and \texttt{mtable}. \newline Add the macro \texttt{{\textbackslash}tabulartitlespec}. \newline Add the macro \texttt{{\textbackslash}makenamespacing}.}{\upmpublic}
 
 \addauthorvalidator*[galland@arakhne.org]{St{\'e}phane}{Galland}{Original Author}
 
@@ -931,6 +931,10 @@ The package \texttt{upmethodology-fmt} provides a set of macros to format the te
 	format the specified people name components according to the document standards. By default, the format \texttt{first von last} is used. \\
 	Example: \texttt{{\textbackslash}upmmakename[von]\{Ludwig Otto Frederik Wilhelm\}\{Wittelsbach\}\{/\}}, \\
 		``\upmmakename[von]{Ludwig Otto Frederik Wilhelm}{Wittelsbach}{/}'';
+\item \texttt{{\textbackslash}makenamespacing\{name\}} \\
+	format the specified name to be sure that the spaces after the points of the initials are demi-spaces. \\
+	Example: \texttt{{\textbackslash}makenamespacing\{S\string.G\string.\}Galland}, \\
+		``\makenamespacing{S.G.}Galland'';
 \item \texttt{{\textbackslash}prname[von]\{first name\}\{last name\}} \\
       \texttt{{\textbackslash}prname*[von]\{first name\}\{last name\}} \\
 	format the specified people name components according to the document standards for \emph{Professor} title. By default, the format \texttt{first von last} is used. The star-ed version is post-fixed, the non-star-ed version is prefixed. \\

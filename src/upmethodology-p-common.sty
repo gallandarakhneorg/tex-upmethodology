@@ -16,7 +16,7 @@
 % 330, Boston, MA 02111-1307, USA.
 %
 
-\global\edef\upm@package@private@doctype@ver{2013/08/15}
+\global\edef\upm@package@private@doctype@ver{2013/08/28}
 
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
 \ProvidesPackage{upmethodology-p-common}[\upm@package@private@doctype@ver]
@@ -128,5 +128,44 @@
 \def\upm@textsubscript#1{%
   {\m@th\ensuremath{_{\mbox{\fontsize\sf@size\z@#1}}}}}
 
+
+%----------------------------------------
+% MACRO THAT PERMITS TO LOOP ON A SEPARATOR
+%----------------------------------------
+
+\newif\ifupm@foreach@hasseparator
+\newif\ifupm@foreach@oneseparator
+
+\let\upm@foreach@end\relax
+
+\def\upm@foreach@rec#1#2{%
+	{\upm@foreach@searchseparator#2\upm@foreach@end\@nil}%
+	\ifupm@foreach@hasseparator%
+		\protected@xdef\upm@foreach@continue{\protect\upm@foreach@rec{#1}{\upm@foreach@rest}}%
+		\upm@foreach@body%
+		\upm@foreach@continue%
+	\else%
+		\ifupm@foreach@oneseparator\else%
+			\upm@foreach@lastbody%
+		\fi%
+	\fi%
+}
+
+\def\upm@foreach#1\in#2\do#3#4{%
+	\global\upm@foreach@oneseparatorfalse%
+	\gdef\upm@foreach@searchseparator##1#1##2\@nil{%
+		\gdef\upm@foreach@term{##1}%
+		\ifx\upm@foreach@end##2%
+			\global\upm@foreach@hasseparatorfalse%
+		\else%
+			\gdef\upm@foreach@rest{##2}%
+			\global\upm@foreach@hasseparatortrue%
+			\global\upm@foreach@oneseparatortrue%
+		\fi%
+	}
+	\gdef\upm@foreach@body{#3}%
+	\gdef\upm@foreach@lastbody{#4}%
+	\upm@foreach@rec{#1}{#2#1}%
+}
 
 \endinput

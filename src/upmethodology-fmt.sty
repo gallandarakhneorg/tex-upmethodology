@@ -789,12 +789,23 @@
 % PEOPLE NAME
 %----------------------------------------
 
+\newcommand{\makenamespacing}[1]{%
+	\expandafter\upm@foreach.\in#1\do{%
+		\ignorespaces\upm@foreach@term.\,%
+	}{%
+		\ignorespaces\upm@foreach@term\xspace%
+	}%
+	\ignorespaces
+}
+
+\newcommand{\makenametest}[2]{\makenamespacing{#1} #2}
+
 %\upmmakename[von]{firstname}{lastname}{separator}
 \newcommand{\upmmakename}[4][\relax]{%
 	\ifx#1\relax%
-		{\mbox{\smaller #2}#4\textsc{#3}}%
+		{\mbox{\smaller \makenamespacing{#2}}#4\textsc{\ignorespaces#3}}%
 	\else%
-		{\mbox{\smaller #2}#4\mbox{\smaller #1}#4\textsc{#3}}%
+		{\mbox{\smaller \makenamespacing{#2}}#4\mbox{\smaller #1}#4\textsc{\ignorespaces#3}}%
 	\fi%
 }
 
