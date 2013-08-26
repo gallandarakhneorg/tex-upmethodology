@@ -14,6 +14,7 @@
 \incsubversion{\makedate{06}{07}{2013}}{Add the macro \texttt{{\textbackslash}ifdocumentauthor}.}{\upmpublic}
 \incsubversion{\makedate{15}{08}{2013}}{Add the macros: \texttt{{\textbackslash}textup}, \texttt{{\textbackslash}textsubscript}, \texttt{{\textbackslash}textdown}, \texttt{{\textbackslash}textsubscript}, \texttt{{\textbackslash}Emph}. Add the environments \texttt{enumdescription}, \texttt{enumdescriptionx}.}{\upmpublic}
 \incsubversion{\makedate{17}{08}{2013}}{Update the second parameter of \texttt{{\textbackslash}mfigurewtex} to have the same semantic as for \texttt{{\textbackslash}mfigure}.}{\upmpublic}
+\incsubversion{\makedate{26}{08}{2013}}{Major bug fixes in the environments \texttt{mtabular} and \texttt{mtable}. \newline Add the macro \texttt{{\textbackslash}tabulartitlespec}.}{\upmpublic}
 
 \addauthorvalidator*[galland@arakhne.org]{St{\'e}phane}{Galland}{Original Author}
 
@@ -257,8 +258,6 @@ Table~\tabref{documentclassoptions} contains the options supported by \texttt{up
 \begin{mtable}{\linewidth}{2}{|l|X|}{Options of \texttt{upmethodology-document} class}{documentclassoptions}
 \captionastitle
 \tabularheader{Option}{Explanation}
-
-\hline
 
 book & see section~\ref{section:documentclass:doctype}. \\
 \hline
@@ -566,23 +565,50 @@ This tabular is an extension of the \texttt{tabularx} environment which provides
 
 \end{itemize}
 
+
+\begin{upmcaution}
+	You must note put any text nor \TeX\ macro before the first use of \texttt{{\textbackslash}tabulartitle} or \texttt{{\textbackslash}tabularheader}. Otherwhise, you will obtain an \TeX\ error.
+\end{upmcaution}
+
+
 The \texttt{mtabular} environment provides:
 \begin{itemize}
 \item \texttt{{\textbackslash}tabulartitle\{title\}} \\
-	this macro permits to define the title of the tabular. It uses the colors \texttt{backtableheader} and \texttt{fronttableheader} for the background and the foreground respectively;
+	This macro permits to define the title of the tabular. It uses the colors \texttt{backtableheader} and \texttt{fronttableheader} for the background and the foreground respectively. The title has a single line at the top, and a single line below;
+
+\item \texttt{{\textbackslash}tabulartitleinside\{title\}} \\
+	This macro permits to define the title of the tabular. It uses the colors \texttt{backtableheader} and \texttt{fronttableheader} for the background and the foreground respectively. The title has two lines at the top, and a single line below;
 
 \item \texttt{{\textbackslash}tabularheader\{$header_1$\}...\{$header_n$\}} \\
-	this macro permits to define the titles of the columns. It uses the colors \texttt{backtableheader} and \texttt{fronttableheader} for the background and the foreground respectively. Because the count of columns was given to the environment this function takes the same count of parameters as the count of columns.
+	This macro permits to define the titles of the columns. It uses the colors \texttt{backtableheader} and \texttt{fronttableheader} for the background and the foreground respectively. Because the count of columns was given to the environment this function takes the same count of parameters as the count of columns. This macro adds a line after the header, \emph{BUT NOT BEFORE}.
+\begin{upmcaution}
+	Because \texttt{{\textbackslash}tabularheader} is adding a \texttt{{\textbackslash}hline} at the end of its expansion. You must put a \texttt{{\textbackslash}tabularheader} just after \texttt{{\textbackslash}tabularheader}. Otherwise you may obtain a \TeX\ error.
+\end{upmcaution}
+
+\item \texttt{{\textbackslash}tabularrowheader\{title\}} \\
+	This macro is designed to be used in the first cell of a row. It is rendering the cell as a row's header.
+
+\item \texttt{{\textbackslash}tabulartitlespec\{column\_spec\}} \\
+	This macro defines the specification of the column used to render the title of the table.
+	The default value of the column specification is $|$\texttt{c}$|$.
+
 \end{itemize}
 
 The following example of table is obtained by: \\
-\texttt{{\textbackslash}begin\{mtabular\}[{\textbackslash}linewidth]\{4\}\{lXrX\}} \\
-\texttt{{\textbackslash}tabulartitle\{Example of {\textbackslash}texttt\{mtabular\}\}} \\
-\texttt{{\textbackslash}tabularheader\{Col1\}\{Col2\}\{Col3\}\{Col4\}} \\
-\texttt{a \& b \& c \& d {\textbackslash}{\textbackslash}} \\
-\texttt{{\textbackslash}hline} \\
-\texttt{e \& f \& g \& h {\textbackslash}{\textbackslash}} \\
-\texttt{{\textbackslash}end\{mtabular\}}
+\begin{verbatim}
+\begin{mtabular}[\linewidth]{4}{lXrX}
+	\tabulartitle{Example of \texttt{mtabular}}
+	\tabularheader{Col1}{Col2}{Col3}{Col4}
+	a & b & c & d \\
+	\hline
+	e & f & g & h \\
+	\tabulartitleinside{Example of second title in the table}
+	\hline
+	\tabularrowheader{i} & j & k & l \\
+	\tabularheader{Col1-2}{Col2-2}{Col3-2}{Col4-2}
+	m & n & o & p \\
+\end{mtabular}
+\end{verbatim}
 
 \begin{mtabular}[\linewidth]{4}{lXrX}
 	\tabulartitle{Example of \texttt{mtabular}}
@@ -590,6 +616,11 @@ The following example of table is obtained by: \\
 	a & b & c & d \\
 	\hline
 	e & f & g & h \\
+	\tabulartitleinside{Example of second title in the table}
+	\hline
+	\tabularrowheader{i} & j & k & l \\
+	\tabularheader{Col1-2}{Col2-2}{Col3-2}{Col4-2}
+	m & n & o & p \\
 \end{mtabular}
 
 \section{Tables}
@@ -643,7 +674,10 @@ The package \texttt{upmethodology-fmt} provides a set of macros dedicated to enu
 
 Sometimes it is usefull to start an enumeration list from a specifical given number. This package provides several macros for saving and restoring the counter use by the enumeration lists.
 
-Caution: only once counter could be saved at a given time.
+\begin{upmcaution}
+Only once counter could be saved at a given time.
+It means that you cannot save the counters for an enumeration and for an enclosing enumeration at the same time.
+\end{upmcaution}
 
 \begin{itemize}
 \item \texttt{{\textbackslash}savecounter\{name\}} \\
@@ -1387,8 +1421,8 @@ Additional macros are provided to redefine the \texttt{upmethodology-document} c
 The \texttt{variable\_name} is the name of the value to override. It must be taken in one of the names listed in table~\tabref{documentextension:names:set}. The \texttt{lang} parameter is a language identifier. It is used to restrict the definition to a specific language. If not given, the default language is used insteed. The \texttt{image\_name} and \texttt{image\_scale} are the name of the image file and the scaling factor respectively.
 
 \begin{mtable}{\linewidth}{2}{lX}{List of overiddable value names}{documentextension:names:set}
-	\tabularheader{Value Name}{Description}
 	\hline
+	\tabularheader{Value Name}{Description}
 	logo & the filename of the picutre which must be used as a large logo. \\
 	\hline
 	smalllogo & the filename of the picutre which must be used as a small logo. \\

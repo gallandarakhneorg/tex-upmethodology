@@ -17,7 +17,7 @@
 % write to the Free Software Foundation, Inc., 59 Temple Place - Suite
 % 330, Boston, MA 02111-1307, USA.
 
-\global\edef\upm@package@fmt@ver{2013/08/23}
+\global\edef\upm@package@fmt@ver{2013/08/26}
 
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
 \ProvidesPackage{upmethodology-fmt}[\upm@package@fmt@ver]
@@ -363,76 +363,93 @@
 % TABLES
 %----------------------------------------
 
-%title of a table
-\def\upm@fmt@table@title#1{\color{fronttableheader}{\bfseries #1}}
-%title of columns
-\def\upm@fmt@table@column@title#1{\mbox{}\hfil{\itshape \mbox{\color{fronttableheader}{#1}}}\hfil\mbox{}}
 %table's colors
 \definecolor{backtableheader}{rgb}{0.92,0.94,1}
 \definecolor{fronttableheader}{rgb}{0.23,0.33,0.48}
+%title of a table
+\def\upm@fmt@table@title#1{\color{fronttableheader} \cellcolor{backtableheader} {\bfseries #1}}
+%title of columns
+\def\upm@fmt@table@column@title#1{\hfil{\color{fronttableheader} \cellcolor{backtableheader} {\itshape#1}}\hfil}
 
-%List of functions able to build an header
-\newif\ifupm@havetitle
-\def\upm@hline{\\\hline}
-\expandafter\def\csname upm@tableheader@b@1\endcsname#1{\protect\upm@fmt@table@column@title{#1} \protect\\}
-\expandafter\protected@edef\csname upm@tableheader@b@2\endcsname#1#2{%
-	\protect\upm@fmt@table@column@title{#1} & \csname upm@tableheader@b@1\endcsname{#2}}
-\expandafter\protected@edef\csname upm@tableheader@b@3\endcsname#1#2#3{%
-	\protect\upm@fmt@table@column@title{#1} & \csname upm@tableheader@b@2\endcsname{#2}{#3}}
-\expandafter\protected@edef\csname upm@tableheader@b@4\endcsname#1#2#3#4{%
-	\protect\upm@fmt@table@column@title{#1} & \csname upm@tableheader@b@3\endcsname{#2}{#3}{#4}}
-\expandafter\protected@edef\csname upm@tableheader@b@5\endcsname#1#2#3#4#5{%
-	\protect\upm@fmt@table@column@title{#1} & \csname upm@tableheader@b@4\endcsname{#2}{#3}{#4}{#5}}
-\expandafter\protected@edef\csname upm@tableheader@b@6\endcsname#1#2#3#4#5#6{%
-	\protect\upm@fmt@table@column@title{#1} & \csname upm@tableheader@b@5\endcsname{#2}{#3}{#4}{#5}{#6}}
-\expandafter\protected@edef\csname upm@tableheader@b@7\endcsname#1#2#3#4#5#6#7{%
-	\protect\upm@fmt@table@column@title{#1} & \csname upm@tableheader@b@6\endcsname{#2}{#3}{#4}{#5}{#6}{#7}}
-\expandafter\protected@edef\csname upm@tableheader@b@8\endcsname#1#2#3#4#5#6#7#8{%
-	\protect\upm@fmt@table@column@title{#1} & \csname upm@tableheader@b@7\endcsname{#2}{#3}{#4}{#5}{#6}{#7}{#8}}
-\expandafter\protected@edef\csname upm@tableheader@b@9\endcsname#1#2#3#4#5#6#7#8#9{%
-	\protect\upm@fmt@table@column@title{#1} & \csname upm@tableheader@b@8\endcsname{#2}{#3}{#4}{#5}{#6}{#7}{#8}{#9}}
+% Utility functions for mtabular
+\newcounter{upm@fmt@mtabular@columnnumber}
 
-\expandafter\def\csname upm@tableheader@c@1\endcsname#1{\ifupm@havetitle\else\hline\fi\rowcolor{backtableheader}\csname upm@tableheader@b@1\endcsname{#1}}
-\expandafter\def\csname upm@tableheader@c@2\endcsname#1#2{\ifupm@havetitle\else\hline\fi\rowcolor{backtableheader}\csname upm@tableheader@b@2\endcsname{#1}{#2}}
-\expandafter\def\csname upm@tableheader@c@3\endcsname#1#2#3{\ifupm@havetitle\else\hline\fi\rowcolor{backtableheader}\csname upm@tableheader@b@3\endcsname{#1}{#2}{#3}}
-\expandafter\def\csname upm@tableheader@c@4\endcsname#1#2#3#4{\ifupm@havetitle\else\hline\fi\rowcolor{backtableheader}\csname upm@tableheader@b@4\endcsname{#1}{#2}{#3}{#4}}
-\expandafter\def\csname upm@tableheader@c@5\endcsname#1#2#3#4#5{\ifupm@havetitle\else\hline\fi\rowcolor{backtableheader}\csname upm@tableheader@b@5\endcsname{#1}{#2}{#3}{#4}{#5}}
-\expandafter\def\csname upm@tableheader@c@6\endcsname#1#2#3#4#5#6{\ifupm@havetitle\else\hline\fi\rowcolor{backtableheader}\csname upm@tableheader@b@6\endcsname{#1}{#2}{#3}{#4}{#5}{#6}}
-\expandafter\def\csname upm@tableheader@c@7\endcsname#1#2#3#4#5#6#7{\ifupm@havetitle\else\hline\fi\csname upm@tableheader@b@7\endcsname{#1}{#2}{#3}{#4}{#5}{#6}{#7}}
-\expandafter\def\csname upm@tableheader@c@8\endcsname#1#2#3#4#5#6#7#8{\ifupm@havetitle\else\hline\fi\csname upm@tableheader@b@8\endcsname{#1}{#2}{#3}{#4}{#5}{#6}{#7}{#8}}
-\expandafter\def\csname upm@tableheader@c@9\endcsname#1#2#3#4#5#6#7#8#9{\ifupm@havetitle\else\hline\fi\rowcolor{backtableheader}\csname upm@tableheader@b@9\endcsname{#1}{#2}{#3}{#4}{#5}{#6}{#7}{#8}{#9}}
+\gdef\upm@fmt@mtabular@expandtitle#1#2{%
+	\multicolumn{#1}{|c|}{\upm@fmt@table@title{\ignorespaces#2\ignorespaces}}%
+}
+
+\newcommand{\tabulartitlespec}[1]{%
+	\gdef\upm@fmt@mtabular@expandtitle##1##2{%
+		\multicolumn{##1}{#1}{\upm@fmt@table@title{\ignorespaces##2\ignorespaces}}%
+	}
+}
 
 %-----
 %\mtabular[width]{ncolumns}{columns}
 \newenvironment{mtabular}[3][\linewidth]{%
-	\upm@havetitlefalse
-	\newcommand{\tabulartitle}[1]{\hline\multicolumn{#2}{>{\columncolor{backtableheader}}c}{\upm@fmt@table@title{##1}}\upm@havetitletrue \upm@hline}%
-	\expandafter\let\expandafter\tabularheader\csname upm@tableheader@c@#2\endcsname%
-	\tabularx{#1}{#3}%
+	\newcommand{\tabulartitle}[1]{%
+		\hline%
+		\upm@fmt@mtabular@expandtitle{#2}{##1} \\%
+		\hline%
+	}%
+	\newcommand{\tabulartitleinside}[1]{%
+		\hline\hline%
+		\upm@fmt@mtabular@expandtitle{#2}{##1} \\%
+		\hline%
+	}%
+	\newcommand*{\upm@fmt@mtabular@column@next}[1]{%
+		& \upm@fmt@table@column@title{\ignorespaces##1\ignorespaces}%
+		\addtocounter{upm@fmt@mtabular@columnnumber}{-1}%
+		\ifnum0<\value{upm@fmt@mtabular@columnnumber}%
+			\let\upm@fmt@mtabular@column@continue\upm@fmt@mtabular@column@next%
+		\else%
+			\\ \hline \let\upm@fmt@mtabular@column@continue\relax%
+		\fi%
+		\upm@fmt@mtabular@column@continue%
+	}
+	\newcommand*{\upm@fmt@mtabular@column@first}[1]{%
+		\upm@fmt@table@column@title{\ignorespaces##1\ignorespaces}%
+		\addtocounter{upm@fmt@mtabular@columnnumber}{-1}%
+		\ifnum0<\value{upm@fmt@mtabular@columnnumber}%
+			\let\upm@fmt@mtabular@column@continue\upm@fmt@mtabular@column@next%
+		\else%
+			\\ \hline \let\upm@fmt@mtabular@column@continue\relax%
+		\fi%
+		\upm@fmt@mtabular@column@continue%
+	}
+	\newcommand{\tabularheader}{%
+		\setcounter{upm@fmt@mtabular@columnnumber}{#2}%
+		\upm@fmt@mtabular@column@first%
+	}%
+	\newcommand{\tabularrowheader}[1]{%
+		\centering\upm@fmt@table@column@title{\ignorespaces##1}%
+	}%
+	\begingroup\tabularx{#1}{#3}%
 }{%
-	\endtabularx%
+	\endtabularx\endgroup%
 }
 
 %-----
 %\mtable[position]{width}{ncolumns}{columns}{caption}{label}
 \newenvironment{mtable}[6][ht]{%
-	\table[#1]\center%
-	\global\protected@edef\upm@table@caption{#5}%
-	\global\protected@edef\upm@table@label{tab:#6}%
+	\gdef\upm@table@caption{#5}%
+	\xdef\upm@table@label{tab:#6}%
 	\gdef\upm@table@note{}%
 	\newcommand{\captionastitle}{\tabulartitle{\upm@table@caption}}%
-	\newcommand{\tablenote}[1]{\gdef\upm@table@note{##1}}%
+	\newcommand{\tablenote}[1]{\gdef\upm@table@note{\bgroup ##1\egroup}}%
+	\table[#1]%
+	\center%
 	\mtabular[#2]{#3}{#4}%
 }{%
-	\endmtabular%
+	\endmtabular\relax%
 	\caption{\upm@table@caption}%
 	\label{\upm@table@label}%
 	\endcenter%
-	{\upm@table@note}%
+	\upm@table@note%
 	\endtable%
-	\let\upm@table@caption\relax%
-	\let\upm@table@label\relax%
-	\let\upm@table@note\relax%
+	\global\let\upm@table@caption\relax%
+	\global\let\upm@table@label\relax%
+	\global\let\upm@table@note\relax%
 }
 
 %-----
@@ -876,7 +893,7 @@
 }
 
 %----------------------------------------
-% DESCRIPTION LIST WITH BULLETS
+% DESCRIPTION LIST WITH NUMBERS
 %----------------------------------------
 
 \newcounter{@upm@fmt@enumdescription@cnt@}
