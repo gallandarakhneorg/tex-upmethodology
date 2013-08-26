@@ -929,8 +929,14 @@
 % DESCRIPTION LIST WITH BULLETS
 %----------------------------------------
 \let\upm@fmt@itemizeddescription@olditem\item
+\gdef\upm@fmt@itemizeddescription@separator{\iflanguage{french}{ :}{:}}
 \newcommand{\upm@fmt@itemizeddescription@formatdescription}[1]{\textbf{#1}}
-\newcommand{\upm@fmt@itemizeddescription@desc}[1][]{\ifthenelse{\equal{a#1}{a}}{}{\upm@fmt@itemizeddescription@formatdescription{#1 :}\xspace}}%
+\newcommand{\upm@fmt@itemizeddescription@desc@with}[1][]{%
+	\upm@fmt@itemizeddescription@formatdescription{#1\upm@fmt@itemizeddescription@separator}\ %
+}%
+\gdef\upm@fmt@itemizeddescription@desc{%
+	\@ifnextchar[\upm@fmt@itemizeddescription@desc@with\relax%
+}%
 \renewenvironment{description}[1][]{%
 	\bgroup%
 	\itemize
