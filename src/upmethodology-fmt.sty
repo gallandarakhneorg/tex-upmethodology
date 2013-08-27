@@ -91,6 +91,7 @@
 \RequirePackage{colortbl}
 \RequirePackage{picinpar}
 \RequirePackage{amsmath}
+\RequirePackage{amsthm}
 \RequirePackage{pifont}
 \RequirePackage{setspace}
 \RequirePackage{varioref}
@@ -1025,11 +1026,19 @@
 %----------------------------------------
 
 \newsavebox{\upm@framed@minipage}
-%\begin{framedminipage}{width}...\end{frameedminipage}
+%\begin{framedminipage}{width}...\end{framedminipage}
 \newenvironment{framedminipage}[1]{%
 	\begin{lrbox}{\upm@framed@minipage}\begin{minipage}{#1}%
 	}{%
 	\end{minipage}\end{lrbox}\fbox{\usebox{\upm@framed@minipage}}}
+
+%\begin{framedcolorminipage}{width}{border}{background}...\end{framedcolorminipage}
+\newenvironment{framedcolorminipage}[3]{%
+	\newcommand{\upm@framed@minipage@border}{#2}%
+	\newcommand{\upm@framed@minipage@background}{#3}%
+	\begin{lrbox}{\upm@framed@minipage}\begin{minipage}{#1}%
+	}{%
+	\end{minipage}\end{lrbox}\fcolorbox{\upm@framed@minipage@border}{\upm@framed@minipage@background}{\usebox{\upm@framed@minipage}}}
 
 %----------------------------------------
 % HIGHLIGH BOXES
@@ -1091,5 +1100,44 @@
 
 \let\upm@oldunderline\underline
 \renewcommand{\underline}[1]{\upm@oldunderline{\smash{#1}}}
+
+%----------------------------------------
+% ENVIRONMENT FOR DEFINITIONS
+%----------------------------------------
+\colorlet{definitionbackground}{backtableheader}
+\colorlet{definitionheaderforeground}{fronttableheader}
+\colorlet{definitionborder}{fronttableheader}
+\colorlet{definitiontextforeground}{fronttableheader}
+
+\newtheoremstyle{upmfmtdefinitionstyle}% name of the style to be used
+	  {}% measure of space to leave above the theorem. E.g.: 3pt
+	  {}% measure of space to leave below the theorem. E.g.: 3pt
+	  {}% name of font to use in the body of the theorem
+	  {}% measure of space to indent the head
+	  {\bfseries}% name of head font
+	  {}% punctuation between head and body
+	  {\newline}% space after theorem head
+	  {\textcolor{definitionheaderforeground}{\thmname{#1}\thmnumber{~#2}\iflanguage{french}{ :}{:}\thmnote{ #3}}\vspace{.25em}}% Manually specify head
+
+\theoremstyle{upmfmtdefinitionstyle}
+\iflanguage{french}{
+	\newtheorem{upmfmtdefinition}{D\'efinition}
+}{
+	\newtheorem{upmfmtdefinition}{Definition}
+}
+\theoremstyle{plain}
+
+\newlength{\upm@fmt@tmp@length}
+\newenvironment{definition}[1][]{%
+	\setlength{\upm@fmt@tmp@length}{\linewidth}%
+	\addtolength{\upm@fmt@tmp@length}{-.65em}%
+	\par\vspace{\parsep}\begin{framedcolorminipage}{\upm@fmt@tmp@length}{definitionborder}{definitionbackground}\color{definitiontextforeground}%
+	\begin{upmfmtdefinition}[#1]%
+}{%
+	\end{upmfmtdefinition}%
+	\end{framedcolorminipage}\vspace{\parsep}\par%
+}
+\let\listofdefinitions\listofupmfmtdefinitions
+
 
 \endinput

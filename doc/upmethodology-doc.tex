@@ -15,6 +15,7 @@
 \incsubversion{\makedate{15}{08}{2013}}{Add the macros: \texttt{{\textbackslash}textup}, \texttt{{\textbackslash}textsubscript}, \texttt{{\textbackslash}textdown}, \texttt{{\textbackslash}textsubscript}, \texttt{{\textbackslash}Emph}. Add the environments \texttt{enumdescription}, \texttt{enumdescriptionx}.}{\upmpublic}
 \incsubversion{\makedate{17}{08}{2013}}{Update the second parameter of \texttt{{\textbackslash}mfigurewtex} to have the same semantic as for \texttt{{\textbackslash}mfigure}.}{\upmpublic}
 \incsubversion{\makedate{26}{08}{2013}}{Major bug fixes in the environments \texttt{mtabular} and \texttt{mtable}. \newline Add the macro \texttt{{\textbackslash}tabulartitlespec}. \newline Add the macro \texttt{{\textbackslash}makenamespacing}.}{\upmpublic}
+\incsubversion{\makedate{27}{08}{2013}}{Add the environment \texttt{framedcolorminipage}. Add the \texttt{definition} environment.}{\upmpublic}
 
 \addauthorvalidator*[galland@arakhne.org]{St{\'e}phane}{Galland}{Original Author}
 
@@ -1013,18 +1014,83 @@ The package \texttt{upmethodology-fmt} provides a set of macros allowing to mana
 	Example: \texttt{{\textbackslash}bibsize\{{\textbackslash}Huge\}};
 \end{itemize}
 
-\section{Framed Mini Pages}
+\section{Theorems and Mathematic Environments}
 
-Standard \LaTeX\ distribution provides the \texttt{minipage} environment. This environment permits to put a small piece of page inside your document. Package \texttt{upmethodology-fmt} provides a framed extension of the original \texttt{minipage} environment:
-\par
-\begin{tabularx}{\linewidth}{XX}
-\texttt{{\textbackslash}begin\{framedminipage\}{[}{\textbackslash}linewidth{]}} \newline
-\texttt{This is an example of a framed minipage.} \newline
-\texttt{{\textbackslash}end\{framedminipage\}}
-&
-\begin{framedminipage}{\linewidth}This is an example of a framed minipage.\end{framedminipage}
-\\
-\end{tabularx}
+The package \texttt{upmethodology-fmt} defines several environments and macros that are based on the \texttt{theorem} or the math API of \LaTeX.
+
+\subsection{\texttt{definition}}
+
+The package \texttt{upmethodology-fmt} defines the environment \texttt{definition}, which permits to put a definition in your document. This environment is based on the standard \texttt{theorem} environment. The \texttt{definition} takes one optional parameter: the name of the definition.
+
+\paragraph{Example:} The following \LaTeX\ code:
+\begin{verbatim}
+\begin{definition}[Name of the definition]
+Text of the definition.
+\end{definition}
+\end{verbatim}
+produces:
+
+\begin{definition}[Name of the definition]
+Text of the definition.
+\end{definition}
+
+\paragraph{Change the colors of the definition:} You could change the colors of the \texttt{definition} environment by redefining the colors below with one of the macros \texttt{{\textbackslash}definecolor} or \texttt{{\textbackslash}colorlet}:
+\begin{itemize}
+\item \texttt{definitionbackground} is the color of the background of the definition;
+\item \texttt{definitionborder} is the color of the frame;
+\item \texttt{definitionheaderforeground} is the color of the text in the header of the definition;
+\item \texttt{definitiontextforeground} is the color of the text in the body of the definition.
+\end{itemize}
+
+\paragraph{Example of color redefinition:} The following \LaTeX\ code:
+\begin{verbatim}
+\definecolor{definitionheaderforeground}{rgb}{.3,.5,.8}
+\colorlet{definitionbackground}{gray!20}
+\colorlet{definitionborder}{red}
+\begin{definition}[Name of the definition]
+Text of the definition.
+\end{definition}
+\end{verbatim}
+produces:
+
+\definecolor{definitionheaderforeground}{rgb}{.3,.5,.8}
+\colorlet{definitionbackground}{gray!20}
+\colorlet{definitionborder}{red}
+\begin{definition}[Name of the definition]
+Text of the definition.
+\end{definition}
+
+\section{Framed Boxes or Mini Pages}
+
+Standard \LaTeX\ distribution provides the \texttt{minipage} environment. This environment permits to put a small piece of page inside your document. The package \texttt{upmethodology-fmt} provides two framed extensions of the original \texttt{minipage} environment: \texttt{framedminipage} and \texttt{framedcolorminipage}.
+
+The prototypes of there two new environments are, respectively:
+\begin{itemize}
+\item \texttt{{\textbackslash}begin\{framedminipage\}\{width\} \dots {\textbackslash}end\{framedminipage\}}
+\item \texttt{{\textbackslash}begin\{framedcolorminipage\}\{width\}\{border\string_color\}\{background\string_color\} \dots {\textbackslash}end\{framedcolorminipage\}}
+\end{itemize}
+
+\paragraph{Example of \texttt{framedminipage}} The following \LaTeX\ code:
+\begin{verbatim}
+\begin{framedminipage}{.75\linewidth}
+This is a text inside a framed minipage.
+\end{framedminipage}
+\end{verbatim}
+produces:
+\begin{framedminipage}{.75\linewidth}
+This is a text inside a framed minipage.
+\end{framedminipage}
+
+\paragraph{Example of \texttt{framedcolorminipage}} The following \LaTeX\ code:
+\begin{verbatim}
+\begin{framedcolorminipage}{.75\linewidth}{red}{yellow}
+This is a text inside a framed minipage with colors.
+\end{framedcolorminipage}
+\end{verbatim}
+produces:
+\begin{framedcolorminipage}{.75\linewidth}{red}{yellow}
+This is a text inside a framed minipage with colors.
+\end{framedcolorminipage}
 
 \section{Message Boxes}
 
