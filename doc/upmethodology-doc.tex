@@ -16,6 +16,7 @@
 \incsubversion{\makedate{17}{08}{2013}}{Update the second parameter of \texttt{{\textbackslash}mfigurewtex} to have the same semantic as for \texttt{{\textbackslash}mfigure}.}{\upmpublic}
 \incsubversion{\makedate{26}{08}{2013}}{Major bug fixes in the environments \texttt{mtabular} and \texttt{mtable}. \newline Add the macro \texttt{{\textbackslash}tabulartitlespec}. \newline Add the macro \texttt{{\textbackslash}makenamespacing}.}{\upmpublic}
 \incsubversion{\makedate{27}{08}{2013}}{Add the environment \texttt{framedcolorminipage}. Add the \texttt{definition} environment.}{\upmpublic}
+\incsubversion{\makedate{02}{09}{2013}}{Change the specification of the optional parameter of \texttt{mtable}. Add the macro \texttt{{\textbackslash}makelastname}}{\upmpublic}
 
 \addauthorvalidator*[galland@arakhne.org]{St{\'e}phane}{Galland}{Original Author}
 
@@ -178,6 +179,8 @@ This section contains the list of all the package dependencies for the \texttt{u
 \item \texttt{colortbl}
 \item \texttt{picinpar}
 \item \texttt{amsmath}
+\item \texttt{amsthm}
+\item \texttt{thmtools}
 \item \texttt{pifont}
 \item \texttt{setspace}
 \item \texttt{txfonts}
@@ -627,11 +630,17 @@ The following example of table is obtained by: \\
 \section{Tables}
 
 You could include a table inside your document with the following environment: \\
-\texttt{{\textbackslash}begin\{mtable\}[position]\{width\}\{ncolumns\}\{columns\}\{caption\}\{label\}...{\textbackslash}end\{mtable\}} \\
+\texttt{{\textbackslash}begin\{mtable\}[options]\{width\}\{ncolumns\}\{columns\}\{caption\}\{label\}...{\textbackslash}end\{mtable\}} \\
 
 This environment is based on the \texttt{mtabular} environment. The parameters are:
 \begin{itemize}
-\item \texttt{position}: is the desired position of the table according to the \LaTeX's \texttt{table} definition;
+\item \texttt{options}: are the options to pass to the \texttt{mtable} environment: \begin{itemize}
+			\item \texttt{h}: put the table ``here'' (similar to the option \texttt{h} for the \LaTeX's \texttt{table}),
+			\item \texttt{H}: put the table ``absolutely here'' (similar to the option \texttt{H} for the \LaTeX's \texttt{table}),
+			\item \texttt{t}: put the table ``at the top of the page'' (similar to the option \texttt{t} for the \LaTeX's \texttt{table}),
+			\item \texttt{b}: put the table ``at bottom of the page'' (similar to the option \texttt{b} for the \LaTeX's \texttt{table}),
+			\item \texttt{size=\string<macro\string>}: specify the size of the text in the table (by default, \texttt{{\textbackslash}normalsize});
+		\end{itemize}
 \item \texttt{width}: is the desired width of the table (ie., the tabular inside the table);
 \item \texttt{ncolumns}: is the count of columns in the table (ie., the tabular inside the table). It must be consistent with the column description;
 \item \texttt{columns}: is the description of the columns according to the \texttt{tabular} and \texttt{tabularx} packages;
@@ -936,6 +945,10 @@ The package \texttt{upmethodology-fmt} provides a set of macros to format the te
 	format the specified name to be sure that the spaces after the points of the initials are demi-spaces. \\
 	Example: \texttt{{\textbackslash}makenamespacing\{S\string.G\string.\}Galland}, \\
 		``\makenamespacing{S.G.}Galland'';
+\item \texttt{{\textbackslash}makelastname\{name\}} \\
+	format the specified last/family name. \\
+	Example: \texttt{{\textbackslash}makelastname\{Galland\}}, \\
+		``\makelastname{Galland}'';
 \item \texttt{{\textbackslash}prname[von]\{first name\}\{last name\}} \\
       \texttt{{\textbackslash}prname*[von]\{first name\}\{last name\}} \\
 	format the specified people name components according to the document standards for \emph{Professor} title. By default, the format \texttt{first von last} is used. The star-ed version is post-fixed, the non-star-ed version is prefixed. \\

@@ -17,7 +17,7 @@
 % write to the Free Software Foundation, Inc., 59 Temple Place - Suite
 % 330, Boston, MA 02111-1307, USA.
 
-\global\edef\upm@package@fmt@ver{2013/08/27}
+\global\edef\upm@package@fmt@ver{2013/09/02}
 
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
 \ProvidesPackage{upmethodology-fmt}[\upm@package@fmt@ver]
@@ -92,6 +92,7 @@
 \RequirePackage{picinpar}
 \RequirePackage{amsmath}
 \RequirePackage{amsthm}
+\RequirePackage{thmtools}
 \RequirePackage{pifont}
 \RequirePackage{setspace}
 \RequirePackage{varioref}
@@ -431,15 +432,56 @@
 }
 
 %-----
-%\mtable[position]{width}{ncolumns}{columns}{caption}{label}
+%\mtable[options]{width}{ncolumns}{columns}{caption}{label}
+\define@key[autolatex]{mtable}{size}{\gdef\@autolatex@mtable@size{#1}}
+%
+\define@key[autolatex]{mtable}{t}[\relax]{\xdef\@autolatex@mtable@position{\@autolatex@mtable@position t}}
+\define@key[autolatex]{mtable}{b}[\relax]{\xdef\@autolatex@mtable@position{\@autolatex@mtable@position b}}
+\define@key[autolatex]{mtable}{h}[\relax]{\xdef\@autolatex@mtable@position{\@autolatex@mtable@position h}}
+\define@key[autolatex]{mtable}{H}[\relax]{\xdef\@autolatex@mtable@position{\@autolatex@mtable@position H}}
+%
+\define@key[autolatex]{mtable}{tb}[\relax]{\xdef\@autolatex@mtable@position{\@autolatex@mtable@position tb}}
+\define@key[autolatex]{mtable}{th}[\relax]{\xdef\@autolatex@mtable@position{\@autolatex@mtable@position th}}
+\define@key[autolatex]{mtable}{tH}[\relax]{\xdef\@autolatex@mtable@position{\@autolatex@mtable@position tH}}
+%
+\define@key[autolatex]{mtable}{bt}[\relax]{\xdef\@autolatex@mtable@position{\@autolatex@mtable@position bt}}
+\define@key[autolatex]{mtable}{bh}[\relax]{\xdef\@autolatex@mtable@position{\@autolatex@mtable@position bh}}
+\define@key[autolatex]{mtable}{bH}[\relax]{\xdef\@autolatex@mtable@position{\@autolatex@mtable@position bH}}
+%
+\define@key[autolatex]{mtable}{ht}[\relax]{\xdef\@autolatex@mtable@position{\@autolatex@mtable@position ht}}
+\define@key[autolatex]{mtable}{hb}[\relax]{\xdef\@autolatex@mtable@position{\@autolatex@mtable@position hb}}
+%
+\define@key[autolatex]{mtable}{tbh}[\relax]{\xdef\@autolatex@mtable@position{\@autolatex@mtable@position tbh}}
+\define@key[autolatex]{mtable}{tbH}[\relax]{\xdef\@autolatex@mtable@position{\@autolatex@mtable@position tbH}}
+\define@key[autolatex]{mtable}{thb}[\relax]{\xdef\@autolatex@mtable@position{\@autolatex@mtable@position thb}}
+\define@key[autolatex]{mtable}{tHb}[\relax]{\xdef\@autolatex@mtable@position{\@autolatex@mtable@position tHb}}
+%
+\define@key[autolatex]{mtable}{bth}[\relax]{\xdef\@autolatex@mtable@position{\@autolatex@mtable@position bth}}
+\define@key[autolatex]{mtable}{btH}[\relax]{\xdef\@autolatex@mtable@position{\@autolatex@mtable@position btH}}
+\define@key[autolatex]{mtable}{bht}[\relax]{\xdef\@autolatex@mtable@position{\@autolatex@mtable@position bht}}
+\define@key[autolatex]{mtable}{bHt}[\relax]{\xdef\@autolatex@mtable@position{\@autolatex@mtable@position bHt}}
+%
+\define@key[autolatex]{mtable}{htb}[\relax]{\xdef\@autolatex@mtable@position{\@autolatex@mtable@position htb}}
+\define@key[autolatex]{mtable}{hbt}[\relax]{\xdef\@autolatex@mtable@position{\@autolatex@mtable@position hbt}}
+%
+\define@key[autolatex]{mtable}{Htb}[\relax]{\xdef\@autolatex@mtable@position{\@autolatex@mtable@position Htb}}
+\define@key[autolatex]{mtable}{Hbt}[\relax]{\xdef\@autolatex@mtable@position{\@autolatex@mtable@position Hbt}}
+%
 \newenvironment{mtable}[6][ht]{%
+	\global\let\@autolatex@mtable@position\relax%
+	\gdef\@autolatex@mtable@size{\normalsize}%
+	\setkeys[autolatex]{mtable}{#1}%
+	\ifx\@autolatex@mtable@position\relax%
+		\gdef\@autolatex@mtable@position{ht}%
+	\fi
+	%
 	\gdef\upm@table@caption{#5}%
 	\xdef\upm@table@label{tab:#6}%
 	\gdef\upm@table@note{}%
 	\newcommand{\captionastitle}{\tabulartitle{\upm@table@caption}}%
 	\newcommand{\tablenote}[1]{\gdef\upm@table@note{\bgroup ##1\egroup}}%
-	\table[#1]%
-	\center%
+	\expandafter\table[\@autolatex@mtable@position]%
+	\center\@autolatex@mtable@size%
 	\mtabular[#2]{#3}{#4}%
 }{%
 	\endmtabular\relax%
@@ -799,8 +841,6 @@
 	\ignorespaces
 }
 
-\newcommand{\makenametest}[2]{\makenamespacing{#1} #2}
-
 %\upmmakename[von]{firstname}{lastname}{separator}
 \newcommand{\upmmakename}[4][\relax]{%
 	\ifx#1\relax%
@@ -808,12 +848,16 @@
 	\else%
 		{\mbox{\smaller \makenamespacing{#2}}#4\mbox{\smaller #1}#4\textsc{\ignorespaces#3}}%
 	\fi%
+	\xspace%
 }
 
 %\makename[von]{firstname}{lastname}
 \newcommand{\makename}[3][\relax]{%
 	\upmmakename[#1]{#2}{#3}{\ }%
 }
+
+%\makelastname[von]{lastname}
+\newcommand{\makelastname}[2][\relax]{\mbox{\smaller#1} \textsc{\ignorespaces#2}\xspace}
 
 \gdef\upm@format@people@title#1{\textsc{#1}}
 
@@ -1109,35 +1153,36 @@
 \colorlet{definitionborder}{fronttableheader}
 \colorlet{definitiontextforeground}{fronttableheader}
 
-\newtheoremstyle{upmfmtdefinitionstyle}% name of the style to be used
+\iflanguage{french}{
+	\gdef\definitionname{D\'efinition}
+}{
+	\gdef\definitionname{Definition}
+}
+
+\gdef\upm@definition@width{.9\linewidth}
+\gdef\upm@definition@rule@width{\linewidth}
+\gdef\upm@definition@rule@height{0.4pt}
+
+\newtheoremstyle{definition}% name of the style to be used
 	  {}% measure of space to leave above the theorem. E.g.: 3pt
 	  {}% measure of space to leave below the theorem. E.g.: 3pt
-	  {}% name of font to use in the body of the theorem
+	  {\normalfont}% name of font to use in the body of the theorem
 	  {}% measure of space to indent the head
-	  {\bfseries}% name of head font
-	  {}% punctuation between head and body
+	  {\normalfont\bfseries}% name of head font
+	  {\\[-1em]{\textcolor{definitionborder}{\rule{\upm@definition@rule@width}{\upm@definition@rule@height}}}}% punctuation between head and body
 	  {\newline}% space after theorem head
 	  {\textcolor{definitionheaderforeground}{\thmname{#1}\thmnumber{~#2}\iflanguage{french}{ :}{:}\thmnote{ #3}}\vspace{.25em}}% Manually specify head
 
-\theoremstyle{upmfmtdefinitionstyle}
-\iflanguage{french}{
-	\newtheorem{upmfmtdefinition}{D\'efinition}
-}{
-	\newtheorem{upmfmtdefinition}{Definition}
-}
-\theoremstyle{plain}
+\declaretheorem[name=\definitionname,style=definition]{upmdefinition}
 
-\newlength{\upm@fmt@tmp@length}
 \newenvironment{definition}[1][]{%
-	\setlength{\upm@fmt@tmp@length}{\linewidth}%
-	\addtolength{\upm@fmt@tmp@length}{-.65em}%
-	\par\vspace{\parsep}\begin{framedcolorminipage}{\upm@fmt@tmp@length}{definitionborder}{definitionbackground}\color{definitiontextforeground}%
-	\begin{upmfmtdefinition}[#1]%
+	\par\vspace{\parsep}\centering\begin{framedcolorminipage}{\upm@definition@width}{definitionborder}{definitionbackground}%
+	\color{definitiontextforeground}%
+	\begin{upmdefinition}[#1]%
 }{%
-	\end{upmfmtdefinition}%
+	\end{upmdefinition}%
 	\end{framedcolorminipage}\vspace{\parsep}\par%
 }
-\let\listofdefinitions\listofupmfmtdefinitions
 
 
 \endinput
