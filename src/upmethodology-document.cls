@@ -17,7 +17,7 @@
 % write to the Free Software Foundation, Inc., 59 Temple Place - Suite
 % 330, Boston, MA 02111-1307, USA.
 
-\global\edef\upm@package@docclazz@ver{2013/08/27}
+\global\edef\upm@package@docclazz@ver{2013/09/05}
 
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
 \ProvidesClass{upmethodology-document}[\upm@package@docclazz@ver]
@@ -220,5 +220,18 @@
 	\gdef\chaptertoc{\upm@package@docclazz@hidesec@a{\string\parttoc}}
 
 \fi\fi
+
+
+\global\let\upm@package@docclazz@frontmatter\frontmatter
+\gdef\frontmatter{\pagestyle{headings}\pagenumbering{roman}}
+
+\global\let\upm@package@docclazz@mainmatter\mainmatter
+\gdef\mainmatter{\cleardoublepage\pagestyle{fancyplain}\upm@package@docclazz@mainmatter}
+
+%\global\let\upm@package@docclazz@backmatter\backmatter
+%\gdef\backmatter{%
+%	\pagestyle{plain}
+%	\upm@package@docclazz@backmatter%
+%}
 
 \endinput
