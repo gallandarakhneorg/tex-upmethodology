@@ -16,7 +16,7 @@
 % 330, Boston, MA 02111-1307, USA.
 %
 
-\global\edef\upm@package@private@doctype@ver{2013/08/28}
+\global\edef\upm@package@private@doctype@ver{2013/09/19}
 
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
 \ProvidesPackage{upmethodology-p-common}[\upm@package@private@doctype@ver]
@@ -88,6 +88,11 @@
 	\expandafter\let\csname\upm@protect{#1}\endcsname\relax%
 }
 
+\def\upm@namelet@ext#1#2{%
+	\expandafter\expandafter\let\expandafter\upm@tmp\csname#2\endcsname%
+	\global\expandafter\let\csname#1\endcsname\upm@tmp%
+}
+
 \def\upm@ifdefinedname#1#2#3{%
 	\expandafter\ifx\csname\upm@protect{#1}\endcsname\relax%
 		#3%
@@ -95,6 +100,8 @@
 		#2%
 	\fi%
 }
+
+\newcommand{\upm@column@char}{\iflanguage{french}{ :}{:}}
 
 %----------------------------------------
 % GET THE REFERENCE ID WITHOUT \REF

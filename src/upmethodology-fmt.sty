@@ -17,7 +17,7 @@
 % write to the Free Software Foundation, Inc., 59 Temple Place - Suite
 % 330, Boston, MA 02111-1307, USA.
 
-\global\edef\upm@package@fmt@ver{2013/09/02}
+\global\edef\upm@package@fmt@ver{2013/09/19}
 
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
 \ProvidesPackage{upmethodology-fmt}[\upm@package@fmt@ver]
@@ -100,6 +100,7 @@
 \RequirePackage{relsize}
 \RequirePackage{xkeyval}
 \RequirePackage{hyphenat}
+\RequirePackage{bbm}
 
 %----------------------------------------
 % Exponent and indice
@@ -129,6 +130,18 @@
 \newcommand{\und}{\textsup{nd}}
 \newcommand{\urd}{\textsup{rd}}
 \newcommand{\uth}{\textsup{th}}
+
+%----------------------------------------
+% MATH SYMBOLS
+%----------------------------------------
+\newcommand{\R}{\ensuremath{\mathbb{R}}}
+\newcommand{\N}{\ensuremath{\mathbb{N}}}
+\newcommand{\Z}{\ensuremath{\mathbb{Z}}}
+\newcommand{\C}{\ensuremath{\mathbb{C}}}
+\newcommand{\Q}{\ensuremath{\mathbb{Q}}}
+\newcommand{\powerset}{\ensuremath{\mathcal{P}}}
+
+\DeclareMathOperator{\sgn}{sgn}
 
 %----------------------------------------
 % DEFAULT GRAPHICX CONFIGURATION
@@ -1148,6 +1161,9 @@
 %----------------------------------------
 % ENVIRONMENT FOR DEFINITIONS
 %----------------------------------------
+
+%-----
+% Defining the style for the definitions
 \colorlet{definitionbackground}{backtableheader}
 \colorlet{definitionheaderforeground}{fronttableheader}
 \colorlet{definitionborder}{fronttableheader}
@@ -1155,15 +1171,17 @@
 
 \iflanguage{french}{
 	\gdef\definitionname{D\'efinition}
+	\gdef\listdefinitionname{Liste des d\'efinitions}
 }{
 	\gdef\definitionname{Definition}
+	\gdef\listdefinitionname{List of Definitions}
 }
 
 \gdef\upm@definition@width{.9\linewidth}
 \gdef\upm@definition@rule@width{\linewidth}
 \gdef\upm@definition@rule@height{0.4pt}
 
-\newtheoremstyle{definition}% name of the style to be used
+\newtheoremstyle{upmdefinition}% name of the style to be used
 	  {}% measure of space to leave above the theorem. E.g.: 3pt
 	  {}% measure of space to leave below the theorem. E.g.: 3pt
 	  {\normalfont}% name of font to use in the body of the theorem
@@ -1171,18 +1189,55 @@
 	  {\normalfont\bfseries}% name of head font
 	  {\\[-1em]{\textcolor{definitionborder}{\rule{\upm@definition@rule@width}{\upm@definition@rule@height}}}}% punctuation between head and body
 	  {\newline}% space after theorem head
-	  {\textcolor{definitionheaderforeground}{\thmname{#1}\thmnumber{~#2}\iflanguage{french}{ :}{:}\thmnote{ #3}}\vspace{.25em}}% Manually specify head
+	  {\textcolor{definitionheaderforeground}{\thmname{#1}\thmnumber{~#2}\upm@column@char\thmnote{ #3}}\vspace{.25em}}% Manually specify head
 
-\declaretheorem[name=\definitionname,style=definition]{upmdefinition}
-
-\newenvironment{definition}[1][]{%
-	\par\vspace{\parsep}\centering\begin{framedcolorminipage}{\upm@definition@width}{definitionborder}{definitionbackground}%
-	\color{definitiontextforeground}%
-	\begin{upmdefinition}[#1]%
-}{%
-	\end{upmdefinition}%
-	\end{framedcolorminipage}\vspace{\parsep}\par%
+%-----
+% Declare a theorem with the standard UPM style
+% \declareupmtheorem[theorem_style]{name}{label}{list_label}
+\newcommand{\declareupmtheorem}[4][upmdefinition]{%
+	\global\declaretheorem[name={#3},style=#1]{upm#2}%
+	\global\newenvironment{#2}[1][]{%
+		\par\vspace{\parsep}\centering\begin{framedcolorminipage}{\upm@definition@width}{definitionborder}{definitionbackground}%
+		\color{definitiontextforeground}%
+		\begin{upm#2}[##1]%
+	}{%
+		\end{upm#2}%
+		\end{framedcolorminipage}\vspace{\parsep}\par%
+	}%
+	% Check the version of the thmtools because the TeXLive distribution
+	% gives a too old version.
+	\@ifpackagelater{thm-listof}{2012/05/03}{%
+		\global\@namedef{listof#2s}{%
+			\global\let\upm@definition@old@listtheoremname\listtheoremname%
+			\global\let\upm@definition@old@upmtheoremopt\upm@definition@upmtheoremopt%
+			\gdef\listtheoremname{#4}%
+			\renewcommand{\upm@definition@upmtheoremopt}[1]{}%
+			\expandafter\listoftheorems[ignoreall,show={upm#2}]%
+			\global\let\listtheoremname\upm@definition@old@listtheoremname%
+			\global\let\upm@definition@upmtheoremopt\upm@definition@old@upmtheoremopt%
+		}%
+	}{%
+		\@latex@warning{Your version of the thmtools is too old. I recommend you to install the version 2012/05/04, or later.}
+		\global\@namedef{listof#2s}{%
+			\global\let\upm@tmp\listtheoremname%
+			\gdef\listtheoremname{#4}%
+			\listoftheorems%
+			\global\let\listtheoremname\upm@tmp%
+		}%
+	}
 }
+\@onlypreamble\declareupmtheorem
 
+\gdef\thmtformatoptarg#1{\upm@column@char\ #1}%
+
+% Permits to define an part of the definition's name that is
+% rendered only in core part of the document, not in the
+% list of theorems
+\gdef\upm@definition@upmtheoremopt#1{#1}
+\gdef\upmtheoremopt#1{\protect\upm@definition@upmtheoremopt{#1}}
+
+%-----
+% Declare the definition environment
+\declareupmtheorem{definition}{\definitionname}{\listdefinitionname}
 
 \endinput

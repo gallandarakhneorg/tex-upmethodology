@@ -17,6 +17,8 @@
 \incsubversion{\makedate{26}{08}{2013}}{Major bug fixes in the environments \texttt{mtabular} and \texttt{mtable}. \newline Add the macro \texttt{{\textbackslash}tabulartitlespec}. \newline Add the macro \texttt{{\textbackslash}makenamespacing}.}{\upmpublic}
 \incsubversion{\makedate{27}{08}{2013}}{Add the environment \texttt{framedcolorminipage}. Add the \texttt{definition} environment.}{\upmpublic}
 \incsubversion{\makedate{02}{09}{2013}}{Change the specification of the optional parameter of \texttt{mtable}. Add the macro \texttt{{\textbackslash}makelastname}}{\upmpublic}
+\incsubversion{\makedate{05}{09}{2013}}{Add the macro \texttt{{\textbackslash}declareupmtheorem}}{\upmpublic}
+\incsubversion{\makedate{19}{09}{2013}}{Add the mathematic symbols}{\upmpublic}
 
 \addauthorvalidator*[galland@arakhne.org]{St{\'e}phane}{Galland}{Original Author}
 
@@ -44,6 +46,8 @@
 
 %\tracingmacros=2
 %\tracingcommands=1
+
+\declareupmtheorem{mytheorem}{My Theorem}{List of my Theorems}
 
 \begin{document}
 
@@ -186,6 +190,7 @@ This section contains the list of all the package dependencies for the \texttt{u
 \item \texttt{txfonts}
 \item \texttt{xkeyval}
 \item \texttt{hyphenat}
+\item \texttt{mathbb}
 \end{itemize}
 
 \subsection{upmethdology-frontpage.sty}
@@ -985,9 +990,13 @@ The package \texttt{upmethodology-fmt} provides a set of macros to format the te
 	Example 1: \texttt{{\textbackslash}iengname\{Pierre\}\{Martin\}}, ``\iengname{Pierre}{Martin}''; \\
 	Example 2: \texttt{{\textbackslash}iengname*\{Pierre\}\{Martin\}}, ``\iengname*{Pierre}{Martin}''.
 \end{itemize}
+
+
 \section{Symbols}
 
-The package \texttt{upmethodology-fmt} provides several symbols described inside the table~\ref{tab:symbols}.
+\subsection{Symbols in Text Mode}
+
+The package \texttt{upmethodology-fmt} provides several symbols in text mode, and described inside the table~\ref{tab:symbols:text}.
 
 \begin{table}[Hht]
 	\begin{center}
@@ -1008,7 +1017,34 @@ The package \texttt{upmethodology-fmt} provides several symbols described inside
 		\end{tabular}
 	\end{center}
 	\caption{List of symbols}
-	\label{tab:symbols}
+	\label{tab:symbols:text}
+\end{table}
+
+\subsection{Symbols in Math Mode}
+
+The package \texttt{upmethodology-fmt} provides several symbols in math mode, and described inside the table~\ref{tab:symbols:math}.
+
+\begin{table}[Hht]
+	\begin{center}
+		\begin{tabular}{|>{\ttfamily}l|l|}
+		\hline
+		\multicolumn{2}{|c|}{Sets} \\
+		\hline
+		{\textbackslash}R & \R \\
+		{\textbackslash}N & \N \\
+		{\textbackslash}Z & \Z \\
+		{\textbackslash}Q & \Q \\
+		{\textbackslash}C & \C \\
+		{\textbackslash}powerset p & $\powerset p$ \\
+		\hline
+		\multicolumn{2}{|c|}{Operators} \\
+		\hline
+		{\textbackslash}sgn expr & $\sgn expr$ \\
+		\hline
+		\end{tabular}
+	\end{center}
+	\caption{List of symbols}
+	\label{tab:symbols:math}
 \end{table}
 
 \section{Bibliography}
@@ -1030,6 +1066,44 @@ The package \texttt{upmethodology-fmt} provides a set of macros allowing to mana
 \section{Theorems and Mathematic Environments}
 
 The package \texttt{upmethodology-fmt} defines several environments and macros that are based on the \texttt{theorem} or the math API of \LaTeX.
+
+\subsection{Definition of a new theorem environment}
+
+If you want to create a new theorem environment based on the style provided by this package, you could invoke \texttt{{\textbackslash}declareupmtheorem}: \\
+\texttt{{\textbackslash}declareupmtheorem[name of the style]\{name\}\{label\}\{title of the list\}}
+
+This macro defines:
+\begin{itemize}
+\item the environment with the given name, and
+\item the macro \texttt{{\textbackslash}listof$\langle$name$\rangle$s}.
+\end{itemize}
+
+The \texttt{name of the style} is the name of the theorem style to be used. This style is defined by \texttt{{\textbackslash}newtheoremstyle}. By default, it is \texttt{upmdefinition}.
+The \texttt{label} is the text to put in the theorem header.
+The \texttt{title of the list} is used by the macro \texttt{{\textbackslash}listof$\langle$name$\rangle$s} as the title of the chapter.
+
+\begin{upmcaution}
+	Some features provided by this package depend on the version of the package \texttt{thmtools}. We recommend to use and install the version 2012/05/04, or later.
+\end{upmcaution}
+
+\begin{upmcaution}
+	The macro \texttt{{\textbackslash}declareupmtheorem} can be used only inside the preamble of your document.
+\end{upmcaution}
+
+\paragraph{Example:} The following code define the environment \texttt{mytheorem}:
+\begin{verbatim}
+\documentclass{upmethodology-document}
+\declareupmtheorem{mytheorem}{My Theorem}{List of my Theorems}
+\begin{document}
+\begin{mytheorem}[Theorem of Everything]
+This is the theorem of Evereything.
+\end{mytheorem}
+\end{document}
+\end{verbatim}
+gives the result:
+\begin{mytheorem}[Theorem of Everything]
+This is the theorem of Evereything.
+\end{mytheorem}
 
 \subsection{\texttt{definition}}
 
