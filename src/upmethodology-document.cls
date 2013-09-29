@@ -17,7 +17,7 @@
 % write to the Free Software Foundation, Inc., 59 Temple Place - Suite
 % 330, Boston, MA 02111-1307, USA.
 
-\global\edef\upm@package@docclazz@ver{2013/09/05}
+\global\edef\upm@package@docclazz@ver{2013/09/29}
 
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
 \ProvidesClass{upmethodology-document}[\upm@package@docclazz@ver]
@@ -28,6 +28,8 @@
 \upm@package@docclazz@nodocinfofalse
 \newif\ifupm@package@docclazz@nopubpage
 \upm@package@docclazz@nopubpagefalse
+\newif\ifupm@package@docclazz@autofrontmatter
+\upm@package@docclazz@autofrontmatterfalse
 
 \gdef\upm@package@docclazz@optionstopass{a4paper,11pt}
 
@@ -61,6 +63,12 @@
 }
 \DeclareOption{pubpage}{%
 	\global\upm@package@docclazz@nopubpagefalse%
+}
+\DeclareOption{nofrontmatter}{%
+	\global\upm@package@docclazz@autofrontmatterfalse%
+}
+\DeclareOption{frontmatter}{%
+	\global\upm@package@docclazz@autofrontmattertrue%
 }
 \DeclareOption{book}{%
 	\global\upmbookformattrue
@@ -167,18 +175,35 @@
 \fi
 
 %----------------------------------------
+% FRONT, MAIN AND BACK MATTERS
+%----------------------------------------
+
+\global\let\upm@package@docclazz@frontmatter\frontmatter
+\gdef\frontmatter{\pagestyle{headings}\pagenumbering{roman}\global\let\frontmatter\relax}
+
+\global\let\upm@package@docclazz@mainmatter\mainmatter
+\gdef\mainmatter{\cleardoublepage\pagestyle{fancyplain}\upm@package@docclazz@mainmatter}
+
+%\global\let\upm@package@docclazz@backmatter\backmatter
+%\gdef\backmatter{%
+%	\pagestyle{plain}
+%	\upm@package@docclazz@backmatter%
+%}
+
+%----------------------------------------
 % AUTO-GENERATED DOCUMENT
 %----------------------------------------
 
-\AtBeginDocument{
-	\makefrontcover
-	\ifupm@package@docclazz@nopubpage\else\upmpublicationpage\fi
-	\ifupm@package@docclazz@nodocinfo\else\upmdocinfopage\fi
-	\sloppy
+\AtBeginDocument{%
+	\ifupm@package@docclazz@autofrontmatter\frontmatter\fi%
+	\makefrontcover%
+	\ifupm@package@docclazz@nopubpage\else\upmpublicationpage\fi%
+	\ifupm@package@docclazz@nodocinfo\else\upmdocinfopage\fi%
+	\sloppy%
 }
 
-\AtEndDocument{
-	\makebackcover
+\AtEndDocument{%
+	\makebackcover%
 }
 
 %----------------------------------------
@@ -220,18 +245,5 @@
 	\gdef\chaptertoc{\upm@package@docclazz@hidesec@a{\string\parttoc}}
 
 \fi\fi
-
-
-\global\let\upm@package@docclazz@frontmatter\frontmatter
-\gdef\frontmatter{\pagestyle{headings}\pagenumbering{roman}}
-
-\global\let\upm@package@docclazz@mainmatter\mainmatter
-\gdef\mainmatter{\cleardoublepage\pagestyle{fancyplain}\upm@package@docclazz@mainmatter}
-
-%\global\let\upm@package@docclazz@backmatter\backmatter
-%\gdef\backmatter{%
-%	\pagestyle{plain}
-%	\upm@package@docclazz@backmatter%
-%}
 
 \endinput

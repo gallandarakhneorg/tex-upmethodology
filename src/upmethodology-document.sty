@@ -17,7 +17,7 @@
 % write to the Free Software Foundation, Inc., 59 Temple Place - Suite
 % 330, Boston, MA 02111-1307, USA.
 
-\global\edef\upm@package@doc@ver{2013/08/15}
+\global\edef\upm@package@doc@ver{2013/09/29}
 
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
 \ProvidesPackage{upmethodology-document}[\upm@package@doc@ver]
@@ -173,15 +173,6 @@
 % Display the the document information on a page
 %\upmpublicationpage
 \newcommand{\upmdocinfopage}{
-	\if@twoside%
-		\ifodd\thepage%
-			\setcounter{page}{-1}%
-		\else%
-			\setcounter{page}{0}%
-		\fi%
-	\else%
-		\setcounter{page}{0}%
-	\fi%
 	\thispagestyle{plain}
 	\upmdocumentsummary\upmdocumentauthors\upmdocumentvalidators\upmdocumentinformedpeople\vfill\upmhistory\clearpage%
 }
@@ -190,7 +181,6 @@
 % Display the publication pag for the document
 %\upmpublicationpage
 \newcommand{\upmpublicationpage}{
-	\setcounter{page}{0}%
 	\thispagestyle{empty}%
 	\upmpublicationminipage%
 }

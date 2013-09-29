@@ -17,7 +17,7 @@
 % write to the Free Software Foundation, Inc., 59 Temple Place - Suite
 % 330, Boston, MA 02111-1307, USA.
 
-\global\edef\upm@package@fmt@ver{2013/09/19}
+\global\edef\upm@package@fmt@ver{2013/09/26}
 
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
 \ProvidesPackage{upmethodology-fmt}[\upm@package@fmt@ver]
@@ -446,39 +446,48 @@
 
 %-----
 %\mtable[options]{width}{ncolumns}{columns}{caption}{label}
+% size=<length>
 \define@key[autolatex]{mtable}{size}{\gdef\@autolatex@mtable@size{#1}}
-%
-\define@key[autolatex]{mtable}{t}[\relax]{\xdef\@autolatex@mtable@position{\@autolatex@mtable@position t}}
-\define@key[autolatex]{mtable}{b}[\relax]{\xdef\@autolatex@mtable@position{\@autolatex@mtable@position b}}
-\define@key[autolatex]{mtable}{h}[\relax]{\xdef\@autolatex@mtable@position{\@autolatex@mtable@position h}}
-\define@key[autolatex]{mtable}{H}[\relax]{\xdef\@autolatex@mtable@position{\@autolatex@mtable@position H}}
-%
-\define@key[autolatex]{mtable}{tb}[\relax]{\xdef\@autolatex@mtable@position{\@autolatex@mtable@position tb}}
-\define@key[autolatex]{mtable}{th}[\relax]{\xdef\@autolatex@mtable@position{\@autolatex@mtable@position th}}
-\define@key[autolatex]{mtable}{tH}[\relax]{\xdef\@autolatex@mtable@position{\@autolatex@mtable@position tH}}
-%
-\define@key[autolatex]{mtable}{bt}[\relax]{\xdef\@autolatex@mtable@position{\@autolatex@mtable@position bt}}
-\define@key[autolatex]{mtable}{bh}[\relax]{\xdef\@autolatex@mtable@position{\@autolatex@mtable@position bh}}
-\define@key[autolatex]{mtable}{bH}[\relax]{\xdef\@autolatex@mtable@position{\@autolatex@mtable@position bH}}
-%
-\define@key[autolatex]{mtable}{ht}[\relax]{\xdef\@autolatex@mtable@position{\@autolatex@mtable@position ht}}
-\define@key[autolatex]{mtable}{hb}[\relax]{\xdef\@autolatex@mtable@position{\@autolatex@mtable@position hb}}
-%
-\define@key[autolatex]{mtable}{tbh}[\relax]{\xdef\@autolatex@mtable@position{\@autolatex@mtable@position tbh}}
-\define@key[autolatex]{mtable}{tbH}[\relax]{\xdef\@autolatex@mtable@position{\@autolatex@mtable@position tbH}}
-\define@key[autolatex]{mtable}{thb}[\relax]{\xdef\@autolatex@mtable@position{\@autolatex@mtable@position thb}}
-\define@key[autolatex]{mtable}{tHb}[\relax]{\xdef\@autolatex@mtable@position{\@autolatex@mtable@position tHb}}
-%
-\define@key[autolatex]{mtable}{bth}[\relax]{\xdef\@autolatex@mtable@position{\@autolatex@mtable@position bth}}
-\define@key[autolatex]{mtable}{btH}[\relax]{\xdef\@autolatex@mtable@position{\@autolatex@mtable@position btH}}
-\define@key[autolatex]{mtable}{bht}[\relax]{\xdef\@autolatex@mtable@position{\@autolatex@mtable@position bht}}
-\define@key[autolatex]{mtable}{bHt}[\relax]{\xdef\@autolatex@mtable@position{\@autolatex@mtable@position bHt}}
-%
-\define@key[autolatex]{mtable}{htb}[\relax]{\xdef\@autolatex@mtable@position{\@autolatex@mtable@position htb}}
-\define@key[autolatex]{mtable}{hbt}[\relax]{\xdef\@autolatex@mtable@position{\@autolatex@mtable@position hbt}}
-%
-\define@key[autolatex]{mtable}{Htb}[\relax]{\xdef\@autolatex@mtable@position{\@autolatex@mtable@position Htb}}
-\define@key[autolatex]{mtable}{Hbt}[\relax]{\xdef\@autolatex@mtable@position{\@autolatex@mtable@position Hbt}}
+% position: h t b p H !
+\define@key[autolatex]{mtable}{h}[\relax]{\gdef\@autolatex@mtable@position{h}}
+\define@key[autolatex]{mtable}{t}[\relax]{\gdef\@autolatex@mtable@position{t}}
+\define@key[autolatex]{mtable}{b}[\relax]{\gdef\@autolatex@mtable@position{b}}
+\define@key[autolatex]{mtable}{p}[\relax]{\gdef\@autolatex@mtable@position{p}}
+\define@key[autolatex]{mtable}{H}[\relax]{\gdef\@autolatex@mtable@position{H}}
+\define@key[autolatex]{mtable}{ht}[\relax]{\gdef\@autolatex@mtable@position{ht}}
+\define@key[autolatex]{mtable}{hb}[\relax]{\gdef\@autolatex@mtable@position{hb}}
+\define@key[autolatex]{mtable}{hp}[\relax]{\gdef\@autolatex@mtable@position{hp}}
+\define@key[autolatex]{mtable}{hH}[\relax]{\gdef\@autolatex@mtable@position{hH}}
+\define@key[autolatex]{mtable}{h!}[\relax]{\gdef\@autolatex@mtable@position{h!}}
+\define@key[autolatex]{mtable}{tb}[\relax]{\gdef\@autolatex@mtable@position{tb}}
+\define@key[autolatex]{mtable}{tp}[\relax]{\gdef\@autolatex@mtable@position{tp}}
+\define@key[autolatex]{mtable}{tH}[\relax]{\gdef\@autolatex@mtable@position{tH}}
+\define@key[autolatex]{mtable}{t!}[\relax]{\gdef\@autolatex@mtable@position{t!}}
+\define@key[autolatex]{mtable}{bp}[\relax]{\gdef\@autolatex@mtable@position{bp}}
+\define@key[autolatex]{mtable}{bH}[\relax]{\gdef\@autolatex@mtable@position{bH}}
+\define@key[autolatex]{mtable}{b!}[\relax]{\gdef\@autolatex@mtable@position{b!}}
+\define@key[autolatex]{mtable}{pH}[\relax]{\gdef\@autolatex@mtable@position{pH}}
+\define@key[autolatex]{mtable}{p!}[\relax]{\gdef\@autolatex@mtable@position{p!}}
+\define@key[autolatex]{mtable}{H!}[\relax]{\gdef\@autolatex@mtable@position{H!}}
+\define@key[autolatex]{mtable}{htb}[\relax]{\gdef\@autolatex@mtable@position{htb}}
+\define@key[autolatex]{mtable}{htp}[\relax]{\gdef\@autolatex@mtable@position{htp}}
+\define@key[autolatex]{mtable}{htH}[\relax]{\gdef\@autolatex@mtable@position{htH}}
+\define@key[autolatex]{mtable}{ht!}[\relax]{\gdef\@autolatex@mtable@position{ht!}}
+\define@key[autolatex]{mtable}{tbp}[\relax]{\gdef\@autolatex@mtable@position{tbp}}
+\define@key[autolatex]{mtable}{tbH}[\relax]{\gdef\@autolatex@mtable@position{tbH}}
+\define@key[autolatex]{mtable}{tb!}[\relax]{\gdef\@autolatex@mtable@position{tb!}}
+\define@key[autolatex]{mtable}{bpH}[\relax]{\gdef\@autolatex@mtable@position{bpH}}
+\define@key[autolatex]{mtable}{bp!}[\relax]{\gdef\@autolatex@mtable@position{bp!}}
+\define@key[autolatex]{mtable}{pH!}[\relax]{\gdef\@autolatex@mtable@position{pH!}}
+\define@key[autolatex]{mtable}{htbp}[\relax]{\gdef\@autolatex@mtable@position{htbp}}
+\define@key[autolatex]{mtable}{htbH}[\relax]{\gdef\@autolatex@mtable@position{htbH}}
+\define@key[autolatex]{mtable}{htb!}[\relax]{\gdef\@autolatex@mtable@position{htb!}}
+\define@key[autolatex]{mtable}{tbpH}[\relax]{\gdef\@autolatex@mtable@position{tbpH}}
+\define@key[autolatex]{mtable}{tbp!}[\relax]{\gdef\@autolatex@mtable@position{tbp!}}
+\define@key[autolatex]{mtable}{bpH!}[\relax]{\gdef\@autolatex@mtable@position{bph!}}
+\define@key[autolatex]{mtable}{htbpH}[\relax]{\gdef\@autolatex@mtable@position{htbpH}}
+\define@key[autolatex]{mtable}{htbp!}[\relax]{\gdef\@autolatex@mtable@position{htbp!}}
+\define@key[autolatex]{mtable}{htbpH!}[\relax]{\gdef\@autolatex@mtable@position{htbpH!}}
 %
 \newenvironment{mtable}[6][ht]{%
 	\global\let\@autolatex@mtable@position\relax%

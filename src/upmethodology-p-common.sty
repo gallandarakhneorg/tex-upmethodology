@@ -16,7 +16,7 @@
 % 330, Boston, MA 02111-1307, USA.
 %
 
-\global\edef\upm@package@private@doctype@ver{2013/09/19}
+\global\edef\upm@package@private@doctype@ver{2013/09/29}
 
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
 \ProvidesPackage{upmethodology-p-common}[\upm@package@private@doctype@ver]
@@ -24,6 +24,19 @@
 \RequirePackage{ifthen}
 \RequirePackage{xspace}
 \RequirePackage{xcolor}
+
+%----------------------------------------
+% UPMVERSION MACRO
+%----------------------------------------
+\input UPMVERSION.def
+\def\upm@common@parseversion@to@tex#1#2#3#4#5#6#7#8#9\@nil{#1#2#3#4/#5#6/#7#8}
+\def\upm@common@parseversion@major#1#2#3#4#5#6#7#8#9\@nil{#1#2#3#4#5#6#7#8}
+\edef\ver@UPMVERSION@major{\expandafter\upm@common@parseversion@major\UPMVERSION-\relax\@nil}
+\edef\ver@UPMVERSION{\expandafter\upm@common@parseversion@to@tex\UPMVERSION\@nil}
+\expandafter\let\csname ver@UPMVERSION.sty\endcsname\ver@UPMVERSION
+\expandafter\let\csname ver@UPMVERSION.cls\endcsname\ver@UPMVERSION
+
+\gdef\UPMVERSIONTEST{\ver@UPMVERSION\\\ver@UPMVERSION@major}
 
 %----------------------------------------
 % ARAKHNE.ORG MACRO
@@ -158,6 +171,12 @@
 	\fi%
 }
 
+% Loop on parts of a text given a specific separator.
+% In the bodies, the macros \upm@foreach@term is the current data.
+% #1: is the separator to consider
+% #2: is the data set
+% #3: is the body to run for each loop, except the last.
+% #4: is the body to run for the last loop.
 \def\upm@foreach#1\in#2\do#3#4{%
 	\global\upm@foreach@oneseparatorfalse%
 	\gdef\upm@foreach@searchseparator##1#1##2\@nil{%
