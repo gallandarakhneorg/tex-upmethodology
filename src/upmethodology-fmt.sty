@@ -17,7 +17,7 @@
 % write to the Free Software Foundation, Inc., 59 Temple Place - Suite
 % 330, Boston, MA 02111-1307, USA.
 
-\global\edef\upm@package@fmt@ver{2013/09/26}
+\global\edef\upm@package@fmt@ver{2013/09/30}
 
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
 \ProvidesPackage{upmethodology-fmt}[\upm@package@fmt@ver]
@@ -863,12 +863,17 @@
 	\ignorespaces
 }
 
+\gdef\upm@format@people@title#1{\textsc{#1}}
+\def\upm@format@firstname@format#1{\mbox{\smaller\makenamespacing{\ignorespaces\textsc{#1}}}}
+\def\upm@format@von@format#1{\mbox{\smaller\ignorespaces#1}}
+\def\upm@format@lastname@format#1{\textsc{\ignorespaces#1}}
+
 %\upmmakename[von]{firstname}{lastname}{separator}
 \newcommand{\upmmakename}[4][\relax]{%
 	\ifx#1\relax%
-		{\mbox{\smaller \makenamespacing{#2}}#4\textsc{\ignorespaces#3}}%
+		{\upm@format@firstname@format{#2}#4\textsc{\ignorespaces#3}}%
 	\else%
-		{\mbox{\smaller \makenamespacing{#2}}#4\mbox{\smaller #1}#4\textsc{\ignorespaces#3}}%
+		{\upm@format@firstname@format{#2}#4\upm@format@von@format{#1}#4\upm@format@lastname@format{#3}}%
 	\fi%
 	\xspace%
 }
@@ -879,15 +884,23 @@
 }
 
 %\makelastname[von]{lastname}
-\newcommand{\makelastname}[2][\relax]{\mbox{\smaller#1} \textsc{\ignorespaces#2}\xspace}
+\newcommand{\makelastname}[2][\relax]{%
+	\ifx#1\relax%
+		\upm@format@lastname@format{#2}%
+	\else%
+		\upm@format@von@format{#1}\ \upm@format@lastname@format{#2}%
+	\fi%
+	\xspace%
+}
 
-\gdef\upm@format@people@title#1{\textsc{#1}}
+%\makefirstname{firstname}
+\newcommand{\makefirstname}[1]{\upm@format@firstname@format{#1}\xspace}
 
 %\prname[von]{firstname}{lastname}
 %\prname*[von]{firstname}{lastname}
 \def\prname{\@ifstar\upm@prnamestar\upm@prname}
 \newcommand{\upm@prname}[3][\relax]{%
-	\upm@format@people@title{\upm@format@lang@professor}~\upmmakename[#1]{#2}{#3}{\ }%
+	\upm@format@people@title{\upm@format@lang@professor}\,\upmmakename[#1]{#2}{#3}{\ }%
 }
 \newcommand{\upm@prnamestar}[3][\relax]{%
 	\upmmakename[#1]{#2}{#3}{\ }, \upm@format@people@title{\upm@format@lang@professor}%
@@ -897,7 +910,7 @@
 %\drname*[von]{firstname}{lastname}
 \def\drname{\@ifstar\upm@drnamestar\upm@drname}
 \newcommand{\upm@drname}[3][\relax]{%
-	\upm@format@people@title{\upm@format@lang@doctor}~\upmmakename[#1]{#2}{#3}{\ }%
+	\upm@format@people@title{\upm@format@lang@doctor}\,\upmmakename[#1]{#2}{#3}{\ }%
 }
 \newcommand{\upm@drnamestar}[3][\relax]{%
 	\upmmakename[#1]{#2}{#3}{\ }, \upm@format@people@title{\upm@format@lang@doctor}%
@@ -907,7 +920,7 @@
 %\phdname*[von]{firstname}{lastname}
 \def\phdname{\@ifstar\upm@phdnamestar\upm@phdname}
 \newcommand{\upm@phdname}[3][\relax]{%
-	\upm@format@people@title{\upm@format@lang@phdoctor}~\upmmakename[#1]{#2}{#3}{\ }%
+	\upm@format@people@title{\upm@format@lang@phdoctor}\,\upmmakename[#1]{#2}{#3}{\ }%
 }
 \newcommand{\upm@phdnamestar}[3][\relax]{%
 	\upmmakename[#1]{#2}{#3}{\ }, \upm@format@people@title{\upm@format@lang@phdoctor}%
@@ -917,7 +930,7 @@
 %\scdname*[von]{firstname}{lastname}
 \def\scdname{\@ifstar\upm@scdnamestar\upm@scdname}
 \newcommand{\upm@scdname}[3][\relax]{%
-	\upm@format@people@title{\upm@format@lang@scdoctor}~\upmmakename[#1]{#2}{#3}{\ }%
+	\upm@format@people@title{\upm@format@lang@scdoctor}\,\upmmakename[#1]{#2}{#3}{\ }%
 }
 \newcommand{\upm@scdnamestar}[3][\relax]{%
 	\upmmakename[#1]{#2}{#3}{\ }, \upm@format@people@title{\upm@format@lang@scdoctor}%
@@ -927,7 +940,7 @@
 %\mdname*[von]{firstname}{lastname}
 \def\mdname{\@ifstar\upm@mdnamestar\upm@mdname}
 \newcommand{\upm@mdname}[3][\relax]{%
-	\upm@format@people@title{\upm@format@lang@mdoctor}~\upmmakename[#1]{#2}{#3}{\ }%
+	\upm@format@people@title{\upm@format@lang@mdoctor}\,\upmmakename[#1]{#2}{#3}{\ }%
 }
 \newcommand{\upm@mdnamestar}[3][\relax]{%
 	\upmmakename[#1]{#2}{#3}{\ }, \upm@format@people@title{\upm@format@lang@mdoctor}%
@@ -937,7 +950,7 @@
 %\pengname*[von]{firstname}{lastname}
 \def\pengname{\@ifstar\upm@pengnamestar\upm@pengname}
 \newcommand{\upm@pengname}[3][\relax]{%
-	\upm@format@people@title{\upm@format@lang@professionalengineer}~\upmmakename[#1]{#2}{#3}{\ }%
+	\upm@format@people@title{\upm@format@lang@professionalengineer}\,\upmmakename[#1]{#2}{#3}{\ }%
 }
 \newcommand{\upm@pengnamestar}[3][\relax]{%
 	\upmmakename[#1]{#2}{#3}{\ }, \upm@format@people@title{\upm@format@lang@professionalengineer}%
@@ -947,7 +960,7 @@
 %\iengname*[von]{firstname}{lastname}
 \def\iengname{\@ifstar\upm@iengnamestar\upm@iengname}
 \newcommand{\upm@iengname}[3][\relax]{%
-	\upm@format@people@title{\upm@format@lang@incorporatedengineer}~\upmmakename[#1]{#2}{#3}{\ }%
+	\upm@format@people@title{\upm@format@lang@incorporatedengineer}\,\upmmakename[#1]{#2}{#3}{\ }%
 }
 \newcommand{\upm@iengnamestar}[3][\relax]{%
 	\upmmakename[#1]{#2}{#3}{\ }, \upm@format@people@title{\upm@format@lang@incorporatedengineer}%
