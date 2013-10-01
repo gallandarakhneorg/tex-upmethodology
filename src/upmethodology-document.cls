@@ -17,7 +17,7 @@
 % write to the Free Software Foundation, Inc., 59 Temple Place - Suite
 % 330, Boston, MA 02111-1307, USA.
 
-\global\edef\upm@package@docclazz@ver{2013/09/29}
+\global\edef\upm@package@docclazz@ver{2013/10/01}
 
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
 \ProvidesClass{upmethodology-document}[\upm@package@docclazz@ver]
@@ -124,23 +124,39 @@
 \RequirePackage{upmethodology-spec}
 
 \RequirePackage{url}
-\RequirePackage[pdftex,
-		breaklinks, %make links breakable on several lines
-		pageanchor=true, %put implicit anchor on each page (required for \printindex)
-                bookmarks=false, %hide bookmarks
-		hyperfigures=true, %not documented
-		hyperindex=true, %the page numbers in the index are links
-		linktocpage=true, %page numbers are used for links in TOC, LOF...
-		bookmarks=true, %open the bookmarks
-		bookmarksopen=true, %open all the bookmark's nodes by default
-		bookmarksnumbered=true, %section number in bookmarks
-		colorlinks=false, % Use a frame around links
-		pdfproducer={upmethodology \upm@package@docclazz@ver},
-                ]{hyperref}
+\ifpdf
+	\RequirePackage[pdftex,
+			breaklinks, %make links breakable on several lines
+			pageanchor=true, %put implicit anchor on each page (required for \printindex)
+		        bookmarks=false, %hide bookmarks
+			hyperfigures=true, %not documented
+			hyperindex=true, %the page numbers in the index are links
+			linktocpage=true, %page numbers are used for links in TOC, LOF...
+			bookmarks=true, %open the bookmarks
+			bookmarksopen=true, %open all the bookmark's nodes by default
+			bookmarksnumbered=true, %section number in bookmarks
+			colorlinks=false, % Use a frame around links
+			pdfproducer={upmethodology \upm@package@docclazz@ver},
+		        ]{hyperref}
+\else
+	\RequirePackage[breaklinks, %make links breakable on several lines
+			pageanchor=true, %put implicit anchor on each page (required for \printindex)
+		        bookmarks=false, %hide bookmarks
+			hyperfigures=true, %not documented
+			hyperindex=true, %the page numbers in the index are links
+			linktocpage=true, %page numbers are used for links in TOC, LOF...
+			bookmarks=true, %open the bookmarks
+			bookmarksopen=true, %open all the bookmark's nodes by default
+			bookmarksnumbered=true, %section number in bookmarks
+			colorlinks=false, % Use a frame around links
+			]{hyperref}
+\fi
 \urlstyle{same}
 
-\pdfpageheight=29.7cm
-\pdfpagewidth=21.0cm
+\ifpdf
+  \pdfpageheight=29.7cm
+  \pdfpagewidth=21.0cm
+\fi
 
 %----------------------------------------
 % HEADERS AND FOOTERS
@@ -210,16 +226,18 @@
 % PDF COLORS
 %----------------------------------------
 \gdef\upm@package@getcolor#1,#2,#3{#1 #2 #3}
-\renewcommand{\setpdfcolor}[1]{
-	\hypersetup{
-		filebordercolor={\upm@package@getcolor #1}, % frame color
-		linkbordercolor={\upm@package@getcolor #1}, % frame color
-		citebordercolor={\upm@package@getcolor #1}, % frame color
-		menubordercolor={\upm@package@getcolor #1}, % frame color
-		urlbordercolor={\upm@package@getcolor #1}, % frame color
-		runbordercolor={\upm@package@getcolor #1}, % frame color
+\ifpdf
+	\renewcommand{\setpdfcolor}[1]{
+		\hypersetup{
+			filebordercolor={\upm@package@getcolor #1}, % frame color
+			linkbordercolor={\upm@package@getcolor #1}, % frame color
+			citebordercolor={\upm@package@getcolor #1}, % frame color
+			menubordercolor={\upm@package@getcolor #1}, % frame color
+			urlbordercolor={\upm@package@getcolor #1}, % frame color
+			runbordercolor={\upm@package@getcolor #1}, % frame color
+		}
 	}
-}
+\fi
 
 %----------------------------------------
 % SET FORBIDDEN SECTIONNING FUNCTIONS

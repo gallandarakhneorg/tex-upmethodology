@@ -17,7 +17,7 @@
 % write to the Free Software Foundation, Inc., 59 Temple Place - Suite
 % 330, Boston, MA 02111-1307, USA.
 
-\global\edef\upm@package@fmt@ver{2013/09/30}
+\global\edef\upm@package@fmt@ver{2013/10/01}
 
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
 \ProvidesPackage{upmethodology-fmt}[\upm@package@fmt@ver]
@@ -147,7 +147,11 @@
 % DEFAULT GRAPHICX CONFIGURATION
 %----------------------------------------
 
-\DeclareGraphicsExtensions{.pdf,.png,.jpg,.jpeg,.tiff,.gif}
+\ifpdf
+  \DeclareGraphicsExtensions{.pdf,.png,.jpg,.jpeg,.gif}
+\else
+  \DeclareGraphicsExtensions{.eps,.png,.jpg,.jpeg,.gif}
+\fi
 \graphicspath{{./}}
 
 %----------------------------------------
@@ -250,7 +254,11 @@
 \providecommand{\DeclareGraphicsExtensionsWtex}[1]{%
 	\xdef\@autolatex@wtfig@extensions{\zap@space#1 \@empty}%
 }
-\DeclareGraphicsExtensionsWtex{.pdftex_t,.pstex_t,.pdf_tex,.ps_tex}
+\ifpdf
+   \DeclareGraphicsExtensionsWtex{.pdftex_t,.pdf_tex}
+\else
+  \DeclareGraphicsExtensionsWtex{.pstex_t,.ps_tex}
+\fi
 
 \providecommand{\@autolatex@wtfig@searchinpath}[1]{%
 	\IfFileExists{#1}{%
