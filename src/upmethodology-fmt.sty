@@ -872,14 +872,14 @@
 }
 
 \gdef\upm@format@people@title#1{\textsc{#1}}
-\def\upm@format@firstname@format#1{\mbox{\smaller\makenamespacing{\ignorespaces\textsc{#1}}}}
+\def\upm@format@firstname@format#1{\nohyphens{\smaller\makenamespacing{\ignorespaces\textsc{#1}}}}
 \def\upm@format@von@format#1{\mbox{\smaller\ignorespaces#1}}
 \def\upm@format@lastname@format#1{\textsc{\ignorespaces#1}}
 
 %\upmmakename[von]{firstname}{lastname}{separator}
 \newcommand{\upmmakename}[4][\relax]{%
 	\ifx#1\relax%
-		{\upm@format@firstname@format{#2}#4\textsc{\ignorespaces#3}}%
+		{\upm@format@firstname@format{#2}#4\upm@format@lastname@format{#3}}%
 	\else%
 		{\upm@format@firstname@format{#2}#4\upm@format@von@format{#1}#4\upm@format@lastname@format{#3}}%
 	\fi%
