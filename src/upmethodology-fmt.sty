@@ -862,17 +862,22 @@
 % PEOPLE NAME
 %----------------------------------------
 
-\newcommand{\makenamespacing}[1]{%
-	\expandafter\upm@foreach.\in#1\do{%
+\def\makenamespacing#1{%
+	\upm@format@makenamespacing{#1}\xspace%
+}
+
+\def\upm@format@makenamespacing#1{%
+	\upm@foreach.\in#1\do{%
 		\ignorespaces\upm@foreach@term.\,%
 	}{%
-		\ignorespaces\upm@foreach@term\xspace%
+		\ignorespaces\upm@foreach@term%
 	}%
-	\ignorespaces
 }
 
 \gdef\upm@format@people@title#1{\textsc{#1}}
-\def\upm@format@firstname@format#1{\nohyphens{\smaller\makenamespacing{\ignorespaces\textsc{#1}}}}
+\def\upm@format@firstname@format#1{%
+	{\smaller\textsc{\upm@format@makenamespacing{#1}}}%
+}
 \def\upm@format@von@format#1{\mbox{\smaller\ignorespaces#1}}
 \def\upm@format@lastname@format#1{\textsc{\ignorespaces#1}}
 
@@ -902,7 +907,9 @@
 }
 
 %\makefirstname{firstname}
-\newcommand{\makefirstname}[1]{\upm@format@firstname@format{#1}\xspace}
+\newcommand{\makefirstname}[1]{%
+	\upm@format@firstname@format{#1}\xspace%
+}
 
 %\prname[von]{firstname}{lastname}
 %\prname*[von]{firstname}{lastname}

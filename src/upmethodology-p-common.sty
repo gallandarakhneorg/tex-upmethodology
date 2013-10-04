@@ -16,7 +16,7 @@
 % 330, Boston, MA 02111-1307, USA.
 %
 
-\global\edef\upm@package@private@doctype@ver{2013/10/01}
+\global\edef\upm@package@private@doctype@ver{2013/10/04}
 
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
 \ProvidesPackage{upmethodology-p-common}[\upm@package@private@doctype@ver]
@@ -159,10 +159,10 @@
 
 \let\upm@foreach@end\relax
 
-\def\upm@foreach@rec#1#2{%
-	{\upm@foreach@searchseparator#2\upm@foreach@end\@nil}%
+\def\upm@foreach@rec#1{%
+	{\upm@foreach@searchseparator#1\upm@foreach@end\@nil}%
 	\ifupm@foreach@hasseparator%
-		\protected@xdef\upm@foreach@continue{\protect\upm@foreach@rec{#1}{\upm@foreach@rest}}%
+		\protected@xdef\upm@foreach@continue{\protect\upm@foreach@rec{\upm@foreach@rest}}%
 		\upm@foreach@body%
 		\upm@foreach@continue%
 	\else%
@@ -189,10 +189,10 @@
 			\global\upm@foreach@hasseparatortrue%
 			\global\upm@foreach@oneseparatortrue%
 		\fi%
-	}
+	}%
 	\gdef\upm@foreach@body{#3}%
 	\gdef\upm@foreach@lastbody{#4}%
-	\upm@foreach@rec{#1}{#2#1}%
+	\upm@foreach@rec{#2#1}%
 }
 
 \endinput
