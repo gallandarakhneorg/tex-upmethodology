@@ -17,7 +17,7 @@
 % write to the Free Software Foundation, Inc., 59 Temple Place - Suite
 % 330, Boston, MA 02111-1307, USA.
 
-\global\edef\upm@package@docclazz@ver{2013/10/01}
+\global\edef\upm@package@docclazz@ver{2013/10/09}
 
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
 \ProvidesClass{upmethodology-document}[\upm@package@docclazz@ver]
@@ -76,7 +76,7 @@
 	\global\upmarticleformatfalse
 	\global\upm@package@docclazz@nopubpagefalse%
 	\global\upm@package@docclazz@nodocinfofalse%
-	\xdef\upm@package@docclazz@optionstopass{\upm@package@docclazz@optionstopass,twoside}%
+	\xdef\upm@package@docclazz@optionstopass{\upm@package@docclazz@optionstopass,twoside,openright}%
 }
 \DeclareOption{report}{%
 	\global\upmbookformatfalse
@@ -113,7 +113,6 @@
 \fi\fi
 
 \RequirePackage{a4wide}
-\RequirePackage{fancyhdr}
 
 \RequirePackage{upmethodology-document}
 \RequirePackage{upmethodology-extension}
@@ -165,46 +164,42 @@
 \def\upm@header@fmt#1{\textsc{\scriptsize #1}}
 \def\upm@copyright@fmt#1{\textsc{\tiny #1}}
 
-\pagestyle{fancyplain}
+\global\let\upm@package@docclazz@old@pagestyle\pagestyle
+\gdef\pagestyle#1{%
+	\gdef\upm@package@docclazz@saved@pagestyle{#1}%
+	\upm@package@docclazz@old@pagestyle{#1}%
+}
+\gdef\upm@package@docclazz@saved@pagestyle{headings}%
+\upm@package@docclazz@old@pagestyle{headings}
 
 \newdimen{\upm@smalllogo@height}
 \upm@smalllogo@height=1cm
-
-\if@twoside
-
-\lhead[]{\fancyplain{}{\upm@header@fmt{\theupmfulldocname}}}
-\chead{}
-\rhead{\Ifdefined{smalllogo}{\expandafter\includegraphics[height=\upm@smalllogo@height]{\theupmsmalldoclogo}}}
-\lfoot[\upm@header@fmt{\ifthenelse{\thepage>0}{\thepage}{}}]{\upm@copyright@fmt{\tiny\theupmdocref~\copyright~\upmcopyrightdate~\theupmformattedcopyrighter}}
-\cfoot{}
-\rfoot[\upm@copyright@fmt{\tiny\theupmdocref~\copyright~\upmcopyrightdate~\theupmformattedcopyrighter}]{\upm@header@fmt{\ifthenelse{\thepage>0}{\thepage}{}}}
-
-\else
-
-\lhead{\fancyplain{}{\upm@header@fmt{\theupmfulldocname}}}
-\chead{}
-\rhead{\Ifdefined{smalllogo}{\expandafter\includegraphics[height=\upm@smalllogo@height]{\theupmsmalldoclogo}}}
-\lfoot{\upm@copyright@fmt{\tiny\theupmdocref~\copyright~\upmcopyrightdate~\theupmformattedcopyrighter}}
-\cfoot{}
-\rfoot{\upm@header@fmt{\ifthenelse{\thepage>0}{\thepage}{}}}
-
-\fi
 
 %----------------------------------------
 % FRONT, MAIN AND BACK MATTERS
 %----------------------------------------
 
 \global\let\upm@package@docclazz@frontmatter\frontmatter
-\gdef\frontmatter{\pagestyle{headings}\pagenumbering{roman}\global\let\frontmatter\relax}
+\gdef\frontmatter{%
+	\upm@package@docclazz@old@pagestyle{headings}%
+	\pagenumbering{roman}%
+	\global\let\frontmatter\relax%
+}
 
 \global\let\upm@package@docclazz@mainmatter\mainmatter
-\gdef\mainmatter{\cleardoublepage\pagestyle{fancyplain}\upm@package@docclazz@mainmatter}
+\gdef\mainmatter{%
+	\upm@package@docclazz@mainmatter%
+	\global\let\frontmatter\relax%
+	\global\let\mainmatter\relax%
+}
 
-%\global\let\upm@package@docclazz@backmatter\backmatter
-%\gdef\backmatter{%
-%	\pagestyle{plain}
-%	\upm@package@docclazz@backmatter%
-%}
+\global\let\upm@package@docclazz@backmatter\backmatter
+\gdef\backmatter{%
+	\upm@package@docclazz@backmatter%
+	\global\let\frontmatter\relax%
+	\global\let\mainmatter\relax%
+	\global\let\backmatter\relax%
+}
 
 %----------------------------------------
 % AUTO-GENERATED DOCUMENT
