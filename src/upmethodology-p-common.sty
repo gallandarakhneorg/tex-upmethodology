@@ -59,6 +59,11 @@
 \long\def\Ifelseempty#1#2#3{\ifthenelse{\equal{#1}{\@empty}}{#2}{#3}}
 
 %----------------------------------------
+% TOC MACROS
+%----------------------------------------
+\newcommand{\newpageintoc}{\addtocontents{toc}{\protect\newpage}}
+
+%----------------------------------------
 % DOCUMENT TYPE
 %----------------------------------------
 \newif\ifupmbookformat
