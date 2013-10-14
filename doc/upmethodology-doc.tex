@@ -22,6 +22,7 @@
 \incsubversion{\makedate{29}{09}{2013}}{Add a notification text about the version of the library at the beginning of the introduction.}{\upmpublic}
 \incsubversion{\makedate{30}{09}{2013}}{Add the macro \texttt{{\textbackslash}makefirstname}}{\upmpublic}
 \incsubversion{\makedate{09}{10}{2013}}{Remove references to \texttt{fancyhdr}}{\upmpublic}
+\incsubversion{\makedate{14}{10}{2013}}{Add the macros \texttt{{\textbackslash}chapterfull} and \texttt{{\textbackslash}sectionfull}}{\upmpublic}
 
 \addauthorvalidator*[galland@arakhne.org]{St{\'e}phane}{Galland}{Original Author}
 
@@ -1277,6 +1278,24 @@ To add a unnumbered subsubsection inside the table of content, you could use one
 \texttt{{\textbackslash}subsubsectiontoc*[toctitle]\{title\}}
 
 The macros \texttt{{\textbackslash}subsubsectiontoc} and \texttt{{\textbackslash}subsubsectiontoc*} have the same effect except that \texttt{{\textbackslash}subsubsectiontoc*} aligns the subsubsection's title to the other numbered subsubsections' titles; and \texttt{{\textbackslash}subsubsectiontoc} not.
+
+\subsection{Chapter with different labels in TOC, headers and document}
+
+If you want to control the labels in the table of contents (TOC), the headers and the document for a chapter, the classical \LaTeX\ macros \texttt{{\textbackslash}chapter} and \texttt{{\textbackslash}chapter*} are inefficient.
+
+To control these labels, you could use the macro: \\
+\texttt{{\textbackslash}chapterfull[toctitle]\{title\}\{headertitle\}}
+
+The macro create a chapter with the given label ``\texttt{title}'' in the core part of the document, with the given label ``\texttt{toctitle}'' in the table of contents, and with the label ``\texttt{headertitle}'' in the headers.
+
+\subsection{Section with different labels in TOC, headers and document}
+
+If you want to control the labels in the table of contents (TOC), the headers and the document for a section, the classical \LaTeX\ macros \texttt{{\textbackslash}section} and \texttt{{\textbackslash}section*} are inefficient.
+
+To control these labels, you could use the macro: \\
+\texttt{{\textbackslash}sectionfull[toctitle]\{title\}\{headertitle\}}
+
+The macro create a section with the given label ``\texttt{title}'' in the core part of the document, with the given label ``\texttt{toctitle}'' in the table of contents, and with the label ``\texttt{headertitle}'' in the headers.
 
 
 %###########################################################

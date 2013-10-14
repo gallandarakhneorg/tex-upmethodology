@@ -750,6 +750,54 @@
 	\subsubsection*{#1\addcontentsline{toc}{subsubsection}{\upm@format@newsection@alignment{#1}}}%
 }
 
+%-----
+% Chapter with different titles for in the TOC, the headers and on the pages
+%\chapterfull[in toc]{on page}{in header} % with number
+%\chapterfull*[in toc]{on page}{in header} % without number
+\def\chapterfull{\@ifstar%
+	{\gdef\upm@format@newsection@thesectionmacro{\chapter*}\upm@format@newsection@chapterfull}%
+	{\gdef\upm@format@newsection@thesectionmacro{\chapter}\upm@format@newsection@chapterfull}%
+}
+
+\def\upm@format@newsection@chapterfull{\@ifnextchar[%
+	\upm@format@newsection@chapterfull@a%
+	\upm@format@newsection@chapterfull@b%
+}
+
+\def\upm@format@newsection@chapterfull@a[#1]#2#3{%
+	\upm@format@newsection@thesectionmacro[#1]{#2}%
+	\chaptermark{#3}%
+}
+
+\def\upm@format@newsection@chapterfull@b#1#2{%
+	\upm@format@newsection@thesectionmacro{#1}%
+	\chaptermark{#2}%
+}
+
+%-----
+% Section with different titles for in the TOC, the headers and on the pages
+%\sectionfull[in toc]{on page}{in header} % with number
+%\sectionfull*[in toc]{on page}{in header} % without number
+\def\sectionfull{\@ifstar%
+	{\gdef\upm@format@newsection@thesectionmacro{\section*}\upm@format@newsection@sectionfull}%
+	{\gdef\upm@format@newsection@thesectionmacro{\section}\upm@format@newsection@sectionfull}%
+}
+
+\def\upm@format@newsection@sectionfull{\@ifnextchar[%
+	\upm@format@newsection@sectionfull@a%
+	\upm@format@newsection@sectionfull@b%
+}
+
+\def\upm@format@newsection@sectionfull@a[#1]#2#3{%
+	\upm@format@newsection@thesectionmacro[#1]{#2}%
+	\global\sectionmark{#3}%
+}
+
+\def\upm@format@newsection@sectionfull@b#1#2{%
+	\upm@format@newsection@thesectionmacro{#1}%
+	\global\sectionmark{#2}%
+}
+
 %----------------------------------------
 % BIBLIOGRAPHY
 %----------------------------------------
