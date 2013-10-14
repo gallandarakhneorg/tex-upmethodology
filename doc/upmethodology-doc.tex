@@ -22,7 +22,7 @@
 \incsubversion{\makedate{29}{09}{2013}}{Add a notification text about the version of the library at the beginning of the introduction.}{\upmpublic}
 \incsubversion{\makedate{30}{09}{2013}}{Add the macro \texttt{{\textbackslash}makefirstname}}{\upmpublic}
 \incsubversion{\makedate{09}{10}{2013}}{Remove references to \texttt{fancyhdr}}{\upmpublic}
-\incsubversion{\makedate{14}{10}{2013}}{Add the macros \texttt{{\textbackslash}chapterfull} and \texttt{{\textbackslash}sectionfull}}{\upmpublic}
+\incsubversion{\makedate{14}{10}{2013}}{Add the macros \texttt{{\textbackslash}chapterfull}, \texttt{{\textbackslash}sectionfull} and \texttt{{\textbackslash}newpageintoc}.}{\upmpublic}
 
 \addauthorvalidator*[galland@arakhne.org]{St{\'e}phane}{Galland}{Original Author}
 
@@ -1224,6 +1224,11 @@ The package \texttt{upmethodology-fmt} provides a set of environment to put emph
 \\
 
 \end{tabularx}
+
+\section{Additional Macros for the Table of Content}
+
+The macro \texttt{{\textbackslash}newpageintoc} permits to insert a page break inside the table of contents (toc).
+It may be used to avoid orhpan titles in the toc.
 
 \section{Additional Document Sectionning Macros}
 
