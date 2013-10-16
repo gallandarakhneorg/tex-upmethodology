@@ -23,6 +23,7 @@
 \incsubversion{\makedate{30}{09}{2013}}{Add the macro \texttt{{\textbackslash}makefirstname}}{\upmpublic}
 \incsubversion{\makedate{09}{10}{2013}}{Remove references to \texttt{fancyhdr}}{\upmpublic}
 \incsubversion{\makedate{14}{10}{2013}}{Add the macros \texttt{{\textbackslash}chapterfull}, \texttt{{\textbackslash}sectionfull} and \texttt{{\textbackslash}newpageintoc}.}{\upmpublic}
+\incsubversion{\makedate{16}{10}{2013}}{Add the section about the environment \texttt{description}.}{\upmpublic}
 
 \addauthorvalidator*[galland@arakhne.org]{St{\'e}phane}{Galland}{Original Author}
 
@@ -739,6 +740,48 @@ This is a text: \begin{inlineenumeration}
 \item second thing;
 \item etc.
 \end{inlineenumeration} This is the text after.
+
+\section{Environment \texttt{description}}
+
+The environment \texttt{description} is redefined as following:
+\begin{verbatim}
+\begin{description}[separator]
+\item[desc] text
+\end{description}
+\end{verbatim}
+The text put in place of \texttt{desc} represents the text which may be emphazed in the description item.
+The \texttt{separator} is the text that is inserted at the end of the head of each description item.
+
+
+\paragraph{Example~1:} The following \LaTeX~code, using roman numbers, produces the description just below:
+\begin{verbatim}
+\begin{description}
+\item[first thing] this is a text for the first thing;
+\item[second thing] this is a text for the second thing;
+\item[more] etc.
+\end{description}
+\end{verbatim}
+
+\begin{description}
+\item[first thing] this is a text for the first thing;
+\item[second thing] this is a text for the second thing;
+\item[more] etc.
+\end{description}
+
+\paragraph{Example~2:} The following \LaTeX~code produces the description just below:
+\begin{verbatim}
+\begin{description}[///]
+\item[first thing] this is a text for the first thing;
+\item[second thing] this is a text for the second thing;
+\item[more] etc.
+\end{description}
+\end{verbatim}
+
+\begin{description}[///]
+\item[first thing] this is a text for the first thing;
+\item[second thing] this is a text for the second thing;
+\item[more] etc.
+\end{description}
 
 \section{Descriptions in conjonction with enumeration}
 

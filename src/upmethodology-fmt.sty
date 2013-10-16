@@ -17,7 +17,7 @@
 % write to the Free Software Foundation, Inc., 59 Temple Place - Suite
 % 330, Boston, MA 02111-1307, USA.
 
-\global\edef\upm@package@fmt@ver{2013/10/14}
+\global\edef\upm@package@fmt@ver{2013/10/16}
 
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
 \ProvidesPackage{upmethodology-fmt}[\upm@package@fmt@ver]
@@ -1086,18 +1086,18 @@
 %----------------------------------------
 % DESCRIPTION LIST WITH BULLETS
 %----------------------------------------
-\gdef\upm@fmt@itemizeddescription@separator{\iflanguage{french}{ :}{:}}
+\gdef\upm@fmt@itemizeddescription@separator{\iflanguage{french}{ :}{:}\ }
 \newcommand{\upm@fmt@itemizeddescription@formatdescription}[1]{\textbf{#1}}
-\newcommand{\upm@fmt@itemizeddescription@desc}[1]{%
-	\upm@fmt@itemizeddescription@formatdescription{#1\upm@fmt@itemizeddescription@separator}\ %
+\newcommand{\upm@fmt@itemizeddescription@desc}[2]{%
+	\upm@fmt@itemizeddescription@formatdescription{#1#2}%
 }
 \let\upm@fmt@olditem\item
 \let\upm@item@param\upm@fmt@olditem
 \let\upm@item@noparam\upm@fmt@olditem
 \def\item{\@ifnextchar[\upm@item@param\upm@item@noparam}
-\renewenvironment{description}[1][]{%
+\renewenvironment{description}[1][\upm@fmt@itemizeddescription@separator]{%
 	\begin{itemize}%
-	\renewcommand{\upm@item@param}[1][]{\upm@fmt@olditem \upm@fmt@itemizeddescription@desc{##1}}%
+	\renewcommand{\upm@item@param}[1][]{\upm@fmt@olditem \upm@fmt@itemizeddescription@desc{##1}{#1}}%
 	\renewcommand{\upm@item@noparam}{\upm@fmt@olditem }%
 }{%
 	\end{itemize}%
