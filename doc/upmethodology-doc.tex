@@ -24,6 +24,7 @@
 \incsubversion{\makedate{09}{10}{2013}}{Remove references to \texttt{fancyhdr}}{\upmpublic}
 \incsubversion{\makedate{14}{10}{2013}}{Add the macros \texttt{{\textbackslash}chapterfull}, \texttt{{\textbackslash}sectionfull} and \texttt{{\textbackslash}newpageintoc}.}{\upmpublic}
 \incsubversion{\makedate{16}{10}{2013}}{Add the section about the environment \texttt{description}.}{\upmpublic}
+\incsubversion{\makedate{14}{12}{2013}}{Add the section about \texttt{backcovermessage}.}{\upmpublic}
 
 \addauthorvalidator*[galland@arakhne.org]{St{\'e}phane}{Galland}{Original Author}
 
@@ -1617,12 +1618,18 @@ where \texttt{layout\_name} must be one of:
 \item \texttt{none}: no back page.
 \end{itemize}
 
+\section{Small text before the back page}
+
+It is possible to insert a text at the bottom of the page just before the back page (usually the inner page of the cover for a two sided document).
+You must set tha macro \texttt{backcovermessage} with the \texttt{{\textbackslash}Set} macro: \\
+\texttt{{\textbackslash}Set\{backcovermessage\}\{text\}}\\
+
 \section{Define a Back Page in Extensions}
 
 The \texttt{upmethodology-backpage} package is able to use a page layout defined in a document extension (see chapter~\ref{section:document:extension} for details on document extension).
 
-A \LaTeX\ macro must be defined in the \texttt{upmext-NAME.cfg} file of the extension. The name of this macro (for example \texttt{mylayout}) must be set with the \texttt{{\textbackslash}set} macro in the same file:\\
-\texttt{{\textbackslash}set\{backpage\}\{mylayout\}}\\
+A \LaTeX\ macro must be defined in the \texttt{upmext-NAME.cfg} file of the extension. The name of this macro is \texttt{backpage}, and it must be set with the \texttt{{\textbackslash}Set} macro in the same file:\\
+\texttt{{\textbackslash}Set\{backpage\}\{\TeX\ macros\}}\\
 
 
 %###########################################################

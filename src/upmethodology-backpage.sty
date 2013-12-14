@@ -1,6 +1,6 @@
 % Back page for Unified Process Methodology
 %
-% Copyright (c) 2009 Stephane GALLAND <galland@arakhne.org>
+% Copyright (c) 2009-2013 Stephane GALLAND <galland@arakhne.org>
 % 
 % This program is free library; you can redistribute it and/or modify
 % it under the terms of the GNU Lesser General Public License as
@@ -16,14 +16,8 @@
 % License along with this library; see the file COPYING.  If not,
 % write to the Free Software Foundation, Inc., 59 Temple Place - Suite
 % 330, Boston, MA 02111-1307, USA.
-%
-% Creation date: 2009-10-22
-% Modifications:
-%   2009-10-30  Rename \setbacklayout to \setbackcover.
-%               Add \makebackcover.
-%
 
-\global\edef\upm@package@bp@ver{2009/10/30}
+\global\edef\upm@package@bp@ver{2013/12/14}
 
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
 \ProvidesPackage{upmethodology-backpage}[\upm@package@bp@ver]
@@ -76,7 +70,8 @@
 			\ifupmarticleformat\clearpage%
 			\else
 				\cleardoublepage%
-				\if@twoside\thispagestyle{empty}\mbox{}\clearpage\fi
+				\if@twoside\thispagestyle{empty}\mbox{}%
+				\vfill{\Get{backcovermessage}}\clearpage\fi
 			\fi
 			\thispagestyle{empty}\Get{backpage}
 		}
