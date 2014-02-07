@@ -30,7 +30,7 @@
 
 \setdockeywords{\LaTeX, Methodology Document Style, User Documentation, Extensible}
 
-\setdocabstract{Packages upmethodology enable users to write documents according to Unified Process Methodology or other methodology. It was initially wittren by St\'ephane \textsc{Galland} from the laboratory ``Syst\`emes et Transports'' and is distributed by the \arakhneorg website.}
+\setdocabstract{The packages in upmethodology enable users to write documents according to Unified Process Methodology or other methodology. It was initially wittren by St\'ephane \textsc{Galland} from the laboratory ``Syst\`emes et Transports'' and is distributed by the \arakhneorg website.}
 
 \makeatletter
 \let\VERversion\upm@package@version@ver
@@ -71,8 +71,8 @@
 \textcolor{red}{\large This documentation is written for and compiled by the\\version \UPMVERSION\\of tex-upmethodology.}
 \end{center}
 
-This set of package allows the user write documents according to Unified Process Methodology. It was initially written by St\'ephane \textsc{Galland} from the laboratory ``Syst\`emes et Transports''\savefootnote{Laboratory \emph{Syst\`emes et Transport} (IRTES-SET), Institut de Recherche sur le Transport, l'\'Energie et la Soci\'et\'e (ITRTES), Universit\'e de Technologie de Belfort-Montb{\'e}liard (UTBM), France, \href{http://set.utbm.fr/}{http://set.utbm.fr/}}{foot:setlab} and is distributed by the \arakhneorg website.
-The provided packages and classes may also be used for other types of documents (reports, thesis...) Since 2012, it is used to support the layout and the style for the PhD thesis of the Doctoral School SPIM\footnote{Doctoral School on the Sciences for engineers, and microtechnics, \href{http://ed-spim.univ-fcomte.fr/}{http://ed-spim.univ-fcomte.fr/}}.
+This set of packages enables users to write documents according to the Unified Process Methodology. It was initially written by St\'ephane \textsc{Galland} from the laboratory ``Syst\`emes et Transports''\savefootnote{Laboratory \emph{Syst\`emes et Transport} (IRTES-SET), Institut de Recherche sur le Transport, l'\'Energie et la Soci\'et\'e (ITRTES), Universit\'e de Technologie de Belfort-Montb{\'e}liard (UTBM), France, \href{http://set.utbm.fr/}{http://set.utbm.fr/}}{foot:setlab} and is distributed by the \arakhneorg website.
+The provided packages and classes may also be used for other types of documents (reports, theses...). Since 2012, it is used to support the layout and the style for the PhD theses of the Doctoral School SPIM\footnote{Doctoral School on the Sciences for engineers, and microtechnics, \href{http://ed-spim.univ-fcomte.fr/}{http://ed-spim.univ-fcomte.fr/}}.
 
 Packages are:
 \begin{itemize}
@@ -93,7 +93,7 @@ Packages are:
 
 \chapter{Download and Installation}
 
-This chapter describes were to download \texttt{tex-upmethodology} and how to install it.
+This chapter describes where to download \texttt{tex-upmethodology} and how to install it.
 
 \section{Download}
 
@@ -750,7 +750,7 @@ The environment \texttt{description} is redefined as following:
 \item[desc] text
 \end{description}
 \end{verbatim}
-The text put in place of \texttt{desc} represents the text which may be emphazed in the description item.
+The text put in place of \texttt{desc} represents the text which may be emphasized in the description item.
 The \texttt{separator} is the text that is inserted at the end of the head of each description item.
 
 
@@ -1373,8 +1373,8 @@ You could declare the information about your document with one of the following 
 \texttt{{\textbackslash}declaredocumentex\{project\}\{subproject\}\{name\}\{ref\}} \\
 where the parameters are:
 \begin{itemize}
-\item \texttt{project} is the name of the project for which the document is for;
-\item \texttt{subproject} is the name of the sub-project for which the document is for;
+\item \texttt{project} is the name of the project the document belongs to;
+\item \texttt{subproject} is the name of the sub-project the document belongs to;
 \item \texttt{name} is the name of the document;
 \item \texttt{ref} is the reference number of the document.
 \end{itemize}
@@ -1389,7 +1389,7 @@ The macro \texttt{{\textbackslash}setdocabstract} is for entering the docment's 
 \texttt{{\textbackslash}setdocabstract{[}lang{]}\{abstract\_text\}} \\
 where \texttt{abstract\_text} is the text of your abstract and \texttt{lang} designates for which language the abstract text is for. If the language is not specified, this macro uses the current document language.
 
-The macro \texttt{{\textbackslash}setdockeywords} is for entering the docment's key-words:\\
+The macro \texttt{{\textbackslash}setdockeywords} is for entering the document's key-words:\\
 \texttt{{\textbackslash}setdockeywords{[}lang{]}\{keywords\}} \\
 where \texttt{keywords} is the list of key-words and \texttt{lang} designates for which language the key-words are for. If the language is not specified, this macro uses the current document language.
 
@@ -1429,7 +1429,7 @@ An author is someone who participates to the writing of the document. You could 
 The list of the authors is accessible by two means:
 \begin{itemize}
 \item \texttt{{\textbackslash}theauthorlist} is a coma-separated list of the authors' names;
-\item \texttt{{\textbackslash}upmdocumentauthors} procudes an array of all the authors (see below for an example).
+\item \texttt{{\textbackslash}upmdocumentauthors} produces an array of all the authors (see below for an example).
 \end{itemize}
 
 \upmdocumentauthors
@@ -1452,7 +1452,7 @@ A validator is someone who participates to the validation of the document. You c
 The list of the validators is accessible by two means:
 \begin{itemize}
 \item \texttt{{\textbackslash}thevalidatorlist} is a coma-separated list of the validator' names;
-\item \texttt{{\textbackslash}upmdocumentvalidators} procudes an array of all the validators (see below for an example).
+\item \texttt{{\textbackslash}upmdocumentvalidators} produces an array of all the validators (see below for an example).
 \end{itemize}
 
 \upmdocumentvalidators
@@ -1466,7 +1466,7 @@ An informed people is someone who receives the document to be informed about its
 The list of the informed people is accessible by two means:
 \begin{itemize}
 \item \texttt{{\textbackslash}theinformedlist} is a coma-separated list of the informed people' names;
-\item \texttt{{\textbackslash}upmdocumentinformedpeople} procudes an array of all the informed people (see below for an example).
+\item \texttt{{\textbackslash}upmdocumentinformedpeople} produces an array of all the informed people (see below for an example).
 \end{itemize}
 
 \upmdocumentinformedpeople
@@ -1508,7 +1508,7 @@ The package \texttt{upmethodology-document} provides the \texttt{{\textbackslash
 \begin{figure}
 	\begin{center}
 		\begin{framedminipage}{.8\linewidth}
-		\upmpublicationminipage % in place of \upmpublicationpage to avod page number and page style changes
+		\upmpublicationminipage % in place of \upmpublicationpage to avoid page number and page style changes
 		\end{framedminipage}
 		\caption{Example of Publication Page generated with \texttt{{\textbackslash}upmpublicationpage}}
 		\label{fig:publication:page}
@@ -1560,7 +1560,7 @@ where \texttt{layout\_name} must be one of:
 \item \texttt{modern}: front page layout with title and logo and background picture.
 \end{itemize}
 
-The figure~\figref{frontpage:layout} illustrates the differents layouts.
+The figure~\figref{frontpage:layout} illustrates the different layouts.
 
 \begin{mfigures}{Front Page Layouts}{frontpage:layout}
 	\mbox{}\hfill
