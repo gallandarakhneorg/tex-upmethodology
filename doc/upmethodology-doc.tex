@@ -30,7 +30,7 @@
 
 \setdockeywords{\LaTeX, Methodology Document Style, User Documentation, Extensible}
 
-\setdocabstract{Packages upmethodology permis to write documents according to Unified Process Methodology or other methodology. It was initially wittren by St\'ephane \textsc{Galland} from the laboratory ``Syst\`emes et Transports'' and is distributed by the \arakhneorg website.}
+\setdocabstract{Packages upmethodology enable users to write documents according to Unified Process Methodology or other methodology. It was initially wittren by St\'ephane \textsc{Galland} from the laboratory ``Syst\`emes et Transports'' and is distributed by the \arakhneorg website.}
 
 \makeatletter
 \let\VERversion\upm@package@version@ver
@@ -71,13 +71,13 @@
 \textcolor{red}{\large This documentation is written for and compiled by the\\version \UPMVERSION\\of tex-upmethodology.}
 \end{center}
 
-This set of package permits to write documents according to Unified Process Methodology. It was initially wittren by St\'ephane \textsc{Galland} from the laboratory ``Syst\`emes et Transports''\savefootnote{Laboratory \emph{Syst\`emes et Transport} (IRTES-SET), Institut de Recherche sur le Transport, l'\'Energie et la Soci\'et\'e (ITRTES), Universit\'e de Technologie de Belfort-Montb{\'e}liard (UTBM), France, \href{http://set.utbm.fr/}{http://set.utbm.fr/}}{foot:setlab} and is distributed by the \arakhneorg website.
-The provided packages and classes may also be used for other types of documents (reports, thesis...) Since 2012, it is used to support the layout and the style for the PhD thesis of the Doctoral School SPIM\footnote{Doctoral School on the Sciences for enginers, and microtechnics, \href{http://ed-spim.univ-fcomte.fr/}{http://ed-spim.univ-fcomte.fr/}}.
+This set of package allows the user write documents according to Unified Process Methodology. It was initially written by St\'ephane \textsc{Galland} from the laboratory ``Syst\`emes et Transports''\savefootnote{Laboratory \emph{Syst\`emes et Transport} (IRTES-SET), Institut de Recherche sur le Transport, l'\'Energie et la Soci\'et\'e (ITRTES), Universit\'e de Technologie de Belfort-Montb{\'e}liard (UTBM), France, \href{http://set.utbm.fr/}{http://set.utbm.fr/}}{foot:setlab} and is distributed by the \arakhneorg website.
+The provided packages and classes may also be used for other types of documents (reports, thesis...) Since 2012, it is used to support the layout and the style for the PhD thesis of the Doctoral School SPIM\footnote{Doctoral School on the Sciences for engineers, and microtechnics, \href{http://ed-spim.univ-fcomte.fr/}{http://ed-spim.univ-fcomte.fr/}}.
 
 Packages are:
 \begin{itemize}
-\item \texttt{upmethodology-version.sty}: permits to set the version and the status of the document. It also permits to manage the document history;
-\item \texttt{upmethodology-fmt.sty}: provides some usefull functions to format the UP documents;
+\item \texttt{upmethodology-version.sty}: makes it possible to set the version and the status of the document. It also makes it possible to manage the document history;
+\item \texttt{upmethodology-fmt.sty}: provides some useful functions to format the UP documents;
 \item \texttt{upmethodology-document.sty}: provides functions to manage the project, the subproject and the status of the document;
 \item \texttt{upmethodology-frontpage.sty}: formats and provides a front page for the document;
 \item \texttt{upmethodology-backpage.sty}: formats and provides a back page for the document;
@@ -113,7 +113,7 @@ The second is to rebuild the \LaTeX\ databases by invoking on a console (Unix sy
 \texttt{\$> sudo mktexlsr}\\
 \texttt{\$> sudo update-updmap --quiet}\\
 
-\texttt{sudo} is a standard Linux tool which permits to authorized users to temporarely obtain the administration rights.
+\texttt{sudo} is a standard Linux tool that allows authorized users to temporarily obtain the administration rights.
 
 \section{Manual User-wide Installation}
 
@@ -329,7 +329,7 @@ previous occurrence of \texttt{pubpage} option. \\
 	\texttt{Version: \VERversion}
 \end{center}
 
-The package \texttt{upmethodology-version} permits to set the version and the status of the document. It also provides functions to manage the document history;
+The package \texttt{upmethodology-version} makes it possible to set the version and the status of the document. It also provides functions to manage the document history;
 
 \section{Constants for the Document Status}
 
@@ -362,15 +362,15 @@ The following functions permit to access to the informations about the document:
 
 \section{Register Revisions}
 
-The package \texttt{upmethodology-version} permits to register revisions for building an history. The available functions are:
+The package \texttt{upmethodology-version} makes it possible to register revisions for building an history. The available functions are:
 \begin{itemize}
 \item \texttt{{\textbackslash}updateversion\{version\}\{date\}\{description\}\{status\}}: registers a revision for the document. The revision indicates that the given version was produced at the given date. A small description of the changes and the resulting document's status must be also provided. The function \texttt{{\textbackslash}updateversion} is a generalization of the following functions;
 
 \item \texttt{{\textbackslash}initialversion[version]\{date\}\{description\}\{status\}}: registers the initial version of the document. If not given, the version is assumed to be \texttt{0.1};
 
-\item \texttt{{\textbackslash}incversion\{date\}\{description\}\{status\}}: regiters a revision corresponding to the next major version. For example, if the version number was \texttt{2.67} before \texttt{{\textbackslash}incversion}, this function add the version \texttt{3.67} with the given informations (incrementation of the major part of the version number);
+\item \texttt{{\textbackslash}incversion\{date\}\{description\}\{status\}}: registers a revision corresponding to the next major version. For example, if the version number was \texttt{2.67} before \texttt{{\textbackslash}incversion}, this function add the version \texttt{3.67} with the given informations (incrementation of the major part of the version number);
 
-\item \texttt{{\textbackslash}incsubversion\{date\}\{description\}\{status\}}: regiters a revision corresponding to the next minor version. For example, if the version number was \texttt{2.67} before \texttt{{\textbackslash}incsubversion}, this function add the version \texttt{2.68} with the given informations (incrementation of the minor part of the version number);
+\item \texttt{{\textbackslash}incsubversion\{date\}\{description\}\{status\}}: registers a revision corresponding to the next minor version. For example, if the version number was \texttt{2.67} before \texttt{{\textbackslash}incsubversion}, this function add the version \texttt{2.68} with the given informations (incrementation of the minor part of the version number);
 \end{itemize}
 
 \section{Formatted List of Versions}
@@ -397,7 +397,7 @@ The following macros defines some localized strings used by \texttt{upmethodolog
 	\texttt{Version: \VERfmt}
 \end{center}
 
-The package \texttt{upmethodology-fmt} provides some usefull facilities to format a document.
+The package \texttt{upmethodology-fmt} provides some useful facilities to format a document.
 
 \section{Default Configuration for the Package \texttt{graphicx}}
 
@@ -421,7 +421,7 @@ It may be verbose to put \LaTeX\ code to include a figure inside your document. 
 \texttt{{\textbackslash}mfigure[position]\{include\_graphics\_options\}\{filename\}\{caption\}\{label\}} \\
 \texttt{{\textbackslash}mfigure*[position]\{include\_graphics\_options\}\{filename\}\{caption\}\{label\}} \\
 
-These two macros permits to include an image in your document. The parameters are:
+These two macros make it possible to include an image in your document. The parameters are:
 \begin{itemize}
 \item \texttt{position}: is the desired position of the figure (see {\textbackslash}begin\{figure\}[position]). It could be \texttt{t} (top of the page), \texttt{b} (bottom of the page), \texttt{h} (at the macro location if possible) or \texttt{H} (at macro location);
 
@@ -448,7 +448,7 @@ The figure~\figref{example:mfigure} page~\figpageref{example:mfigure} is obtaine
 
 \section{Sub-figures}
 
-In some case, it is usefull to put several images inside the same floating figure, but without loosing the possibility to reference each of the subfigures. This feature was proposed by the package \texttt{subfigure}. The following environments provides helper functions for \texttt{subfigure}:
+In some case, it is useful to put several images inside the same floating figure, but without loosing the possibility to reference each of the subfigures. This feature was proposed by the package \texttt{subfigure}. The following environments provides helper functions for \texttt{subfigure}:
 \texttt{{\textbackslash}begin\{mfigures\}[position]\{caption\}\{label\}\\
 ...\\
 {\textbackslash}end\{mfigures\}} \\
@@ -456,7 +456,7 @@ In some case, it is usefull to put several images inside the same floating figur
 ...\\
 {\textbackslash}end\{mfigures*\}} \\
 
-These two macros permits to include an image in your document.The parameters are:
+These two macros enable you to include an image in your document. The parameters are:
 \begin{itemize}
 \item \texttt{position}: is the desired position of the figure (see {\textbackslash}begin\{figure\}[position]). It could be \texttt{t} (top of the page), \texttt{b} (bottom of the page), \texttt{h} (at the macro location if possible) or \texttt{H} (at macro location);
 
@@ -484,12 +484,12 @@ The reference and page reference are obtained with \texttt{{\textbackslash}figre
 
 The references to the subfigures could be obtained in two way:\nopagebreak\begin{itemize}
 \item using the label given as the last parameter of \texttt{{\textbackslash}mfigure}, eg. the label \texttt{example:firstsubfigure} corresponds to \figref{example:firstsubfigure};
-\item using the label of the enclosing figure to which the index of the subfigure could be appended (in its roman representation and prefixed by the character ``\texttt{:}''), eg. the label \texttt{example:msubfigure:b} corresponds to \figref{example:msubfigure:b};
+\item using the label of the enclosing figure to which the index of the subfigure could be appended (in its Roman representation and prefixed by the character ``\texttt{:}''), eg. the label \texttt{example:msubfigure:b} corresponds to \figref{example:msubfigure:b};
 \end{itemize}
 
 \section{Figures with embedded \TeX\xspace macros}
 
-In several case it is usefull to include \TeX\xspace macros inside a figure. It is possible to combine figures and \TeX\ macros. Several figure editors provide exporting features to obtain combined figures: \texttt{xfig}, \texttt{inkscape}, \texttt{GNU Plot}, etc. Basically, these tools create two files per source figure: \begin{itemize}
+In several case it is useful to include \TeX\xspace macros inside a figure. It is possible to combine figures and \TeX\ macros. Several figure editors provide exporting features to obtain combined figures: \texttt{xfig}, \texttt{inkscape}, \texttt{GNU Plot}, etc. Basically, these tools create two files per source figure: \begin{itemize}
 \item the figure in PDF or Postscript format (filename extensions, \texttt{.pdf} or \texttt{.ps}); and
 \item a \TeX\ file that contains the macros to put over the figure, and that is including the generated figure. Its filename extension depends on the type of the figure: \texttt{.pdftex\_t} or \texttt{.pdf\_tex} for PDF, and \texttt{.pstex\_t} or \texttt{.ps\_tex} for Postscript.
 \end{itemize}
@@ -530,7 +530,7 @@ The parameters are:
 \begin{itemize}
 \item \texttt{position}: is the desired position of the figure (see {\textbackslash}begin{figure}[position]). It could be \texttt{t} (top of the page), \texttt{b} (bottom of the page), \texttt{h} (at the macro location if possible) or \texttt{H} (at macro location);
 
-\item \texttt{include\_graphics\_options}: are the options to pass to \texttt{{\textbackslash}includegraphicswtex}. For ascendent compatibility, if you pass a length without a key, e.g. \texttt{\{.8{\textbackslash}linewidth\}}, the length is assumed to be the width of the figure;
+\item \texttt{include\_graphics\_options}: are the options to pass to \texttt{{\textbackslash}includegraphicswtex}. For ascendant compatibility, if you pass a length without a key, e.g. \texttt{\{.8{\textbackslash}linewidth\}}, the length is assumed to be the width of the figure;
 
 \item \texttt{filename}: is the name of the file of the figure (see \texttt{{\textbackslash}includegraphicswtex} for details);
 
@@ -591,13 +591,13 @@ This tabular is an extension of the \texttt{tabularx} environment which provides
 The \texttt{mtabular} environment provides:
 \begin{itemize}
 \item \texttt{{\textbackslash}tabulartitle\{title\}} \\
-	This macro permits to define the title of the tabular. It uses the colors \texttt{backtableheader} and \texttt{fronttableheader} for the background and the foreground respectively. The title has a single line at the top, and a single line below;
+	This macro allows you to define the title of the tabular. It uses the colors \texttt{backtableheader} and \texttt{fronttableheader} for the background and the foreground respectively. The title has a single line at the top, and a single line below;
 
 \item \texttt{{\textbackslash}tabulartitleinside\{title\}} \\
-	This macro permits to define the title of the tabular. It uses the colors \texttt{backtableheader} and \texttt{fronttableheader} for the background and the foreground respectively. The title has two lines at the top, and a single line below;
+	This macro allows you  to define the title of the tabular. It uses the colors \texttt{backtableheader} and \texttt{fronttableheader} for the background and the foreground respectively. The title has two lines at the top, and a single line below;
 
 \item \texttt{{\textbackslash}tabularheader\{$header_1$\}...\{$header_n$\}} \\
-	This macro permits to define the titles of the columns. It uses the colors \texttt{backtableheader} and \texttt{fronttableheader} for the background and the foreground respectively. Because the count of columns was given to the environment this function takes the same count of parameters as the count of columns. This macro adds a line after the header, \emph{BUT NOT BEFORE}.
+	This macro allows you to define the titles of the columns. It uses the colors \texttt{backtableheader} and \texttt{fronttableheader} for the background and the foreground respectively. Because the count of columns was given to the environment this function takes the same count of parameters as the count of columns. This macro adds a line after the header, \emph{BUT NOT BEFORE}.
 \begin{upmcaution}
 	Because \texttt{{\textbackslash}tabularheader} is adding a \texttt{{\textbackslash}hline} at the end of its expansion. You must put a \texttt{{\textbackslash}tabularheader} just after \texttt{{\textbackslash}tabularheader}. Otherwise you may obtain a \TeX\ error.
 \end{upmcaution}
@@ -701,7 +701,7 @@ The package \texttt{upmethodology-fmt} provides a set of macros dedicated to enu
 
 \subsection{Enumeration Counters}
 
-Sometimes it is usefull to start an enumeration list from a specifical given number. This package provides several macros for saving and restoring the counter use by the enumeration lists.
+Sometimes it is useful to start an enumeration list from a specific given number. This package provides several macros for saving and restoring the counter use by the enumeration lists.
 
 \begin{upmcaution}
 Only once counter could be saved at a given time.
@@ -727,7 +727,7 @@ It means that you cannot save the counters for an enumeration and for an enclosi
 
 In several document, an enumeration of things is written inside a paragraph instead of inside a list of points.
 
-\paragraph{Exemple:} The following \LaTeX~code produces the result below:
+\paragraph{Example:} The following \LaTeX~code produces the result below:
 \begin{verbatim}
 This is a text: \begin{inlineenumeration}
 \item first thing;
@@ -754,7 +754,7 @@ The text put in place of \texttt{desc} represents the text which may be emphazed
 The \texttt{separator} is the text that is inserted at the end of the head of each description item.
 
 
-\paragraph{Example~1:} The following \LaTeX~code, using roman numbers, produces the description just below:
+\paragraph{Example~1:} The following \LaTeX~code, using Roman numbers, produces the description just below:
 \begin{verbatim}
 \begin{description}
 \item[first thing] this is a text for the first thing;
@@ -784,9 +784,9 @@ The \texttt{separator} is the text that is inserted at the end of the head of ea
 \item[more] etc.
 \end{description}
 
-\section{Descriptions in conjonction with enumeration}
+\section{Descriptions in conjunction with enumeration}
 
-It may be helpful to put a list of descriptions in conjonction with an enumeration.
+It may be helpful to put a list of descriptions in conjunction with an enumeration.
 In other words, the following environment provides a mix between the standards \LaTeX~environments \texttt{description} and \texttt{enumerate}.
 
 \subsection{Environment \texttt{enumdescription}}
@@ -799,11 +799,11 @@ The environment \texttt{enumdescription} is:
 \end{verbatim}
 where the \texttt{type} is the type of the enumeration. It may be one of:
 \begin{itemize}
-\item ``\texttt{i}'': for an enumeration with roman numbers (this is the default),
-\item ``\texttt{1}'': for an enumeration with arabic numbers,
+\item ``\texttt{i}'': for an enumeration with Roman numbers (this is the default),
+\item ``\texttt{1}'': for an enumeration with Arabic numbers,
 \item ``\texttt{a}'': for an enumeration with letters.
 \end{itemize}
-The text put in place of \texttt{desc} represents the text which may be emphazed in the description item.
+The text put in place of \texttt{desc} represents the text which may be emphasized in the description item.
 
 
 To change the rendering of the labels, you must redefined the macro as:
@@ -812,7 +812,7 @@ To change the rendering of the labels, you must redefined the macro as:
 \end{verbatim}
 
 
-\paragraph{Example~1:} The following \LaTeX~code, using roman numbers, produces the enumerated description just below:
+\paragraph{Example~1:} The following \LaTeX~code, using Roman numbers, produces the enumerated description just below:
 \begin{verbatim}
 \begin{enumdescription}
 \item[first thing] this is a text for the first thing;
@@ -870,11 +870,11 @@ The environment \texttt{enumdescriptionx} is:
 \end{verbatim}
 where the \texttt{type} is the type of the enumeration. It may be one of:
 \begin{itemize}
-\item ``\texttt{i}'': for an enumeration with roman numbers (this is the default),
-\item ``\texttt{1}'': for an enumeration with arabic numbers,
+\item ``\texttt{i}'': for an enumeration with Roman numbers (this is the default),
+\item ``\texttt{1}'': for an enumeration with Arabic numbers,
 \item ``\texttt{a}'': for an enumeration with letters.
 \end{itemize}
-The text put in place of \texttt{desc} represents the text which may be emphazed in the description item.
+The text put in place of \texttt{desc} represents the text which may be emphasized in the description item.
 The text \texttt{counter\_prefix} is put before all the counter values in the enumeration.
 The text \texttt{counter\_postfix} is put after all the counter values in the enumeration.
 
@@ -928,7 +928,7 @@ The package \texttt{upmethodology-fmt} provides a set of macros allowing to save
 
 \section{UML diagrams on the side of paragraphs}
 
-The package \texttt{upmethodology-fmt} provides an environment which permits to put an UML diagram (or any other picture) on the side of a paragraph.
+The package \texttt{upmethodology-fmt} provides an environment that makes it possible to put an UML diagram (or any other picture) on the side of a paragraph.
 
 \begin{itemize}
 \item \texttt{{\textbackslash}begin\{umlinpar\}[width]\{picture\_path\}}\\\texttt{text}\\\texttt{{\textbackslash}end\{umlinpat\}} \\
@@ -948,7 +948,7 @@ Because the concept of date was important and unfortunately localized, this pack
 
 \begin{itemize}
 \item \texttt{{\textbackslash}makedate\{day\}\{month\}\{year\}}\\
-permits to create the text corresponding to the given date according to the current localized date format.
+allows you to create the text corresponding to the given date according to the current localized date format.
 \item \texttt{{\textbackslash}extractyear\{formatted\_date\}}\\
 extract the year field from a date respecting the localized date format.
 \item \texttt{{\textbackslash}extractmonth\{formatted\_date\}}\\
@@ -1162,12 +1162,12 @@ This is the theorem of Evereything.
 \end{verbatim}
 gives the result:
 \begin{mytheorem}[Theorem of Everything]
-This is the theorem of Evereything.
+This is the theorem of Everything.
 \end{mytheorem}
 
 \subsection{\texttt{definition}}
 
-The package \texttt{upmethodology-fmt} defines the environment \texttt{definition}, which permits to put a definition in your document. This environment is based on the standard \texttt{theorem} environment. The \texttt{definition} takes one optional parameter: the name of the definition.
+The package \texttt{upmethodology-fmt} defines the environment \texttt{definition} to put a definition in your document. This environment is based on the standard \texttt{theorem} environment. The \texttt{definition} takes one optional parameter: the name of the definition.
 
 \paragraph{Example:} The following \LaTeX\ code:
 \begin{verbatim}
@@ -1209,7 +1209,7 @@ Text of the definition.
 
 \section{Framed Boxes or Mini Pages}
 
-Standard \LaTeX\ distribution provides the \texttt{minipage} environment. This environment permits to put a small piece of page inside your document. The package \texttt{upmethodology-fmt} provides two framed extensions of the original \texttt{minipage} environment: \texttt{framedminipage} and \texttt{framedcolorminipage}.
+Standard \LaTeX\ distribution provides the \texttt{minipage} environment. This environment allows you to put a small piece of page inside your document. The package \texttt{upmethodology-fmt} provides two framed extensions of the original \texttt{minipage} environment: \texttt{framedminipage} and \texttt{framedcolorminipage}.
 
 The prototypes of there two new environments are, respectively:
 \begin{itemize}
@@ -1271,10 +1271,10 @@ The package \texttt{upmethodology-fmt} provides a set of environment to put emph
 
 \section{Additional Macros for the Table of Content}
 
-The macro \texttt{{\textbackslash}newpageintoc} permits to insert a page break inside the table of contents (toc).
-It may be used to avoid orhpan titles in the toc.
+The macro \texttt{{\textbackslash}newpageintoc} makes it possible to insert a page break inside the table of contents (toc).
+It may be used to avoid orphan titles in the toc.
 
-\section{Additional Document Sectionning Macros}
+\section{Additional Document Sectioning Macros}
 
 The package \texttt{upmethodology-fmt} provides several macros that permit to create special sections.
 
@@ -1477,13 +1477,13 @@ Package \texttt{upmethodology-document} provides several macros to define the co
 
 \subsection{Setting Information}
 
-Copyrighter is the people or the institution, or both, which is owning the copyright on the document. The following macro permits to set the identify of the copyighter in all the parts of the documents: \\
+The Copyright holder(s) are person(s) or institution(s), that own the copyright on the document. The following macro allows you to set the identity of the copyright holder in all  parts of the documents: \\
 \texttt{{\textbackslash}setcopyrighter\{name\}}\\
 
 Publisher is the people or the institution, or both, which is publishing the document. Basically it is the same the copyrighter (see above): \\
 \texttt{{\textbackslash}setpublisher\{name\}}\\
 
-Some times, copyright laws depend on the location where the document is printed. The following macro permits to put a message in the publication page which is indicating where the document is printed: \\
+Some times, copyright laws depend on the location where the document is printed. The following macro allows you to put a message in the publication page which is indicating where the document is printed: \\
 \texttt{{\textbackslash}setprintingaddress\{address\}}\\
 
 Publications may be identifier by international identifiers. Package \texttt{upmethodology-document} supports ISBN, ISSN and DOI:
@@ -1655,7 +1655,7 @@ A document extension could be written and described inside a file named \texttt{
 
 The \texttt{upmext-NAME.cfg} file is a \LaTeX\ file in which a set of definition macros are put. These macros must respect the \LaTeX\ syntax.
 
-The \texttt{{\textbackslash}DeclaraCopyright} macro permits to declare several copyright information about the extension: \\
+The \texttt{{\textbackslash}DeclareCopyright} macro enables you to declare additional copyright information about the extension: \\
 \texttt{{\textbackslash}DeclareCopyright{[}lang{]}\{extension\_name\}\{year\}\{copyrighter\}\{trademark and copyright information\}} \\
 
 This macro declares the \texttt{copyright} value which contains the copyright text (for this documentation ``\Get{copyright}'').
@@ -1669,9 +1669,9 @@ The \texttt{variable\_name} is the name of the value to override. It must be tak
 \begin{mtable}{\linewidth}{2}{lX}{List of overiddable value names}{documentextension:names:set}
 	\hline
 	\tabularheader{Value Name}{Description}
-	logo & the filename of the picutre which must be used as a large logo. \\
+	logo & the filename of the picture which must be used as a large logo. \\
 	\hline
-	smalllogo & the filename of the picutre which must be used as a small logo. \\
+	smalllogo & the filename of the picture which must be used as a small logo. \\
 	\hline
 	copyrighter & the name of the authors or the institution which own the copyright on the document. \\
 	\hline
@@ -1689,19 +1689,19 @@ The \texttt{variable\_name} is the name of the value to override. It must be tak
 	\hline
 \end{mtable}
 
-The \texttt{{\textbackslash}Get} macro permits to retreive the value defined by a \texttt{{\textbackslash}Set}:\\
+The \texttt{{\textbackslash}Get} macro allows you to retrieve the value defined by a \texttt{{\textbackslash}Set}:\\
 \texttt{{\textbackslash}Get\{variable\_name\}} \\
 
-The \texttt{{\textbackslash}Unset} macro permits to remove the definition of a value:\\
+The \texttt{{\textbackslash}Unset} macro allows you to remove the definition of a value:\\
 \texttt{{\textbackslash}Unset\{variable\_name\}} \\
 
-The \texttt{{\textbackslash}Ifnotempty} macro permits to expand the \LaTeX\ macros if the given text is not empty:\\
+The \texttt{{\textbackslash}Ifnotempty} macro allows you to expand the \LaTeX\ macros if the given text is not empty:\\
 \texttt{{\textbackslash}Ifnotempty\{text\}\{latex\_code\}} \\
 
-The \texttt{{\textbackslash}Ifempty} macro permits to expand the \LaTeX\ macros if the given text is empty:\\
+The \texttt{{\textbackslash}Ifempty} macro allows you to expand the \LaTeX\ macros if the given text is empty:\\
 \texttt{{\textbackslash}Ifempty\{text\}\{latex\_code\}} \\
 
-The \texttt{{\textbackslash}Ifelsedefined} macro permits to expand the \LaTeX\ macros in \texttt{then\_code} if a value with the given name was defined, or to expand the \LaTeX\ macros in \texttt{else\_code} if no value with the given name was defined:\\
+The \texttt{{\textbackslash}Ifelsedefined} macro allows you to expand the \LaTeX\ macros in \texttt{then\_code} if a value with the given name was defined, or to expand the \LaTeX\ macros in \texttt{else\_code} if no value with the given name was defined:\\
 \texttt{{\textbackslash}Ifelsedefined\{value\_name\}\{then\_code\}\{else\_code\}} \\
 
 The \texttt{{\textbackslash}Put} macro is an extension of the standard picture \texttt{{\textbackslash}put} macro. It takes into account the joint margin applied in two sided documents when it is used on page's backside (eg. the back page of the document):\\
@@ -1728,22 +1728,22 @@ The definition of a task could be made only inside one of the following environm
 \texttt{{\textbackslash}begin\{taskdescription*\}\{id\}...{\textbackslash}end\{taskdescription*\}} \\
 where \texttt{id} is the identifier of the task.
 
-The environment \texttt{taskdefinion} displays the task's description with a call to \texttt{{\textbackslash}thetaskdescription\{id\}}. In the opposite \texttt{taskdefinition*} never displays the ta's description.
+The environment \texttt{taskdefinion} displays the task's description with a call to \texttt{{\textbackslash}thetaskdescription\{id\}}. On the other hand, \texttt{taskdefinition*} never displays the task's description.
 
 Inside one of the task's definition environment above, you could use one of the following macros to define the task's attributes:
 \begin{itemize}
 \item \texttt{{\textbackslash}taskname\{name\}} \\
-	permits to defines the name of the task;
+	to define the name of the task;
 \item \texttt{{\textbackslash}tasksuper\{id\}} \\
 	indicates that the current task is a sub-task of the task identified by the given identifier;
 \item \texttt{{\textbackslash}taskcomment\{text\}} \\
-	permits to describe the task's purposes and goals (will be shown in the description box of the task's description);
+	to describe the task's purposes and goals (will be shown in the description box of the task's description);
 \item \texttt{{\textbackslash}taskprogress\{percent\}} \\
-	defines the percent for thtask's archieving;
+	to set the percentage for task achievement;
 \item \texttt{{\textbackslash}taskstart\{date\}} \\
-	permits to set the starting date of the task (real or predicted);
+	to set the starting date of the task (real or predicted);
 \item \texttt{{\textbackslash}taskend\{date\}} \\
-	permits to set the finished date of the task (real or predicted);
+	to set the finished date of the task (real or predicted);
 \item \texttt{{\textbackslash}taskmanager\{name\}} \\
 	adds a task's manager into the list of the managers;
 \item \texttt{{\textbackslash}taskmember\{name\}} \\
@@ -1790,7 +1790,7 @@ The following macros defines some localized strings used by \texttt{upmethodolog
 \item \texttt{{\textbackslash}upm@task@lang@escription}: Description;
 \item \texttt{{\textbackslash}upm@task@lang@startat}: Start at;
 \item \texttt{{\textbackslash}upm@task@lang@endat}: End at;
-\item \texttt{{\textbackslash}upm@task@lang@archieved}: Archieved;
+\item \texttt{{\textbackslash}upm@task@lang@archieved}: Achieved;
 \item \texttt{{\textbackslash}upm@task@lang@managers}: Managers;
 \item \texttt{{\textbackslash}upm@task@lang@members}: Members;
 \item \texttt{{\textbackslash}upm@task@lang@Milestones}: Milestones;
