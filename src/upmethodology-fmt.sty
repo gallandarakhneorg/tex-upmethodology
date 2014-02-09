@@ -1,6 +1,6 @@
 % Layout and Pagraph Format for Unified Process Methodology
 %
-% Copyright (c) 2006-2009, 2012-2013 Stephane GALLAND <galland@arakhne.org>
+% Copyright (c) 2006-2009, 2012-2014 Stephane GALLAND <galland@arakhne.org>
 % 
 % This program is free library; you can redistribute it and/or modify
 % it under the terms of the GNU Lesser General Public License as
@@ -17,7 +17,7 @@
 % write to the Free Software Foundation, Inc., 59 Temple Place - Suite
 % 330, Boston, MA 02111-1307, USA.
 
-\global\edef\upm@package@fmt@ver{2013/10/16}
+\global\edef\upm@package@fmt@ver{2014/02/09}
 
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
 \ProvidesPackage{upmethodology-fmt}[\upm@package@fmt@ver]
@@ -1057,7 +1057,15 @@
 \newcounter{@upm@fmt@enumdescription@cnt@}
 \newcommand{\upm@fmt@enumdescription@fmt@}[1]{}
 \newcommand{\enumdescriptionlabel}[1]{\textbf{#1}}
-\newenvironment{enumdescriptionx}[3][i]{%
+\newcommand{\enumdescriptioncounterseparator}{~-~}
+\newcommand{\enumdescriptionlabelseparator}{\upm@column@char}
+% #1: counter style.
+% #2: text before the counter.
+% #3: text after the counter.
+% #4: text between the counter and the description.
+% #5: text between the description and the rest of the text.
+% #6: text between the counter (no description) and the rest of the text.
+\newenvironment{upm@fmt@enumdescription}[6]{%
 	\begingroup\setcounter{@upm@fmt@enumdescription@cnt@}{1}%
 	\let\upm@fmt@enumdescription@savedlabel\@currentlabel%
 	\ifthenelse{\equal{#1}{a}}{%
@@ -1070,17 +1078,30 @@
 		}%
 	}%
 	\begin{list}{}{%
-		\renewcommand{\makelabel}[1]{\xdef\@currentlabel{\upm@fmt@enumdescription@fmt@{@upm@fmt@enumdescription@cnt@}}\enumdescriptionlabel{\@currentlabel~-~##1}:~{\addtocounter{@upm@fmt@enumdescription@cnt@}{1}}}%
-		\settowidth{\labelwidth}{iii)~}%
+		\renewcommand{\makelabel}[1]{\xdef\@currentlabel{\upm@fmt@enumdescription@fmt@{@upm@fmt@enumdescription@cnt@}}\enumdescriptionlabel{\@currentlabel#4##1\ifthenelse{\equal{a##1}{a}}{#6}{#5}}{\addtocounter{@upm@fmt@enumdescription@cnt@}{1}}}%
+		\expandafter\settowidth{\labelwidth}{#2iii#3}%
 	}
 }{%
 	\global\let\@currentlabel\upm@fmt@enumdescription@savedlabel%
 	\end{list}\endgroup%
 }
-\newenvironment{enumdescription}[1][i]{%
-	\begin{enumdescriptionx}[#1]{}{}%
+\newenvironment{enumdescriptionx}[3][i]{%
+	\begin{upm@fmt@enumdescription}{#1}{#2}{#3}{\enumdescriptioncounterseparator}{\enumdescriptionlabelseparator}{\enumdescriptionlabelseparator}%
 }{%
-	\end{enumdescriptionx}%
+	\end{upm@fmt@enumdescription}%
+}
+\newenvironment{enumdescription}[1][i]{%
+	\begin{upm@fmt@enumdescription}{#1}{}{}{\enumdescriptioncounterseparator}{\enumdescriptionlabelseparator}{\enumdescriptionlabelseparator}%
+}{%
+	\end{upm@fmt@enumdescription}%
+}
+
+% Issue #14: enumerate behaves as enumdescription
+\renewenvironment{enumerate}[1][1]{%
+	\begin{upm@fmt@enumdescription}{#1}{}{\string.~}{}{\enumdescriptionlabelseparator}{}%
+}
+{%
+	\end{upm@fmt@enumdescription}%
 }
 
 %----------------------------------------
