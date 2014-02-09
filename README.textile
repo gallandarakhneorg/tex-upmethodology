@@ -14,9 +14,11 @@ h2. Installation
  $> mktexlsr
  $> update-updmap --quiet
 
-h2. Author
+h2. Authors
 
-"Stéphane GALLAND":http://www.arakhne.org/homes/galland.html <galland@arakhne.org>
+"Stéphane GALLAND":http://www.arakhne.org/homes/galland.html <galland@arakhne.org> (source, documentation)
+
+"Frans van Dunné":https://github.com/FvD (documentation)
 
 h2. License
 

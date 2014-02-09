@@ -21,11 +21,10 @@ b) Update the LaTeX databases from the command line:
  $> update-updmap --quiet
 
 
-3. Author
----------
+3. Authors
+----------
 
-Stéphane GALLAND <galland@arakhne.org>
-http://www.arakhne.org/homes/galland.html
+See the file AUTHORS.
 
 
 4. License
