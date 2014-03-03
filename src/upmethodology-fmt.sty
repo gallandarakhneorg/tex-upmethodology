@@ -848,6 +848,16 @@
 }
 }
 
+% Overide the color configuration of the MINITOC package
+\AtBeginDocument{
+	\@ifundefined{minitoc}{}{%
+		\global\let\upm@format@mtcSfont@old\mtcSfont
+		\gdef\mtcSfont{\upm@format@mtcSfont@old\color{sectiontitlecolor}}
+		\global\let\upm@format@mtifont@old\mtifont
+		\gdef\mtifont{\upm@format@mtifont@old\color{chaptertitlecolor}}
+	}
+}
+
 %----------------------------------------
 % ENUMERATIONS
 %----------------------------------------
