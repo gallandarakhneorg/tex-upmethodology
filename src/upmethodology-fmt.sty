@@ -17,7 +17,7 @@
 % write to the Free Software Foundation, Inc., 59 Temple Place - Suite
 % 330, Boston, MA 02111-1307, USA.
 
-\global\edef\upm@package@fmt@ver{2014/02/09}
+\global\edef\upm@package@fmt@ver{2014/03/03}
 
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
 \ProvidesPackage{upmethodology-fmt}[\upm@package@fmt@ver]
@@ -822,6 +822,31 @@
 %----------------------------------------
 \setcounter{secnumdepth}{3}
 \setcounter{tocdepth}{3}
+
+% Change the color of the TOC for the "dotted" lines
+%\let\upm@format@dottedtocline@old\@dottedtocline
+%\gdef\@dottedtocline#1#2#3#4#5{%
+%	%{depth}{left margin}{right margin}{text}{page number}
+%	\upm@format@dottedtocline@old{#1}{#2}{#3}{#4}{#5}%
+%}
+
+% Change the color of the TOC for the parts
+\@ifundefined{l@part}{}{
+\let\upm@format@l@part@old\l@part
+\renewcommand*\l@part[2]{%
+	%{text}{page number}
+	\upm@format@l@part@old{\textcolor{parttitlecolor}{#1}}{\textcolor{parttitlecolor}{#2}}%
+}
+}
+
+% Change the color of the TOC for the chapters
+\@ifundefined{l@chapter}{}{
+\let\upm@format@l@chapter@old\l@chapter
+\renewcommand*\l@chapter[2]{%
+	%{text}{page number}
+	\upm@format@l@chapter@old{\textcolor{chaptertitlecolor}{#1}}{\textcolor{chaptertitlecolor}{#2}}%
+}
+}
 
 %----------------------------------------
 % ENUMERATIONS
