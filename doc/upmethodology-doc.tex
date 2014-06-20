@@ -26,6 +26,7 @@
 \incsubversion{\makedate{16}{10}{2013}}{Add the section about the environment \texttt{description}.}{\upmpublic}
 \incsubversion{\makedate{14}{12}{2013}}{Add the section about \texttt{backcovermessage}.}{\upmpublic}
 \incsubversion{\makedate{09}{02}{2014}}{Add the section about \texttt{enumerate}. Typos are fixed.}{\upmpublic}
+\incsubversion{\makedate{20}{06}{2014}}{Add the class option \texttt{standardlists}. Add the dependency to \texttt{environ}.}{\upmpublic}
 
 \addauthorvalidator*[galland@arakhne.org]{St{\'e}phane}{Galland}{Original Author}
 \addauthor*{Frans}{van Dunn\'e}{Reviewer}
@@ -135,8 +136,8 @@ This section contains the list of all the package dependencies for the \texttt{u
 
 \texttt{upmethodology-backpage} package depends on:
 \begin{itemize}
-\item \texttt{upmethodology-p-common}
 \item \texttt{upmethodology-extension}
+\item \texttt{upmethodology-p-common}
 \end{itemize}
 
 \subsection{upmethdology-code.sty}
@@ -150,29 +151,29 @@ This section contains the list of all the package dependencies for the \texttt{u
 
 \texttt{upmethodology-document} class depends on:
 \begin{itemize}
-\item \texttt{upmethodology-p-common}
 \item \texttt{a4wide}
+\item \texttt{hyperref}
+\item \texttt{upmethodology-backpage}
+\item \texttt{upmethodology-code}
 \item \texttt{upmethodology-document}
 \item \texttt{upmethodology-extension}
 \item \texttt{upmethodology-frontpage}
-\item \texttt{upmethodology-backpage}
-\item \texttt{upmethodology-task}
-\item \texttt{upmethodology-code}
+\item \texttt{upmethodology-p-common}
 \item \texttt{upmethodology-spec}
+\item \texttt{upmethodology-task}
 \item \texttt{url}
-\item \texttt{hyperref}
 \end{itemize}
 
 \subsection{upmethdology-document.sty}
 
 \texttt{upmethodology-document} package depends on:
 \begin{itemize}
-\item \texttt{upmethodology-p-common}
 \item \texttt{babel}
-\item \texttt{vmargin}
 \item \texttt{upmethodology-extension}
 \item \texttt{upmethodology-fmt}
+\item \texttt{upmethodology-p-common}
 \item \texttt{upmethodology-version}
+\item \texttt{vmargin}
 \end{itemize}
 
 \subsection{upmethdology-extension.sty}
@@ -186,31 +187,32 @@ This section contains the list of all the package dependencies for the \texttt{u
 
 \texttt{upmethodology-fmt} package depends on:
 \begin{itemize}
-\item \texttt{upmethodology-p-common}
-\item \texttt{graphicx}
-\item \texttt{subfigure}
-\item \texttt{tabularx}
-\item \texttt{multicol}
-\item \texttt{colortbl}
-\item \texttt{picinpar}
 \item \texttt{amsmath}
 \item \texttt{amsthm}
-\item \texttt{thmtools}
-\item \texttt{pifont}
-\item \texttt{setspace}
-\item \texttt{txfonts}
-\item \texttt{xkeyval}
+\item \texttt{colortbl}
+\item \texttt{environ}
+\item \texttt{graphicx}
 \item \texttt{hyphenat}
 \item \texttt{mathbb}
+\item \texttt{multicol}
+\item \texttt{picinpar}
+\item \texttt{pifont}
+\item \texttt{setspace}
+\item \texttt{subfigure}
+\item \texttt{tabularx}
+\item \texttt{thmtools}
+\item \texttt{txfonts}
+\item \texttt{upmethodology-p-common}
+\item \texttt{xkeyval}
 \end{itemize}
 
 \subsection{upmethdology-frontpage.sty}
 
 \texttt{upmethodology-frontpage} package depends on:
 \begin{itemize}
-\item \texttt{upmethodology-p-common}
-\item \texttt{upmethodology-extension}
 \item \texttt{upmethodology-document}
+\item \texttt{upmethodology-extension}
+\item \texttt{upmethodology-p-common}
 \end{itemize}
 
 \subsection{upmethdology-p-common.sty}
@@ -218,18 +220,18 @@ This section contains the list of all the package dependencies for the \texttt{u
 \texttt{upmethodology-p-common} package depends on:
 \begin{itemize}
 \item \texttt{ifthen}
-\item \texttt{xspace}
 \item \texttt{xcolor}
+\item \texttt{xspace}
 \end{itemize}
 
 \subsection{upmethdology-spec.sty}
 
 \texttt{upmethodology-spec} package depends on:
 \begin{itemize}
-\item \texttt{upmethodology-p-common}
 \item \texttt{ulem}
-\item \texttt{upmethodology-fmt}
 \item \texttt{upmethodology-code}
+\item \texttt{upmethodology-fmt}
+\item \texttt{upmethodology-p-common}
 \end{itemize}
 
 \subsection{upmethdology-task.sty}
@@ -244,8 +246,8 @@ This section contains the list of all the package dependencies for the \texttt{u
 
 \texttt{upmethodology-version} package depends on:
 \begin{itemize}
-\item \texttt{upmethodology-p-common}
 \item \texttt{upmethodology-fmt}
+\item \texttt{upmethodology-p-common}
 \end{itemize}
 
 %###########################################################
@@ -311,6 +313,10 @@ pubpage & invoke \texttt{{\textbackslash}upmpublicationpage} macro at the begini
 \hline
 nopubpage & do not invoke \texttt{{\textbackslash}upmpublicationpage} macro at the begining of the document. This option overrides any 
 previous occurrence of \texttt{pubpage} option. \\
+
+\hline\hline
+
+standardlist & disable the override of the lists (enumeration, etc.) for restoring the standard \LaTeX\ lists. \\
 
 \hline
 \end{mtable}

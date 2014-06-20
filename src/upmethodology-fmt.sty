@@ -31,6 +31,9 @@
 \gdef\upm@date@second#1{{\expandafter\expandafter\expandafter\upm@date@head\expandafter\upm@date@tail#1\expandafter\@nil\expandafter\expandafter\expandafter\@nil}}
 \gdef\upm@date@third#1{{\expandafter\expandafter\expandafter\upm@date@tail\expandafter\upm@date@tail#1\expandafter\@nil\expandafter\expandafter\expandafter\@nil}}
 
+\newif\ifupm@use@override@standard@lists
+\global\upm@use@override@standard@liststrue
+
 %----------------------------------------
 % LOCALES
 %----------------------------------------
@@ -79,6 +82,9 @@
   \upm@format@lang@english
   \PassOptionsToPackage{english}{varioref}
 }
+\DeclareOption{standardlists}{%
+  \global\upm@use@override@standard@listsfalse
+}
 \ExecuteOptions{english}
 \ProcessOptions
 \upm@lang@@
@@ -101,6 +107,7 @@
 \RequirePackage{xkeyval}
 \RequirePackage{hyphenat}
 \RequirePackage{bbm}
+\RequirePackage{environ}% for advanced environment declaration
 
 %----------------------------------------
 % Exponent and indice
@@ -1131,13 +1138,19 @@
 	\end{upm@fmt@enumdescription}%
 }
 
-% Issue #14: enumerate behaves as enumdescription
-\renewenvironment{enumerate}[1][1]{%
-	\begin{upm@fmt@enumdescription}{#1}{}{\string.~}{}{\enumdescriptionlabelseparator}{}%
-}
-{%
-	\end{upm@fmt@enumdescription}%
-}
+%% Issue #14: enumerate behaves as enumdescription
+\ifupm@use@override@standard@lists
+	\AtBeginDocument{
+		\message{*** Overriding the 'enumerate' environment. Pass option 'standardlists' for avoiding this override.}
+		\global\let\enumerate\@undefined
+		\global\let\endenumerate\@undefined
+		\global\NewEnviron{enumerate}[1][1]{
+			\protect\begin{upm@fmt@enumdescription}{#1}{}{\string.~}{}{\enumdescriptionlabelseparator}{}%
+			\BODY%
+			\protect\end{upm@fmt@enumdescription}%
+		}
+	}
+\fi
 
 %----------------------------------------
 % DESCRIPTION LIST WITH BULLETS
