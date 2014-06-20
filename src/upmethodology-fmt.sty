@@ -1155,22 +1155,29 @@
 %----------------------------------------
 % DESCRIPTION LIST WITH BULLETS
 %----------------------------------------
-\gdef\upm@fmt@itemizeddescription@separator{\iflanguage{french}{ :}{:}\ }
-\newcommand{\upm@fmt@itemizeddescription@formatdescription}[1]{\textbf{#1}}
-\newcommand{\upm@fmt@itemizeddescription@desc}[2]{%
-	\upm@fmt@itemizeddescription@formatdescription{#1#2}%
-}
-\let\upm@fmt@olditem\item
-\let\upm@item@param\upm@fmt@olditem
-\let\upm@item@noparam\upm@fmt@olditem
-\def\item{\@ifnextchar[\upm@item@param\upm@item@noparam}
-\renewenvironment{description}[1][\upm@fmt@itemizeddescription@separator]{%
-	\begin{itemize}%
-	\renewcommand{\upm@item@param}[1][]{\upm@fmt@olditem \upm@fmt@itemizeddescription@desc{##1}{#1}}%
-	\renewcommand{\upm@item@noparam}{\upm@fmt@olditem }%
-}{%
-	\end{itemize}%
-}
+\ifupm@use@override@standard@lists
+	\gdef\upm@fmt@itemizeddescription@separator{\iflanguage{french}{ :}{:}\ }
+	\newcommand{\upm@fmt@itemizeddescription@formatdescription}[1]{\textbf{#1}}
+	\newcommand{\upm@fmt@itemizeddescription@desc}[2]{%
+		\upm@fmt@itemizeddescription@formatdescription{#1#2}%
+	}
+	\let\upm@fmt@olditem\item
+	\let\upm@item@param\upm@fmt@olditem
+	\let\upm@item@noparam\upm@fmt@olditem
+	\def\item{\@ifnextchar[\upm@item@param\upm@item@noparam}
+	\AtBeginDocument{
+		\message{*** Overriding the 'description' environment. Pass option 'standardlists' for avoiding this override.}
+		\global\let\description\@undefined
+		\global\let\enddescription\@undefined
+		\global\NewEnviron{description}[1][\upm@fmt@itemizeddescription@separator]{
+			\begin{itemize}%
+			\renewcommand{\upm@item@param}[1][]{\upm@fmt@olditem \upm@fmt@itemizeddescription@desc{##1}{#1}}%
+			\renewcommand{\upm@item@noparam}{\upm@fmt@olditem }%
+			\BODY%
+			\end{itemize}%
+		}
+	}
+\fi
 
 %----------------------------------------
 % SIZE MANAGEMENT
