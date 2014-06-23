@@ -17,7 +17,7 @@
 % write to the Free Software Foundation, Inc., 59 Temple Place - Suite
 % 330, Boston, MA 02111-1307, USA.
 
-\global\edef\upm@package@docclazz@ver{2014/06/20}
+\global\edef\upm@package@docclazz@ver{2014/06/23}
 
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
 \ProvidesClass{upmethodology-document}[\upm@package@docclazz@ver]
@@ -200,10 +200,15 @@
 
 \global\let\upm@package@docclazz@backmatter\backmatter
 \gdef\backmatter{%
-	\upm@package@docclazz@backmatter%
 	\global\let\frontmatter\relax%
 	\global\let\mainmatter\relax%
 	\global\let\backmatter\relax%
+	\upm@package@docclazz@backmatter%
+	\global\let\upm@package@docclazz@appendix\appendix%
+	\gdef\appendix{%
+		\upm@package@docclazz@appendix%
+		\global\@mainmattertrue%
+	}%
 }
 
 %----------------------------------------
