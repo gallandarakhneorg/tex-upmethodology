@@ -20,6 +20,8 @@ h2. Authors
 
 "Frans van Dunné":https://github.com/FvD (documentation)
 
+"Nicolas GAUD":http://www.arakhne.org/homes/gaud.html <gaud@arakhne.org> (bibtex style)
+
 h2. License
 
 GNU LESSER GENERAL PUBLIC LICENSE.
