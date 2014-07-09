@@ -17,7 +17,7 @@
 % write to the Free Software Foundation, Inc., 59 Temple Place - Suite
 % 330, Boston, MA 02111-1307, USA.
 
-\global\edef\upm@package@fmt@ver{2014/06/23}
+\global\edef\upm@package@fmt@ver{2014/07/09}
 
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
 \ProvidesPackage{upmethodology-fmt}[\upm@package@fmt@ver]
@@ -632,6 +632,14 @@
 %----------------------------------------
 % PAGE LAYOUT
 %----------------------------------------
+
+% Change the factors for determining the element positions
+\renewcommand{\topfraction}{.99} % max fraction of floats at top
+\renewcommand{\bottomfraction}{.99} % max fraction of floats at bottom
+\renewcommand{\textfraction}{.5} % allow minimal text w. figs
+\renewcommand{\dbltopfraction}{.66} % fit big float above 2-col. text
+\renewcommand{\floatpagefraction}{0.99} % require fuller float pages | N.B.: floatpagefraction MUST be less than topfraction !!
+\renewcommand{\dblfloatpagefraction}{.66} % fit big float above 2-col. text
 
 % Update the format of the saved pages and sections
 \renewcommand{\sectionmark}[1]{\markright{\thesection\ \textsc{#1}}}
@@ -1404,5 +1412,21 @@
 %-----
 % Declare the definition environment
 \declareupmtheorem{definition}{\definitionname}{\listdefinitionname}
+
+%----------------------------------------
+% ENVIRONMENT FOR EMPHBOX
+%----------------------------------------
+
+%-----
+% Defining the style for the emphbox
+\colorlet{emphboxbackground}{backtableheader}
+\colorlet{emphboxborder}{fronttableheader}
+\colorlet{emphboxtext}{fronttableheader}
+
+\NewEnviron{emphbox}[1][\linewidth]{%
+	\begin{framedcolorminipage}{#1}{emphboxborder}{emphboxbackground}%
+		\centering\color{emphboxtext}\BODY%
+	\end{framedcolorminipage}%
+}
 
 \endinput

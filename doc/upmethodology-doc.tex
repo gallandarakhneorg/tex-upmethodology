@@ -4,14 +4,7 @@
 
 \declaredocument{\LaTeX\ Packages for Unified Process Methodology}{Official Documentation}{UPM-2012-01}
 
-%\initialversion[1.0]{\makedate{11}{04}{2006}}{First release of this documentation}{\upmpublic}
-\updateversion{18.0}{\makedate{21}{12}{2012}}{{\textbackslash}upmuse \ensuremath{\rightarrow} {\textbackslash}UseExtension}{\upmpublic}
-\incversion{\makedate{28}{04}{2013}}{Replace the package inclusion of \texttt{color.sty} by \texttt{xcolor.sty}}{\upmpublic}
-\incversion{\makedate{17}{05}{2013}}{Add a section on the default configuration of the package \texttt{graphicx}}{\upmpublic}
-\incversion{\makedate{30}{05}{2013}}{Add the macros \texttt{{\textbackslash}includegraphicswtex} and \texttt{{\textbackslash}DeclareGraphicsExtensionsWtex}}{\upmpublic}
-\incsubversion{\makedate{31}{05}{2013}}{Fixing some grammar and syntax problems.}{\upmpublic}
-\incsubversion{\makedate{06}{07}{2013}}{Add the macro \texttt{{\textbackslash}ifdocumentauthor}.}{\upmpublic}
-\incversion{\makedate{15}{08}{2013}}{Add the macros: \texttt{{\textbackslash}textup}, \texttt{{\textbackslash}textsubscript}, \texttt{{\textbackslash}textdown}, \texttt{{\textbackslash}textsubscript}, \texttt{{\textbackslash}Emph}. Add the environments \texttt{enumdescription}, \texttt{enumdescriptionx}.}{\upmpublic}
+\updateversion{22.0}{\makedate{15}{08}{2013}}{Add the macros: \texttt{{\textbackslash}textup}, \texttt{{\textbackslash}textsubscript}, \texttt{{\textbackslash}textdown}, \texttt{{\textbackslash}textsubscript}, \texttt{{\textbackslash}Emph}. Add the environments \texttt{enumdescription}, \texttt{enumdescriptionx}.}{\upmpublic}
 \incversion{\makedate{17}{08}{2013}}{Update the second parameter of \texttt{{\textbackslash}mfigurewtex} to have the same semantic as for \texttt{{\textbackslash}mfigure}.}{\upmpublic}
 \incversion{\makedate{26}{08}{2013}}{Major bug fixes in the environments \texttt{mtabular} and \texttt{mtable}. \newline Add the macro \texttt{{\textbackslash}tabulartitlespec}. \newline Add the macro \texttt{{\textbackslash}makenamespacing}.}{\upmpublic}
 \incversion{\makedate{27}{08}{2013}}{Add the environment \texttt{framedcolorminipage}. Add the \texttt{definition} environment.}{\upmpublic}
@@ -27,6 +20,7 @@
 \incsubversion{\makedate{14}{12}{2013}}{Add the section about \texttt{backcovermessage}.}{\upmpublic}
 \incsubversion{\makedate{09}{02}{2014}}{Add the section about \texttt{enumerate}. Typos are fixed.}{\upmpublic}
 \incsubversion{\makedate{20}{06}{2014}}{Add the class option \texttt{standardlists}. Add the dependency to \texttt{environ}.}{\upmpublic}
+\incversion{\makedate{09}{07}{2014}}{Add the environment \texttt{emphbox}.}{\upmpublic}
 
 \addauthorvalidator*[galland@arakhne.org]{St{\'e}phane}{Galland}{Original Author}
 \addauthor*{Frans}{van Dunn\'e}{Reviewer}
@@ -1258,6 +1252,47 @@ produces:
 \begin{definition}[Name of the definition]
 Text of the definition.
 \end{definition}
+
+\section{Emphazing Box}
+
+If you want to create a text that is emphazed with a box, you could use the environment: \\
+\texttt{{\textbackslash}begin\{emphbox\}[width] text {\textbackslash}end\{emphbox\}}
+
+\paragraph{Example:} The following \LaTeX\ code:
+\begin{verbatim}
+\begin{emphbox}[.7\linewidth]
+This is an emphazed text.
+\end{emphbox}
+\end{verbatim}
+produces:
+
+\begin{emphbox}[.7\linewidth]
+This is an emphazed text.
+\end{emphbox}
+
+\paragraph{Change the colors of the emphazing box:} You could change the colors of the \texttt{emphbox} environment by redefining the colors below with one of the macros \texttt{{\textbackslash}definecolor} or \texttt{{\textbackslash}colorlet}:
+\begin{itemize}
+\item \texttt{emphboxbackground} is the color of the background of the environment;
+\item \texttt{emphboxborder} is the color of the frame;
+\item \texttt{emphboxtext} is the color of the text in the body of the environment.
+\end{itemize}
+
+\paragraph{Example of color redefinition:} The following \LaTeX\ code:
+\begin{verbatim}
+\colorlet{emphboxbackground}{gray!20}
+\colorlet{emphboxborder}{red}
+\begin{emphbox}
+This is an emphazed text.
+\end{emphbox}
+\end{verbatim}
+produces:
+
+\colorlet{emphboxbackground}{gray!20}
+\colorlet{emphboxborder}{red}
+\begin{emphbox}
+This is an emphazed text.
+\end{emphbox}
+
 
 \section{Framed Boxes or Mini Pages}
 
