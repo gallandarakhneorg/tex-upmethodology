@@ -1108,6 +1108,8 @@
 %----------------------------------------
 
 \newcounter{@upm@fmt@enumdescription@cnt@}
+\gdef\upm@fmt@enumdescription@savedlabel{}
+\gdef\upm@fmt@enumdescription@savedcounter{}
 \newcommand{\upm@fmt@enumdescription@fmt@}[1]{}
 \newcommand{\enumdescriptionlabel}[1]{\textbf{#1}}
 \newcommand{\enumdescriptioncounterseparator}{~-~}
@@ -1119,24 +1121,34 @@
 % #5: text between the description and the rest of the text.
 % #6: text between the counter (no description) and the rest of the text.
 \newenvironment{upm@fmt@enumdescription}[6]{%
-	\begingroup\setcounter{@upm@fmt@enumdescription@cnt@}{1}%
-	\let\upm@fmt@enumdescription@savedlabel\@currentlabel%
-	\ifthenelse{\equal{#1}{a}}{%
-		\renewcommand{\upm@fmt@enumdescription@fmt@}[1]{#2\alph{##1}#3}%
-	}{%
-		\ifthenelse{\equal{#1}{i}}{%
-			\renewcommand{\upm@fmt@enumdescription@fmt@}[1]{#2\roman{##1}#3}%
-		}{%
-			\renewcommand{\upm@fmt@enumdescription@fmt@}[1]{#2\expandafter{\csname the##1\endcsname}#3}%
-		}%
-	}%
 	\begin{list}{}{%
-		\renewcommand{\makelabel}[1]{\xdef\@currentlabel{\upm@fmt@enumdescription@fmt@{@upm@fmt@enumdescription@cnt@}}\enumdescriptionlabel{\@currentlabel#4##1\ifthenelse{\equal{a##1}{a}}{#6}{#5}}{\addtocounter{@upm@fmt@enumdescription@cnt@}{1}}}%
+		\renewcommand{\upm@fmt@enumdescription@savedlabel}{\@currentlabel}%
+		\edef\upm@fmt@enumdescription@savedcounter{\the@upm@fmt@enumdescription@cnt@}%
+		\setcounter{@upm@fmt@enumdescription@cnt@}{1}%
+		\ifthenelse{\equal{#1}{a}}{%
+			\renewcommand{\upm@fmt@enumdescription@fmt@}[1]{#2\alph{##1}#3}%
+		}{%
+			\ifthenelse{\equal{#1}{A}}{%
+				\renewcommand{\upm@fmt@enumdescription@fmt@}[1]{#2\Alph{##1}#3}%
+			}{%
+				\ifthenelse{\equal{#1}{i}}{%
+					\renewcommand{\upm@fmt@enumdescription@fmt@}[1]{#2\roman{##1}#3}%
+				}{%
+					\ifthenelse{\equal{#1}{I}}{%
+						\renewcommand{\upm@fmt@enumdescription@fmt@}[1]{#2\Roman{##1}#3}%
+					}{%
+						\renewcommand{\upm@fmt@enumdescription@fmt@}[1]{#2\arabic{##1}#3}%
+					}%
+				}%
+			}%
+		}%
+		\renewcommand{\makelabel}[1]{\edef\@currentlabel{\upm@fmt@enumdescription@fmt@{@upm@fmt@enumdescription@cnt@}}\enumdescriptionlabel{\@currentlabel#4##1\ifthenelse{\equal{a##1}{a}}{#6}{#5}}{\addtocounter{@upm@fmt@enumdescription@cnt@}{1}}}%
 		\expandafter\settowidth{\labelwidth}{#2iii#3}%
 	}
 }{%
 	\global\let\@currentlabel\upm@fmt@enumdescription@savedlabel%
-	\end{list}\endgroup%
+	\setcounter{@upm@fmt@enumdescription@cnt@}{\upm@fmt@enumdescription@savedcounter}%
+	\end{list}%
 }
 \newenvironment{enumdescriptionx}[3][i]{%
 	\begin{upm@fmt@enumdescription}{#1}{#2}{#3}{\enumdescriptioncounterseparator}{\enumdescriptionlabelseparator}{\enumdescriptionlabelseparator}%
@@ -1151,12 +1163,55 @@
 
 %% Issue #14: enumerate behaves as enumdescription
 \ifupm@use@override@standard@lists
+	
 	\AtBeginDocument{
 		\message{*** Overriding the 'enumerate' environment. Pass option 'standardlists' for avoiding this override.}
 		\global\let\enumerate\@undefined
 		\global\let\endenumerate\@undefined
-		\global\NewEnviron{enumerate}[1][1]{
-			\protect\begin{upm@fmt@enumdescription}{#1}{}{\string.~}{}{\enumdescriptionlabelseparator}{}%
+		\global\NewEnviron{enumerate}[1][1\string.~]{%
+			% Parse the parameter for extracting the type of the enumeration, the prefix and the postfix
+			\in@{a}{#1}\ifin@
+				\gdef\upm@fmt@enumerate@style{a}%
+				\def\reserved@a##1a##2\@nil{%
+					\def\upm@fmt@enumerate@prefix{##1}%
+					\def\upm@fmt@enumerate@postfix{##2}%
+				}%
+				\reserved@a#1\@nil%
+			\else\in@{1}{#1}\ifin@
+				\gdef\upm@fmt@enumerate@style{1}%
+				\def\reserved@a##11##2\@nil{%
+					\def\upm@fmt@enumerate@prefix{##1}%
+					\def\upm@fmt@enumerate@postfix{##2}%
+				}%
+				\reserved@a#1\@nil%
+			\else\in@{A}{#1}\ifin@
+				\gdef\upm@fmt@enumerate@style{A}%
+				\def\reserved@a##1A##2\@nil{%
+					\def\upm@fmt@enumerate@prefix{##1}%
+					\def\upm@fmt@enumerate@postfix{##2}%
+				}%
+				\reserved@a#1\@nil%
+			\else\in@{i}{#1}\ifin@
+				\gdef\upm@fmt@enumerate@style{i}%
+				\def\reserved@a##1i##2\@nil{%
+					\def\upm@fmt@enumerate@prefix{##1}%
+					\def\upm@fmt@enumerate@postfix{##2}%
+				}%
+				\reserved@a#1\@nil%
+			\else\in@{I}{#1}\ifin@
+				\gdef\upm@fmt@enumerate@style{I}%
+				\def\reserved@a##1I##2\@nil{%
+					\def\upm@fmt@enumerate@prefix{##1}%
+					\def\upm@fmt@enumerate@postfix{##2}%
+				}%
+				\reserved@a#1\@nil%
+			\else%
+				\errmessage{Invalid format of the enumerate counter}
+			\fi\fi\fi\fi\fi%
+			\protected@xdef\upm@tmp{\protect\protect\protect\begin{upm@fmt@enumdescription}{\upm@fmt@enumerate@style}{\upm@fmt@enumerate@prefix}{\upm@fmt@enumerate@postfix}{}{\protect\enumdescriptionlabelseparator}{}}%
+			%
+			\upm@tmp%
+			%\protect\begin{upm@fmt@enumdescription}{#1}{}{\string.~}{}{\enumdescriptionlabelseparator}{}%
 			\BODY%
 			\protect\end{upm@fmt@enumdescription}%
 		}

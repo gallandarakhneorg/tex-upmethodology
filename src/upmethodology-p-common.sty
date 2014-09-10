@@ -200,6 +200,11 @@
 	\upm@foreach@rec{#2#1}%
 }
 
+%----------------------------------------
+% MACRO THAT PERMITS TO FIND A STRING
+%----------------------------------------
+\def\upm@ifin#1#2{\begingroup\edef\upm@tmp{\endgroup\noexpand\in@{#1}{#2}}\upm@tmp\ifin@}
+
 %-----------------------------------------
 % Option parameters
 \newif\ifupm@common@optlist@needdefault
