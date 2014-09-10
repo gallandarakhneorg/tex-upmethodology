@@ -17,7 +17,7 @@
 % write to the Free Software Foundation, Inc., 59 Temple Place - Suite
 % 330, Boston, MA 02111-1307, USA.
 
-\global\edef\upm@package@fmt@ver{2014/07/09}
+\global\edef\upm@package@fmt@ver{2014/09/10}
 
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
 \ProvidesPackage{upmethodology-fmt}[\upm@package@fmt@ver]
@@ -863,13 +863,16 @@
 }
 }
 
-% Overide the color configuration of the MINITOC package
+% Overide the color and font configurations of the MINITOC package
 \AtBeginDocument{
 	\@ifundefined{minitoc}{}{%
-		\global\let\upm@format@mtcSfont@old\mtcSfont
-		\gdef\mtcSfont{\upm@format@mtcSfont@old\color{sectiontitlecolor}}
-		\global\let\upm@format@mtifont@old\mtifont
-		\gdef\mtifont{\upm@format@mtifont@old\color{chaptertitlecolor}}
+		% Chapter
+		\gdef\mtifont{\normalfont\large\upshape\bfseries\color{chaptertitlecolor}}
+		% Section
+		\gdef\mtcSfont{\normalfont\small\upshape\bfseries\color{sectiontitlecolor}}
+		% Sub-Section and SubSub-Section
+		\gdef\mtcSSfont{\normalfont\small\upshape\mdseries\normalcolor}
+		\global\let\mtcSSSfont\mtcSSfont
 	}
 }
 
