@@ -1,6 +1,6 @@
 % Document class for Unified Process Methodology
 %
-% Copyright (c) 2006-2014 Stephane GALLAND <galland@arakhne.org>
+% Copyright (c) 2014 Stephane GALLAND <galland@arakhne.org>
 % 
 % This program is free library; you can redistribute it and/or modify
 % it under the terms of the GNU Lesser General Public License as
@@ -17,7 +17,7 @@
 % write to the Free Software Foundation, Inc., 59 Temple Place - Suite
 % 330, Boston, MA 02111-1307, USA.
 
-\global\edef\upm@package@docclazz@ver{2014/06/23}
+\global\edef\upm@package@docclazz@ver{2014/09/11}
 
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
 \ProvidesClass{upmethodology-document}[\upm@package@docclazz@ver]
@@ -30,6 +30,10 @@
 \upm@package@docclazz@nopubpagefalse
 \newif\ifupm@package@docclazz@autofrontmatter
 \upm@package@docclazz@autofrontmatterfalse
+\newif\ifupm@package@docclazz@addfrontcover
+\upm@package@docclazz@addfrontcovertrue
+\newif\ifupm@package@docclazz@addbackcover
+\upm@package@docclazz@addbackcovertrue
 
 \gdef\upm@package@docclazz@optionstopass{a4paper,11pt}
 
@@ -74,6 +78,18 @@
 }
 \DeclareOption{frontmatter}{%
 	\global\upm@package@docclazz@autofrontmattertrue%
+}
+\DeclareOption{nofrontcover}{%
+	\global\upm@package@docclazz@addfrontcoverfalse%
+}
+\DeclareOption{frontcover}{%
+	\global\upm@package@docclazz@addfrontcovertrue%
+}
+\DeclareOption{nobackcover}{%
+	\global\upm@package@docclazz@addbackcoverfalse%
+}
+\DeclareOption{backcover}{%
+	\global\upm@package@docclazz@addbackcovertrue%
 }
 \DeclareOption{book}{%
 	\global\upmbookformattrue
@@ -217,14 +233,14 @@
 
 \AtBeginDocument{%
 	\ifupm@package@docclazz@autofrontmatter\frontmatter\fi%
-	\makefrontcover%
+	\ifupm@package@docclazz@addfrontcover\makefrontcover\fi%
 	\ifupm@package@docclazz@nopubpage\else\upmpublicationpage\fi%
 	\ifupm@package@docclazz@nodocinfo\else\upmdocinfopage\fi%
 	\sloppy%
 }
 
 \AtEndDocument{%
-	\makebackcover%
+	\ifupm@package@docclazz@addbackcover\makebackcover\fi%
 }
 
 %----------------------------------------
