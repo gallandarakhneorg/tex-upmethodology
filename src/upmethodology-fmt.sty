@@ -17,7 +17,7 @@
 % write to the Free Software Foundation, Inc., 59 Temple Place - Suite
 % 330, Boston, MA 02111-1307, USA.
 
-\global\edef\upm@package@fmt@ver{2014/09/10}
+\global\edef\upm@package@fmt@ver{2014/10/13}
 
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
 \ProvidesPackage{upmethodology-fmt}[\upm@package@fmt@ver]
@@ -1142,7 +1142,9 @@
 				}%
 			}%
 		}%
-		\renewcommand{\makelabel}[1]{\edef\@currentlabel{\upm@fmt@enumdescription@fmt@{@upm@fmt@enumdescription@cnt@}}\enumdescriptionlabel{\@currentlabel#4##1\ifthenelse{\equal{a##1}{a}}{#6}{#5}}{\addtocounter{@upm@fmt@enumdescription@cnt@}{1}}}%
+		\renewcommand{\makelabel}[1]{%
+			\xdef\@currentlabel{\upm@fmt@enumdescription@fmt@{@upm@fmt@enumdescription@cnt@}}%
+			\enumdescriptionlabel{\@currentlabel#4##1\ifthenelse{\equal{a##1}{a}}{#6}{#5}}{\addtocounter{@upm@fmt@enumdescription@cnt@}{1}}}%
 		\expandafter\settowidth{\labelwidth}{#2iii#3}%
 	}
 }{%
