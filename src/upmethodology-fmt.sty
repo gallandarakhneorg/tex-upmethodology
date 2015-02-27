@@ -17,7 +17,7 @@
 % write to the Free Software Foundation, Inc., 59 Temple Place - Suite
 % 330, Boston, MA 02111-1307, USA.
 
-\global\edef\upm@package@fmt@ver{2014/10/13}
+\global\edef\upm@package@fmt@ver{2015/02/27}
 
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
 \ProvidesPackage{upmethodology-fmt}[\upm@package@fmt@ver]
@@ -707,11 +707,17 @@
 \def\upm@format@newsection@chapter@a[#1]#2{%
 	\expandafter\chapter*[#1]{#2}%
 	\addcontentsline{toc}{chapter}{\upm@format@newsection@alignment{#1}}%
+	\@ifundefined{minitoc}{}{%
+		\global\addtocounter{mtc}{1}%
+	}%
 }
 
 \def\upm@format@newsection@chapter@b#1{%
 	\expandafter\chapter*{#1}%
 	\addcontentsline{toc}{chapter}{\upm@format@newsection@alignment{#1}}%
+	\@ifundefined{minitoc}{}{%
+		\global\addtocounter{mtc}{1}%
+	}%
 }
 
 %-----
