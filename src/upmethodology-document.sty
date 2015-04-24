@@ -17,7 +17,7 @@
 % write to the Free Software Foundation, Inc., 59 Temple Place - Suite
 % 330, Boston, MA 02111-1307, USA.
 
-\global\edef\upm@package@doc@ver{2013/09/29}
+\global\edef\upm@package@doc@ver{2015/04/24}
 
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
 \ProvidesPackage{upmethodology-document}[\upm@package@doc@ver]
@@ -96,7 +96,7 @@
   \upm@document@lang@english
 }
 \ExecuteOptions{english}
-\ProcessOptions
+\ProcessOptions*
 
 {\upm@lang@@}
 
@@ -115,7 +115,7 @@
 
 \newlength\listendskip
 \listendskip=\parskip
-\iflanguage{french}{%
+\ifupmlang{french}{%
 	\addto\extrasfrench{%
 		\let\upm@document@enditemizeFB\enditemizeFB%
 		\def\enditemizeFB{\upm@document@enditemizeFB\vspace{\listendskip}}%

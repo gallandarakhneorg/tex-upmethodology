@@ -2,7 +2,7 @@
 
 \setfrontcover{classic}
 
-\declaredocument{\LaTeX\ Packages for Unified Process Methodology}{Official Documentation}{UPM-2012-01}
+\declaredocument{\LaTeX\ Packages for Unified Process Methodology}{Official Documentation}{UPM-2015-01}
 
 \updateversion{22.0}{\makedate{15}{08}{2013}}{Add the macros: \texttt{{\textbackslash}textup}, \texttt{{\textbackslash}textsubscript}, \texttt{{\textbackslash}textdown}, \texttt{{\textbackslash}textsubscript}, \texttt{{\textbackslash}Emph}. Add the environments \texttt{enumdescription}, \texttt{enumdescriptionx}.}{\upmpublic}
 \incversion{\makedate{17}{08}{2013}}{Update the second parameter of \texttt{{\textbackslash}mfigurewtex} to have the same semantic as for \texttt{{\textbackslash}mfigure}.}{\upmpublic}
@@ -22,6 +22,7 @@
 \incsubversion{\makedate{20}{06}{2014}}{Add the class option \texttt{standardlists}. Add the dependency to \texttt{environ}.}{\upmpublic}
 \incversion{\makedate{09}{07}{2014}}{Add the environment \texttt{emphbox}.}{\upmpublic}
 \incsubversion{\makedate{10}{09}{2014}}{Complete the documentation of \texttt{enumerate}.}{\upmpublic}
+\incversion{\makedate{24}{05}{2015}}{Add explanations about the macros on the current language.}{\upmpublic}
 
 \addauthorvalidator*[galland@arakhne.org]{St{\'e}phane}{Galland}{Original Author}
 \addauthor*{Frans}{van Dunn\'e}{Reviewer}
@@ -1658,6 +1659,10 @@ The package \texttt{upmethodology-document} provides the \texttt{{\textbackslash
 \end{figure}
 
 \section{Localization}
+
+The current language is defined in the macro \texttt{{\textbackslash}upmcurrentlang}.
+
+For testing the current language, you could use the macro \texttt{{\textbackslash}ifuplang\{lang\_id\}\{then macros\}\{else macros\}}. This macro tests if the given \texttt{lang\_id} corresponds to the value expended by the macro \texttt{{\textbackslash}upmcurrentlang}. If it is true, the macros specified in the ``then macros'' are expanded. Otherwise, the macros specified in the ``else macros'' are expanded.
 
 The following macros defines some localized strings used by \texttt{upmethodology-document}:
 \begin{itemize}
