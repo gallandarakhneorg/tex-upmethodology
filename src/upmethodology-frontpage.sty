@@ -1,6 +1,6 @@
 % Front page for Unified Process Methodology
 %
-% Copyright (c) 2006-2009 Stephane GALLAND <galland@arakhne.org>
+% Copyright (c) 2006-2015 Stephane GALLAND <galland@arakhne.org>
 % 
 % This program is free library; you can redistribute it and/or modify
 % it under the terms of the GNU Lesser General Public License as
@@ -18,15 +18,16 @@
 % 330, Boston, MA 02111-1307, USA.
 %
 
-\global\edef\upm@package@fp@ver{2009/10/30}
+\global\edef\upm@package@fp@ver{2015/06/26}
 
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
 \ProvidesPackage{upmethodology-frontpage}[\upm@package@fp@ver]
 
 \RequirePackage{upmethodology-p-common}
 
-%-----
+%----------------------------------------
 % Locales
+%----------------------------------------
 \def\upm@front@lang@english{
   \gdef\upm@lang@@{\message{**** upmethodology-frontpage is using English language ****}}%
   \gdef\upm@lang@front@authors{\upm@lang@document@authors}
@@ -35,6 +36,7 @@
   \gdef\upm@lang@@{\message{**** upmethodology-frontpage is using French language ****}}%
   \gdef\upm@lang@front@authors{\upm@lang@document@authors}
 }
+
 %----------------------------------------
 % OPTIONS
 %----------------------------------------
@@ -58,8 +60,9 @@
 \newdimen\upm@front@tmpa
 \newdimen\upm@front@tmpb
 
-%-----
+%----------------------------------------
 % String format
+%----------------------------------------
 \def\upm@front@force@single@spacing#1{{\begin{singlespace}#1\end{singlespace}}}
 \def\upm@front@maintitle@fmt#1{\Huge \scshape #1}
 \def\upm@front@project@fmt#1{\textbf{\Large #1}}
@@ -70,8 +73,9 @@
 	\begin{upmfontsize}{\small}#1\end{upmfontsize}%
 	}
 
-%-----
+%----------------------------------------
 % Define the command to put the title with a classic layout
+%----------------------------------------
 \newcommand{\upm@front@layout@classic}{%
     \message{************ USE CLASSIC FRONT COVER}
     \begin{titlepage}%
@@ -126,8 +130,9 @@
 }
 
 
-%-----
+%----------------------------------------
 % Define the command to put the title with a classic layout
+%----------------------------------------
 \newcommand{\upm@front@layout@modern}{%
     \message{************ USE MODERN FRONT COVER}
     \begin{titlepage}%
@@ -187,8 +192,9 @@
 	}%
 }
 
-%----
+%----------------------------------------
 % Set the front page layout as the classic layout theme
+%----------------------------------------
 %\setfrontcover{layout_name}
 \newcommand{\setfrontcover}[1]{%
 	\upm@front@setfrontlayout{#1}{\errmessage{invalid front layout theme: #1}}%
@@ -211,20 +217,35 @@
 	\upm@front@layout}%
 \newcommand{\makefrontcover}{\maketitle}
 
-%----
+%----------------------------------------
 % Set the illustration figure on the front page
+%----------------------------------------
 %\setfrontillustration[size_factor]{filename}
 \newcommand{\setfrontillustration}[2][1]{%
 	\Set{frontillustrationsize}{#1}%
 	\Set{frontillustration}{#2}%
 }
 
-%----
+%----------------------------------------
 % Clear the illustration figure on the front page
+%----------------------------------------
 %\clearfrontillustration
 \newcommand{\clearfrontillustration}{%
 	\Set{frontillustrationsize}{1}%
 	\Unset{frontillustration}%
+}
+
+%----------------------------------------
+% SUPPORT FOR TIKZEXTERNAL
+%----------------------------------------
+% See issue #25
+\AtBeginDocument{
+	\@ifundefined{tikzexternalrealjob}{}{%
+		\message{*** Overriding the document specification for TikZ externalizer.}%
+		\ifthenelse{\equal{\jobname}{\tikzexternalrealjob}}{}{%
+			\gdef\maketitle{}%
+		}%
+	}%
 }
 
 \endinput
