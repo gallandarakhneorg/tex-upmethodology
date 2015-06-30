@@ -17,7 +17,7 @@
 % write to the Free Software Foundation, Inc., 59 Temple Place - Suite
 % 330, Boston, MA 02111-1307, USA.
 
-\global\edef\upm@package@fmt@ver{2015/06/26}
+\global\edef\upm@package@fmt@ver{2015/06/30}
 
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
 \ProvidesPackage{upmethodology-fmt}[\upm@package@fmt@ver]
@@ -505,12 +505,9 @@
 \define@key[autolatex]{mtable}{htbpH!}[\relax]{\gdef\@autolatex@mtable@position{htbpH!}}
 %
 \newenvironment{mtable}[6][ht]{%
-	\global\let\@autolatex@mtable@position\relax%
+	\gdef\@autolatex@mtable@position{ht}%
 	\gdef\@autolatex@mtable@size{\normalsize}%
 	\setkeys[autolatex]{mtable}{#1}%
-	\ifx\@autolatex@mtable@position\relax%
-		\gdef\@autolatex@mtable@position{ht}%
-	\fi
 	%
 	\gdef\upm@table@caption{#5}%
 	\xdef\upm@table@label{tab:#6}%
@@ -1383,11 +1380,11 @@
 %----------------------------------------
 % Exponents and Indices
 %----------------------------------------
-\renewcommand{\textup}[1]{\textsuperscript{#1}\xspace}
+\gdef\textup#1{\textsuperscript{#1}\xspace}
 \def\@textsubscript#1{%
   {\m@th\ensuremath{_{\mbox{\fontsize\sf@size\z@#1}}}}}
-\newcommand{\textsubscript}[1]{\@textsubscript{\selectfont#1}}
-\newcommand{\textdown}[1]{\textsubscript{#1}\xspace}
+\gdef\textsubscript#1{\@textsubscript{\selectfont#1}}
+\gdef\textdown#1{\textsubscript{#1}\xspace}
 
 
 %----------------------------------------
