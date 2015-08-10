@@ -23,6 +23,7 @@
 \incversion{\makedate{09}{07}{2014}}{Add the environment \texttt{emphbox}.}{\upmpublic}
 \incsubversion{\makedate{10}{09}{2014}}{Complete the documentation of \texttt{enumerate}.}{\upmpublic}
 \incversion{\makedate{24}{04}{2015}}{Add explanations about the macros on the current language.}{\upmpublic}
+\incversion{\makedate{10}{08}{2015}}{Add on enumeration counter saving mechanism.}{\upmpublic}
 
 \addauthorvalidator*[galland@arakhne.org]{St{\'e}phane}{Galland}{Original Author}
 \addauthor*{Frans}{van Dunn\'e}{Reviewer}
@@ -727,20 +728,68 @@ Only once counter could be saved at a given time.
 It means that you cannot save the counters for an enumeration and for an enclosing enumeration at the same time.
 \end{upmcaution}
 
+Two general macros are defined for helping you to save a counter value into the global variable: 
 \begin{itemize}
 \item \texttt{{\textbackslash}savecounter\{name\}} \\
-	save the counter identifier by the given name;
+	save the value of the counter identified by the given name in a global variable.
+	The name of the counter must be previously defined with one of thee standard \LaTeX\ or \TeX\ macros, e.g. \texttt{{\textbackslash}newcounter};
 \item \texttt{{\textbackslash}restorecounter\{name\}} \\
-	put the previously saved value into the given counter;
-\item \texttt{{\textbackslash}setenumcounter\{value\}} \\
-	force the value of the enumeration counter;
-\item \texttt{{\textbackslash}getenumcounter} \\
-	replies the value of the enumeration counter;
-\item \texttt{{\textbackslash}saveenumcounter} \\
-	save the enumeration counter;
-\item \texttt{{\textbackslash}restoreenumcounter} \\
-	force the enumeration to use the saved counter's value;
+	put the previously saved value into the counter with the given name.
+	The name of the counter must be previously defined with one of thee standard \LaTeX\ or \TeX\ macros, e.g. \texttt{{\textbackslash}newcounter};
 \end{itemize}
+
+The counter is extensively used in enumeration lists. The following macros will help you for managing the enumeration counter:
+\begin{itemize}
+\item \texttt{{\textbackslash}setenumcounter\{value\}} \\
+	force the value of the counter used by the enumeration environments;
+\item \texttt{{\textbackslash}getenumcounter} \\
+	replies the value of the counter used by the enumeration environments;
+\item \texttt{{\textbackslash}saveenumcounter} \\
+	save the value of the counter used by the enumeration environment with \texttt{{\textbackslash}savecounter};
+\item \texttt{{\textbackslash}restoreenumcounter} \\
+	restore the value of the counter used by the enumeration environment with \texttt{{\textbackslash}restorecounter}.
+\end{itemize}
+
+\paragraph{Example:} The following \LaTeX~code produces the result below:
+\begin{verbatim}
+This is a text: \begin{enumerate}
+        \item This is an item. 
+        \item This is another item. 
+        \saveenumcounter
+\end{enumerate}
+This is a text in the between.
+\begin{enumerate}
+        \restoreenumcounter
+        \item The list goes on
+        \item and on.
+\end{enumerate}
+This is a second text in the between.
+\begin{enumerate}
+        \setenumcounter{18}
+        \item The list goes on again
+        \item and on.
+\end{enumerate} This is the text after.
+\end{verbatim}
+
+\fbox{\parbox{\linewidth}{
+	This is a text: \begin{enumerate}
+		    \item This is an item. 
+		    \item This is another item.
+		    \saveenumcounter
+	\end{enumerate}
+	This is a text in the between.
+	\begin{enumerate}
+		    \restoreenumcounter
+		    \item The list goes on
+		    \item and on.
+	\end{enumerate}
+	This is a second text in the between.
+	\begin{enumerate}
+		    \setenumcounter{18}
+		    \item The list goes on again
+		    \item and on.
+	\end{enumerate} This is the text after.
+}}
 
 \subsection{Inline Enumeration}
 

@@ -17,7 +17,7 @@
 % write to the Free Software Foundation, Inc., 59 Temple Place - Suite
 % 330, Boston, MA 02111-1307, USA.
 
-\global\edef\upm@package@fmt@ver{2015/07/01}
+\global\edef\upm@package@fmt@ver{2015/08/10}
 
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
 \ProvidesPackage{upmethodology-fmt}[\upm@package@fmt@ver]
@@ -890,10 +890,18 @@
 \newcommand{\restorecounter}[1]{%
 	\setcounter{#1}{\theupm@fmt@savedcounter}%
 }
-\newcommand{\saveenumcounter}{\savecounter{\@enumctr}}
-\newcommand{\restoreenumcounter}{\restorecounter{\@enumctr}}
-\newcommand{\setenumcounter}[1]{\setcounter{\@enumctr}{#1}\addtocounter{\@enumctr}{-1}}
-\newcommand{\getenumcounter}{\value{\@enumctr}}
+
+\ifupm@use@override@standard@lists
+	\newcommand{\saveenumcounter}{\savecounter{@upm@fmt@enumdescription@cnt@}}
+	\newcommand{\restoreenumcounter}{\restorecounter{@upm@fmt@enumdescription@cnt@}}
+	\newcommand{\setenumcounter}[1]{\setcounter{@upm@fmt@enumdescription@cnt@}{#1}}
+	\newcommand{\getenumcounter}{\the@upm@fmt@enumdescription@cnt@}
+\else
+	\newcommand{\saveenumcounter}{\savecounter{@enumctr}}
+	\newcommand{\restoreenumcounter}{\restorecounter{@enumctr}}
+	\newcommand{\setenumcounter}[1]{\setcounter{@enumctr}{#1}\addtocounter{@enumctr}{-1}}
+	\newcommand{\getenumcounter}{\value{@enumctr}}
+\fi
 
 %----------------------------------------
 % FOOTNOTE
