@@ -2,12 +2,12 @@
 TEX-UPMETHODOLOGY
 -----------------
 
-1. Presentation
+1. Introduction
 ---------------
 
-tex-upmethodology is a (La)TeX style which permits to create Unified Process methodology (UP or RUP) based documents (document version, history, authors, validators, specification, task management, helping tools...)
+tex-upmethodology is a (La)TeX style that enables you to create Unified Process methodology (UP or RUP) based documents (document version, history, authors, validators, specification, task management, helping tools...) with LaTeX. It offers a template that may be used to automate revisions, or simply to make it easier to collaborate on text based documentation that can be managed through a version control system with ease.
 
-Because the tex-upmethodology package is based on external definitions of layouts and styles, it is also succesfully used as a base to write scientific documents such as reports, engineering thesis, master thesis, and PhD thesis. An example of PhD thesis styles may be found at: http://www.multiagent.fr/ThesisStyle
+Because the tex-upmethodology package is based on external definitions of layouts and styles, it has also been used successfully to write and publish scientific documents such as reports, engineering theses, master theses, and PhD theses.  An example of PhD thesis styles based on tex-upmethodology may be found at: http://www.multiagent.fr/ThesisStyle
 
 
 2. Installation
