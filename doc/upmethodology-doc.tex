@@ -2,8 +2,9 @@
 
 \setfrontcover{classic}
 
-\declaredocument{\LaTeX\ Packages for Unified Process Methodology}{Official Documentation}{UPM-2015-01}
+\declaredocument{\LaTeX\ Packages for Unified Process Methodology}{Official Documentation}{UPM-2017-01}
 
+\updateversion{23.0}{\makedate{17}{02}{2017}}{Replace the package \texttt{subfigure} by \texttt{subcaption}.}{\upmpublic}
 \updateversion{22.0}{\makedate{15}{08}{2013}}{Add the macros: \texttt{{\textbackslash}textup}, \texttt{{\textbackslash}textsubscript}, \texttt{{\textbackslash}textdown}, \texttt{{\textbackslash}textsubscript}, \texttt{{\textbackslash}Emph}. Add the environments \texttt{enumdescription}, \texttt{enumdescriptionx}.}{\upmpublic}
 \incversion{\makedate{17}{08}{2013}}{Update the second parameter of \texttt{{\textbackslash}mfigurewtex} to have the same semantic as for \texttt{{\textbackslash}mfigure}.}{\upmpublic}
 \incversion{\makedate{26}{08}{2013}}{Major bug fixes in the environments \texttt{mtabular} and \texttt{mtable}. \newline Add the macro \texttt{{\textbackslash}tabulartitlespec}. \newline Add the macro \texttt{{\textbackslash}makenamespacing}.}{\upmpublic}
@@ -195,7 +196,7 @@ This section contains the list of all the package dependencies for the \texttt{u
 \item \texttt{picinpar}
 \item \texttt{pifont}
 \item \texttt{setspace}
-\item \texttt{subfigure}
+\item \texttt{subcaption}
 \item \texttt{tabularx}
 \item \texttt{thmtools}
 \item \texttt{txfonts}
@@ -468,7 +469,7 @@ The figure~\figref{example:mfigure} page~\figpageref{example:mfigure} is obtaine
 
 \section{Sub-figures}
 
-In some case, it is useful to put several images inside the same floating figure, but without loosing the possibility to reference each of the subfigures. This feature was proposed by the package \texttt{subfigure}. The following environments provides helper functions for \texttt{subfigure}:
+In some case, it is useful to put several images inside the same floating figure, but without loosing the possibility to reference each of the subfigures. This feature was proposed by the package \texttt{subcaption}. The following environments provides helper functions for \texttt{subcaption}:
 \texttt{{\textbackslash}begin\{mfigures\}[position]\{caption\}\{label\}\\
 ...\\
 {\textbackslash}end\{mfigures\}} \\
@@ -1108,7 +1109,7 @@ extract the month field from a date respecting the localized date format.
 extract the day field from a date respecting the localized date format.
 \end{itemize}
 
-\begin{table}[Hht]
+\begin{table}[ht]
 	\begin{center}
 		\begin{tabular}{|>{\ttfamily}l|l|}
 		\hline
@@ -1209,7 +1210,7 @@ The package \texttt{upmethodology-fmt} provides a set of macros to format the te
 
 The package \texttt{upmethodology-fmt} provides several symbols in text mode, and described inside the table~\ref{tab:symbols:text}.
 
-\begin{table}[Hht]
+\begin{table}[ht]
 	\begin{center}
 		\begin{tabular}{|>{\ttfamily}l|l|}
 		\hline
@@ -1235,7 +1236,7 @@ The package \texttt{upmethodology-fmt} provides several symbols in text mode, an
 
 The package \texttt{upmethodology-fmt} provides several symbols in math mode, and described inside the table~\ref{tab:symbols:math}.
 
-\begin{table}[Hht]
+\begin{table}[ht]
 	\begin{center}
 		\begin{tabular}{|>{\ttfamily}l|l|}
 		\hline

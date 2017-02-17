@@ -17,7 +17,7 @@
 % write to the Free Software Foundation, Inc., 59 Temple Place - Suite
 % 330, Boston, MA 02111-1307, USA.
 
-\global\edef\upm@package@fmt@ver{2015/08/10}
+\global\edef\upm@package@fmt@ver{2017/02/17}
 
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
 \ProvidesPackage{upmethodology-fmt}[\upm@package@fmt@ver]
@@ -91,7 +91,7 @@
 
 
 \RequirePackage{graphicx}
-\RequirePackage{subfigure}
+\RequirePackage{subcaption}
 \RequirePackage{tabularx}
 \RequirePackage{multicol}
 \RequirePackage{colortbl}
@@ -198,36 +198,36 @@
 
 \newcounter{upm@subfigure@count}
 
-\newcommand{\upm@beginsubfigure}[4]{
-	\let\upm@mfiguresaved\mfigure
+\newcommand{\upm@beginsubfigure}[4]{%
+	\let\upm@mfiguresaved\mfigure%
 	%options,filename,caption,label
-	\renewcommand{\mfigure}[5][]{
+	\renewcommand{\mfigure}[5][]{%
 		\xdef\upm@tmp@subfigure@label{\alph{upm@subfigure@count}}%
-                \subfigure[##4]{%
-			\includegraphics[##2]{##3}%
-			\label{fig:##5}%
-			\label{fig:#4:\upm@tmp@subfigure@label}%
-		}%
+		\includegraphics[##2]{##3}%
+		\subcaption{##4}%
+		\label{fig:##5}%
+		\label{fig:#4:\upm@tmp@subfigure@label}%
 		\addtocounter{upm@subfigure@count}{1}%
 	}
 	%options,filename,caption
-	\newcommand{\msubfigure}[3]{
+	\newcommand{\msubfigure}[3]{%
 		\xdef\upm@tmp@subfigure@label{\alph{upm@subfigure@count}}%
-                \subfigure[##3]{%
-			\includegraphics[##1]{##2}%
-			\label{fig:#4:\upm@tmp@subfigure@label}%
-		}%
+		\includegraphics[##1]{##2}%
+        \subcaption{##3}%
+		\label{fig:#4:\upm@tmp@subfigure@label}%
 		\addtocounter{upm@subfigure@count}{1}%
 	}
-	\setcounter{upm@subfigure@count}{1}
+	\setcounter{upm@subfigure@count}{1}%
 	\gdef\upm@mfigurescaption{#3}%
 	\gdef\upm@mfigureslabel{fig:#4}%
 	\begin{#1}[#2]\centering %
+	\begingroup%
 }
 
-\newcommand{\upm@endsubfigure}[1]{
-		\caption{\upm@mfigurescaption}%
-		\label{\upm@mfigureslabel}%
+\newcommand{\upm@endsubfigure}[1]{%
+	\endgroup%
+	\caption{\upm@mfigurescaption}%
+	\label{\upm@mfigureslabel}%
 	\end{#1}%
 	\let\mfigure\upm@mfiguresaved
 }
