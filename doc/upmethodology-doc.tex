@@ -2,8 +2,9 @@
 
 \setfrontcover{classic}
 
-\declaredocument{\LaTeX\ Packages for Unified Process Methodology}{Official Documentation}{UPM-2017-01}
+\declaredocument{\LaTeX\ Packages for Unified Process Methodology}{Official Documentation}{UPM-2017-02}
 
+\updateversion{23.1}{\makedate{10}{03}{2017}}{Fixing subfigure invalid alignement.}{\upmpublic}
 \updateversion{23.0}{\makedate{17}{02}{2017}}{Replace the package \texttt{subfigure} by \texttt{subcaption}.}{\upmpublic}
 \updateversion{22.0}{\makedate{15}{08}{2013}}{Add the macros: \texttt{{\textbackslash}textup}, \texttt{{\textbackslash}textsubscript}, \texttt{{\textbackslash}textdown}, \texttt{{\textbackslash}textsubscript}, \texttt{{\textbackslash}Emph}. Add the environments \texttt{enumdescription}, \texttt{enumdescriptionx}.}{\upmpublic}
 \incversion{\makedate{17}{08}{2013}}{Update the second parameter of \texttt{{\textbackslash}mfigurewtex} to have the same semantic as for \texttt{{\textbackslash}mfigure}.}{\upmpublic}
@@ -489,9 +490,9 @@ These two macros enable you to include an image in your document. The parameters
 Inside the environment \texttt{{\textbackslash}mfigures[*]}, you could use the macro \texttt{{\textbackslash}mfigure} to properly include a subfigure (the first optional parameter is ignored), or you could use the macro \texttt{{\textbackslash}msubfigure\{options\}\{file\}\{caption\}}.
 
 The figure~\figref{example:msubfigure} page~\figpageref{example:msubfigure} is obtained with the environment:\\
-\texttt{{\textbackslash}begin\{mfigures\}\{Example of subfigures with {\textbackslash}texttt\{mfigures\}\}\{example:msubfigure\}}\\
+\texttt{{\textbackslash}begin\{mfigures\}\{Example of subfigures with {\textbackslash}texttt\{msubfigures\}\}\{example:msubfigure\}}\\
 \texttt{{\textbackslash}mfigure\{width=.4{\textbackslash}linewidth\}\{img1\}\{First subfigure\}\{example:firstsubfigure\}} \\
-\texttt{{\textbackslash}hfill} \\
+\texttt{{\textbackslash}hspace\{1cm\}} \\
 \texttt{{\textbackslash}msubfigure\{width=.4{\textbackslash}linewidth\}\{img2\}\{Second subfigure\}} \\
 \texttt{{\textbackslash}end\{mfigures\}}
 
@@ -499,7 +500,7 @@ The reference and page reference are obtained with \texttt{{\textbackslash}figre
 
 \begin{mfigures}{Example of subfigures with \texttt{mfigures}}{example:msubfigure}
 	\mfigure{width=.4\linewidth}{arakhne_org_logo}{First subfigure}{example:firstsubfigure}
-	\hfill
+	\hspace{1cm}
 	\msubfigure{width=.4\linewidth}{figure_and_tex}{Second subfigure}
 \end{mfigures}
 

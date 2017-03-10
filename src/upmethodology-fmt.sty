@@ -17,7 +17,7 @@
 % write to the Free Software Foundation, Inc., 59 Temple Place - Suite
 % 330, Boston, MA 02111-1307, USA.
 
-\global\edef\upm@package@fmt@ver{2017/02/17}
+\global\edef\upm@package@fmt@ver{2017/03/10}
 
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
 \ProvidesPackage{upmethodology-fmt}[\upm@package@fmt@ver]
@@ -203,18 +203,18 @@
 	%options,filename,caption,label
 	\renewcommand{\mfigure}[5][]{%
 		\xdef\upm@tmp@subfigure@label{\alph{upm@subfigure@count}}%
-		\includegraphics[##2]{##3}%
-		\subcaption{##4}%
-		\label{fig:##5}%
-		\label{fig:#4:\upm@tmp@subfigure@label}%
+		\subcaptionbox{##4%
+			\label{fig:##5}%
+			\label{fig:#4:\upm@tmp@subfigure@label}%
+		}{\includegraphics[##2]{##3}}%
 		\addtocounter{upm@subfigure@count}{1}%
 	}
 	%options,filename,caption
 	\newcommand{\msubfigure}[3]{%
 		\xdef\upm@tmp@subfigure@label{\alph{upm@subfigure@count}}%
-		\includegraphics[##1]{##2}%
-        \subcaption{##3}%
-		\label{fig:#4:\upm@tmp@subfigure@label}%
+		\subcaptionbox{##3%
+			\label{fig:#4:\upm@tmp@subfigure@label}%
+		}{\includegraphics[##1]{##2}}%
 		\addtocounter{upm@subfigure@count}{1}%
 	}
 	\setcounter{upm@subfigure@count}{1}%
