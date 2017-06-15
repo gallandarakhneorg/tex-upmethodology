@@ -17,7 +17,7 @@
 % write to the Free Software Foundation, Inc., 59 Temple Place - Suite
 % 330, Boston, MA 02111-1307, USA.
 
-\global\edef\upm@package@fmt@ver{2017/03/10}
+\global\edef\upm@package@fmt@ver{2017/06/15}
 
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
 \ProvidesPackage{upmethodology-fmt}[\upm@package@fmt@ver]
@@ -561,6 +561,7 @@
 \gdef\upm@format@chaptertitle#1{\textcolor{chaptertitlecolor}{\Huge\scshape #1}}
 \gdef\upm@format@sectionnum#1#2{\textcolor{sectiontitlecolor}{#2}}
 \gdef\upm@format@sectiontitle#1#2{\textcolor{sectiontitlecolor}{#2}}
+\gdef\upm@format@sectionnum@postfix{/}
 
 % PART
 \ifupmbookformat
@@ -624,7 +625,7 @@
 % internal implementations for sections.
 \gdef\@sect#1#2#3#4#5#6[#7]#8{\upm@format@sect@old{#1}{#2}{#3}{#4}{#5}{#6}[#7]{\upm@format@sectiontitle{\theupm@format@section@sectionlevel}{#8}}}
 \gdef\@ssect#1#2#3#4#5{\upm@format@ssect@old{#1}{#2}{#3}{#4}{\upm@format@sectiontitle{\theupm@format@section@sectionlevel}{#5}}}
-\gdef\@seccntformat#1{\upm@format@sectionnum{\theupm@format@section@sectionlevel}{\csname the#1\endcsname/}\quad}
+\gdef\@seccntformat#1{\upm@format@sectionnum{\theupm@format@section@sectionlevel}{\csname the#1\endcsname\upm@format@sectionnum@postfix}\quad}
 
 %----------------------------------------
 % PAGE LAYOUT
