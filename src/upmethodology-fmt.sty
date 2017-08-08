@@ -953,7 +953,7 @@
 % DATE
 %----------------------------------------
 
-%Build a date this a supported format
+%Build a date that has the format supported by tex-upmethodology
 %\makedate{day}{month}{year}
 \let\makedate\upm@format@lang@makedate
 
@@ -1475,7 +1475,7 @@
 
 \gdef\thmtformatoptarg#1{\upm@column@char\ #1}%
 
-% Permits to define an part of the definition's name that is
+% Permits to define a part of the definition's name that is
 % rendered only in core part of the document, not in the
 % list of theorems
 \gdef\upm@definition@upmtheoremopt#1{#1}
