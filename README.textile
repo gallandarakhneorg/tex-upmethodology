@@ -26,6 +26,8 @@ h2. Authors
 
 "Nicolas GAUD":http://www.arakhne.org/homes/gaud.html <gaud@arakhne.org> (bibtex style)
 
+"Maxime PINARD":https://github.com/pinam45 <maxime.pin@live.fr> (documentation)
+
 h2. License
 
 GNU LESSER GENERAL PUBLIC LICENSE.
