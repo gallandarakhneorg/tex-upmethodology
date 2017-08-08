@@ -274,7 +274,7 @@ The \LaTeX\ class \texttt{upmethodology-document} provides the basic configurati
 
 \section{Class options}
 
-Table~\tabref{documentclassoptions} contains the options supported by \texttt{upmethodology-document}. Any option not explicitely supported by the class is directly pass to the underlying standard \LaTeX\ class (\texttt{book}, \texttt{report} or \texttt{article} according to the type of document, see~\ref{section:documentclass:doctype}).
+Table~\tabref{documentclassoptions} contains the options supported by \texttt{upmethodology-document}. Any option not explicitely supported by the class is directly passed to the underlying standard \LaTeX\ class (\texttt{book}, \texttt{report} or \texttt{article} according to the type of document, see~\ref{section:documentclass:doctype}).
 
 \begin{mtable}{\linewidth}{2}{|l|X|}{Options of \texttt{upmethodology-document} class}{documentclassoptions}
 \captionastitle
@@ -425,7 +425,7 @@ The package \texttt{upmethodology-fmt} provides some useful facilities to format
 
 The package \texttt{graphicx} is included, and the following configuration is applied:
 \begin{description}
-\item[Image extensions] By default, the supported image extensions ar, in the preference order: \texttt{pdf}, \texttt{png}, \texttt{jpg}, \texttt{jpeg}, \texttt{tiff}, \texttt{gif}. Note that, the \texttt{tiff} picture format is not always supported by the \TeX\ tools.
+\item[Image extensions] By default, the supported image extensions are, in the preference order: \texttt{pdf}, \texttt{png}, \texttt{jpg}, \texttt{jpeg}, \texttt{tiff}, \texttt{gif}. Note that, the \texttt{tiff} picture format is not always supported by the \TeX\ tools.
 
 To redefine these extensions, you must invoke:\\
 	\texttt{{\textbackslash}DeclareGraphicsExtensions\{extensions\}} \\
@@ -511,7 +511,7 @@ The references to the subfigures could be obtained in two way:\nopagebreak\begin
 
 \section{Figures with embedded \TeX\xspace macros}
 
-In several case it is useful to include \TeX\xspace macros inside a figure. It is possible to combine figures and \TeX\ macros. Several figure editors provide exporting features to obtain combined figures: \texttt{xfig}, \texttt{inkscape}, \texttt{GNU Plot}, etc. Basically, these tools create two files per source figure: \begin{itemize}
+In several cases it is useful to include \TeX\xspace macros inside a figure. It is possible to combine figures and \TeX\ macros. Several figure editors provide exporting features to obtain combined figures: \texttt{xfig}, \texttt{inkscape}, \texttt{GNU Plot}, etc. Basically, these tools create two files per source figure: \begin{itemize}
 \item the figure in PDF or Postscript format (filename extensions, \texttt{.pdf} or \texttt{.ps}); and
 \item a \TeX\ file that contains the macros to put over the figure, and that is including the generated figure. Its filename extension depends on the type of the figure: \texttt{.pdftex\_t} or \texttt{.pdf\_tex} for PDF, and \texttt{.pstex\_t} or \texttt{.ps\_tex} for Postscript.
 \end{itemize}
@@ -606,7 +606,7 @@ This tabular is an extension of the \texttt{tabularx} environment which provides
 
 
 \begin{upmcaution}
-	You must note put any text nor \TeX\ macro before the first use of \texttt{{\textbackslash}tabulartitle} or \texttt{{\textbackslash}tabularheader}. Otherwhise, you will obtain an \TeX\ error.
+	You must note put any text nor \TeX\ macro before the first use of \texttt{{\textbackslash}tabulartitle} or \texttt{{\textbackslash}tabularheader}. Otherwhise, you will obtain a \TeX\ error.
 \end{upmcaution}
 
 
@@ -616,7 +616,7 @@ The \texttt{mtabular} environment provides:
 	This macro allows you to define the title of the tabular. It uses the colors \texttt{backtableheader} and \texttt{fronttableheader} for the background and the foreground respectively. The title has a single line at the top, and a single line below;
 
 \item \texttt{{\textbackslash}tabulartitleinside\{title\}} \\
-	This macro allows you  to define the title of the tabular. It uses the colors \texttt{backtableheader} and \texttt{fronttableheader} for the background and the foreground respectively. The title has two lines at the top, and a single line below;
+	This macro allows you to define the title of the tabular. It uses the colors \texttt{backtableheader} and \texttt{fronttableheader} for the background and the foreground respectively. The title has two lines at the top, and a single line below;
 
 \item \texttt{{\textbackslash}tabularheader\{$header_1$\}...\{$header_n$\}} \\
 	This macro allows you to define the titles of the columns. It uses the colors \texttt{backtableheader} and \texttt{fronttableheader} for the background and the foreground respectively. Because the count of columns was given to the environment this function takes the same count of parameters as the count of columns. This macro adds a line after the header, \emph{BUT NOT BEFORE}.
@@ -696,13 +696,13 @@ Because the \texttt{mtable} environment registers a label with a string starting
 \end{itemize}
 
 The table~\tabref{example:mtable} page~\tabpageref{example:mtable} is an illustration of the following \LaTeX\ code: \\
-\texttt{{\textbackslash}begin\{mtable\}\{{\textbackslash}linewidth\}\{4\}\{lXrX\}\{Example of {\textbackslash}texttt{mtable}\}\{example:mtable\}} \\
-%\texttt{{\textbackslash}tabulartitle\{Example of {\textbackslash}texttt\{mtable\}\}} \\
-\texttt{{\textbackslash}captionastitle} \\
-\texttt{{\textbackslash}tabularheader\{Col1\}\{Col2\}\{Col3\}\{Col4\}} \\
-\texttt{a \& b \& c \& d {\textbackslash}{\textbackslash}} \\
-\texttt{{\textbackslash}hline} \\
-\texttt{e \& f \& g \& h {\textbackslash}{\textbackslash}} \\
+\texttt{{\textbackslash}begin\{mtable\}\{{\textbackslash}linewidth\}\{4\}\{lXrX\}\{Example of {\textbackslash}texttt{mtable}\}\{example:mtable\}} \\
+%\texttt{{\textbackslash}tabulartitle\{Example of {\textbackslash}texttt\{mtable\}\}} \\
+\texttt{{\textbackslash}captionastitle} \\
+\texttt{{\textbackslash}tabularheader\{Col1\}\{Col2\}\{Col3\}\{Col4\}} \\
+\texttt{a \& b \& c \& d {\textbackslash}{\textbackslash}} \\
+\texttt{{\textbackslash}hline} \\
+\texttt{e \& f \& g \& h {\textbackslash}{\textbackslash}} \\
 \texttt{{\textbackslash}end\{mtable\}}
 
 \begin{mtable}{\linewidth}{4}{lXrX}{Example of \texttt{mtable}}{example:mtable}
@@ -726,7 +726,7 @@ The package \texttt{upmethodology-fmt} provides a set of macros dedicated to enu
 Sometimes it is useful to start an enumeration list from a specific given number. This package provides several macros for saving and restoring the counter use by the enumeration lists.
 
 \begin{upmcaution}
-Only once counter could be saved at a given time.
+Only one counter could be saved at a given time.
 It means that you cannot save the counters for an enumeration and for an enclosing enumeration at the same time.
 \end{upmcaution}
 
@@ -734,10 +734,10 @@ Two general macros are defined for helping you to save a counter value into the 
 \begin{itemize}
 \item \texttt{{\textbackslash}savecounter\{name\}} \\
 	save the value of the counter identified by the given name in a global variable.
-	The name of the counter must be previously defined with one of thee standard \LaTeX\ or \TeX\ macros, e.g. \texttt{{\textbackslash}newcounter};
+	The name of the counter must be previously defined with one of the standard \LaTeX\ or \TeX\ macros, e.g. \texttt{{\textbackslash}newcounter};
 \item \texttt{{\textbackslash}restorecounter\{name\}} \\
 	put the previously saved value into the counter with the given name.
-	The name of the counter must be previously defined with one of thee standard \LaTeX\ or \TeX\ macros, e.g. \texttt{{\textbackslash}newcounter};
+	The name of the counter must be previously defined with one of the standard \LaTeX\ or \TeX\ macros, e.g. \texttt{{\textbackslash}newcounter};
 \end{itemize}
 
 The counter is extensively used in enumeration lists. The following macros will help you for managing the enumeration counter:
@@ -755,8 +755,8 @@ The counter is extensively used in enumeration lists. The following macros will 
 \paragraph{Example:} The following \LaTeX~code produces the result below:
 \begin{verbatim}
 This is a text: \begin{enumerate}
-        \item This is an item. 
-        \item This is another item. 
+        \item This is an item.
+        \item This is another item.
         \saveenumcounter
 \end{enumerate}
 This is a text in the between.
@@ -775,7 +775,7 @@ This is a second text in the between.
 
 \fbox{\parbox{\linewidth}{
 	This is a text: \begin{enumerate}
-		    \item This is an item. 
+		    \item This is an item.
 		    \item This is another item.
 		    \saveenumcounter
 	\end{enumerate}
@@ -1090,9 +1090,9 @@ The package \texttt{upmethodology-fmt} provides an environment that makes it pos
 
 \begin{umlinpar}{figure_and_tex}
 	This paragraph is an typical example of the usage of the environment \texttt{umlinpar}. To obtain it, the following \LaTeX\ code was typed: \\
-\texttt{{\textbackslash}begin\{umlinpar\}\{smalllogo\}} \\
+\texttt{{\textbackslash}begin\{umlinpar\}\{smalllogo\}} \\
 \texttt{This paragraph is an typical example of the usage of the environment {\textbackslash}texttt\{umlinpar\}.} \\
-\texttt{{\textbackslash}end\{umlinpar\}} \\
+\texttt{{\textbackslash}end\{umlinpar\}} \\
 \end{umlinpar}
 
 \section{Date formatting}
@@ -1130,18 +1130,18 @@ The package \texttt{upmethodology-fmt} provides a set of macros to format the te
 
 \begin{itemize}
 \item \texttt{{\textbackslash}textsup\{text\}} \\
-	put a text as exponent in text mode instead of the basic \LaTeX exponent in math mode. In opposite to the standard \LaTeX\ macro \texttt{{\textbackslash}textsuperscript}, this macro adds an extra space after the macro when needed. \\
+	put a text as exponent in text mode instead of the basic \LaTeX\ exponent in math mode. In opposite to the standard \LaTeX\ macro \texttt{{\textbackslash}textsuperscript}, this macro adds an extra space after the macro when needed. \\
 	Example: \texttt{{\textbackslash}textsup\{this is an exponent\}}\textsup{this is an exponent}this is the following text;
 \item \texttt{{\textbackslash}textup\{text\}} \\
 	same as \texttt{{\textbackslash}textsup}.
 \item \texttt{{\textbackslash}textsub\{text\}} \\
-	put a text as indice in text mode instead of the basic \LaTeX indice in math mode. In opposite to \texttt{{\textbackslash}textsubscript}, this macro adds an extra space after the macro when needed. In opposite to \texttt{{\textbackslash}textdown}, the size of the text is not changed in the text down. \\
+	put a text as indice in text mode instead of the basic \LaTeX\ indice in math mode. In opposite to \texttt{{\textbackslash}textsubscript}, this macro adds an extra space after the macro when needed. In opposite to \texttt{{\textbackslash}textdown}, the size of the text is not changed in the text down. \\
 	Example: \texttt{{\textbackslash}textsub\{this is an indice\}}\textsub{this is an indice}this is the following text;
 \item \texttt{{\textbackslash}textdown\{text\}} \\
-	put a text as indice in text mode instead of the basic \LaTeX indice in math mode. In opposite to \texttt{{\textbackslash}textsubscript}, this macro adds an extra space after the macro when needed. In opposite to \texttt{{\textbackslash}textsub}, the size of the text is changed in the text down. \\
+	put a text as indice in text mode instead of the basic \LaTeX\ indice in math mode. In opposite to \texttt{{\textbackslash}textsubscript}, this macro adds an extra space after the macro when needed. In opposite to \texttt{{\textbackslash}textsub}, the size of the text is changed in the text down. \\
 	Example: \texttt{{\textbackslash}textdown\{this is an indice\}}\textdown{this is an indice}this is the following text;
 \item \texttt{{\textbackslash}textsubscript\{text\}} \\
-	put a text as indice in text mode instead of the basic \LaTeX indice in math mode. As for the standard \LaTeX\ macro \texttt{{\textbackslash}textsuperscript}, this macro does not add an extra space after the macro. \\
+	put a text as indice in text mode instead of the basic \LaTeX\ indice in math mode. As for the standard \LaTeX\ macro \texttt{{\textbackslash}textsuperscript}, this macro does not add an extra space after the macro. \\
 	Example: \texttt{{\textbackslash}textsubscript\{this is an indice\}}\textsubscript{this is an indice}this is the following text;
 \item \texttt{{\textbackslash}Emph\{text\}} \\
 	put a \emph{very important} text. This macro is similar to the standard \LaTeX\ macro \texttt{{\textbackslash}emph}. The difference is: \texttt{{\textbackslash}emph} is for ``important things''; and \texttt{{\textbackslash}Emph} is for ``very important things''.\\
@@ -1476,7 +1476,7 @@ The package \texttt{upmethodology-fmt} provides several macros that permit to cr
 
 If you want to add a document part that has no part number but appearing inside the table of content, the classical \LaTeX\ macros \texttt{{\textbackslash}part} and \texttt{{\textbackslash}part*} are inefficient. Indeed, \texttt{{\textbackslash}part} is adding a numbered part inside the table of content, and \texttt{{\textbackslash}part*} is adding an unnumbered part but not inside the table of content.
 
-To add a unnumbered part inside the table of content, you could use one of the macros: \\
+To add an unnumbered part inside the table of content, you could use one of the macros: \\
 \texttt{{\textbackslash}parttoc[toctitle]\{title\}} \\
 \texttt{{\textbackslash}parttoc*[toctitle]\{title\}}
 
@@ -1486,7 +1486,7 @@ The macros \texttt{{\textbackslash}parttoc} and \texttt{{\textbackslash}parttoc*
 
 If you want to add a document chapter that has no chapter number but appearing inside the table of content, the classical \LaTeX\ macros \texttt{{\textbackslash}chapter} and \texttt{{\textbackslash}chapter*} are inefficient. Indeed, \texttt{{\textbackslash}chapter} is adding a numbered chapter inside the table of content, and \texttt{{\textbackslash}chapter*} is adding an unnumbered chapter but not inside the table of content.
 
-To add a unnumbered chapter inside the table of content, you could use one of the macros: \\
+To add an unnumbered chapter inside the table of content, you could use one of the macros: \\
 \texttt{{\textbackslash}chaptertoc[toctitle]\{title\}} \\
 \texttt{{\textbackslash}chaptertoc*[toctitle]\{title\}}
 
@@ -1496,7 +1496,7 @@ The macros \texttt{{\textbackslash}chaptertoc} and \texttt{{\textbackslash}chapt
 
 If you want to add a document section that has no a section number but appearing inside the table of content, the classical \LaTeX\ macros \texttt{{\textbackslash}section} and \texttt{{\textbackslash}section*} are inefficient. Indeed, \texttt{{\textbackslash}section} add a numbered section inside the table of content, and \texttt{{\textbackslash}section*} adds an unnumbered section but not inside the table of content.
 
-To add a unnumbered section inside the table of content, you could use one of the macros: \\
+To add an unnumbered section inside the table of content, you could use one of the macros: \\
 \texttt{{\textbackslash}sectiontoc[toctitle]\{title\}} \\
 \texttt{{\textbackslash}sectiontoc*[toctitle]\{title\}}
 
@@ -1506,7 +1506,7 @@ The macros \texttt{{\textbackslash}sectiontoc} and \texttt{{\textbackslash}secti
 
 If you want to add a document subsection that has no subsection number but appearing inside the table of content, the classical \LaTeX\ macros \texttt{{\textbackslash}subsection} and \texttt{{\textbackslash}subsection*} are inefficient. Indeed, \texttt{{\textbackslash}subsection} is adding a numbered subsection inside the table of content, and \texttt{{\textbackslash}subsection*} is adding an unnumbered subsection but not inside the table of content.
 
-To add a unnumbered subsection inside the table of content, you could use one of the macros: \\
+To add an unnumbered subsection inside the table of content, you could use one of the macros: \\
 \texttt{{\textbackslash}subsectiontoc[toctitle]\{title\}} \\
 \texttt{{\textbackslash}subsectiontoc*[toctitle]\{title\}}
 
@@ -1516,7 +1516,7 @@ The macros \texttt{{\textbackslash}subsectiontoc} and \texttt{{\textbackslash}su
 
 If you want to add a document subsubsection that has no subsubsection number but appearing inside the table of content, the classical \LaTeX\ macros \texttt{{\textbackslash}subsubsection} and \texttt{{\textbackslash}subsubsection*} are inefficient. Indeed, \texttt{{\textbackslash}subsubsection} is adding a numbered subsubsection inside the table of content, and \texttt{{\textbackslash}subsubsection*} is adding an unnumbered subsubsection but not inside the table of content.
 
-To add a unnumbered subsubsection inside the table of content, you could use one of the macros: \\
+To add an unnumbered subsubsection inside the table of content, you could use one of the macros: \\
 \texttt{{\textbackslash}subsubsectiontoc[toctitle]\{title\}} \\
 \texttt{{\textbackslash}subsubsectiontoc*[toctitle]\{title\}}
 
@@ -1549,7 +1549,7 @@ The macro create a section with the given label ``\texttt{title}'' in the core p
 	\texttt{Version: \VERdoc}
 \end{center}
 
-The package \texttt{upmethodology-document} provides base function to manage document information (project, subproject, authors...).
+The package \texttt{upmethodology-document} provides base functions to manage document information (project, subproject, authors...).
 
 \section{Document Information and Declaration}
 
@@ -1645,7 +1645,7 @@ A validator is someone who participates to the validation of the document. You c
 
 The list of the validators is accessible by two means:
 \begin{itemize}
-\item \texttt{{\textbackslash}thevalidatorlist} is a coma-separated list of the validator' names;
+\item \texttt{{\textbackslash}thevalidatorlist} is a coma-separated list of the validator's names;
 \item \texttt{{\textbackslash}upmdocumentvalidators} produces an array of all the validators (see below for an example).
 \end{itemize}
 
@@ -1659,7 +1659,7 @@ An informed people is someone who receives the document to be informed about its
 
 The list of the informed people is accessible by two means:
 \begin{itemize}
-\item \texttt{{\textbackslash}theinformedlist} is a coma-separated list of the informed people' names;
+\item \texttt{{\textbackslash}theinformedlist} is a coma-separated list of the informed people's names;
 \item \texttt{{\textbackslash}upmdocumentinformedpeople} produces an array of all the informed people (see below for an example).
 \end{itemize}
 
@@ -1671,7 +1671,7 @@ Package \texttt{upmethodology-document} provides several macros to define the co
 
 \subsection{Setting Information}
 
-The Copyright holder(s) are person(s) or institution(s), that own the copyright on the document. The following macro allows you to set the identity of the copyright holder in all  parts of the documents: \\
+The Copyright holder(s) are person(s) or institution(s), that own the copyright on the document. The following macro allows you to set the identity of the copyright holder in all parts of the documents: \\
 \texttt{{\textbackslash}setcopyrighter\{name\}}\\
 
 Publisher is the people or the institution, or both, which is publishing the document. Basically it is the same the copyrighter (see above): \\
@@ -1740,7 +1740,7 @@ The following macros defines some localized strings used by \texttt{upmethodolog
 	\texttt{Version: \VERfp}
 \end{center}
 
-The \texttt{upmethodology-frontpage} package provides an front page for the UP documents. This package does not provides any public function. It is based on all the previous packages.
+The \texttt{upmethodology-frontpage} package provides a front page for the UP documents. This package does not provides any public function. It is based on all the previous packages.
 
 \section{Display the front page}
 
@@ -1800,7 +1800,7 @@ The following macros defines some localized strings used by \texttt{upmethodolog
 	\texttt{Version: \VERbp}
 \end{center}
 
-The package \texttt{upmethodology-backpage} provides an back page for the UP documents. This package does not provides any public function. It is based on all the previous packages.
+The package \texttt{upmethodology-backpage} provides a back page for the UP documents. This package does not provides any public function. It is based on all the previous packages.
 
 \section{Display the back page}
 
@@ -1819,7 +1819,7 @@ where \texttt{layout\_name} must be one of:
 \section{Small text before the back page}
 
 It is possible to insert a text at the bottom of the page just before the back page (usually the inner page of the cover for a two sided document).
-You must set tha macro \texttt{backcovermessage} with the \texttt{{\textbackslash}Set} macro: \\
+You must set the macro \texttt{backcovermessage} with the \texttt{{\textbackslash}Set} macro: \\
 \texttt{{\textbackslash}Set\{backcovermessage\}\{text\}}\\
 
 \section{Define a Back Page in Extensions}
@@ -1862,7 +1862,7 @@ This macro also declares the \texttt{trademarks} value which contains the tradem
 Additional macros are provided to redefine the \texttt{upmethodology-document} constants:\\
 \texttt{{\textbackslash}Set{[}lang{]}\{variable\_name\}\{value\}}\\
 
-The \texttt{variable\_name} is the name of the value to override. It must be taken in one of the names listed in table~\tabref{documentextension:names:set}. The \texttt{lang} parameter is a language identifier. It is used to restrict the definition to a specific language. If not given, the default language is used insteed. The \texttt{image\_name} and \texttt{image\_scale} are the name of the image file and the scaling factor respectively.
+The \texttt{variable\_name} is the name of the value to override. It must be taken in one of the names listed in table~\tabref{documentextension:names:set}. The \texttt{lang} parameter is a language identifier. It is used to restrict the definition to a specific language. If not given, the default language is used instead. The \texttt{image\_name} and \texttt{image\_scale} are the name of the image file and the scaling factor respectively.
 
 \begin{mtable}{\linewidth}{2}{lX}{List of overiddable value names}{documentextension:names:set}
 	\hline
@@ -1943,11 +1943,11 @@ Inside one of the task's definition environment above, you could use one of the 
 \item \texttt{{\textbackslash}taskend\{date\}} \\
 	to set the finished date of the task (real or predicted);
 \item \texttt{{\textbackslash}taskmanager\{name\}} \\
-	adds a task's manager into the list of the managers;
+	to add a task's manager into the list of the managers;
 \item \texttt{{\textbackslash}taskmember\{name\}} \\
-	adds a task's member into the list of the members;
+	to add a task's member into the list of the members;
 \item \texttt{{\textbackslash}taskmilestone\{date\}\{comment\}} \\
-	add a milestone into the task for the given date and described by the given comment.
+	to add a milestone into the task for the given date and described by the given comment.
 \end{itemize}
 
 \section{Task Reference}

@@ -131,7 +131,7 @@
 
 
 %----------------------------------------
-% Define the command to put the title with a classic layout
+% Define the command to put the title with a modern layout
 %----------------------------------------
 \newcommand{\upm@front@layout@modern}{%
     \message{************ USE MODERN FRONT COVER}
@@ -199,7 +199,7 @@
 \newcommand{\setfrontcover}[1]{%
 	\upm@front@setfrontlayout{#1}{\errmessage{invalid front layout theme: #1}}%
 }
-\newcommand{\setfrontlayout}[1]{\errmessage{"\string\setfrontlayout" is deprecated. Use "\string\setfrontcover" insteed}}
+\newcommand{\setfrontlayout}[1]{\errmessage{"\string\setfrontlayout" is deprecated. Use "\string\setfrontcover" instead}}
 
 \setfrontcover{classic}
 
