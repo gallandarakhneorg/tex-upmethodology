@@ -13,8 +13,8 @@ h2. Installation
 # operating systems.
 # Update the LaTeX databases from the command line:
 
- $> mktexlsr
- $> update-updmap --quiet
+@$> mktexlsr@
+@$> update-updmap --quiet@
 
 h2. Authors
 
