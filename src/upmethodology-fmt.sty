@@ -17,7 +17,7 @@
 % write to the Free Software Foundation, Inc., 59 Temple Place - Suite
 % 330, Boston, MA 02111-1307, USA.
 
-\global\edef\upm@package@fmt@ver{2017/08/08}
+\global\edef\upm@package@fmt@ver{2017/10/13}
 
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
 \ProvidesPackage{upmethodology-fmt}[\upm@package@fmt@ver]
@@ -1004,6 +1004,14 @@
 		{\upm@format@firstname@format{#2}#4\upm@format@lastname@format{#3}}%
 	\else%
 		{\upm@format@firstname@format{#2}#4\upm@format@von@format{#1}#4\upm@format@lastname@format{#3}}%
+	\fi%
+	\xspace%
+}
+\newcommand{\upmmakenamestar}[4][\relax]{%
+	\ifx#1\relax%
+		{\upm@format@lastname@format{#3}#4\upm@format@firstname@format{#2}}%
+	\else%
+		{\upm@format@lastname@format{#3}#4\upm@format@von@format{#1}#4\upm@format@firstname@format{#2}}%
 	\fi%
 	\xspace%
 }
