@@ -17,7 +17,7 @@
 % write to the Free Software Foundation, Inc., 59 Temple Place - Suite
 % 330, Boston, MA 02111-1307, USA.
 
-\global\edef\upm@package@fmt@ver{2017/12/10}
+\global\edef\upm@package@fmt@ver{2019/08/04}
 
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
 \ProvidesPackage{upmethodology-fmt}[\upm@package@fmt@ver]
@@ -160,6 +160,20 @@
   \DeclareGraphicsExtensions{.eps,.png,.jpg,.jpeg,.gif}
 \fi
 \graphicspath{{./}}
+
+%-----------------------------------------
+% LOCAL DEFINITION OF TH GRAPHICS PATH
+%-----------------------------------------
+
+\newenvironment{graphicspathcontext}[1]{%
+	\bgroup%
+	\let\upm@tmp@graphicspathcontext@ginputpath\Ginput@path%
+	\def\old{\upm@tmp@graphicspathcontext@ginputpath}%
+	\protected@edef\upm@tmp@graphicspathcontext@tmp{\protect\graphicspath{#1}}%
+	\upm@tmp@graphicspathcontext@tmp%
+}{%
+	\egroup%
+}
 
 %----------------------------------------
 % FIGURES

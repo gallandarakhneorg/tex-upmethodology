@@ -2,12 +2,13 @@
 
 \setfrontcover{classic}
 
-\declaredocument{\LaTeX\ Packages for Unified Process Methodology}{Official Documentation}{UPM-2017-02}
+\declaredocument{\LaTeX\ Packages for Unified Process Methodology}{Official Documentation}{UPM-2019-01}
 
 \updateversion{23.0}{\makedate{17}{02}{2017}}{Replace the package \texttt{subfigure} by \texttt{subcaption}.}{\upmpublic}
 \incsubversion{\makedate{10}{03}{2017}}{Fixing subfigure invalid alignement.}{\upmpublic}
 \incsubversion{\makedate{08}{08}{2017}}{Fixing spelling errors and typos.}{\upmpublic}
 \incsubversion{\makedate{28}{11}{2017}}{Add 'standardlists' option.}{\upmpublic}
+\incsubversion{\makedate{04}{08}{2019}}{Add 'graphicspathcontext' option.}{\upmpublic}
 
 \addauthorvalidator*[galland@arakhne.org]{St{\'e}phane}{Galland}{Original Author}
 \addauthor*{Frans}{van Dunn\'e}{Reviewer}
@@ -422,6 +423,26 @@ To redefine these extensions, you must invoke:\\
 	where \texttt{path1}, \texttt{path2}, \texttt{path2}, etc. must be replaced by the names of the directories in which the images are located. The paths in the list are separated by comas. \emph{Do not forget to write a slash or a backslash character (depending on the path naming conventions for your operating system) at the end of each path.} \\
 	Example: \texttt{{\textbackslash}graphicspath\{\{./imgs/\},\{./imgs/auto/\}\}} \\
 \end{description}
+
+\section{Contextual Search Path for \texttt{graphicx}}
+
+As described into the previous section, the \texttt{graphicx} package is able to search for files into a set of defined paths.
+
+In order to define a search path that is valid for a part of the document, the \texttt{graphicspathcontext} environment is defined. This environment redefines the \texttt{graphicx} path with the environment's parameter. The original value of the \texttt{graphicx} path is restored when existing of the environment.
+
+The defined environment is: \\
+\texttt{{\textbackslash}begin\{graphicspathcontext\}\{path\}} \\
+\texttt{...}\\
+\texttt{{\textbackslash}end\{graphicspathcontext\}} \\
+
+
+The parameter \texttt{path} must follow the syntactic definition of the \texttt{graphicx} path. If you want to reuse the current value of the \texttt{graphicx} path, you could obtain it by using the \texttt{{\textbackslash}old} macro, such as: \\
+\texttt{{\textbackslash}begin\{graphicspathcontext\}\{{mypath},{\textbackslash}old\}} \\
+\texttt{...}\\
+\texttt{{\textbackslash}end\{graphicspathcontext\}} \\
+
+\emph{Note that \texttt{{\textbackslash}old} must not be inside curly braces.}
+
 
 \section{Figures}
 
