@@ -17,7 +17,7 @@
 % write to the Free Software Foundation, Inc., 59 Temple Place - Suite
 % 330, Boston, MA 02111-1307, USA.
 
-\global\edef\upm@package@docclazz@ver{2014/09/11}
+\global\edef\upm@package@docclazz@ver{2019/09/17}
 
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
 \ProvidesClass{upmethodology-document}[\upm@package@docclazz@ver]
@@ -34,6 +34,13 @@
 \upm@package@docclazz@addfrontcovertrue
 \newif\ifupm@package@docclazz@addbackcover
 \upm@package@docclazz@addbackcovertrue
+
+\newif\ifupm@package@docclazz@taskpackage
+\upm@package@docclazz@taskpackagefalse
+\newif\ifupm@package@docclazz@specpackage
+\upm@package@docclazz@specpackagefalse
+\newif\ifupm@package@docclazz@codepackage
+\upm@package@docclazz@codepackagefalse
 
 \gdef\upm@package@docclazz@optionstopass{a4paper,11pt}
 
@@ -91,6 +98,15 @@
 \DeclareOption{backcover}{%
 	\global\upm@package@docclazz@addbackcovertrue%
 }
+\DeclareOption{taskpackage}{%
+	\global\upm@package@docclazz@taskpackagetrue%
+}
+\DeclareOption{specpackage}{%
+	\global\upm@package@docclazz@specpackagetrue%
+}
+\DeclareOption{codepackage}{%
+	\global\upm@package@docclazz@codepackagetrue%
+}
 \DeclareOption{book}{%
 	\global\upmbookformattrue
 	\global\upmreportformatfalse
@@ -139,9 +155,15 @@
 \RequirePackage{upmethodology-extension}
 \RequirePackage{upmethodology-frontpage}
 \RequirePackage{upmethodology-backpage}
-\RequirePackage{upmethodology-task}
-\RequirePackage{upmethodology-code}
-\RequirePackage{upmethodology-spec}
+\ifupm@package@docclazz@taskpackage
+	\RequirePackage{upmethodology-task}
+\fi
+\ifupm@package@docclazz@codepackage
+	\RequirePackage{upmethodology-code}
+\fi
+\ifupm@package@docclazz@specpackage
+	\RequirePackage{upmethodology-spec}
+\fi
 
 \RequirePackage{url}
 \ifpdf

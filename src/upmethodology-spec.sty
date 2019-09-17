@@ -23,7 +23,7 @@
 %   2007-03-19   Add localization.
 %
 
-\global\edef\upm@package@spec@ver{2009/10/30}
+\global\edef\upm@package@spec@ver{2019/09/17}
 
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
 \ProvidesPackage{upmethodology-spec}[\upm@package@spec@ver]
@@ -133,7 +133,7 @@
 	\upm@spec@func@modifiers@scan{#1}%
 }
 \newcommand{\upm@spec@func@modifiers@scan}[1]{%
-	\upm@ifnotempty{#1}{%
+	\Ifnotempty{#1}{%
 		\edef\upm@reserved@a{\upm@spec@head #1\@empty\@empty}%
 		\edef\upm@reserved@b{\upm@spec@tail #1\@empty\@empty}%
 		\ifthenelse{\equal{\upm@reserved@a}{+}}{%
@@ -187,7 +187,7 @@
 %-----
 %\upm@spec@param@modifiers{modifiers}
 \newcommand{\upm@spec@param@modifiers}[1]{%
-	\upm@ifnotempty{#1}{%
+	\Ifnotempty{#1}{%
 		\ifthenelse{\equal{#1}{out}}{%
 			%out
 			\upm@spec@lang@modifier@out%
@@ -205,7 +205,7 @@
 %-----
 \def\upm@spec@trim#1{#1}
 \newcommand{\upm@spec@splitparams}[1]{%
-	\upm@ifnotempty{#1}{%
+	\Ifnotempty{#1}{%
 		\upm@spec@firstparamtrue
 		\@for\reserved@a:=#1\do{%
 			\ifupm@spec@firstparam\upm@spec@firstparamfalse\else, \fi%
@@ -247,7 +247,7 @@
 		\addtocounter{upm@detailspec@function@counter}{1}%
 		\protected@xdef\upm@spec@reserved@a{\protect\csname upm@detailspec@return@ptr@\theupm@detailspec@function@counter\endcsname}%
 		\gdef\upm@spec@reserved@b{}
-		\upm@ifnotempty{##2}{\gdef\upm@spec@reserved@b{\string:\ }}
+		\Ifnotempty{##2}{\gdef\upm@spec@reserved@b{\string:\ }}
 
 		\gdef\upm@spec@reserved@c{}%
 		\upm@spec@func@modifiers{##1}%
@@ -271,17 +271,17 @@
 				\gdef\upm@spec@reserved@e{\upm@spec@lang@modifier@const}%
 			\fi
 			\ifupm@spec@modifier@has@final%
-				\upm@ifnotempty{\upm@spec@reserved@e}{%
+				\Ifnotempty{\upm@spec@reserved@e}{%
 				\xdef\upm@spec@reserved@e{\upm@spec@reserved@e,}}%
 				\protected@xdef\upm@spec@reserved@e{\upm@spec@reserved@e\protect\upm@spec@lang@modifier@final}%
 			\fi
 			\ifupm@spec@modifier@has@abstract%
-				\upm@ifnotempty{\upm@spec@reserved@e}{%
+				\Ifnotempty{\upm@spec@reserved@e}{%
 				\xdef\upm@spec@reserved@e{\upm@spec@reserved@e,}}%
 				\protected@xdef\upm@spec@reserved@e{\upm@spec@reserved@e\protect\upm@spec@lang@modifier@abstract}%
 			\fi
 			\ifupm@spec@modifier@has@root%
-				\upm@ifnotempty{\upm@spec@reserved@e}{%
+				\Ifnotempty{\upm@spec@reserved@e}{%
 				\xdef\upm@spec@reserved@e{\upm@spec@reserved@e,}}%
 				\protected@xdef\upm@spec@reserved@e{\upm@spec@reserved@e\protect\upm@spec@lang@modifier@root}%
 			\fi
@@ -343,13 +343,13 @@
 
 	\ifthenelse{\equal{\upm@spec@global@return}{\@empty}}{%
 		\gdef\upm@detailspec@return@section{}
-		\upm@ifnotempty{\upm@spec@local@return}{
+		\Ifnotempty{\upm@spec@local@return}{
 			\gdef\upm@detailspec@separator{ & & & \\}
 			\protected@xdef\upm@detailspec@return@section{\upm@spec@local@return}%
 			\upm@spec@showreturnstrue%
 		}%
 	}{%
-		\upm@ifnotempty{\upm@spec@local@return}{%
+		\Ifnotempty{\upm@spec@local@return}{%
 		\gdef\upm@detailspec@separator{ & & & \\}
 		\gdef\upm@spec@reserved@a{ \upm@spec@lang@except@for:\protect\upm@spec@local@return}}%
 		\protected@xdef\upm@detailspec@return@section{%
@@ -358,9 +358,8 @@
 		\upm@spec@showreturnstrue%
 	}
 
-	\ifthenelse{\equal{\upm@spec@detailspec@title}{\@empty}}{
-		\gdef\upm@spec@reserved@c{}
-	}{
+	\gdef\upm@spec@reserved@c{}
+	\Ifnotempty{\upm@spec@detailspec@title}{
 		\gdef\upm@spec@reserved@c{\hline%
 			\multicolumn{4}{>{\columncolor{backtableheader}}l}{\color{fronttableheader}{\large\textsc{\upm@spec@detailspec@title}}} \\%
 		}
@@ -370,11 +369,11 @@
 
 	\upm@spec@showparamsfalse%
 
-	\upm@ifnotempty{\upm@spec@parameters}{%
+	\Ifnotempty{\upm@spec@parameters}{%
 		\ifupm@spec@showdescription%
 		\gdef\upm@detailspec@separator{ & & & \\}%
 		\fi%
-		\upm@ifnotempty{\upm@spec@functions}{%
+		\Ifnotempty{\upm@spec@functions}{%
 		\gdef\upm@detailspec@separator{ & & & \\}%
 		}%
 		\upm@spec@showparamstrue%
@@ -429,7 +428,7 @@
 }
 
 %-----
-%\begin{detailspec}}[width]{title}...\end{detailspec}....
+%\begin{detailspec}[width]{title}...\end{detailspec}....
 \newenvironment{detailspec}[2][\linewidth]
 {%
 	\upm@spec@showdescriptiontrue%
@@ -442,7 +441,7 @@
 }
 
 %-----
-%\begin{detailspec}}[width]{title}...\end{detailspec}....
+%\begin{detailspec*}[width]{title}...\end{detailspec*}....
 \newenvironment{detailspec*}[2][\linewidth]
 {%
 	\upm@spec@showdescriptionfalse%

@@ -1,4 +1,4 @@
-\documentclass[book]{upmethodology-document}
+\documentclass[book,taskpackage,specpackage,codepackage]{upmethodology-document}
 
 \setfrontcover{classic}
 
@@ -9,6 +9,8 @@
 \incsubversion{\makedate{08}{08}{2017}}{Fixing spelling errors and typos.}{\upmpublic}
 \incsubversion{\makedate{28}{11}{2017}}{Add 'standardlists' option.}{\upmpublic}
 \incsubversion{\makedate{04}{08}{2019}}{Add 'graphicspathcontext' option.}{\upmpublic}
+\incversion{\makedate{17}{09}{2019}}{Add class options to include optional packages.}{\upmpublic}
+%\incversion{\makedate{17}{09}{2019}}{Add the documentation for the \texttt{upmethodology-spec} package.}{\upmpublic}
 
 \addauthorvalidator*[galland@arakhne.org]{St{\'e}phane}{Galland}{Original Author}
 \addauthor*{Frans}{van Dunn\'e}{Reviewer}
@@ -27,6 +29,7 @@
 \let\VERtask\upm@package@task@ver
 \let\VERdocclazz\upm@package@docclazz@ver
 \let\VERcode\upm@package@code@ver
+\let\VERspec\upm@package@spec@ver
 \makeatother
 
 \setpublisher{Arakhn\^e.org Group}
@@ -66,9 +69,10 @@ Packages are:
 \item \texttt{upmethodology-document.sty}: provides functions to manage the project, the subproject and the status of the document;
 \item \texttt{upmethodology-frontpage.sty}: formats and provides a front page for the document;
 \item \texttt{upmethodology-backpage.sty}: formats and provides a back page for the document;
-\item \texttt{upmethodology-task.sty}: is the \LaTeXe\xspace package that provides macros to manage project's tasks.
+\item \texttt{upmethodology-task.sty}: is the \emph{optional} \LaTeXe\xspace package that provides macros to manage project's tasks.
+\item \texttt{upmethodology-spec.sty}: is the \emph{optional} \LaTeXe\xspace package that provides macros to build a specification description.
 \item \texttt{upmethodology-document.cls}: is the \LaTeXe\xspace class that provides the whole document specification. It is based on \texttt{book} and on the previous packages;
-\item \texttt{upmethodology-code.sty}: provides macros for source code formatting;
+\item \texttt{upmethodology-code.sty}: provides \emph{optional} macros for source code formatting;
 \item \texttt{upmethodology-extension.sty}: provides macros for extension mechanism.
 \end{itemize}
 
@@ -136,13 +140,13 @@ This section contains the list of all the package dependencies for the \texttt{u
 \item \texttt{a4wide}
 \item \texttt{hyperref}
 \item \texttt{upmethodology-backpage}
-\item \texttt{upmethodology-code}
+\item \texttt{upmethodology-code} (optional)
 \item \texttt{upmethodology-document}
 \item \texttt{upmethodology-extension}
 \item \texttt{upmethodology-frontpage}
 \item \texttt{upmethodology-p-common}
-\item \texttt{upmethodology-spec}
-\item \texttt{upmethodology-task}
+\item \texttt{upmethodology-spec} (optionnal)
+\item \texttt{upmethodology-task} (optionnal)
 \item \texttt{url}
 \end{itemize}
 
@@ -318,6 +322,18 @@ nobackcover & do not put a cover page at the end of the document. \\
 \hline\hline
 
 standardlists & The style does not override the standard list, description and enumeration definitions. \\
+
+\hline\hline
+
+codepackage & Include the \texttt{upmethodology-code} package. \\
+
+\hline
+
+specpackage & Include the \texttt{upmethodology-spec} package. \\
+
+\hline
+
+taskpackage & Include the \texttt{upmethodology-task} package. \\
 
 \hline
 \end{mtable}
@@ -2071,6 +2087,86 @@ The provided macros are listed in the following table: \\
 	{\textbackslash}jop\{operator\} & \upmcodelang{uml}\jop{operator} & \upmcodelang{java}\jop{operator} & \upmcodelang{cpp}\jop{operator} \\
 	\hline
 \end{tabularx}
+
+%###########################################################
+
+%\chapter{Package upmethodology-spec}
+
+%\begin{center}
+%	\texttt{Version: \VERspec}
+%\end{center}
+
+%The \LaTeX\ package \texttt{upmethodology-spec} provides a set of macros for building a specification document.
+
+%\section{Specification Definition}
+
+%The definition of a specification could be made only inside one of the following environments: \\
+%\texttt{{\textbackslash}begin\{detailspec\}[width]\{title\}...{\textbackslash}end\{detailspec\}} \\
+%\texttt{{\textbackslash}begin\{detailspec*\}[width]\{title\}...{\textbackslash}end\{detailspec*\}} \\
+%where \texttt{width} is the width of the specification box on the page, and \texttt{title} is the title of the specification box.
+
+%The environment \texttt{specdetail} displays the detailed description and uses a more complex rendering. On the other hand, \texttt{specdetail*} never displays the description and uses a simpler rendering.
+
+%\section{Components of a Specification}
+
+%A specification has several components that may be defined by the macros in the following table:
+%\begin{tabularx}{\linewidth}{|>{\ttfamily}l|X|}
+%	\hline
+%	{\normalfont Macro} & Description \\
+%	\hline\hline
+%	{\textbackslash}specfunc[modifiers]\{return type\}\{name\}\{parameters\} & \\
+%	\hline
+%	{\textbackslash}speccons[modifiers]\{name\}\{parameters\} & \\
+%	\hline
+%	{\textbackslash}specget[modifiers]\{return type\}\{name\} & \\
+%	\hline
+%	{\textbackslash}specset[modifiers]\{return type\}\{name\} & \\
+%	\hline\hline
+%	{\textbackslash}specparam[in|inout|out]\{name\}\{description\} & \\
+%	\hline\hline
+%	{\textbackslash}specreturn[modifiers]\{description\} & \\
+%	\hline
+%	{\textbackslash}specglobalreturn[modifiers]\{description\} & \\
+%	\hline\hline
+%	{\textbackslash}specstarthline & \\
+%	\hline
+%	{\textbackslash}specendhline & \\
+%	\hline
+%\end{tabularx}
+
+%\section{Examples of Specifications}
+
+%\subsection{Description of the specification}
+
+%Let consider a specification with a description:
+%\begin{verbatim}
+%\begin{detailspec}{Example 1}
+%	This is a description.
+%\end{detailspec}
+%\end{verbatim}
+
+%The previous \LaTeX\ code generates the following figure:
+%\begin{detailspec}{Example 1}
+%	This is a description.
+%\end{detailspec}
+
+%\subsection{Returned Values}
+
+%Let add into the previous example the specification of returned values:
+%\begin{verbatim}
+%\begin{detailspec}{Example 2}
+%	This is a description.
+%	\specreturn{description of a first returned value}
+%	\specreturn{description of a second returned value}
+%\end{detailspec}
+%\end{verbatim}
+
+%The previous \LaTeX\ code generates the following figure:
+%\begin{detailspec}{Example 2}
+%%	This is a description.
+%%	\specreturn{description of a first returned value}
+%%	\specreturn{description of a second returned value}
+%\end{detailspec}
 
 %###########################################################
 
