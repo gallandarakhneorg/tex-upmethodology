@@ -1,6 +1,6 @@
 % Layout and Pagraph Format for Unified Process Methodology
 %
-% Copyright (c) 2006-2009, 2012-2015 Stephane GALLAND <galland@arakhne.org>
+% Copyright (c) 2006-2009, 2012-2019 Stephane GALLAND <galland@arakhne.org>
 % 
 % This program is free library; you can redistribute it and/or modify
 % it under the terms of the GNU Lesser General Public License as
@@ -17,7 +17,7 @@
 % write to the Free Software Foundation, Inc., 59 Temple Place - Suite
 % 330, Boston, MA 02111-1307, USA.
 
-\global\edef\upm@package@fmt@ver{2019/08/04}
+\global\edef\upm@package@fmt@ver{2019/09/28}
 
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
 \ProvidesPackage{upmethodology-fmt}[\upm@package@fmt@ver]
@@ -1370,34 +1370,54 @@
 
 \newsavebox{\upm@highlight@box@save}
 
-\newenvironment{upm@highligh@box}[2]{%
+% Parameters are:
+% #1: the width of the box
+% #2: the name of the picture
+% #3: the name of the border color
+% #4: the name of the background color
+% #5: the name of the text color
+\newenvironment{upm@highligh@box}[5]{%
 	\par
 	\vspace{.5cm}
 	\begin{tabular}{|p{#1}|}
-	\hline
-	\begin{window}[0,l,{\mbox{\includegraphics[width=1cm]{#2}}},{}]
-}{%
-	\end{window}\\ \hline \end{tabular}
+		\arrayrulecolor{#3}%
+		\hline
+		\cellcolor{#4}
+		\begin{window}[0,l,{\mbox{\includegraphics[width=1cm]{#2}}},{}]
+		\color{#5}
+		}{%
+		\normalcolor\end{window}\\ \hline \end{tabular}
 	\vspace{.5cm}
 	\par
 }
 
-\newenvironment{upmcaution}[1][\linewidth]{%
-	\upm@highligh@box{#1}{upm_caution.png}%
+% Colors for the highligh boxes
+\colorlet{highlightboxbackground_caution}{white}
+\colorlet{highlightboxforeground_caution}{black}
+\colorlet{highlightboxborder_caution}{black}
+\colorlet{highlightboxbackground_info}{white}
+\colorlet{highlightboxforeground_info}{black}
+\colorlet{highlightboxborder_info}{black}
+\colorlet{highlightboxbackground_question}{white}
+\colorlet{highlightboxforeground_question}{black}
+\colorlet{highlightboxborder_question}{black}
+
+\newenvironment{upmcaution}[1][.8\linewidth]{%
+	\bgroup\centering\upm@highligh@box{#1}{upm_caution.pdf}{highlightboxborder_caution}{highlightboxbackground_caution}{highlightboxforeground_caution}%
 }{%
-	\endupm@highligh@box%
+	\endupm@highligh@box\egroup%
 }
 
-\newenvironment{upminfo}[1][\linewidth]{%
-	\upm@highligh@box{#1}{upm_info.png}%
+\newenvironment{upminfo}[1][.8\linewidth]{%
+	\bgroup\centering\upm@highligh@box{#1}{upm_info.pdf}{highlightboxborder_info}{highlightboxbackground_info}{highlightboxforeground_info}%
 }{%
-	\endupm@highligh@box%
+	\endupm@highligh@box\egroup%
 }
 
-\newenvironment{upmquestion}[1][\linewidth]{%
-	\upm@highligh@box{#1}{upm_question.png}%
+\newenvironment{upmquestion}[1][.8\linewidth]{%
+	\bgroup\centering\upm@highligh@box{#1}{upm_question.pdf}{highlightboxborder_question}{highlightboxbackground_question}{highlightboxforeground_question}%
 }{%
-	\endupm@highligh@box%
+	\endupm@highligh@box\egroup%
 }
 
 %----------------------------------------
