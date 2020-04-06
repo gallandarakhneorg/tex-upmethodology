@@ -10,6 +10,7 @@
 \incsubversion{\makedate{28}{11}{2017}}{Add 'standardlists' option.}{\upmpublic}
 \incsubversion{\makedate{04}{08}{2019}}{Add 'graphicspathcontext' option.}{\upmpublic}
 \incversion{\makedate{17}{09}{2019}}{Add class options to include optional packages.}{\upmpublic}
+\incversion{\makedate{06}{04}{2020}}{Add explainations for \texttt{{\textbackslash}Append} and \texttt{{\textbackslash}setdocumentpurpose}.}{\upmpublic}
 %\incversion{\makedate{17}{09}{2019}}{Add the documentation for the \texttt{upmethodology-spec} package.}{\upmpublic}
 
 \addauthorvalidator*[galland@arakhne.org]{St{\'e}phane}{Galland}{Original Author}
@@ -235,6 +236,7 @@ This section contains the list of all the package dependencies for the \texttt{u
 \item \texttt{upmethodology-fmt}
 \item \texttt{upmethodology-p-common}
 \end{itemize}
+
 
 %###########################################################
 \part{Package Documentation}
@@ -1708,6 +1710,11 @@ Publications may be identifier by international identifiers. Package \texttt{upm
 \texttt{{\textbackslash}setissn\{number\}}\\
 \texttt{{\textbackslash}setdoi\{number\}}\\
 
+The specific text may be provided for explaining the purpose of the document. The text is shown into the copyright page.
+In order to change the document's purpose, the following macro is provided: \\
+\texttt{{\textbackslash}setdocumentpurpose\{text\}}\\
+
+
 \subsection{Retreiving Information}
 
 The information set by the macros described in the previous section may be retreived with the following macros: \\
@@ -1806,7 +1813,7 @@ where:
 The \texttt{upmethodology-frontpage} package is able to use a page layout defined in a document extension (see chapter~\ref{section:document:extension} for details on document extension).
 
 \pagebreak A \LaTeX\ macro must be defined in the \texttt{upmext-NAME.cfg} file of the extension. The name of this macro (for example \texttt{mylayout}) must be set with the \texttt{{\textbackslash}set} macro in the same file:\\
-\texttt{{\textbackslash}set\{frontpage\}\{mylayout\}}\\
+\texttt{{\textbackslash}Set\{frontpage\}\{mylayout\}}\\
 
 \section{Localization}
 
@@ -1912,6 +1919,9 @@ The \texttt{variable\_name} is the name of the value to override. It must be tak
 
 The \texttt{{\textbackslash}Get} macro allows you to retrieve the value defined by a \texttt{{\textbackslash}Set}:\\
 \texttt{{\textbackslash}Get\{variable\_name\}} \\
+
+The \texttt{{\textbackslash}Append} macro allows you to append text to an existing definition of a value:\\
+\texttt{{\textbackslash}Append\{variable\_name\}\{text to append\}} \\
 
 The \texttt{{\textbackslash}Unset} macro allows you to remove the definition of a value:\\
 \texttt{{\textbackslash}Unset\{variable\_name\}} \\

@@ -1,6 +1,6 @@
 % Package for Unified Process Methodology's extensions
 %
-% Copyright (c) 2006-2009 Stephane GALLAND <galland@arakhne.org>
+% Copyright (c) 2006-2020 Stephane GALLAND <galland@arakhne.org>
 % 
 % This program is free library; you can redistribute it and/or modify
 % it under the terms of the GNU Lesser General Public License as
@@ -18,7 +18,7 @@
 % 330, Boston, MA 02111-1307, USA.
 %
 
-\global\edef\upm@package@ext@ver{2017/08/08}
+\global\edef\upm@package@ext@ver{2020/04/06}
 
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
 \ProvidesPackage{upmethodology-extension}[\upm@package@ext@ver]
@@ -62,7 +62,7 @@
 		}{}%
 	}{%			
 		\ifthenelse{\equal{\upmcurrentlang}{#1}}{%
-			\message{*** define extension value #2 ****}%
+			\message{*** define the extension value #2 ****}%
 			\global\@namedef{upmext@extension@value@#2}{#3}%
 			}{}%
 		\ifupm@extension@savealllang%
@@ -72,9 +72,19 @@
 }
 \let\Set\upm@extension@Set
 
+\newcommand{\Append}[3][\upmcurrentlang]{%
+	\ifthenelse{\equal{\upmcurrentlang}{#1}}{%
+		\message{*** append to extension value #2 ****}%
+		\expandafter\expandafter\expandafter\global\expandafter\protected@edef\csname upmext@extension@value@#2\endcsname{\@nameuse{upmext@extension@value@#2}\xspace#3}%
+	}{}%
+	%\ifupm@extension@savealllang%
+	%	\global\expandafter\g@addto@macro\csname upmext@extension@value@#2#1\endcsname{#3}%
+	%\fi
+}
+
 \newcommand{\Unset}[2][\upmcurrentlang]{%
 	\ifthenelse{\equal{\upmcurrentlang}{#1}}{%
-		\message{*** undefine extension value #2 ****}%
+		\message{*** undefine the extension value #2 ****}%
 		\global\expandafter\let\csname upmext@extension@value@#2\endcsname\@undefined%
 		\ifupm@extension@savealllang%
 			\global\expandafter\let\csname upmext@extension@value@#2@#1\endcsname\@undefined%
