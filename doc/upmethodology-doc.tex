@@ -11,6 +11,7 @@
 \incsubversion{\makedate{04}{08}{2019}}{Add 'graphicspathcontext' option.}{\upmpublic}
 \incversion{\makedate{17}{09}{2019}}{Add class options to include optional packages.}{\upmpublic}
 \incversion{\makedate{06}{04}{2020}}{Add explainations for \texttt{{\textbackslash}Append} and \texttt{{\textbackslash}setdocumentpurpose}.}{\upmpublic}
+\incversion{\makedate{03}{06}{2021}}{Add emphazing box with titles.}{\upmpublic}
 %\incversion{\makedate{17}{09}{2019}}{Add the documentation for the \texttt{upmethodology-spec} package.}{\upmpublic}
 
 \addauthorvalidator*[galland@arakhne.org]{St{\'e}phane}{Galland}{Original Author}
@@ -1402,11 +1403,58 @@ produces:
 This is an emphazed text.
 \end{emphbox}
 
+\paragraph{Emphazing Box with a Title:} Three additional boxes are provided. All of them are output a title, and has a different background color: \\
+\texttt{{\textbackslash}begin\{titleemphbox\}[width]\{title\} text {\textbackslash}end\{titleemphbox\}} \\
+\texttt{{\textbackslash}begin\{titleemphbox2\}[width]\{title\} text {\textbackslash}end\{titleemphbox2\}} \\
+\texttt{{\textbackslash}begin\{titleemphbox3\}[width]\{title\} text {\textbackslash}end\{titleemphbox3\}}
+
+The following \LaTeX\ code:
+\begin{verbatim}
+\begin{titleemphbox}[.7\linewidth]{The title}
+This is an emphazed text.
+\end{titleemphbox}
+\end{verbatim}
+produces:
+
+\begin{titleemphbox}[.7\linewidth]{The title}
+This is an emphazed text.
+\end{titleemphbox}
+
+
+The following \LaTeX\ code:
+\begin{verbatim}
+\begin{titleemphbox2}[.7\linewidth]{The title}
+This is an emphazed text.
+\end{titleemphbox2}
+\end{verbatim}
+produces:
+
+\begin{titleemphbox2}[.7\linewidth]{The title}
+This is an emphazed text.
+\end{titleemphbox2}
+
+
+The following \LaTeX\ code:
+\begin{verbatim}
+\begin{titleemphbox3}[.7\linewidth]{The title}
+This is an emphazed text.
+\end{titleemphbox3}
+\end{verbatim}
+produces:
+
+\begin{titleemphbox3}[.7\linewidth]{The title}
+This is an emphazed text.
+\end{titleemphbox3}
+
+
+
 \paragraph{Change the colors of the emphazing box:} You could change the colors of the \texttt{emphbox} environment by redefining the colors below with one of the macros \texttt{{\textbackslash}definecolor} or \texttt{{\textbackslash}colorlet}:
 \begin{itemize}
 \item \texttt{emphboxbackground} is the color of the background of the environment;
 \item \texttt{emphboxborder} is the color of the frame;
 \item \texttt{emphboxtext} is the color of the text in the body of the environment.
+\item \texttt{emphboxbackgroundb} is the color of the background of the second environment with title;
+\item \texttt{emphboxbackgroundc} is the color of the background of the third environment with title;
 \end{itemize}
 
 \paragraph{Example of color redefinition:} The following \LaTeX\ code:
