@@ -1,6 +1,6 @@
 % Layout and Pagraph Format for Unified Process Methodology
 %
-% Copyright (c) 2006-2009, 2012-2021 Stephane GALLAND <galland@arakhne.org>
+% Copyright (c) 2006-2009, 2012-2022 Stephane GALLAND <galland@arakhne.org>
 % 
 % This program is free library; you can redistribute it and/or modify
 % it under the terms of the GNU Lesser General Public License as
@@ -17,7 +17,7 @@
 % write to the Free Software Foundation, Inc., 59 Temple Place - Suite
 % 330, Boston, MA 02111-1307, USA.
 
-\global\edef\upm@package@fmt@ver{2021/07/08}
+\global\edef\upm@package@fmt@ver{2022/02/10}
 
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
 \ProvidesPackage{upmethodology-fmt}[\upm@package@fmt@ver]
@@ -413,6 +413,9 @@
 %title of a table
 \def\upm@fmt@table@title#1{\color{fronttableheader} \cellcolor{backtableheader} {\bfseries #1}}
 %title of columns
+\newcommand{\tabularheaderstyle}[1]{%
+	\mbox{}{\cellcolor{backtableheader} {\color{fronttableheader}\itshape\ignorespaces#1}}%
+}%
 \def\upm@fmt@table@column@title#1{\hfil{\color{fronttableheader} \cellcolor{backtableheader} {\itshape#1}}\hfil}
 
 % Utility functions for mtabular
