@@ -450,7 +450,7 @@
 		\ifnum0<\value{upm@fmt@mtabular@columnnumber}%
 			\let\upm@fmt@mtabular@column@continue\upm@fmt@mtabular@column@next%
 		\else%
-			\\ \hline \let\upm@fmt@mtabular@column@continue\relax%
+			\\ \hline \let\upm@fmt@mtabular@column@continue\ignorespaces%
 		\fi%
 		\upm@fmt@mtabular@column@continue%
 	}
@@ -460,7 +460,7 @@
 		\ifnum0<\value{upm@fmt@mtabular@columnnumber}%
 			\let\upm@fmt@mtabular@column@continue\upm@fmt@mtabular@column@next%
 		\else%
-			\\ \hline \let\upm@fmt@mtabular@column@continue\relax%
+			\\ \hline \let\upm@fmt@mtabular@column@continue\ignorespaces%
 		\fi%
 		\upm@fmt@mtabular@column@continue%
 	}
