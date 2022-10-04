@@ -17,7 +17,7 @@
 % write to the Free Software Foundation, Inc., 59 Temple Place - Suite
 % 330, Boston, MA 02111-1307, USA.
 
-\global\edef\upm@package@fmt@ver{2022/02/10}
+\global\edef\upm@package@fmt@ver{2022/10/04}
 
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
 \ProvidesPackage{upmethodology-fmt}[\upm@package@fmt@ver]
@@ -1270,18 +1270,44 @@
 	\let\upm@item@param\upm@fmt@olditem
 	\let\upm@item@noparam\upm@fmt@olditem
 	\def\item{\@ifnextchar[\upm@item@param\upm@item@noparam}
-	\AtBeginDocument{
+	\newcommand{\overridedescriptionenvironment}{%
 		\message{*** Overriding the 'description' environment. Pass option 'standardlists' for avoiding this override.}
+		% Override the description environment
 		\global\let\description\@undefined
 		\global\let\enddescription\@undefined
 		\global\NewEnviron{description}[1][\upm@fmt@itemizeddescription@separator]{
 			\begin{itemize}%
-			\renewcommand{\upm@item@param}[1][]{\upm@fmt@olditem \upm@fmt@itemizeddescription@desc{##1}{#1}}%
+			\renewcommand{\upm@item@param}[1][]{\upm@fmt@olditem \upm@fmt@itemizeddescription@desc{####1}{##1}}%
 			\renewcommand{\upm@item@noparam}{\upm@fmt@olditem }%
 			\BODY%
 			\end{itemize}%
 		}
 	}
+	\newcommand{\restoredescriptionenvironment}{%
+		\message{*** Restoring the 'description' environment.}
+		\global\let\description\@upm@fmt@overriden@description%
+		\global\let\enddescription\@upm@fmt@overriden@enddescrption%
+	}
+	\AtBeginDocument{
+		% Save the original definition for later restore
+		\global\let\@upm@fmt@overriden@description\description%
+		\global\let\@upm@fmt@overriden@enddescrption\enddescription%
+		\overridedescriptionenvironment%
+		\@ifundefined{printglossary}{}{%
+			\message{*** Overriding the 'printglossary' macro.}
+			\global\let\upm@fmt@printglossary@original\printglossary%
+			\global\newcommand{\upm@fmt@printglossary}[1][]{%
+				\message{*** Evaluating 'printglossary' macro.}%
+				\restoredescriptionenvironment%
+				\upm@fmt@printglossary@original[#1]%
+				\overridedescriptionenvironment%
+			}%
+			\global\let\printglossary\upm@fmt@printglossary%
+		}%
+	}
+\else
+	\newcommand{\overridedescriptionenvironment}{}
+	\newcommand{\restoredescriptionenvironment}{}
 \fi
 
 %----------------------------------------

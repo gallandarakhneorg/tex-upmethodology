@@ -17,7 +17,7 @@
 % write to the Free Software Foundation, Inc., 59 Temple Place - Suite
 % 330, Boston, MA 02111-1307, USA.
 
-\global\edef\upm@package@docclazz@ver{2022/02/10}
+\global\edef\upm@package@docclazz@ver{2022/10/04}
 
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
 \ProvidesClass{upmethodology-document}[\upm@package@docclazz@ver]
