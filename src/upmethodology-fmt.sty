@@ -1,6 +1,6 @@
 % Layout and Pagraph Format for Unified Process Methodology
 %
-% Copyright (c) 2006-2009, 2012-2022 Stephane GALLAND <galland@arakhne.org>
+% Copyright (c) 2006-2009, 2012-2025 Stephane GALLAND <galland@arakhne.org>
 % 
 % This program is free library; you can redistribute it and/or modify
 % it under the terms of the GNU Lesser General Public License as
@@ -17,7 +17,7 @@
 % write to the Free Software Foundation, Inc., 59 Temple Place - Suite
 % 330, Boston, MA 02111-1307, USA.
 
-\global\edef\upm@package@fmt@ver{2022/10/04}
+\global\edef\upm@package@fmt@ver{2025/03/11}
 
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
 \ProvidesPackage{upmethodology-fmt}[\upm@package@fmt@ver]
@@ -90,6 +90,7 @@
 \upm@lang@@
 
 
+\RequirePackage[explicit,calcwidth]{titlesec}
 \RequirePackage{graphicx}
 \RequirePackage{subcaption}
 \RequirePackage{tabularx}
@@ -108,6 +109,8 @@
 \RequirePackage{hyphenat}
 \RequirePackage{bbm}
 \RequirePackage{environ}% for advanced environment declaration
+\RequirePackage{xcolor}
+\RequirePackage{tikz}
 
 %----------------------------------------
 % Exponent and indice
@@ -564,9 +567,17 @@
 %----------------------------------------
 
 % PRIVATE COLORS
-\definecolor{sectiontitlecolor}{rgb}{0.93,0.41,0}
-\definecolor{chaptertitlecolor}{rgb}{0.24,0.33,0.48}
 \definecolor{parttitlecolor}{rgb}{0.24,0.33,0.48}
+\definecolor{chaptertitlecolor}{rgb}{0.24,0.33,0.48}
+\colorlet{chaptertitlenumcolor}{chaptertitlecolor}
+\definecolor{sectiontitlecolor}{rgb}{0.93,0.41,0}
+\colorlet{sectiontitlenumcolor}{sectiontitlecolor}
+\colorlet{sectiontitleboxcolor}{lightgray}
+\colorlet{subsectiontitlecolor}{sectiontitlecolor}
+\colorlet{subsectiontitlenumcolor}{sectiontitlecolor}
+\colorlet{subsectiontitlecolor}{sectiontitlecolor}
+\colorlet{subsubsectiontitlecolor}{sectiontitlecolor}
+\colorlet{paragraphtitlecolor}{black}
 
 % PRIVATE FORMATTING MACROS
 \newcounter{upm@format@section@sectionlevel}
@@ -574,11 +585,22 @@
 
 \gdef\upm@format@partnum#1{\textcolor{parttitlecolor}{\expandafter\fontsize{40pt}{60pt}\selectfont#1\normalfont}}
 \gdef\upm@format@parttitle#1{\textcolor{parttitlecolor}{\huge\scshape #1}}
-\gdef\upm@format@chapternum#1{\textcolor{chaptertitlecolor}{\expandafter\fontsize{40pt}{60pt}\selectfont#1\normalfont}}
-\gdef\upm@format@chaptertitle#1{\textcolor{chaptertitlecolor}{\Huge\scshape #1}}
-\gdef\upm@format@sectionnum#1#2{\textcolor{sectiontitlecolor}{#2}}
-\gdef\upm@format@sectiontitle#1#2{\textcolor{sectiontitlecolor}{#2}}
-\gdef\upm@format@sectionnum@postfix{/}
+
+\gdef\upm@format@chapternum{\color{chaptertitlenumcolor}\fontsize{90}{40}\sffamily\bfseries}
+\gdef\upm@format@chaptertitle#1{\textcolor{chaptertitlecolor}{\Huge\scshape\sffamily\bfseries #1}}
+
+\gdef\upm@format@sectionnum#1{#1}
+\gdef\upm@format@sectiontitle{\normalfont\sffamily\large\bfseries\color{sectiontitlecolor}}
+
+\gdef\upm@format@subsectionnum#1{#1}
+\gdef\upm@format@subsectiontitle{\normalfont\large\sffamily\bfseries\color{subsectiontitlecolor}}
+
+\gdef\upm@format@subsubsectionnum@postfix{\xspace|}
+\gdef\upm@format@subsubsectionnum#1{#1\upm@format@subsubsectionnum@postfix\xspace}
+\gdef\upm@format@subsubsectiontitle{\normalfont\normalfont\sffamily\itshape\color{subsubsectiontitlecolor}}
+
+\gdef\upm@format@paragraphtitle@postfix{.}
+\gdef\upm@format@paragraphtitle{\normalfont\normalsize\sffamily\bfseries\color{paragraphtitlecolor}}
 
 % PART
 \ifupmbookformat
@@ -610,39 +632,74 @@
 
 % CHAPTER
 \ifupmarticleformat\else
-	\newcommand{\upm@format@makechapterhead}[2]{%
-		  %\vspace*{50\p@}%
-		  {\parindent \z@ \Huge \raggedleft \normalfont
-		    \ifx\@empty#1\ifnum \c@secnumdepth >\m@ne
-			\upm@format@chapternum{\thechapter}
-			\par\nobreak
-			\vskip 20\p@
-		    \fi\fi
-		    \interlinepenalty\@M
-		    %\ifupmbookformat\doublespacing\fi
-		    \upm@format@chaptertitle{\nohyphens{#2}}\par\nobreak
-		    \vskip 80\p@
-		  }
-	}
-	%internal implementation of \chapter
-	\gdef\@makechapterhead#1{\upm@format@makechapterhead{\@empty}{#1}}
-	%internal implementation of \chapter*
-	\gdef\@makeschapterhead#1{\upm@format@makechapterhead{\relax}{#1}}
+	\titleformat{name=\chapter,numberless}[display]%
+		{\flushright}%
+		{}%
+		{0pt}%
+		{\upm@format@chaptertitle{\nohyphens{#1}}}%
+	%
+	\titleformat{\chapter}[display]%
+		{\flushright\upm@format@chapternum}%
+		{\thechapter}%
+		{0pt}
+		{\upm@format@chaptertitle{\nohyphens{#1}}}%
+	\titlespacing*{\chapter} {0pt}{40pt}{40pt}
 \fi
 
 % SECTIONS
-\let\upm@format@sect@old\@sect
-\let\upm@format@ssect@old\@ssect
 
-% public implementation of sections.
-\renewcommand{\section}{\setcounter{upm@format@section@sectionlevel}{1}\@startsection{section}{1}{\z@}{-3.5ex \@plus -1ex \@minus -.2ex}{2.3ex \@plus.2ex}{\normalfont\Large\scshape}}
-\renewcommand{\subsection}{\setcounter{upm@format@section@sectionlevel}{2}\@startsection{subsection}{2}{\z@}{-3.25ex\@plus -1ex \@minus -.2ex}{1.5ex \@plus .2ex}{\normalfont\large\scshape}}
-\renewcommand{\subsubsection}{\setcounter{upm@format@section@sectionlevel}{3}\@startsection{subsubsection}{3}{\z@}{-3.25ex\@plus -1ex \@minus -.2ex}{1.5ex \@plus .2ex}{\normalfont\normalsize\scshape}}
+\newlength\sectionhoffset
+\setlength\sectionhoffset{\dimexpr 1in+\hoffset\relax}
+\setlength\sectionhoffset{\dimexpr 1in+\leftmargin\relax}
 
-% internal implementations for sections.
-\gdef\@sect#1#2#3#4#5#6[#7]#8{\upm@format@sect@old{#1}{#2}{#3}{#4}{#5}{#6}[#7]{\upm@format@sectiontitle{\theupm@format@section@sectionlevel}{#8}}}
-\gdef\@ssect#1#2#3#4#5{\upm@format@ssect@old{#1}{#2}{#3}{#4}{\upm@format@sectiontitle{\theupm@format@section@sectionlevel}{#5}}}
-\gdef\@seccntformat#1{\upm@format@sectionnum{\theupm@format@section@sectionlevel}{\csname the#1\endcsname\upm@format@sectionnum@postfix}\quad}
+% implementation of sections.
+\titleformat{\section}
+	{\upm@format@sectiontitle}
+	{}
+	{0pt}
+	{%
+	\begin{tikzpicture}%
+		\hspace*{-\sectionhoffset}\llap{%
+		\node[%
+			text depth=0pt,%
+			anchor=east,%
+			sectiontitlenumcolor,ultra thick,fill=sectiontitleboxcolor!40,%
+			rectangle,%
+			inner sep=10pt, outer sep=0pt,%
+			align=right,%
+			text width=\dimexpr\sectionhoffset-20pt\relax]%
+			(O) at (0,0){\upm@format@sectionnum{\thesection}};%
+		\draw (O.east) node[text depth=0pt,anchor=west,inner sep=10pt,text width=\linewidth]{\nohyphens{#1}};%
+		\draw [sectiontitleboxcolor!40] (O.south east) --++ (\dimexpr\textwidth\relax,0);%
+		\fill [sectiontitleboxcolor] (O.south east) ++ (\dimexpr\textwidth\relax,0) circle(.1);%
+		}%
+	\end{tikzpicture}
+	}
+\titlespacing*{\section}{0pt}{*5}{*-2}
+
+% implementation of subsections.
+\titleformat{\subsection}
+	{\upm@format@subsectiontitle}
+	{\rlap{\hspace{-1.2cm}\color{subsectiontitlenumcolor}\upm@format@subsectionnum{\thesubsection}}}
+	{0pt}
+	{\upm@format@subsectiontitle#1}
+\titlespacing*{\subsection}{0pt}{*4}{*2}
+
+% implementation of subsubsections.
+\titleformat{\subsubsection}
+	{\upm@format@subsubsectiontitle}
+	{\upm@format@subsubsectionnum{\thesubsubsection}}
+	{0pt}
+	{#1}
+\titlespacing*{\subsubsection}{0pt}{7pt}{3pt}
+
+% implementation of paragraphs.
+\titleformat{\paragraph}[runin]
+	{\upm@format@paragraphtitle}
+	{}
+	{2pt}
+	{#1\upm@format@paragraphtitle@postfix}
+	{}
 
 %----------------------------------------
 % PAGE LAYOUT
@@ -1454,8 +1511,8 @@
 % OVERRIDDEN BY THE DOCUMENT CLASS
 %----------------------------------------
 
-\newcommand{\url}[2][]{\texttt{#2}}
-\newcommand{\href}[3][]{\texttt{#3}}
+\providecommand{\url}[2][]{\texttt{#2}}
+\providecommand{\href}[3][]{\texttt{#3}}
 
 %----------------------------------------
 % Exponents and Indices
