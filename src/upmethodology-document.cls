@@ -42,6 +42,9 @@
 \newif\ifupm@package@docclazz@codepackage
 \upm@package@docclazz@codepackagefalse
 
+\newif\ifupm@package@docclazz@nohyperref
+\upm@package@docclazz@nohyperreffalse
+
 \gdef\upm@package@docclazz@optionstopass{a4paper,11pt}
 
 \DeclareOption{twoside}{%
@@ -66,6 +69,11 @@
 \DeclareOption{standardlists}{%
 	\message{*********** DISABLING UPMETHODOLOGY LISTS}
 	\PassOptionsToPackage{standardlists}{upmethodology-fmt}
+}
+
+\DeclareOption{nohyperref}{%
+	\message{*********** DISABLING HYPERREF}
+	\global\upm@package@docclazz@nohyperreftrue
 }
 
 \DeclareOption{nodocumentinfo}{%
@@ -151,22 +159,7 @@
 
 \RequirePackage{a4wide}
 
-\RequirePackage{upmethodology-document}
-\RequirePackage{upmethodology-extension}
-\RequirePackage{upmethodology-frontpage}
-\RequirePackage{upmethodology-backpage}
-\ifupm@package@docclazz@taskpackage
-	\RequirePackage{upmethodology-task}
-\fi
-\ifupm@package@docclazz@codepackage
-	\RequirePackage{upmethodology-code}
-\fi
-\ifupm@package@docclazz@specpackage
-	\RequirePackage{upmethodology-spec}
-\fi
-
-\RequirePackage{url}
-\ifpdf
+\ifupm@package@docclazz@nohyperref\else\ifpdf
 	\RequirePackage[pdftex,
 			breaklinks, %make links breakable on several lines
 			pageanchor=true, %put implicit anchor on each page (required for \printindex)
@@ -192,8 +185,23 @@
 			bookmarksnumbered=true, %section number in bookmarks
 			colorlinks=false, % Use a frame around links
 			]{hyperref}
-\fi
+\fi\fi
+\RequirePackage{url}
 \urlstyle{same}
+
+\RequirePackage{upmethodology-document}
+\RequirePackage{upmethodology-extension}
+\RequirePackage{upmethodology-frontpage}
+\RequirePackage{upmethodology-backpage}
+\ifupm@package@docclazz@taskpackage
+	\RequirePackage{upmethodology-task}
+\fi
+\ifupm@package@docclazz@codepackage
+	\RequirePackage{upmethodology-code}
+\fi
+\ifupm@package@docclazz@specpackage
+	\RequirePackage{upmethodology-spec}
+\fi
 
 \ifpdf
   \pdfpageheight=29.7cm
@@ -270,16 +278,21 @@
 %----------------------------------------
 \gdef\upm@package@getcolor#1,#2,#3{#1 #2 #3}
 \ifpdf
-	\renewcommand{\setpdfcolor}[1]{
-		\hypersetup{
-			filebordercolor={\upm@package@getcolor #1}, % frame color
-			linkbordercolor={\upm@package@getcolor #1}, % frame color
-			citebordercolor={\upm@package@getcolor #1}, % frame color
-			menubordercolor={\upm@package@getcolor #1}, % frame color
-			urlbordercolor={\upm@package@getcolor #1}, % frame color
-			runbordercolor={\upm@package@getcolor #1}, % frame color
+	\ifupm@package@docclazz@nohyperref
+		\renewcommand{\setpdfcolor}[1]{%
 		}
-	}
+	\else
+		\renewcommand{\setpdfcolor}[1]{
+			\hypersetup{
+				filebordercolor={\upm@package@getcolor #1}, % frame color
+				linkbordercolor={\upm@package@getcolor #1}, % frame color
+				citebordercolor={\upm@package@getcolor #1}, % frame color
+				menubordercolor={\upm@package@getcolor #1}, % frame color
+				urlbordercolor={\upm@package@getcolor #1}, % frame color
+				runbordercolor={\upm@package@getcolor #1}, % frame color
+			}
+		}
+	\fi
 \fi
 
 %----------------------------------------
