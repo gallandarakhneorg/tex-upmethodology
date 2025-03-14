@@ -12,6 +12,7 @@
 \incversion{\makedate{17}{09}{2019}}{Add class options to include optional packages.}{\upmpublic}
 \incversion{\makedate{06}{04}{2020}}{Add explainations for \texttt{{\textbackslash}Append} and \texttt{{\textbackslash}setdocumentpurpose}.}{\upmpublic}
 \incversion{\makedate{03}{06}{2021}}{Add emphazing box with titles.}{\upmpublic}
+\incversion{\makedate{14}{03}{2025}}{Update the documentation for the \texttt{declareupmtheorem} macro and \texttt{definition} environment.}{\upmpublic}
 %\incversion{\makedate{17}{09}{2019}}{Add the documentation for the \texttt{upmethodology-spec} package.}{\upmpublic}
 
 \addauthorvalidator*[galland@arakhne.org]{St{\'e}phane}{Galland}{Original Author}
@@ -43,7 +44,7 @@
 %\tracingmacros=2
 %\tracingcommands=1
 
-\declareupmtheorem{mytheorem}{My Theorem}{List of my Theorems}
+\declareupmtheorem{mytheorem}{My Theorem}{List of my Theorems}{thm}{mytheorem}{\textbf}
 
 \begin{document}
 
@@ -1308,64 +1309,135 @@ The package \texttt{upmethodology-fmt} defines several environments and macros t
 
 \subsection{Definition of a new theorem environment}
 
+The theorem API from this package is based on the standard \texttt{tcolorbox} package.
 If you want to create a new theorem environment based on the style provided by this package, you could invoke \texttt{{\textbackslash}declareupmtheorem}: \\
-\texttt{{\textbackslash}declareupmtheorem[name of the style]\{name\}\{label\}\{title of the list\}}
+\texttt{{\textbackslash}declareupmtheorem[name of the tcolorbox style]\{name of the \LaTeX\ environment\}\{label of the theorem\}\{title of the theorems' list\}\{prefix for the label keys\}\{name of the theorem's list\}\{macro for formating the source\}}
 
 This macro defines:
 \begin{itemize}
-\item the environment with the given name, and
-\item the macro \texttt{{\textbackslash}listof$\langle$name$\rangle$s}.
+\item the environment with the given "name of the \LaTeX\ environment", and
+\item the macro \texttt{{\textbackslash}listof$\langle$name of the \LaTeX\ environment$\rangle$s}.
 \end{itemize}
 
-The \texttt{name of the style} is the name of the theorem style to be used. This style is defined by \texttt{{\textbackslash}newtheoremstyle}. By default, it is \texttt{upmdefinition}.
-The \texttt{label} is the text to put in the theorem header.
-The \texttt{title of the list} is used by the macro \texttt{{\textbackslash}listof$\langle$name$\rangle$s} as the title of the chapter.
-
-\begin{upmcaution}
-	Some features provided by this package depend on the version of the package \texttt{thmtools}. We recommend to use and install the version 2012/05/04, or later.
-\end{upmcaution}
+The \texttt{name of the tcolorbox style} is the name of the tcolorbox style to be used. This style must be defined according to the \texttt{tcolorbox} package documentation. By default, it is \texttt{upmdefinition}.
+The \texttt{label of the theorem} is the text to put in the theorem header, e.g., \texttt{Definition}.
+The \texttt{title of the theorems' list} is used by the macro \texttt{{\textbackslash}listof$\langle$name of the \LaTeX\ environment$\rangle$s} as the title of the associated chapter/section.
+By default, the theorem environment defines a label for the theorem box. The \texttt{prefix for the label keys} is the prefix that is automatically appended to the label. For example, if this prefix is set to "\texttt{prefix}", and the theorem is invoked with a label value "\texttt{thekey}", then the theorem environment will automatically generate the macro \texttt{{\textbackslash}label\{prefix:thekey\}} in the theorem environment.
+The \texttt{name of the theorems' list} is identifier of the list in which the theorem adds entries. This list could be displayed with the macro \texttt{{\textbackslash}listof$\langle$name of the \LaTeX\ environment$\rangle$s}.
+The \texttt{macro for formating the source} is \LaTeX\ macro that could be followed by the source text of theorem. It is usually used for formatting this source text in the lower part of the theorem box.
 
 \begin{upmcaution}
 	The macro \texttt{{\textbackslash}declareupmtheorem} can be used only inside the preamble of your document.
 \end{upmcaution}
 
-\paragraph{Example:} The following code define the environment \texttt{mytheorem}:
+\subsection{Using a defined theorem}
+
+After defining an environment, you could use it as a regular \LaTeX\ environment, whitch takes three parameters:
+\begin{itemize}
+\item the title of the theorem in the box,
+\item the key for the implicit \texttt{{\textbackslash}label} macro, and
+\item the optional argument that is the text of the source. The source of the theorem is rendered in the lower part of the theorem box. Usually, it corecponds to the reference to a scientific article or an Internet page.
+\end{itemize}
+
+\paragraph{Example 1:} The following code define the environment \texttt{mytheorem} and use it without source text:
 \begin{verbatim}
 \documentclass{upmethodology-document}
-\declareupmtheorem{mytheorem}{My Theorem}{List of my Theorems}
+\declareupmtheorem{mytheorem}{My Theorem}{List of my Theorems}{thm}{mytheorem}{\textbf}
 \begin{document}
-\begin{mytheorem}[Theorem of Everything]
+
+Read the theorem \ref{thm:mytheo}.
+
+\begin{mytheorem}{Theorem of Everything}{mytheo}
 This is the theorem of Evereything.
 \end{mytheorem}
+
 \end{document}
 \end{verbatim}
-gives the result:
-\begin{mytheorem}[Theorem of Everything]
+gives the result: \\[.5cm]
+Read the theorem \ref{thm:mytheo1}.
+\begin{mytheorem}{Theorem of Everything}{mytheo1}
 This is the theorem of Everything.
 \end{mytheorem}
 
+\paragraph{Example 2:} The following code define the environment \texttt{mytheorem} and use it with a source text:
+\begin{verbatim}
+\documentclass{upmethodology-document}
+\declareupmtheorem{mytheorem}{My Theorem}{List of my Theorems}{thm}{mytheorem}{\textbf}
+\begin{document}
+
+Read the theorem \ref{thm:mytheo2}.
+
+\begin{mytheorem}{Theorem of Everything}{mytheo2}[description of the source]
+This is the theorem of Evereything.
+\end{mytheorem}
+
+\end{document}
+\end{verbatim}
+gives the result: \\[.5cm]
+Read the theorem \ref{thm:mytheo2}.
+\begin{mytheorem}{Theorem of Everything}{mytheo2}[description of the source]
+This is the theorem of Everything.
+\end{mytheorem}
+
+\subsection{Using the list of theorems}
+
+When a theorem is defined, the it is possible to creation a chapter (in books or reports) or a section (in articles) that lists all the defined theorems.
+In order to do so, you could use the "listof" macro that is automatically created when defining the theorem.
+The following code define the environment \texttt{mytheorem} and shows the list of defined \texttt{mytheorem}s:
+\begin{verbatim}
+\documentclass{upmethodology-document}
+\declareupmtheorem{mytheorem}{My Theorem}{List of my Theorems}{thm}{mytheorem}{\textbf}
+\begin{document}
+
+\begin{mytheorem}{Theorem of Everything}{mytheo}
+This is the theorem of Evereything.
+\end{mytheorem}
+
+\listofmytheorems
+
+\end{document}
+\end{verbatim}
+
 \subsection{\texttt{definition}}
 
-The package \texttt{upmethodology-fmt} defines the environment \texttt{definition} to put a definition in your document. This environment is based on the standard \texttt{theorem} environment. The \texttt{definition} takes one optional parameter: the name of the definition.
+The package \texttt{upmethodology-fmt} defines the environment \texttt{definition} to put a definition in your document. This environment is based on the \texttt{theorem} environment explained in the previous sections. The \texttt{definition} takes one optional parameter: the name of the definition.
 
-\paragraph{Example:} The following \LaTeX\ code:
+\paragraph{Example 1:} The following \LaTeX\ code:
 \begin{verbatim}
-\begin{definition}[Name of the definition]
-Text of the definition.
+\begin{definition}{Name of the definition}{Label of the definition}
+   Text of the definition.
 \end{definition}
 \end{verbatim}
+
 produces:
 
-\begin{definition}[Name of the definition]
-Text of the definition.
+\begin{definition}{Name of the definition}{Label of the definition}
+  Text of the definition.
 \end{definition}
+
+It is also possible to provide the source of the definition by adding the optional parameter as in the following example.
+
+\paragraph{Example 2:} 
+\begin{verbatim}
+\begin{definition}{Name of the definition}{Label of the definition}[This is the source]
+   Text of the definition.
+\end{definition}
+\end{verbatim}
+
+THe result of this definition declaration is:
+
+\begin{definition}{Name of the definition}{Label of the definition}[This is the source]
+  Text of the definition.
+\end{definition}
+
 
 \paragraph{Change the colors of the definition:} You could change the colors of the \texttt{definition} environment by redefining the colors below with one of the macros \texttt{{\textbackslash}definecolor} or \texttt{{\textbackslash}colorlet}:
 \begin{itemize}
 \item \texttt{definitionbackground} is the color of the background of the definition;
-\item \texttt{definitionborder} is the color of the frame;
+\item \texttt{definitionborder} is the color of the frame and of the header's background;
 \item \texttt{definitionheaderforeground} is the color of the text in the header of the definition;
 \item \texttt{definitiontextforeground} is the color of the text in the body of the definition.
+\item \texttt{definitionsourceforeground} is the color of the text in the lower part of the definition in which the source is rendered.
 \end{itemize}
 
 \paragraph{Example of color redefinition:} The following \LaTeX\ code:
@@ -1373,17 +1445,18 @@ Text of the definition.
 \definecolor{definitionheaderforeground}{rgb}{.3,.5,.8}
 \colorlet{definitionbackground}{gray!20}
 \colorlet{definitionborder}{red}
-\begin{definition}[Name of the definition]
-Text of the definition.
+\begin{definition}{Name of the definition}{Label of the definition}
+  Text of the definition.
 \end{definition}
 \end{verbatim}
+
 produces:
 
 \definecolor{definitionheaderforeground}{rgb}{.3,.5,.8}
 \colorlet{definitionbackground}{gray!20}
 \colorlet{definitionborder}{red}
-\begin{definition}[Name of the definition]
-Text of the definition.
+\begin{definition}{Name of the definition}{Label of the definition}
+  Text of the definition.
 \end{definition}
 
 \section{Emphazing Box}
