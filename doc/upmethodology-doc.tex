@@ -2,7 +2,7 @@
 
 \setfrontcover{classic}
 
-\declaredocument{\LaTeX\ Packages for Unified Process Methodology}{Official Documentation}{UPM-2019-01}
+\declaredocument{\LaTeX\ Packages for Structured Documents as for Unified Process Methodology}{Official Documentation}{UPM-2025-01}
 
 \updateversion{23.0}{\makedate{17}{02}{2017}}{Replace the package \texttt{subfigure} by \texttt{subcaption}.}{\upmpublic}
 \incsubversion{\makedate{10}{03}{2017}}{Fixing subfigure invalid alignement.}{\upmpublic}
@@ -1599,24 +1599,24 @@ The package \texttt{upmethodology-fmt} provides a set of environment to put emph
 \begin{tabularx}{\linewidth}{XX}
 
 \texttt{{\textbackslash}begin\{upmcaution\}{[}width{]}} \newline
-\texttt{This is an example of a caution message. This text must be rendered with enough height (usually 2 lines of text) to avoid intersection between the caution icon and the box frame.} \newline
+\texttt{This is an example of a caution message.} \newline
 \texttt{{\textbackslash}end\{upmcaution\}}
 &
-\begin{upmcaution}This is an example of a caution message. This text must be rendered with enough height (usually 2 lines of text) to avoid intersection between the caution icon and the box frame.\end{upmcaution}
+\raisebox{-\height}{\begin{upmcaution}This is an example of a caution message.\end{upmcaution}}
 \\
 	
 \texttt{{\textbackslash}begin\{upminfo\}{[}width{]}} \newline
-\texttt{This is an example of an information message. This text must be rendered with enough height (usually 2 lines of text) to avoid intersection between the caution icon and the box frame.} \newline
+\texttt{This is an example of an information message.} \newline
 \texttt{{\textbackslash}end\{upminfo\}}
 &
-\begin{upminfo}This is an example of an information message. This text must be rendered with enough height (usually 2 lines of text) to avoid intersection between the caution icon and the box frame.\end{upminfo}
+\raisebox{-\height}{\begin{upminfo}This is an example of an information message.\end{upminfo}}
 \\
 
 \texttt{{\textbackslash}begin\{upmquestion\}{[}width{]}} \newline
-\texttt{This is an example of a question message. This text must be rendered with enough height (usually 2 lines of text) to avoid intersection between the caution icon and the box frame.} \newline
+\texttt{This is an example of a question message.} \newline
 \texttt{{\textbackslash}end\{upmquestion\}}
 &
-\begin{upmquestion}This is an example of a question message. This text must be rendered with enough height (usually 2 lines of text) to avoid intersection between the caution icon and the box frame.\end{upmquestion}
+\raisebox{-\height}{\begin{upmquestion}This is an example of a question message.\end{upmquestion}}
 \\
 
 \end{tabularx}

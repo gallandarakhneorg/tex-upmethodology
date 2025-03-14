@@ -112,9 +112,7 @@
 \RequirePackage{environ}% for advanced environment declaration
 \RequirePackage{xcolor}
 \RequirePackage{tikz}
-
-% Include the theorem definition with tcolorbox
-\tcbuselibrary{theorems}
+\RequirePackage{fontawesome5}
 
 %----------------------------------------
 % Exponent and indice
@@ -1458,29 +1456,6 @@
 % HIGHLIGH BOXES
 %----------------------------------------
 
-\newsavebox{\upm@highlight@box@save}
-
-% Parameters are:
-% #1: the width of the box
-% #2: the name of the picture
-% #3: the name of the border color
-% #4: the name of the background color
-% #5: the name of the text color
-\newenvironment{upm@highligh@box}[5]{%
-	\par
-	\vspace{.5cm}
-	\begin{tabular}{|p{#1}|}
-		\arrayrulecolor{#3}%
-		\hline
-		\cellcolor{#4}
-		\begin{window}[0,l,{\mbox{\includegraphics[width=1cm]{#2}}},{}]
-		\color{#5}
-		}{%
-		\normalcolor\end{window}\\ \hline \end{tabular}
-	\vspace{.5cm}
-	\par
-}
-
 % Colors for the highligh boxes
 \colorlet{highlightboxbackground_caution}{white}
 \colorlet{highlightboxforeground_caution}{black}
@@ -1492,22 +1467,67 @@
 \colorlet{highlightboxforeground_question}{black}
 \colorlet{highlightboxborder_question}{black}
 
-\newenvironment{upmcaution}[1][.8\linewidth]{%
-	\bgroup\centering\upm@highligh@box{#1}{upm_caution.pdf}{highlightboxborder_caution}{highlightboxbackground_caution}{highlightboxforeground_caution}%
-}{%
-	\endupm@highligh@box\egroup%
+% Include the skins definition with tcolorbox
+\tcbuselibrary{skins}
+
+\newtcolorbox{upm@highligh@box@caution}[1]{
+	enhanced,
+	colback=highlightboxbackground_caution,
+	colframe=highlightboxborder_caution,
+	fonttitle=\Huge\bfseries,
+	rounded corners,
+	sidebyside,
+	sidebyside align=center,
+	lefthand width=1cm, % Width for the icon area
+	colupper=highlightboxforeground_caution,
+	coltext=highlightboxforeground_caution,
 }
 
-\newenvironment{upminfo}[1][.8\linewidth]{%
-	\bgroup\centering\upm@highligh@box{#1}{upm_info.pdf}{highlightboxborder_info}{highlightboxbackground_info}{highlightboxforeground_info}%
+\newenvironment{upmcaution}[1][\linewidth]{%
+	\begin{upm@highligh@box@caution}{#1}%
+	{\Huge\faExclamationTriangle}\tcblower %
 }{%
-	\endupm@highligh@box\egroup%
+	\end{upm@highligh@box@caution}%
 }
 
-\newenvironment{upmquestion}[1][.8\linewidth]{%
-	\bgroup\centering\upm@highligh@box{#1}{upm_question.pdf}{highlightboxborder_question}{highlightboxbackground_question}{highlightboxforeground_question}%
+\newtcolorbox{upm@highligh@box@info}[1]{
+	enhanced,
+	colback=highlightboxbackground_info,
+	colframe=highlightboxborder_info,
+	fonttitle=\Huge\bfseries,
+	rounded corners,
+	sidebyside,
+	sidebyside align=center,
+	lefthand width=1cm, % Width for the icon area
+	colupper=highlightboxforeground_info,
+	coltext=highlightboxforeground_info,
+}
+
+\newenvironment{upminfo}[1][\linewidth]{%
+	\begin{upm@highligh@box@info}{#1}%
+	{\Huge\faInfoCircle}\tcblower %
 }{%
-	\endupm@highligh@box\egroup%
+	\end{upm@highligh@box@info}%
+}
+
+\newtcolorbox{upm@highligh@box@question}[1]{
+	enhanced,
+	colback=highlightboxbackground_question,
+	colframe=highlightboxborder_question,
+	fonttitle=\Huge\bfseries,
+	rounded corners,
+	sidebyside,
+	sidebyside align=center,
+	lefthand width=1cm, % Width for the icon area
+	colupper=highlightboxforeground_question,
+	coltext=highlightboxforeground_question,
+}
+
+\newenvironment{upmquestion}[1][\linewidth]{%
+	\begin{upm@highligh@box@question}{#1}%
+	{\Huge\faQuestionCircle}\tcblower %
+}{%
+	\end{upm@highligh@box@question}%
 }
 
 %----------------------------------------
@@ -1538,6 +1558,9 @@
 %----------------------------------------
 % ENVIRONMENT FOR DEFINITIONS
 %----------------------------------------
+
+% Include the theorem definition with tcolorbox
+\tcbuselibrary{theorems}
 
 %-----
 % Defining the style for the definitions
