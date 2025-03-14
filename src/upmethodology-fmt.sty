@@ -1639,9 +1639,9 @@
 % Draw an emph box without title
 % [#1]: width of the box (linewidth by default)
 \NewEnviron{emphbox}[1][\linewidth]{%
-	\begin{framedcolorminipage}{#1}{emphboxborder}{emphboxbackground}%
-		\centering\color{emphboxtext}\BODY%
-	\end{framedcolorminipage}%
+	\begin{tcolorbox}[halign=center,valign=center,coltext=emphboxtext,colback=emphboxbackground,colframe=emphboxborder,rounded corners]
+		\BODY%
+	\end{tcolorbox}%
 }
 
 %-----
@@ -1649,11 +1649,9 @@
 % [#1]: width of the box (linewidth by default)
 % #2: text of the title
 \NewEnviron{titleemphbox}[2][\linewidth]{%
-	\begin{framedcolorminipage}{#1}{emphboxborder}{emphboxbackground}%
-		\centering\color{emphboxtext}%
-		\vspace{.25cm}\uline{\textbf{#2}}\\[.25cm]%
-		\raggedright\BODY\vspace{.25cm}%
-	\end{framedcolorminipage}\\[.4cm]%
+	\begin{tcolorbox}[halign=center,valign=center,coltext=emphboxtext,colback=emphboxbackground,colframe=emphboxborder,rounded corners,fonttitle=\bfseries,halign title=center,title=#2]
+		\BODY%
+	\end{tcolorbox}%
 }
 
 %-----
@@ -1661,11 +1659,9 @@
 % [#1]: width of the box (linewidth by default)
 % #2: text of the title
 \NewEnviron{titleemphbox2}[2][\linewidth]{%
-	\begin{framedcolorminipage}{#1}{emphboxborder}{emphboxbackgroundb}%
-		\centering\color{emphboxtext}%
-		\vspace{.25cm}\uline{\textbf{#2}}\\[.25cm]%
-		\raggedright\BODY\vspace{.25cm}%
-	\end{framedcolorminipage}\\[.4cm]%
+	\begin{tcolorbox}[halign=center,valign=center,coltext=emphboxtext,colback=emphboxbackgroundb,colframe=emphboxborder,rounded corners,fonttitle=\bfseries,halign title=center,title=#2]
+		\BODY%
+	\end{tcolorbox}%
 }
 
 %-----
@@ -1673,11 +1669,9 @@
 % [#1]: width of the box (linewidth by default)
 % #2: text of the title
 \NewEnviron{titleemphbox3}[2][\linewidth]{%
-	\begin{framedcolorminipage}{#1}{emphboxborder}{emphboxbackgroundc}%
-		\centering\color{emphboxtext}%
-		\vspace{.25cm}\uline{\textbf{#2}}\\[.25cm]%
-		\raggedright\BODY\vspace{.25cm}%
-	\end{framedcolorminipage}\\[.4cm]%
+	\begin{tcolorbox}[halign=center,valign=center,coltext=emphboxtext,colback=emphboxbackgroundc,colframe=emphboxborder,rounded corners,fonttitle=\bfseries,halign title=center,title=#2]
+		\BODY%
+	\end{tcolorbox}%
 }
 
 \endinput

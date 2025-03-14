@@ -1303,7 +1303,7 @@ The package \texttt{upmethodology-fmt} provides a set of macros allowing to mana
 	Example: \texttt{{\textbackslash}bibsize\{{\textbackslash}Huge\}};
 \end{itemize}
 
-\section{Theorems and Mathematic Environments}
+\section{Theorems and Mathematic Environments}\label{sec:theoremdefinition}
 
 The package \texttt{upmethodology-fmt} defines several environments and macros that are based on the \texttt{theorem} or the math API of \LaTeX.
 
@@ -1548,6 +1548,18 @@ This is an emphazed text.
 
 
 \section{Framed Boxes or Mini Pages}
+
+There is two API that are available for created framed boxes. The first one is \texttt{tcolorbox}, that is the one use by default in this package. The second approach is based on the \texttt{framedminipage} macros defined in this package.
+
+\subsection{With tcolorbox}
+
+\texttt{tcolorbox} provides an environment for colored and framed text boxes with a heading line. Optionally, such a box can be split in an upper and a lower part. The package
+\texttt{tcolorbox} is included by default, with its \texttt{theorems} extension.
+It can be used for the setting of \LaTeX\ examples where one part of the box displays the source code and the other part shows the output. Another common use case is the setting of theorems (see Section \ref{sec:theoremdefinition}).
+
+More information could be found on \url{https://www.ctan.org/pkg/tcolorbox} or \url{https://github.com/T-F-S/tcolorbox}.
+
+\subsection{With framedminipage}
 
 Standard \LaTeX\ distribution provides the \texttt{minipage} environment. This environment allows you to put a small piece of page inside your document. The package \texttt{upmethodology-fmt} provides two framed extensions of the original \texttt{minipage} environment: \texttt{framedminipage} and \texttt{framedcolorminipage}.
 
