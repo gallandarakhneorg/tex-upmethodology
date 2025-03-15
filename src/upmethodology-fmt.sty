@@ -1683,6 +1683,12 @@
 %-----
 % Declare the definition environments
 \declareupmtheorem{definition}{\definitionname}{\listdefinitionname}{def}{definition}{\upm@definition@formatsource}
+%-----
+%\defref{label}
+\newcommand{\defref}[1]{\ref{def:#1}}
+%-----
+%\defpageref{label}
+\newcommand{\defpageref}[1]{\pageref{def:#1}}
 
 %----------------------------------------
 % ENVIRONMENT FOR EMPHBOX
