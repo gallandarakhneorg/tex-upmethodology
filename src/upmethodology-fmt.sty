@@ -1727,7 +1727,7 @@
 \newcommand{\declareupmtheorem}[7][upmdefinition]{%
 	\expandafter\newtcbtheorem[list inside=#6]{upm@#2}{#3}{upmdefinition}{#5}%
 	\newenvironment{#2}[3][]{%
-		\upm@definition@argumentmanager[##1]{#2}{##2}{##3}%
+		\upm@definition@argumentmanager[##1]{#2}{\nohyphens{##2}}{##3}%
 	}{%
 		\Ifnotempty{\upm@definition@source}{\tcblower#7{\upm@definition@source}}%
 		\end{upm@#2}%
