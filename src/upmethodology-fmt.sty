@@ -50,6 +50,7 @@
   \gdef\upm@format@lang@mdoctor{M.D.}%
   \gdef\upm@format@lang@professionalengineer{CEng.}%
   \gdef\upm@format@lang@incorporatedengineer{IEng.}%
+  \gdef\upm@format@lang@listofalgorithms{List of Algorithms}%
   \gdef\upm@format@lang@listoffigures{List of Figures}%
 }
 \def\upm@format@lang@french{%
@@ -65,6 +66,7 @@
   \gdef\upm@format@lang@mdoctor{M.D.}%
   \gdef\upm@format@lang@professionalengineer{Ing.}%
   \gdef\upm@format@lang@incorporatedengineer{Ing.}%
+  \gdef\upm@format@lang@listofalgorithms{Liste des algorithmes}%
   \gdef\upm@format@lang@listoffigures{Liste des figures}%
 }
 \global\providecommand{\upm@format@lang@makedate}[3]{}%
@@ -115,6 +117,8 @@
 \RequirePackage{xcolor}
 \RequirePackage{tikz}
 \RequirePackage{fontawesome5}
+\RequirePackage{tocbibind} % To automatically the common "Listof" in the outline
+
 
 %----------------------------------------
 % Exponent and indice
@@ -796,6 +800,26 @@
 	}%
 }
 
+\def\@chaptertoc{\@ifstar\upm@chaptertoc@a\upm@chaptertoc@b}
+\def\upm@chaptertoc@a[#1]#2{%
+    \chapter*[#1]{#2}%
+    \addcontentsline{toc}{chapter}{#2}%
+}
+\def\upm@chaptertoc@b#1{%
+    \chapter*{#1}%
+    \addcontentsline{toc}{chapter}{#1}%
+}
+
+\def\@sectiontoc{\@ifstar\upm@sectiontoc@a\upm@sectiontoc@b}
+\def\upm@sectiontoc@a[#1]#2{%
+    \section*[#1]{#2}%
+    \addcontentsline{toc}{section}{#2}%
+}
+\def\upm@sectiontoc@b#1{%
+    \section*{#1}%
+    \addcontentsline{toc}{section}{#1}%
+}
+
 %-----
 % Section without number but inside the TOC
 %\sectiontoc [toctitle]{title} % left-alignment inside TOC
@@ -893,6 +917,22 @@
 \def\upm@format@newsection@sectionfull@b#1#2{%
 	\upm@format@newsection@thesectionmacro{#1}%
 	\global\sectionmark{#2}%
+}
+
+%-----
+%\upm@rootheadertoc and \upm@rootheadertoc@addtotoc
+\AtBeginDocument{%
+    \ifupmarticleformat%
+        \global\let\upm@rootheadertoc\@sectiontoc%
+        \gdef\upm@rootheadertoc@addtotoc#1{%
+            \addcontentsline{toc}{section}{#1}%
+        }%
+    \else%
+        \global\let\upm@rootheadertoc\@chaptertoc%
+        \gdef\upm@rootheadertoc@addtotoc#1{%
+            \addcontentsline{toc}{chapter}{#1}%
+        }%
+    \fi%
 }
 
 %----------------------------------------
@@ -1636,11 +1676,7 @@
 	}
 	% Check the version of the thmtools because the TeXLive distribution
 	% gives a too old version.
-	\ifupmarticleformat%
-		\global\@namedef{listof#2s}{\tcblistof[\section*]{#2}{#4}}%
-	\else%
-		\global\@namedef{listof#2s}{\tcblistof[\chapter*]{#2}{#4}}%
-	\fi%
+	\global\@namedef{listof#2s}{\tcblistof[\upm@rootheadertoc]{#2}{#4}}%
 }
 \@onlypreamble\declareupmtheorem
 
@@ -1710,5 +1746,25 @@
         \global\let\listfigurename\upm@format@lang@listoffigures%
     }%
     \@ifundefined{listalgorithmname}{}{%
+         \global\let\listalgorithmname\upm@format@lang@listofalgorithms%
+    }
+}
+
+%----------------------------------------
+% REDEFINE THE LISTOFALGORTIHMS MACRO FOR BEING IN TOC
+%----------------------------------------
+
+% Force the list of algorithms to be in the TOC.
+\AtBeginDocument{%
+    \@ifundefined{listofalgorithms}{}{%
+        \renewcommand{\listofalgorithms}{%
+            \global\let\upm@float@listhead@old\float@listhead%
+            \global\let\float@listhead\upm@rootheadertoc%
+            \listof{algorithm}{\listalgorithmname}%
+            \global\let\float@listhead\upm@float@listhead@old%
+        }%
+    }%
+}
+
 \endinput
 
