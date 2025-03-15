@@ -50,6 +50,7 @@
   \gdef\upm@format@lang@mdoctor{M.D.}%
   \gdef\upm@format@lang@professionalengineer{CEng.}%
   \gdef\upm@format@lang@incorporatedengineer{IEng.}%
+  \gdef\upm@format@lang@listoffigures{List of Figures}%
 }
 \def\upm@format@lang@french{%
   \gdef\upm@lang@@{\message{**** upmethodology-fmt is using French language ****}}%
@@ -64,6 +65,7 @@
   \gdef\upm@format@lang@mdoctor{M.D.}%
   \gdef\upm@format@lang@professionalengineer{Ing.}%
   \gdef\upm@format@lang@incorporatedengineer{Ing.}%
+  \gdef\upm@format@lang@listoffigures{Liste des figures}%
 }
 \global\providecommand{\upm@format@lang@makedate}[3]{}%
 
@@ -770,8 +772,8 @@
 %\chaptertoc [toctitle]{title} % left-alignment inside TOC
 %\chaptertoc*[toctitle]{title} % right-alignment inside TOC
 \def\chaptertoc{\@ifstar%
-	{\gdef\upm@format@newsection@alignment{\protect\numberline{}}\expandafter\upm@format@newsection@chapter}%
-	{\gdef\upm@format@newsection@alignment{}\expandafter\upm@format@newsection@chapter}}
+    {\gdef\upm@format@newsection@alignment{\protect\numberline{}}\expandafter\upm@format@newsection@chapter}%
+    {\gdef\upm@format@newsection@alignment{}\expandafter\upm@format@newsection@chapter}}
 
 \def\upm@format@newsection@chapter{\@ifnextchar[%
 	{\upm@format@newsection@chapter@a}%
@@ -1697,5 +1699,16 @@
 	\end{tcolorbox}%
 }
 
+%----------------------------------------
+% FIXING THE CHAPTER/SECTION NAMES
+%----------------------------------------
+
+% Change the names of the section "List of *" when the language
+% is French, because the LaTeX packages do not define them properly
+\AtBeginDocument{%
+    \@ifundefined{listfigurename}{}{%
+        \global\let\listfigurename\upm@format@lang@listoffigures%
+    }%
+    \@ifundefined{listalgorithmname}{}{%
 \endinput
 
