@@ -546,8 +546,13 @@
 	\endtabularx\endgroup%
 }
 
+\newcommand{\upm@mtable@formatsource}[1]{%
+    \mbox{}\\ \mfigureformatsource{\figuresourcename\upm@format@lang@colonchar{#1}}%
+}
+\gdef\upm@table@source{}
+
 %-----
-%\mtable[options]{width}{ncolumns}{columns}{caption}{label}
+%\mtable[options]{width}{ncolumns}{columns}{caption}{label}[source text]
 % size=<length>
 \define@key[autolatex]{mtable}{size}{\gdef\@autolatex@mtable@size{#1}}
 % position: h t b p H !
@@ -592,28 +597,32 @@
 \define@key[autolatex]{mtable}{htbpH!}[\relax]{\gdef\@autolatex@mtable@position{[htbpH!]}}
 %
 \newenvironment{mtable}[6][ht]{%
-	\gdef\@autolatex@mtable@position{[ht]}%
-	\gdef\@autolatex@mtable@size{\normalsize}%
-	\setkeys[autolatex]{mtable}{#1}%
-	%
-	\gdef\upm@table@caption{#5}%
-	\xdef\upm@table@label{tab:#6}%
-	\gdef\upm@table@note{}%
-	\newcommand{\captionastitle}{\tabulartitle{\upm@table@caption}}%
-	\newcommand{\tablenote}[1]{\gdef\upm@table@note{\bgroup ##1\egroup}}%
-	\expandafter\table\@autolatex@mtable@position%
-	\center\@autolatex@mtable@size%
-	\mtabular[#2]{#3}{#4}%
+    \gdef\@autolatex@mtable@position{[ht]}%
+    \gdef\@autolatex@mtable@size{\normalsize}%
+    \setkeys[autolatex]{mtable}{#1}%
+    %
+    \gdef\upm@table@source{}%
+    \gdef\upm@table@caption{#5}%
+    \xdef\upm@table@label{tab:#6}%
+    \gdef\upm@table@note{}%
+    \newcommand{\captionastitle}{\tabulartitle{\upm@table@caption}}%
+    \newcommand{\tablenote}[1]{\gdef\upm@table@note{\bgroup ##1\egroup}}%
+    \newcommand{\addsource}[1]{\gdef\upm@table@source{\upm@mtable@formatsource{\bgroup ##1 \egroup}}}%
+    %%
+    \expandafter\table\@autolatex@mtable@position%
+    \center\@autolatex@mtable@size%
+    \mtabular[#2]{#3}{#4}%
 }{%
-	\endmtabular\relax%
-	\caption{\upm@table@caption}%
-	\label{\upm@table@label}%
-	\endcenter%
-	\upm@table@note%
-	\endtable%
-	\global\let\upm@table@caption\relax%
-	\global\let\upm@table@label\relax%
-	\global\let\upm@table@note\relax%
+    \endmtabular\relax%
+    \caption{\upm@table@caption\upm@table@source}%
+    \label{\upm@table@label}%
+    \endcenter%
+    \upm@table@note%
+    \endtable%
+    \global\let\upm@table@caption\relax%
+    \global\let\upm@table@label\relax%
+    \global\let\upm@table@note\relax%
+    \global\let\upm@mtable@optionalarg@value\relax%
 }
 
 %-----

@@ -16,6 +16,7 @@
 \incsubversion{\makedate{15}{03}{2025}}{Add the mention of the dependency to \texttt{tobibind} in the dependencies of \texttt{upmmethodology-fmt}.}{\upmpublic}
 \incversion{\makedate{15}{03}{2025}}{Add the macros \texttt{{\textbackslash}defref} and \texttt{{\textbackslash}defpageref}.}{\upmpublic}
 \incversion{\makedate{15}{03}{2025}}{Add the optional "source text" to the macros \texttt{{\textbackslash}mfigure} and \texttt{{\textbackslash}mfigure*}.}{\upmpublic}
+\incversion{\makedate{15}{03}{2025}}{Add the macros \texttt{{\textbackslash}addsource} and \texttt{{\textbackslash}tablenote} for the \texttt{mtable} environment.}{\upmpublic}
 
 \addauthorvalidator*[galland@arakhne.org]{St{\'e}phane}{Galland}{Original Author}
 \addauthor*{Frans}{van Dunn\'e}{Reviewer}
@@ -52,9 +53,9 @@
 
 \tableofcontents
 
-\listoffigures
-
 \listoftables
+
+\listoffigures
 
 %###########################################################
 
@@ -462,13 +463,15 @@ As described into the previous section, the \texttt{graphicx} package is able to
 
 In order to define a search path that is valid for a part of the document, the \texttt{graphicspathcontext} environment is defined. This environment redefines the \texttt{graphicx} path with the environment's parameter. The original value of the \texttt{graphicx} path is restored when existing of the environment.
 
-The defined environment is: \\
+\paragraph{Syntax} \mbox{}\\
 \texttt{{\textbackslash}begin\{graphicspathcontext\}\{path\}} \\
 \texttt{...}\\
 \texttt{{\textbackslash}end\{graphicspathcontext\}} \\
 
 
-The parameter \texttt{path} must follow the syntactic definition of the \texttt{graphicx} path. If you want to reuse the current value of the \texttt{graphicx} path, you could obtain it by using the \texttt{{\textbackslash}old} macro, such as: \\
+The parameter \texttt{path} must follow the syntactic definition of the \texttt{graphicx} path. If you want to reuse the current value of the \texttt{graphicx} path, you could obtain it by using the \texttt{{\textbackslash}old} macro.
+
+\paragraph{Syntax with \texttt{{\textbackslash}old}} \mbox{}\\
 \texttt{{\textbackslash}begin\{graphicspathcontext\}\{{mypath},{\textbackslash}old\}} \\
 \texttt{...}\\
 \texttt{{\textbackslash}end\{graphicspathcontext\}} \\
@@ -478,9 +481,15 @@ The parameter \texttt{path} must follow the syntactic definition of the \texttt{
 
 \section{Figures}
 
-It may be verbose to put \LaTeX\ code to include a figure inside your document. To simplify your life, you could include a figure with the following macros: \\
-\texttt{{\textbackslash}mfigure[position]\{include\_graphics\_options\}\{filename\}\{caption\}\{label\}[source text]} \\
-\texttt{{\textbackslash}mfigure*[position]\{include\_graphics\_options\}\{filename\}\{caption\}\{label\}[source text]} \\
+It may be verbose to put \LaTeX\ code to include a figure inside your document. To simplify your life, you could include a figure with the following macros.
+
+\paragraph{Syntax 1} \mbox{}\\
+\texttt{{\textbackslash}mfigure[position]\{include\_graphics\_options\}\{filename\}\{caption\}\{label\}[source text]}
+
+\paragraph{Syntax 2} \mbox{}\\
+\texttt{{\textbackslash}mfigure*[position]\{include\_graphics\_options\}\{filename\}\{caption\}\{label\}[source text]}
+
+The difference between \texttt{{\textbackslash}mfigure} and \texttt{{\textbackslash}mfigure*} is the same as the difference between \texttt{{\textbackslash}begin\{figure\}} and \texttt{{\textbackslash}begin\{figure*\}}: the star-version fits to the entire paper width event if the document has two or more columns.
 
 \subsection{Macros for Including Figures}
 
@@ -498,8 +507,6 @@ These two macros make it possible to include an image in your document. The para
 
 \item \texttt{source text}: is the optinal text used to describe the source of the figure. If this value is provided, it is rendered below the caption itself.
 \end{itemize}
-
-The difference between \texttt{{\textbackslash}mfigure} and \texttt{{\textbackslash}mfigure*} is the same as the difference between \texttt{{\textbackslash}begin\{figure\}} and \texttt{{\textbackslash}begin\{figure*\}}: the star-version fits to the entire paper width event if the document has two or more columns.
 
 \subsection{Macros for Referencing Figures}
 
@@ -533,19 +540,23 @@ The source text that could be provided to the macros \texttt{{\textbackslash}mfi
 
 First the color of the source text is defined by \texttt{figuresourceforeground}. The default color is \textcolor{figuresourceforeground}{gray}.
 
-The prefix text that is written before the provided source text is defined by the macro \texttt{{\textbackslash}\figuresourcename}.
+The prefix text that is written before the provided source text is defined by the macro \texttt{{\textbackslash}figuresourcename}.
 
-It is also possible to change the color and the font of the source text by redefining the macro \texttt{{\textbackslash}\mfigureformatsource[1]}. This macro takes one argument that is the source text provided to \texttt{{\textbackslash}mfigure} or \texttt{{\textbackslash}mfigure*}.
+It is also possible to change the color and the font of the source text by redefining the macro \texttt{{\textbackslash}mfigureformatsource[1]}. This macro takes one argument that is the source text provided to \texttt{{\textbackslash}mfigure} or \texttt{{\textbackslash}mfigure*}.
 
 \section{Sub-figures}
 
-In some case, it is useful to put several images inside the same floating figure, but without loosing the possibility to reference each of the subfigures. This feature was proposed by the package \texttt{subcaption}. The following environments provides helper functions for \texttt{subcaption}:
+In some case, it is useful to put several images inside the same floating figure, but without loosing the possibility to reference each of the subfigures. This feature was proposed by the package \texttt{subcaption}. The following environments provides helper functions for \texttt{subcaption}.
+
+\paragraph{Syntax 1} \mbox{}\\
 \texttt{{\textbackslash}begin\{mfigures\}[position]\{caption\}\{label\}\\
 ...\\
-{\textbackslash}end\{mfigures\}} \\
+{\textbackslash}end\{mfigures\}}
+
+\paragraph{Syntax 2} \mbox{}\\
 \texttt{{\textbackslash}begin\{mfigures*\}[position]\{caption\}\{label\}\\
 ...\\
-{\textbackslash}end\{mfigures*\}} \\
+{\textbackslash}end\{mfigures*\}}
 
 These two macros enable you to include an image in your document. The parameters are:
 \begin{itemize}
@@ -593,29 +604,39 @@ To include a figure with \TeX\ macros inside, you must have: \begin{enumerate}
 \item a PDF figure (\texttt{.pdf}), and a \TeX\ file \texttt{.pdftex\_t} related to the PDF figure.
 \end{enumerate}
 
-With the \texttt{upmethodology-fmt} package, the inclusion of the figure with embedded \TeX\ macros is similar to the inclusion of figures with \texttt{{\textbackslash}includegraphics}. You must type the following macro: \\
-\texttt{{\textbackslash}includegraphicswtex[options]\{filename\}} \\
+With the \texttt{upmethodology-fmt} package, the inclusion of the figure with embedded \TeX\ macros is similar to the inclusion of figures with \texttt{{\textbackslash}includegraphics}. You must type the following macro.
+
+\paragraph{Syntax} \texttt{{\textbackslash}includegraphicswtex[options]\{filename\}}
+
 where \texttt{options} must be one or more of: \begin{itemize}
 \item \texttt{width=xxx}: specification of the width of the figure (\texttt{xxx} must be replaced by the length);
 \item \texttt{height=xxx}: specification of the height of the figure (\texttt{xxx} must be replaced by the length);
 \end{itemize}
 
-If the \texttt{filename} given to the macro \texttt{{\textbackslash}includegraphicswtex} does not specify a filename extension, the macro tries to add the extensions \texttt{.pdftex\_t}, \texttt{.pstex\_t}, \texttt{.pdf\_tex}, or \texttt{.ps\_tex}, by default. If you want to specify other file extensions, you must use the macro:
-\texttt{{\textbackslash}DeclareGraphicsExtensionsWtex\{extensions\}} \\
-where the \texttt{extensions} is a list of file extensions (including the point character), separated by coma characters. \\
-Example: \texttt{{\textbackslash}DeclareGraphicsExtensionsWtex\{.pdftex,.pstex\}}
+If the \texttt{filename} given to the macro \texttt{{\textbackslash}includegraphicswtex} does not specify a filename extension, the macro tries to add the extensions \texttt{.pdftex\_t}, \texttt{.pstex\_t}, \texttt{.pdf\_tex}, or \texttt{.ps\_tex}, by default. If you want to specify other file extensions, you must use the macro.
+
+\paragraph{Syntax} \texttt{{\textbackslash}DeclareGraphicsExtensionsWtex\{extensions\}} \\
+where the \texttt{extensions} is a list of file extensions (including the point character), separated by coma characters.
+
+\paragraph{Example} \texttt{{\textbackslash}DeclareGraphicsExtensionsWtex\{.pdftex,.pstex\}}
 
 If the \texttt{filename} does not correspond to a file on the disk, the macro \texttt{{\textbackslash}includegraphicswtex} tries to find the file in the directories specified in \texttt{{\textbackslash}graphicspath} (declared in the package \texttt{graphicx} for example). \\
-Example: \texttt{{\textbackslash}graphicspath\{\{./imgs/\},\{./imgs/additional/\}\}} \\
-\emph{Note that each of the given directories must be finished by the separation character of your operating system: \texttt{/} on Unix, \texttt{\textbackslash} on Windows. You must always use the Unix standard because it is assumed by a lot of \TeX\ compilers, even on Windows platforms.}
+
+\paragraph{Example} \texttt{{\textbackslash}graphicspath\{\{./imgs/\},\{./imgs/additional/\}\}} \\
+
+\begin{upminfo}
+	Note that each of the given directories must be finished by the separation character of your operating system: \texttt{/} on Unix, \texttt{\textbackslash} on Windows. You must always use the Unix standard because it is assumed by a lot of \TeX\ compilers, even on Windows platforms.
+\end{upminfo}
 
 Figure~\figref{figure_and_tex} gives an example of a floating figure combined with \TeX\ macros, which is using the macro \texttt{{\textbackslash}includegraphicswtex}.
 
 \subsection{Floating figure with embedded \TeX\ macros}
 
-To put a floating figure with \TeX\xspace macro inside, you may use one of the macros:
-\texttt{{\textbackslash}mfigurewtex[position]\{include\_graphics\_options\}\{filename\}\{caption\}\{label\}} \\
-\texttt{{\textbackslash}mfigurewtex*[position]\{include\_graphics\_options\}\{filename\}\{caption\}\{label\}}
+To put a floating figure with \TeX\xspace macro inside, you may use one of the macros.
+
+\paragraph{Syntax 1} \texttt{{\textbackslash}mfigurewtex[position]\{include\_graphics\_options\}\{filename\}\{caption\}\{label\}}
+
+\paragraph{Syntax 2} \texttt{{\textbackslash}mfigurewtex*[position]\{include\_graphics\_options\}\{filename\}\{caption\}\{label\}}
 
 The parameters are:
 \begin{itemize}
@@ -660,8 +681,9 @@ Figure~\figref{figure_and_tex} gives an example where the equation is written as
 
 \section{Tabulars}
 
-You could include a tabular inside your document with the following environment: \\
-\texttt{{\textbackslash}begin\{mtabular\}[width]\{ncolumns\}\{columns\}...{\textbackslash}end\{mtabular\}} \\
+You could include a tabular inside your document with the following environment.
+
+\paragraph{Syntax} \texttt{{\textbackslash}begin\{mtabular\}[width]\{ncolumns\}\{columns\}...{\textbackslash}end\{mtabular\}}
 
 This tabular is an extension of the \texttt{tabularx} environment which provides dynamic columns with the specifier \texttt{X}. The parameters are:
 \begin{itemize}
@@ -783,8 +805,65 @@ The table~\tabref{example:mtable} page~\tabpageref{example:mtable} is an illustr
 	e & f & g & h \\
 \end{mtable}
 
-The macro \texttt{{\textbackslash}captionastitle} is equivalent to a call to the macro \texttt{{\textbackslash}tabulartitle} with the caption in parameter.
+\subsection{Table Components}
 
+The package provides several macros that could help you to configure, update or add a component ot the table.
+
+\subsubsection{Specify the Caption as Table Title}
+
+The macro \texttt{{\textbackslash}captionastitle} is equivalent to a call to the macro \texttt{{\textbackslash}tabulartitle} with the caption in parameter.
+This macro allows you to define the title of the tabular in the table. It uses the colors \texttt{backtableheader} and \texttt{fronttableheader} for the background and the foreground respectively. The title has a single line at the top, and a single line below;
+
+\paragraph{Syntax} \texttt{{\textbackslash}captionastitle}
+
+\paragraph{Example} See Table \tabref{example:mtable} in the previous section.
+
+\subsubsection{Add a Table Note}
+
+A table note is a note that is rendered below the table and its caption.
+This macro changes the text of the table note.
+
+\paragraph{Syntax} \texttt{{\textbackslash}tablenote\{text\}}
+
+\paragraph{Example} The table~\tabref{example:mtable2} is an illustration of the following \LaTeX\ code: \\
+\texttt{{\textbackslash}begin\{mtable\}\{{\textbackslash}linewidth\}\{4\}\{lXrX\}\{Example of {\textbackslash}texttt{mtable} with a table note\}\{example:mtable2\}} \\
+\texttt{{\textbackslash}tablenote\{This is the text of the note\}} \\
+\texttt{{\textbackslash}tabularheader\{Col1\}\{Col2\}\{Col3\}\{Col4\}} \\
+\texttt{a \& b \& c \& d {\textbackslash}{\textbackslash}} \\
+\texttt{{\textbackslash}hline} \\
+\texttt{e \& f \& g \& h {\textbackslash}{\textbackslash}} \\
+\texttt{{\textbackslash}end\{mtable\}}
+
+\begin{mtable}{\linewidth}{4}{lXrX}{Example of \texttt{mtable} with a table note}{example:mtable2}
+	\tablenote{This is the text of the note}
+	\tabularheader{Col1}{Col2}{Col3}{Col4}
+	a & b & c & d \\
+	\hline
+	e & f & g & h \\
+\end{mtable}
+
+\subsubsection{Add a Table Source}
+
+A table source is a text that is describing the source of the content of the table.
+
+\paragraph{Syntax} \texttt{{\textbackslash}addsource\{text\}}
+
+\paragraph{Example} The table~\tabref{example:mtable3} is an illustration of the following \LaTeX\ code: \\
+\texttt{{\textbackslash}begin\{mtable\}\{{\textbackslash}linewidth\}\{4\}\{lXrX\}\{Example of {\textbackslash}texttt{mtable} with a table source\}\{example:mtable3\}} \\
+\texttt{{\textbackslash}addsource\{This is the source of the content\}} \\
+\texttt{{\textbackslash}tabularheader\{Col1\}\{Col2\}\{Col3\}\{Col4\}} \\
+\texttt{a \& b \& c \& d {\textbackslash}{\textbackslash}} \\
+\texttt{{\textbackslash}hline} \\
+\texttt{e \& f \& g \& h {\textbackslash}{\textbackslash}} \\
+\texttt{{\textbackslash}end\{mtable\}}
+
+\begin{mtable}{\linewidth}{4}{lXrX}{Example of \texttt{mtable} with a table source}{example:mtable3}
+	\addsource{This is the source of the content}
+	\tabularheader{Col1}{Col2}{Col3}{Col4}
+	a & b & c & d \\
+	\hline
+	e & f & g & h \\
+\end{mtable}
 
 \section{Enumerations}
 
@@ -883,7 +962,9 @@ This is a text: \begin{inlineenumeration}
 
 \section{Environment \texttt{description}}
 
-The environment \texttt{description} is redefined as following:
+The environment \texttt{description} is redefined as following.
+
+\paragraph{Syntax}
 \begin{verbatim}
 \begin{description}[separator]
 \item[desc] text
@@ -893,7 +974,7 @@ The text put in place of \texttt{desc} represents the text which may be emphasiz
 The \texttt{separator} is the text that is inserted at the end of the head of each description item.
 
 
-\paragraph{Example~1:} The following \LaTeX~code, using Roman numbers, produces the description just below:
+\paragraph{Example 1} The following \LaTeX~code, using Roman numbers, produces the description just below:
 \begin{verbatim}
 \begin{description}
 \item[first thing] this is a text for the first thing;
@@ -908,7 +989,7 @@ The \texttt{separator} is the text that is inserted at the end of the head of ea
 \item[more] etc.
 \end{description}
 
-\paragraph{Example~2:} The following \LaTeX~code produces the description just below:
+\paragraph{Example 2} The following \LaTeX~code produces the description just below:
 \begin{verbatim}
 \begin{description}[///]
 \item[first thing] this is a text for the first thing;
@@ -931,6 +1012,8 @@ In other words, the following environment provides a mix between the standards \
 \subsection{Environment \texttt{enumdescription}}
 
 The environment \texttt{enumdescription} is:
+
+\paragraph{Syntax}
 \begin{verbatim}
 \begin{enumdescription}[type]
 \item[desc] text
@@ -960,7 +1043,7 @@ To change the separator between the description and the rest of the text, you mu
 \renewcommand{\enumdescriptionlabelseparator}{ ... }
 \end{verbatim}
 
-\paragraph{Example~1:} The following \LaTeX~code, using Roman numbers, produces the enumerated description just below:
+\paragraph{Example 1} The following \LaTeX~code, using Roman numbers, produces the enumerated description just below:
 \begin{verbatim}
 \begin{enumdescription}
 \item[first thing] this is a text for the first thing;
@@ -975,7 +1058,7 @@ To change the separator between the description and the rest of the text, you mu
 \item[more] etc.
 \end{enumdescription}
 
-\paragraph{Example~2:} The following \LaTeX~code, using numeric numbers, produces the enumerated description just below:
+\paragraph{Example 2} The following \LaTeX~code, using numeric numbers, produces the enumerated description just below:
 \begin{verbatim}
 \begin{enumdescription}[1]
 \item[first thing] this is a text for the first thing;
@@ -990,7 +1073,7 @@ To change the separator between the description and the rest of the text, you mu
 \item[more] etc.
 \end{enumdescription}
 
-\paragraph{Example~3:} The following \LaTeX~code, using letter numbers, produces the enumerated description just below:
+\paragraph{Example 3} The following \LaTeX~code, using letter numbers, produces the enumerated description just below:
 \begin{verbatim}
 \begin{enumdescription}[a]
 \item[first thing] this is a text for the first thing;
@@ -1019,7 +1102,7 @@ Additionally, you could specify the format of the counter in the first optional 
 \item \texttt{I}: the counter is an upper-case roman number.
 \end{itemize}
 
-\paragraph{Example~1:} The following \LaTeX~code produces a list, which is similar to the one generated by the standard \LaTeX\ environment \texttt{enumerate}:
+\paragraph{Example 1} The following \LaTeX~code produces a list, which is similar to the one generated by the standard \LaTeX\ environment \texttt{enumerate}:
 \begin{verbatim}
 \begin{enumerate}
 \item this is a text for the first thing;
@@ -1034,7 +1117,7 @@ Additionally, you could specify the format of the counter in the first optional 
 \item etc.
 \end{enumerate}
 
-\paragraph{Example~2:} The following \LaTeX~code illustrates how the environment is reacting to a given description:
+\paragraph{Example 2} The following \LaTeX~code illustrates how the environment is reacting to a given description:
 \begin{verbatim}
 \begin{enumerate}
 \item this is a text for the first thing;
@@ -1049,7 +1132,7 @@ Additionally, you could specify the format of the counter in the first optional 
 \item etc.
 \end{enumerate}
 
-\paragraph{Example~3:} The following \LaTeX~code illustrates the alphabetic counter specification. Note that the parenthesis characters are directly rendered in the list:
+\paragraph{Example 3} The following \LaTeX~code illustrates the alphabetic counter specification. Note that the parenthesis characters are directly rendered in the list:
 \begin{verbatim}
 \begin{enumerate}[(a)]
 \item this is a text for the first thing;
@@ -1064,7 +1147,7 @@ Additionally, you could specify the format of the counter in the first optional 
 \item etc.
 \end{enumerate}
 
-\paragraph{Example~4:} The following \LaTeX~code illustrates the roman counter specification. Note that the dot character is directly rendered in the list:
+\paragraph{Example 4} The following \LaTeX~code illustrates the roman counter specification. Note that the dot character is directly rendered in the list:
 \begin{verbatim}
 \begin{enumerate}[I.]
 \item this is a text for the first thing;
@@ -1083,8 +1166,7 @@ Additionally, you could specify the format of the counter in the first optional 
 
 The environment \texttt{enumdescriptionx} extends the environment \texttt{enumdescription} by enabling a finer configuration with more parameters.
 
-
-The environment \texttt{enumdescriptionx} is:
+\paragraph{Syntax}
 \begin{verbatim}
 \begin{enumdescriptionx}[type]{counter\_prefix}{counter\_postfix}
 \item[desc] text
@@ -1107,7 +1189,7 @@ To change the rendering of the labels, you must redefined the macro as:
 \end{verbatim}
 
 
-\paragraph{Example:} The following \LaTeX~code, using letter numbers, produces the enumerated description just below:
+\paragraph{Example} The following \LaTeX~code, using letter numbers, produces the enumerated description just below:
 \begin{verbatim}
 \begin{enumdescriptionx}[a]{$\langle$}{$\rangle$}
 \item[first thing] this is a text for the first thing;
@@ -1352,7 +1434,9 @@ The package \texttt{upmethodology-fmt} defines several environments and macros t
 \subsection{Definition of a new theorem environment}
 
 The theorem API from this package is based on the standard \texttt{tcolorbox} package.
-If you want to create a new theorem environment based on the style provided by this package, you could invoke \texttt{{\textbackslash}declareupmtheorem}: \\
+If you want to create a new theorem environment based on the style provided by this package, you could invoke \texttt{{\textbackslash}declareupmtheorem}:
+
+\paragraph{Syntax} \mbox{}\\
 \texttt{{\textbackslash}declareupmtheorem[name of the tcolorbox style]\{name of the \LaTeX\ environment\}\{label of the theorem\}\{title of the theorems' list\}\{prefix for the label keys\}\{name of the theorem's list\}\{macro for formating the source\}}
 
 This macro defines:
@@ -1362,10 +1446,15 @@ This macro defines:
 \end{itemize}
 
 The \texttt{name of the tcolorbox style} is the name of the tcolorbox style to be used. This style must be defined according to the \texttt{tcolorbox} package documentation. By default, it is \texttt{upmdefinition}.
+
 The \texttt{label of the theorem} is the text to put in the theorem header, e.g., \texttt{Definition}.
+
 The \texttt{title of the theorems' list} is used by the macro \texttt{{\textbackslash}listof$\langle$name of the \LaTeX\ environment$\rangle$s} as the title of the associated chapter/section.
+
 By default, the theorem environment defines a label for the theorem box. The \texttt{prefix for the label keys} is the prefix that is automatically appended to the label. For example, if this prefix is set to "\texttt{prefix}", and the theorem is invoked with a label value "\texttt{thekey}", then the theorem environment will automatically generate the macro \texttt{{\textbackslash}label\{prefix:thekey\}} in the theorem environment.
+
 The \texttt{name of the theorems' list} is identifier of the list in which the theorem adds entries. This list could be displayed with the macro \texttt{{\textbackslash}listof$\langle$name of the \LaTeX\ environment$\rangle$s}.
+
 The \texttt{macro for formating the source} is \LaTeX\ macro that could be followed by the source text of theorem. It is usually used for formatting this source text in the lower part of the theorem box.
 
 \begin{upmcaution}
@@ -1381,7 +1470,7 @@ After defining an environment, you could use it as a regular \LaTeX\ environment
 \item the optional argument that is the text of the source. The source of the theorem is rendered in the lower part of the theorem box. Usually, it corecponds to the reference to a scientific article or an Internet page.
 \end{itemize}
 
-\paragraph{Example 1:} The following code define the environment \texttt{mytheorem} and use it without source text:
+\paragraph{Example 1} The following code define the environment \texttt{mytheorem} and use it without source text:
 \begin{verbatim}
 \documentclass{upmethodology-document}
 \declareupmtheorem{mytheorem}{My Theorem}{List of my Theorems}{thm}{mytheorem}{\textbf}
@@ -1401,7 +1490,7 @@ Read the theorem \ref{thm:mytheo1}.
 This is the theorem of Everything.
 \end{mytheorem}
 
-\paragraph{Example 2:} The following code define the environment \texttt{mytheorem} and use it with a source text:
+\paragraph{Example 2} The following code define the environment \texttt{mytheorem} and use it with a source text:
 \begin{verbatim}
 \documentclass{upmethodology-document}
 \declareupmtheorem{mytheorem}{My Theorem}{List of my Theorems}{thm}{mytheorem}{\textbf}
@@ -1424,7 +1513,7 @@ This is the theorem of Everything.
 \paragraph{Reference the defined theorem} You could add a reference to a defined theorem by using one of the following macros:
 \begin{itemize}
 \item \texttt{{\textbackslash}ref\{$\langle$label of the theorem$\rangle$:$\langle$Label of the theorem$\rangle$\}} for showing the definition's number, e.g., \ref{thm:mytheo2} for the theorem above.
-\item \texttt{{\textbackslash}pageref\{$\langle$label of the theorem$\rangle$:$\langle$Label of the theorem$\rangle$\}} for showing the definition's page, e.g., \defpageref{thm:mytheo2} for the theorem above.
+\item \texttt{{\textbackslash}pageref\{$\langle$label of the theorem$\rangle$:$\langle$Label of the theorem$\rangle$\}} for showing the definition's page, e.g., \pageref{thm:mytheo2} for the theorem above.
 \end{itemize}
 
 \subsection{Using the list of theorems}
@@ -1450,7 +1539,7 @@ This is the theorem of Evereything.
 
 The package \texttt{upmethodology-fmt} defines the environment \texttt{definition} to put a definition in your document. This environment is based on the \texttt{theorem} environment explained in the previous sections. The \texttt{definition} takes one optional parameter: the name of the definition.
 
-\paragraph{Example 1:} The following \LaTeX\ code:
+\paragraph{Example 1} The following \LaTeX\ code:
 \begin{verbatim}
 \begin{definition}{Name of the definition}{Label of the definition}
    Text of the definition.
@@ -1465,7 +1554,7 @@ produces:
 
 It is also possible to provide the source of the definition by adding the optional parameter as in the following example.
 
-\paragraph{Example 2:} 
+\paragraph{Example 2} 
 \begin{verbatim}
 \begin{definition}{Name of the definition}{Label of the definition}[This is the source]
    Text of the definition.
@@ -1514,10 +1603,11 @@ produces:
 
 \section{Emphazing Box}
 
-If you want to create a text that is emphazed with a box, you could use the environment: \\
-\texttt{{\textbackslash}begin\{emphbox\}[width] text {\textbackslash}end\{emphbox\}}
+If you want to create a text that is emphazed with a box, you could use the environment: 
 
-\paragraph{Example:} The following \LaTeX\ code:
+\paragraph{Syntax} \texttt{{\textbackslash}begin\{emphbox\}[width] text {\textbackslash}end\{emphbox\}}
+
+\paragraph{Example} The following \LaTeX\ code:
 \begin{verbatim}
 \begin{emphbox}[.7\linewidth]
 This is an emphazed text.
@@ -1529,7 +1619,7 @@ produces:
 This is an emphazed text.
 \end{emphbox}
 
-\paragraph{Emphazing Box with a Title:} Three additional boxes are provided. All of them are output a title, and has a different background color: \\
+\paragraph{Emphazing Box with a Title} Three additional boxes are provided. All of them are output a title, and has a different background color: \\
 \texttt{{\textbackslash}begin\{titleemphbox\}[width]\{title\} text {\textbackslash}end\{titleemphbox\}} \\
 \texttt{{\textbackslash}begin\{titleemphbox2\}[width]\{title\} text {\textbackslash}end\{titleemphbox2\}} \\
 \texttt{{\textbackslash}begin\{titleemphbox3\}[width]\{title\} text {\textbackslash}end\{titleemphbox3\}}
@@ -1574,7 +1664,7 @@ This is an emphazed text.
 
 
 
-\paragraph{Change the colors of the emphazing box:} You could change the colors of the \texttt{emphbox} environment by redefining the colors below with one of the macros \texttt{{\textbackslash}definecolor} or \texttt{{\textbackslash}colorlet}:
+\paragraph{Change the colors of the emphazing box} You could change the colors of the \texttt{emphbox} environment by redefining the colors below with one of the macros \texttt{{\textbackslash}definecolor} or \texttt{{\textbackslash}colorlet}:
 \begin{itemize}
 \item \texttt{emphboxbackground} is the color of the background of the environment;
 \item \texttt{emphboxborder} is the color of the frame;
@@ -1583,7 +1673,7 @@ This is an emphazed text.
 \item \texttt{emphboxbackgroundc} is the color of the background of the third environment with title;
 \end{itemize}
 
-\paragraph{Example of color redefinition:} The following \LaTeX\ code:
+\paragraph{Example of color redefinition} The following \LaTeX\ code:
 \begin{verbatim}
 \colorlet{emphboxbackground}{gray!20}
 \colorlet{emphboxborder}{red}
@@ -1687,9 +1777,11 @@ The package \texttt{upmethodology-fmt} provides several macros that permit to cr
 
 If you want to add a document part that has no part number but appearing inside the table of content, the classical \LaTeX\ macros \texttt{{\textbackslash}part} and \texttt{{\textbackslash}part*} are inefficient. Indeed, \texttt{{\textbackslash}part} is adding a numbered part inside the table of content, and \texttt{{\textbackslash}part*} is adding an unnumbered part but not inside the table of content.
 
-To add an unnumbered part inside the table of content, you could use one of the macros: \\
-\texttt{{\textbackslash}parttoc[toctitle]\{title\}} \\
-\texttt{{\textbackslash}parttoc*[toctitle]\{title\}}
+To add an unnumbered part inside the table of content, you could use one of the macros:
+
+\paragraph{Syntax 1} \texttt{{\textbackslash}parttoc[toctitle]\{title\}}
+
+\paragraph{Syntax 2} \texttt{{\textbackslash}parttoc*[toctitle]\{title\}}
 
 The macros \texttt{{\textbackslash}parttoc} and \texttt{{\textbackslash}parttoc*} have the same effect except that \texttt{{\textbackslash}parttoc*} aligns the part's title to the other numbered parts' titles; and \texttt{{\textbackslash}parttoc} not.
 
@@ -1697,9 +1789,11 @@ The macros \texttt{{\textbackslash}parttoc} and \texttt{{\textbackslash}parttoc*
 
 If you want to add a document chapter that has no chapter number but appearing inside the table of content, the classical \LaTeX\ macros \texttt{{\textbackslash}chapter} and \texttt{{\textbackslash}chapter*} are inefficient. Indeed, \texttt{{\textbackslash}chapter} is adding a numbered chapter inside the table of content, and \texttt{{\textbackslash}chapter*} is adding an unnumbered chapter but not inside the table of content.
 
-To add an unnumbered chapter inside the table of content, you could use one of the macros: \\
-\texttt{{\textbackslash}chaptertoc[toctitle]\{title\}} \\
-\texttt{{\textbackslash}chaptertoc*[toctitle]\{title\}}
+To add an unnumbered chapter inside the table of content, you could use one of the macros:
+
+\paragraph{Syntax 1} \texttt{{\textbackslash}chaptertoc[toctitle]\{title\}}
+
+\paragraph{Syntax 2} \texttt{{\textbackslash}chaptertoc*[toctitle]\{title\}}
 
 The macros \texttt{{\textbackslash}chaptertoc} and \texttt{{\textbackslash}chaptertoc*} have the same effect except that \texttt{{\textbackslash}chaptertoc*} aligns the chapter's title to the other numbered chapters' titles; and \texttt{{\textbackslash}chaptertoc} not.
 
@@ -1707,9 +1801,11 @@ The macros \texttt{{\textbackslash}chaptertoc} and \texttt{{\textbackslash}chapt
 
 If you want to add a document section that has no a section number but appearing inside the table of content, the classical \LaTeX\ macros \texttt{{\textbackslash}section} and \texttt{{\textbackslash}section*} are inefficient. Indeed, \texttt{{\textbackslash}section} add a numbered section inside the table of content, and \texttt{{\textbackslash}section*} adds an unnumbered section but not inside the table of content.
 
-To add an unnumbered section inside the table of content, you could use one of the macros: \\
-\texttt{{\textbackslash}sectiontoc[toctitle]\{title\}} \\
-\texttt{{\textbackslash}sectiontoc*[toctitle]\{title\}}
+To add an unnumbered section inside the table of content, you could use one of the macros:
+
+\paragraph{Syntax 1} \texttt{{\textbackslash}sectiontoc[toctitle]\{title\}}
+
+\paragraph{Syntax 2} \texttt{{\textbackslash}sectiontoc*[toctitle]\{title\}}
 
 The macros \texttt{{\textbackslash}sectiontoc} and \texttt{{\textbackslash}sectiontoc*} have the same effect except that \texttt{{\textbackslash}sectiontoc*} aligns the section's title to the other numbered sections' titles; and \texttt{{\textbackslash}sectiontoc} not.
 
@@ -1717,9 +1813,11 @@ The macros \texttt{{\textbackslash}sectiontoc} and \texttt{{\textbackslash}secti
 
 If you want to add a document subsection that has no subsection number but appearing inside the table of content, the classical \LaTeX\ macros \texttt{{\textbackslash}subsection} and \texttt{{\textbackslash}subsection*} are inefficient. Indeed, \texttt{{\textbackslash}subsection} is adding a numbered subsection inside the table of content, and \texttt{{\textbackslash}subsection*} is adding an unnumbered subsection but not inside the table of content.
 
-To add an unnumbered subsection inside the table of content, you could use one of the macros: \\
-\texttt{{\textbackslash}subsectiontoc[toctitle]\{title\}} \\
-\texttt{{\textbackslash}subsectiontoc*[toctitle]\{title\}}
+To add an unnumbered subsection inside the table of content, you could use one of the macros:
+
+\paragraph{Syntax 1} \texttt{{\textbackslash}subsectiontoc[toctitle]\{title\}}
+
+\paragraph{Syntax 2} \texttt{{\textbackslash}subsectiontoc*[toctitle]\{title\}}
 
 The macros \texttt{{\textbackslash}subsectiontoc} and \texttt{{\textbackslash}subsectiontoc*} have the same effect except that \texttt{{\textbackslash}subsectiontoc*} aligns the subsection's title to the other numbered subsections' titles; and \texttt{{\textbackslash}subsectiontoc} not.
 
@@ -1727,9 +1825,11 @@ The macros \texttt{{\textbackslash}subsectiontoc} and \texttt{{\textbackslash}su
 
 If you want to add a document subsubsection that has no subsubsection number but appearing inside the table of content, the classical \LaTeX\ macros \texttt{{\textbackslash}subsubsection} and \texttt{{\textbackslash}subsubsection*} are inefficient. Indeed, \texttt{{\textbackslash}subsubsection} is adding a numbered subsubsection inside the table of content, and \texttt{{\textbackslash}subsubsection*} is adding an unnumbered subsubsection but not inside the table of content.
 
-To add an unnumbered subsubsection inside the table of content, you could use one of the macros: \\
-\texttt{{\textbackslash}subsubsectiontoc[toctitle]\{title\}} \\
-\texttt{{\textbackslash}subsubsectiontoc*[toctitle]\{title\}}
+To add an unnumbered subsubsection inside the table of content, you could use one of the macros:
+
+\paragraph{Syntax 1} \texttt{{\textbackslash}subsubsectiontoc[toctitle]\{title\}}
+
+\paragraph{Syntax 2} \texttt{{\textbackslash}subsubsectiontoc*[toctitle]\{title\}}
 
 The macros \texttt{{\textbackslash}subsubsectiontoc} and \texttt{{\textbackslash}subsubsectiontoc*} have the same effect except that \texttt{{\textbackslash}subsubsectiontoc*} aligns the subsubsection's title to the other numbered subsubsections' titles; and \texttt{{\textbackslash}subsubsectiontoc} not.
 
@@ -1737,8 +1837,7 @@ The macros \texttt{{\textbackslash}subsubsectiontoc} and \texttt{{\textbackslash
 
 If you want to control the labels in the table of contents (TOC), the headers and the document for a chapter, the classical \LaTeX\ macros \texttt{{\textbackslash}chapter} and \texttt{{\textbackslash}chapter*} are inefficient.
 
-To control these labels, you could use the macro: \\
-\texttt{{\textbackslash}chapterfull[toctitle]\{title\}\{headertitle\}}
+\paragraph{Syntax} \texttt{{\textbackslash}chapterfull[toctitle]\{title\}\{headertitle\}}
 
 The macro create a chapter with the given label ``\texttt{title}'' in the core part of the document, with the given label ``\texttt{toctitle}'' in the table of contents, and with the label ``\texttt{headertitle}'' in the headers.
 
@@ -1746,8 +1845,7 @@ The macro create a chapter with the given label ``\texttt{title}'' in the core p
 
 If you want to control the labels in the table of contents (TOC), the headers and the document for a section, the classical \LaTeX\ macros \texttt{{\textbackslash}section} and \texttt{{\textbackslash}section*} are inefficient.
 
-To control these labels, you could use the macro: \\
-\texttt{{\textbackslash}sectionfull[toctitle]\{title\}\{headertitle\}}
+\paragraph{Syntax} \texttt{{\textbackslash}sectionfull[toctitle]\{title\}\{headertitle\}}
 
 The macro create a section with the given label ``\texttt{title}'' in the core part of the document, with the given label ``\texttt{toctitle}'' in the table of contents, and with the label ``\texttt{headertitle}'' in the headers.
 
