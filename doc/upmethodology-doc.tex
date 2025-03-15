@@ -13,6 +13,9 @@
 \incversion{\makedate{06}{04}{2020}}{Add explainations for \texttt{{\textbackslash}Append} and \texttt{{\textbackslash}setdocumentpurpose}.}{\upmpublic}
 \incversion{\makedate{03}{06}{2021}}{Add emphazing box with titles.}{\upmpublic}
 \incversion{\makedate{14}{03}{2025}}{Update the documentation for the \texttt{declareupmtheorem} macro and \texttt{definition} environment.}{\upmpublic}
+\incsubversion{\makedate{15}{03}{2025}}{Add the mention of the dependency to \texttt{tobibind} in the dependencies of \texttt{upmmethodology-fmt}.}{\upmpublic}
+\incversion{\makedate{15}{03}{2025}}{Add the macros \texttt{{\textbackslash}defref} and \texttt{{\textbackslash}defpageref}.}{\upmpublic}
+\incversion{\makedate{15}{03}{2025}}{Add the optional "source text" to the macros \texttt{{\textbackslash}mfigure} and \texttt{{\textbackslash}mfigure*}.}{\upmpublic}
 
 \addauthorvalidator*[galland@arakhne.org]{St{\'e}phane}{Galland}{Original Author}
 \addauthor*{Frans}{van Dunn\'e}{Reviewer}
@@ -195,6 +198,7 @@ This section contains the list of all the package dependencies for the \texttt{u
 \item \texttt{thmtools}
 \item \texttt{tikz}
 \item \texttt{titlesec}
+\item \texttt{tocbibind}
 \item \texttt{txfonts}
 \item \texttt{upmethodology-p-common}
 \item \texttt{varioref}
@@ -475,8 +479,10 @@ The parameter \texttt{path} must follow the syntactic definition of the \texttt{
 \section{Figures}
 
 It may be verbose to put \LaTeX\ code to include a figure inside your document. To simplify your life, you could include a figure with the following macros: \\
-\texttt{{\textbackslash}mfigure[position]\{include\_graphics\_options\}\{filename\}\{caption\}\{label\}} \\
-\texttt{{\textbackslash}mfigure*[position]\{include\_graphics\_options\}\{filename\}\{caption\}\{label\}} \\
+\texttt{{\textbackslash}mfigure[position]\{include\_graphics\_options\}\{filename\}\{caption\}\{label\}[source text]} \\
+\texttt{{\textbackslash}mfigure*[position]\{include\_graphics\_options\}\{filename\}\{caption\}\{label\}[source text]} \\
+
+\subsection{Macros for Including Figures}
 
 These two macros make it possible to include an image in your document. The parameters are:
 \begin{itemize}
@@ -489,9 +495,13 @@ These two macros make it possible to include an image in your document. The para
 \item \texttt{caption}: is the caption of the figure (see {\textbackslash}caption\{caption\});
 
 \item \texttt{label}: is the label used to reference the figure (see {\textbackslash}label\{fig:label\}).
+
+\item \texttt{source text}: is the optinal text used to describe the source of the figure. If this value is provided, it is rendered below the caption itself.
 \end{itemize}
 
 The difference between \texttt{{\textbackslash}mfigure} and \texttt{{\textbackslash}mfigure*} is the same as the difference between \texttt{{\textbackslash}begin\{figure\}} and \texttt{{\textbackslash}begin\{figure*\}}: the star-version fits to the entire paper width event if the document has two or more columns.
+
+\subsection{Macros for Referencing Figures}
 
 Because the two macros above register a label with string starting with \texttt{fig:}, we propose the following function to easily access to the figure's references:
 \begin{itemize}
@@ -499,9 +509,33 @@ Because the two macros above register a label with string starting with \texttt{
 \item \texttt{{\textbackslash}figpageref\{label\}}: is equivalent to \texttt{{\textbackslash}pageref\{fig:label\}}.
 \end{itemize}
 
-The figure~\figref{example:mfigure} page~\figpageref{example:mfigure} is obtained with the macro: \texttt{{\textbackslash}mfigure[ht]\{width=.4{\textbackslash}linewidth\}\{slogo\}\{Example of figure inclusion with {\textbackslash}texttt\{\{{\textbackslash}textbackslash\}mfigure\}\}\{example:mfigure\}}. The reference and page reference are obtained with \texttt{{\textbackslash}figref\{example:mfigure\}} and \texttt{{\textbackslash}figpageref\{example:mfigure\}}.
+\subsection{Example without Source Text}
 
-\mfigure[ht]{width=.4\linewidth}{arakhne_org_logo}{Example of figure inclusion with \texttt{{\textbackslash}mfigure}}{example:mfigure}
+The figure~\figref{example:mfigure1} page~\figpageref{example:mfigure1} is obtained with the macro:
+
+\texttt{{\textbackslash}mfigure[ht]\{width=.4{\textbackslash}linewidth\}\{slogo\}\{Example of figure inclusion with {\textbackslash}texttt\{\{{\textbackslash}textbackslash\}mfigure\}\}\{example:mfigure1\}}
+
+The reference and page reference are obtained with \texttt{{\textbackslash}figref\{example:mfigure1\}} and \texttt{{\textbackslash}figpageref\{example:mfigure1\}}.
+
+\mfigure[ht]{width=.4\linewidth}{arakhne_org_logo}{Example of figure inclusion with \texttt{{\textbackslash}mfigure}}{example:mfigure1}
+
+\subsection{Example with Source Text}
+
+For illustrating the rendering of the source text argument, the figure~\figref{example:mfigure2} page~\figpageref{example:mfigure2} is obtained with the macro:
+
+\texttt{{\textbackslash}mfigure[ht]\{width=.4{\textbackslash}linewidth\}\{slogo\}\{Example of figure inclusion with {\textbackslash}texttt\{\{{\textbackslash}textbackslash\}mfigure with source text\}\}\{example:mfigure2\}[This text explain the source]}
+
+\mfigure[ht]{width=.4\linewidth}{arakhne_org_logo}{Example of figure inclusion with \texttt{{\textbackslash}mfigure with source text}}{example:mfigure2}[This text explain the source]
+
+\subsection{Rendering of the source text}
+
+The source text that could be provided to the macros \texttt{{\textbackslash}mfigure} or \texttt{{\textbackslash}mfigure*} is rendered with a specific configuration.
+
+First the color of the source text is defined by \texttt{figuresourceforeground}. The default color is \textcolor{figuresourceforeground}{gray}.
+
+The prefix text that is written before the provided source text is defined by the macro \texttt{{\textbackslash}\figuresourcename}.
+
+It is also possible to change the color and the font of the source text by redefining the macro \texttt{{\textbackslash}\mfigureformatsource[1]}. This macro takes one argument that is the source text provided to \texttt{{\textbackslash}mfigure} or \texttt{{\textbackslash}mfigure*}.
 
 \section{Sub-figures}
 
@@ -1387,6 +1421,12 @@ Read the theorem \ref{thm:mytheo2}.
 This is the theorem of Everything.
 \end{mytheorem}
 
+\paragraph{Reference the defined theorem} You could add a reference to a defined theorem by using one of the following macros:
+\begin{itemize}
+\item \texttt{{\textbackslash}ref\{$\langle$label of the theorem$\rangle$:$\langle$Label of the theorem$\rangle$\}} for showing the definition's number, e.g., \ref{thm:mytheo2} for the theorem above.
+\item \texttt{{\textbackslash}pageref\{$\langle$label of the theorem$\rangle$:$\langle$Label of the theorem$\rangle$\}} for showing the definition's page, e.g., \defpageref{thm:mytheo2} for the theorem above.
+\end{itemize}
+
 \subsection{Using the list of theorems}
 
 When a theorem is defined, the it is possible to creation a chapter (in books or reports) or a section (in articles) that lists all the defined theorems.
@@ -1432,12 +1472,17 @@ It is also possible to provide the source of the definition by adding the option
 \end{definition}
 \end{verbatim}
 
-THe result of this definition declaration is:
+The result of this definition declaration is:
 
 \begin{definition}{Name of the definition}{Label of the definition}[This is the source]
   Text of the definition.
 \end{definition}
 
+\paragraph{Reference the definition} You could add a reference to a definition by using one of the following macros:
+\begin{itemize}
+\item \texttt{{\textbackslash}defref\{$\langle$Label of the definition$\rangle$\}} for showing the definition's number, e.g., \defref{Label of the definition} for the definition above.
+\item \texttt{{\textbackslash}defpageref\{$\langle$Label of the definition$\rangle$\}} for showing the definition's page, e.g., \defpageref{Label of the definition} for the definition above.
+\end{itemize}
 
 \paragraph{Change the colors of the definition:} You could change the colors of the \texttt{definition} environment by redefining the colors below with one of the macros \texttt{{\textbackslash}definecolor} or \texttt{{\textbackslash}colorlet}:
 \begin{itemize}

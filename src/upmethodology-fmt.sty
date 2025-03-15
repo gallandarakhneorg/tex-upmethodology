@@ -17,7 +17,7 @@
 % write to the Free Software Foundation, Inc., 59 Temple Place - Suite
 % 330, Boston, MA 02111-1307, USA.
 
-\global\edef\upm@package@fmt@ver{2025/03/14}
+\global\edef\upm@package@fmt@ver{2025/03/15}
 
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
 \ProvidesPackage{upmethodology-fmt}[\upm@package@fmt@ver]
@@ -52,6 +52,8 @@
   \gdef\upm@format@lang@incorporatedengineer{IEng.}%
   \gdef\upm@format@lang@listofalgorithms{List of Algorithms}%
   \gdef\upm@format@lang@listoffigures{List of Figures}%
+  \gdef\upm@format@lang@sourcename{Source}%
+  \gdef\upm@format@lang@colonchar{:\xspace}%
 }
 \def\upm@format@lang@french{%
   \gdef\upm@lang@@{\message{**** upmethodology-fmt is using French language ****}}%
@@ -68,6 +70,8 @@
   \gdef\upm@format@lang@incorporatedengineer{Ing.}%
   \gdef\upm@format@lang@listofalgorithms{Liste des algorithmes}%
   \gdef\upm@format@lang@listoffigures{Liste des figures}%
+  \gdef\upm@format@lang@sourcename{Source}%
+  \gdef\upm@format@lang@colonchar{\;:\xspace}%
 }
 \global\providecommand{\upm@format@lang@makedate}[3]{}%
 
@@ -190,26 +194,81 @@
 % FIGURES
 %----------------------------------------
 
-\newcommand{\upm@mfigure}[5][ht]{
-	\begin{figure}[#1]%
-		\begin{center}%
-			\includegraphics[#2]{#3}%
-			\caption{#4}%
-			\label{fig:#5}%
-		\end{center}%
-	\end{figure}%
+\colorlet{figuresourceforeground}{gray}
+\global\let\figuresourcename\upm@format@lang@sourcename
+\newcommand{\mfigureformatsource}[1]{%
+    \centering\textcolor{figuresourceforeground}{\smaller\textit{#1}}%
+}%
+\newcommand{\upm@mfigure@formatsource}[1]{%
+    \\ \mfigureformatsource{\figuresourcename\upm@format@lang@colonchar{#1}}%
 }
-\newcommand{\upm@mfigurestar}[5][ht]{
-	\begin{figure*}[#1]%
-		\begin{center}%
-			\includegraphics[#2]{#3}%
-			\caption{#4}%
-			\label{fig:#5}%
-		\end{center}%
-	\end{figure*}%
+\newcommand{\upm@mfigure@internal@}[7]{%
+    \begin{#7}[#1]%
+        \begin{center}%
+            \protect\includegraphics[#2]{#3}%
+            \protect\caption{#4#6}%
+            \protect\label{fig:#5}%
+        \end{center}%
+    \end{#7}%
+}
+
+\newcommand{\upm@mfigure@internal}{%
+    \protected@edef\upm@tmp{
+        \protect\upm@mfigure@internal@%
+        {\upm@mfigure@arga}%
+        {\upm@mfigure@argb}%
+        {\upm@mfigure@argc}%
+        {\upm@mfigure@argd}%
+        {\upm@mfigure@arge}%
+        {\upm@mfigure@argf}%
+        {figure}%
+    }%
+    \upm@tmp%
+}
+\gdef\upm@mfigure@sourcetext@reader[#1]{%
+    \gdef\upm@mfigure@argf{\upm@mfigure@formatsource{#1}}\upm@mfigure@internal%
+}
+\newcommand{\upm@mfigure}[5][ht]{%
+    \gdef\upm@mfigure@arga{#1}%
+    \gdef\upm@mfigure@argb{#2}%
+    \gdef\upm@mfigure@argc{#3}%
+    \gdef\upm@mfigure@argd{#4}%
+    \gdef\upm@mfigure@arge{#5}%
+    \global\let\upm@mfigure@argf\@empty%
+    \@ifnextchar[%
+        \upm@mfigure@sourcetext@reader%
+        \upm@mfigure@internal%
+}
+
+\newcommand{\upm@mfigurestar@internal}{%
+    \protected@edef\upm@tmp{
+        \protect\upm@mfigure@internal@%
+        {\upm@mfigure@arga}%
+        {\upm@mfigure@argb}%
+        {\upm@mfigure@argc}%
+        {\protect\upm@mfigure@argd}%
+        {\upm@mfigure@arge}%
+        {\protect\upm@mfigure@argf}%
+        {figure*}%
+    }%
+    \upm@tmp%
+}
+\gdef\upm@mfigurestar@sourcetext@reader[#1]{%
+    \gdef\upm@mfigure@argf{\upm@mfigure@formatsource{#1}}\upm@mfigurestar@internal%
+}
+\newcommand{\upm@mfigurestar}[5][ht]{%
+    \gdef\upm@mfigure@arga{#1}%
+    \gdef\upm@mfigure@argb{#2}%
+    \gdef\upm@mfigure@argc{#3}%
+    \gdef\upm@mfigure@argd{#4}%
+    \gdef\upm@mfigure@arge{#5}%
+    \global\let\upm@mfigure@argf\@empty%
+    \@ifnextchar[%
+        \upm@mfigurestar@sourcetext@reader%
+        \upm@mfigurestar@internal%
 }
 %-----
-%\mfigure[position]{options}{filename}{caption}{label}
+%\mfigure[position]{options}{filename}{caption}{label}[source]
 \def\mfigure{\@ifstar\upm@mfigurestar\upm@mfigure}
 %-----
 %\figref{label}
@@ -1615,14 +1674,13 @@
 \ifupmlang{french}{
 	\gdef\definitionname{D\'efinition}
 	\gdef\listdefinitionname{Liste des d\'efinitions}
-	\gdef\definitionsourcename{Source}
 	\gdef\upm@definition@formatsource#1{\definitionsourcename\;:\xspace#1}
 }{
 	\gdef\definitionname{Definition}
 	\gdef\listdefinitionname{List of Definitions}
-	\gdef\definitionsourcename{Source}
 	\gdef\upm@definition@formatsource#1{\definitionsourcename:\xspace#1}
 }
+\global\let\definitionsourcename\upm@format@lang@sourcename
 
 \gdef\upm@definition@width{\linewidth}
 
