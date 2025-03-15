@@ -171,8 +171,7 @@
 % Display the version history
 %\upmhistory[width]
 \newcommand{\upmhistory}[1][\linewidth]{%
-	\noindent\expandafter\begin{mtabular}[#1]{3}{|c|c|X|}
-	\tabulartitle{\upm@lang@version@history}%
+	\noindent\expandafter\begin{mtabular}[#1]{3}{|c|c|X|}{\upm@lang@version@history}%
 	\tabularheader{\upm@lang@version}{\upm@lang@date}{\upm@lang@updates}%
 	\upm@update@list
 	\hline

@@ -17,6 +17,7 @@
 \incversion{\makedate{15}{03}{2025}}{Add the macros \texttt{{\textbackslash}defref} and \texttt{{\textbackslash}defpageref}.}{\upmpublic}
 \incversion{\makedate{15}{03}{2025}}{Add the optional "source text" to the macros \texttt{{\textbackslash}mfigure} and \texttt{{\textbackslash}mfigure*}.}{\upmpublic}
 \incversion{\makedate{15}{03}{2025}}{Add the macros \texttt{{\textbackslash}addsource} and \texttt{{\textbackslash}tablenote} for the \texttt{mtable} environment.}{\upmpublic}
+\incversion{\makedate{15}{03}{2025}}{Use the package \texttt{tcolorbox} for implementing \texttt{mtabular} and \texttt{mtable} environments.}{\upmpublic}
 
 \addauthorvalidator*[galland@arakhne.org]{St{\'e}phane}{Galland}{Original Author}
 \addauthor*{Frans}{van Dunn\'e}{Reviewer}
@@ -281,7 +282,6 @@ The \LaTeX\ class \texttt{upmethodology-document} provides the basic configurati
 Table~\tabref{documentclassoptions} contains the options supported by \texttt{upmethodology-document}. Any option not explicitely supported by the class is directly passed to the underlying standard \LaTeX\ class (\texttt{book}, \texttt{report} or \texttt{article} according to the type of document, see~\ref{section:documentclass:doctype}).
 
 \begin{mtable}{\linewidth}{2}{|l|X|}{Options of \texttt{upmethodology-document} class}{documentclassoptions}
-\captionastitle
 \tabularheader{Option}{Explanation}
 
 book & see section~\ref{section:documentclass:doctype}. \\
@@ -697,26 +697,22 @@ This tabular is an extension of the \texttt{tabularx} environment which provides
 
 
 \begin{upmcaution}
-	You must note put any text nor \TeX\ macro before the first use of \texttt{{\textbackslash}tabulartitle} or \texttt{{\textbackslash}tabularheader}. Otherwhise, you will obtain a \TeX\ error.
-\end{upmcaution}
+	The following macro is deprecated: \texttt{{\textbackslash}tabulartitle}. \end{upmcaution}
 
 
 The \texttt{mtabular} environment provides:
 \begin{itemize}
-\item \texttt{{\textbackslash}tabulartitle\{title\}} \\
-	This macro allows you to define the title of the tabular. It uses the colors \texttt{backtableheader} and \texttt{fronttableheader} for the background and the foreground respectively. The title has a single line at the top, and a single line below;
-
 \item \texttt{{\textbackslash}tabulartitleinside\{title\}} \\
-	This macro allows you to define the title of the tabular. It uses the colors \texttt{backtableheader} and \texttt{fronttableheader} for the background and the foreground respectively. The title has two lines at the top, and a single line below;
+	This macro allows you to define the title of the tabular. It uses the colors \texttt{tableheaderbackground} and \texttt{tableheaderforeground} for the background and the foreground respectively. The title has two lines at the top, and a single line below;
 
 \item \texttt{{\textbackslash}tabularheader\{$header_1$\}...\{$header_n$\}} \\
-	This macro allows you to define the titles of the columns. It uses the colors \texttt{backtableheader} and \texttt{fronttableheader} for the background and the foreground respectively. Because the count of columns was given to the environment this function takes the same count of parameters as the count of columns. This macro adds a line after the header, \emph{BUT NOT BEFORE}.
+	This macro allows you to define the titles of the columns. It uses the colors \texttt{tableheaderbackground} and \texttt{tableheaderforeground} for the background and the foreground respectively. Because the count of columns was given to the environment this function takes the same count of parameters as the count of columns. This macro adds a line after the header, \emph{BUT NOT BEFORE}.
 \begin{upmcaution}
 	Because \texttt{{\textbackslash}tabularheader} is adding a \texttt{{\textbackslash}hline} at the end of its expansion. You must put a \texttt{{\textbackslash}tabularheader} just after \texttt{{\textbackslash}tabularheader}. Otherwise you may obtain a \TeX\ error.
 \end{upmcaution}
 
 \item \texttt{{\textbackslash}tabularrowheader\{title\}} \\
-	This macro is designed to be used in the first cell of a row. It is rendering the cell as a row's header.
+	This macro is designed to be used in the first cell of a row. It is rendering the cell as a row's header. A row header is a cell that is an header for the row. Only the row header cell has the header background color.
 
 \item \texttt{{\textbackslash}tabulartitlespec\{column\_spec\}} \\
 	This macro defines the specification of the column used to render the title of the table.
@@ -727,7 +723,6 @@ The \texttt{mtabular} environment provides:
 The following example of table is obtained by: \\
 \begin{verbatim}
 \begin{mtabular}[\linewidth]{4}{lXrX}
-	\tabulartitle{Example of \texttt{mtabular}}
 	\tabularheader{Col1}{Col2}{Col3}{Col4}
 	a & b & c & d \\
 	\hline
@@ -740,8 +735,7 @@ The following example of table is obtained by: \\
 \end{mtabular}
 \end{verbatim}
 
-\begin{mtabular}[\linewidth]{4}{lXrX}
-	\tabulartitle{Example of \texttt{mtabular}}
+\begin{mtabular}[\linewidth]{4}{lXrX}{}
 	\tabularheader{Col1}{Col2}{Col3}{Col4}
 	a & b & c & d \\
 	\hline
@@ -788,8 +782,6 @@ Because the \texttt{mtable} environment registers a label with a string starting
 
 The table~\tabref{example:mtable} page~\tabpageref{example:mtable} is an illustration of the following \LaTeX\ code: \\
 \texttt{{\textbackslash}begin\{mtable\}\{{\textbackslash}linewidth\}\{4\}\{lXrX\}\{Example of {\textbackslash}texttt{mtable}\}\{example:mtable\}} \\
-%\texttt{{\textbackslash}tabulartitle\{Example of {\textbackslash}texttt\{mtable\}\}} \\
-\texttt{{\textbackslash}captionastitle} \\
 \texttt{{\textbackslash}tabularheader\{Col1\}\{Col2\}\{Col3\}\{Col4\}} \\
 \texttt{a \& b \& c \& d {\textbackslash}{\textbackslash}} \\
 \texttt{{\textbackslash}hline} \\
@@ -797,8 +789,6 @@ The table~\tabref{example:mtable} page~\tabpageref{example:mtable} is an illustr
 \texttt{{\textbackslash}end\{mtable\}}
 
 \begin{mtable}{\linewidth}{4}{lXrX}{Example of \texttt{mtable}}{example:mtable}
-	%\tabulartitle{Example of \texttt{mtable}}
-	\captionastitle
 	\tabularheader{Col1}{Col2}{Col3}{Col4}
 	a & b & c & d \\
 	\hline
@@ -808,15 +798,6 @@ The table~\tabref{example:mtable} page~\tabpageref{example:mtable} is an illustr
 \subsection{Table Components}
 
 The package provides several macros that could help you to configure, update or add a component ot the table.
-
-\subsubsection{Specify the Caption as Table Title}
-
-The macro \texttt{{\textbackslash}captionastitle} is equivalent to a call to the macro \texttt{{\textbackslash}tabulartitle} with the caption in parameter.
-This macro allows you to define the title of the tabular in the table. It uses the colors \texttt{backtableheader} and \texttt{fronttableheader} for the background and the foreground respectively. The title has a single line at the top, and a single line below;
-
-\paragraph{Syntax} \texttt{{\textbackslash}captionastitle}
-
-\paragraph{Example} See Table \tabref{example:mtable} in the previous section.
 
 \subsubsection{Add a Table Note}
 
@@ -1755,11 +1736,25 @@ The package \texttt{upmethodology-fmt} provides a set of environment to put emph
 \raisebox{-\height}{\begin{upminfo}This is an example of an information message.\end{upminfo}}
 \\
 
+\texttt{{\textbackslash}begin\{upmnote\}{[}width{]}} \newline
+\texttt{This is an example of a note message.} \newline
+\texttt{{\textbackslash}end\{upmnote\}}
+&
+\raisebox{-\height}{\begin{upmnote}This is an example of a note message.\end{upmnote}}
+\\
+
 \texttt{{\textbackslash}begin\{upmquestion\}{[}width{]}} \newline
 \texttt{This is an example of a question message.} \newline
 \texttt{{\textbackslash}end\{upmquestion\}}
 &
 \raisebox{-\height}{\begin{upmquestion}This is an example of a question message.\end{upmquestion}}
+\\
+
+\texttt{{\textbackslash}begin\{upmaction\}{[}width{]}} \newline
+\texttt{This is an example of an action message.} \newline
+\texttt{{\textbackslash}end\{upmaction\}}
+&
+\raisebox{-\height}{\begin{upmaction}This is an example of an action message.\end{upmaction}}
 \\
 
 \end{tabularx}

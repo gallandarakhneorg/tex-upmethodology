@@ -158,8 +158,7 @@
 % Display the summary of the document
 %\upmdocumentsummary[width]
 \newcommand{\upmdocumentsummary}[1][\linewidth]{%
-	\noindent\begin{mtabular}[#1]{2}{|l|X|}%
-	\tabulartitle{\upm@lang@document@summary}%
+	\noindent\begin{mtabular}[#1]{2}{|l|X|}{\upm@lang@document@summary}%
 	\upm@lang@project & \theupmproject\Ifnotempty{\theupmsubproject}{ -- \theupmsubproject} \\
 	\upm@lang@document & \theupmdocname \\
 	\upm@lang@docref & \theupmdocref \\
@@ -339,16 +338,14 @@
 \newcommand{\upmdocumentauthors}[1][\linewidth]{%
 	\ifupm@document@author@tab@hascomment%
 		\Ifnotempty{\upm@document@author@tab@commented}{%
-		\noindent\expandafter\begin{mtabular}[#1]{3}{|X|l|c|}%
-		\tabulartitle{\upm@lang@document@authors}%
+		\noindent\expandafter\begin{mtabular}[#1]{3}{|X|l|c|}{\upm@lang@document@authors}%
 		\tabularheader{\upm@lang@document@names}{\upm@lang@document@comments}{\upm@lang@document@emails}%
 		\upm@document@author@tab@commented
 		\hline%
 		\expandafter\end{mtabular}\par\vspace{.5cm}}%
 	\else%
 		\Ifnotempty{\upm@document@author@tab}{%
-		\noindent\expandafter\begin{mtabular}[#1]{2}{|X|c|}%
-		\tabulartitle{\upm@lang@document@authors}%
+		\noindent\expandafter\begin{mtabular}[#1]{2}{|X|c|}{\upm@lang@document@authors}%
 		\tabularheader{\upm@lang@document@names}{\upm@lang@document@emails}%
 		\upm@document@author@tab
 		\hline%
@@ -401,16 +398,14 @@
 \newcommand{\upmdocumentvalidators}[1][\linewidth]{%
 	\ifupm@document@validator@tab@hascomment%
 		\Ifnotempty{\upm@document@validator@tab@commented}{%
-		\noindent\expandafter\begin{mtabular}[#1]{4}{|X|l|c|p{3cm}|}%
-		\tabulartitle{\upm@lang@document@validators}%
+		\noindent\expandafter\begin{mtabular}[#1]{4}{|X|l|c|p{3cm}|}{\upm@lang@document@validators}%
 		\tabularheader{\upm@lang@document@names}{\upm@lang@document@comments}{\upm@lang@document@emails}{\upm@lang@document@initials}%
 		\upm@document@validator@tab@commented
 		\hline%
 		\expandafter\end{mtabular}\par\vspace{.5cm}}%
 	\else%
 		\Ifnotempty{\upm@document@validator@tab}{%
-		\noindent\expandafter\begin{mtabular}[#1]{3}{|X|c|p{3cm}|}%
-		\tabulartitle{\upm@lang@document@validators}%
+		\noindent\expandafter\begin{mtabular}[#1]{3}{|X|c|p{3cm}|}{\upm@lang@document@validators}%
 		\tabularheader{\upm@lang@document@names}{\upm@lang@document@emails}{\upm@lang@document@initials}%
 		\upm@document@validator@tab
 		\hline%
@@ -476,16 +471,14 @@
 \newcommand{\upmdocumentinformedpeople}[1][\linewidth]{%
 	\ifupm@document@validator@tab@hascomment%
 		\Ifnotempty{\upm@document@informed@tab@commented}{%
-		\noindent\expandafter\begin{mtabular}[#1]{3}{|X|l|c|}%
-		\tabulartitle{\upm@lang@document@informed}%
+		\noindent\expandafter\begin{mtabular}[#1]{3}{|X|l|c|}{\upm@lang@document@informed}%
 		\tabularheader{\upm@lang@document@names}{\upm@lang@document@comments}{\upm@lang@document@emails}%
 		\upm@document@informed@tab@commented
 		\hline%
 		\expandafter\end{mtabular}\par\vspace{.5cm}}%
 	\else%
 		\Ifnotempty{\upm@document@informed@tab}{%
-		\noindent\expandafter\begin{mtabular}[#1]{2}{|X|c|}%
-		\tabulartitle{\upm@lang@document@informed}%
+		\noindent\expandafter\begin{mtabular}[#1]{2}{|X|c|}{\upm@lang@document@informed}%
 		\tabularheader{\upm@lang@document@names}{\upm@lang@document@emails}%
 		\upm@document@informed@tab
 		\hline%
