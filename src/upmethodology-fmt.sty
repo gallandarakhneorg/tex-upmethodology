@@ -17,7 +17,7 @@
 % write to the Free Software Foundation, Inc., 59 Temple Place - Suite
 % 330, Boston, MA 02111-1307, USA.
 
-\global\edef\upm@package@fmt@ver{2025/03/15}
+\global\edef\upm@package@fmt@ver{2025/03/23}
 
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
 \ProvidesPackage{upmethodology-fmt}[\upm@package@fmt@ver]
@@ -677,6 +677,7 @@
 \colorlet{subsectiontitlecolor}{sectiontitlecolor}
 \colorlet{subsubsectiontitlecolor}{sectiontitlecolor}
 \colorlet{paragraphtitlecolor}{black}
+\colorlet{subparagraphtitlecolor}{gray}
 
 % PRIVATE FORMATTING MACROS
 \newcounter{upm@format@section@sectionlevel}
@@ -700,6 +701,9 @@
 
 \gdef\upm@format@paragraphtitle@postfix{.}
 \gdef\upm@format@paragraphtitle{\normalfont\normalsize\sffamily\bfseries\color{paragraphtitlecolor}}
+
+\gdef\upm@format@subparagraphtitle@postfix{:}
+\gdef\upm@format@subparagraphtitle{\normalfont\normalsize\sffamily\itshape\color{subparagraphtitlecolor}}
 
 % PART
 \ifupmbookformat
@@ -798,6 +802,14 @@
 	{}
 	{2pt}
 	{#1\upm@format@paragraphtitle@postfix}
+	{}
+
+% implementation of subparagraphs.
+\titleformat{\subparagraph}[runin]
+	{\upm@format@subparagraphtitle}
+	{}
+	{2pt}
+	{#1\upm@format@subparagraphtitle@postfix}
 	{}
 
 %----------------------------------------
