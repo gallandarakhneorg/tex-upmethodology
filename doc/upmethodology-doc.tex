@@ -4,13 +4,7 @@
 
 \declaredocument{\LaTeX\ Packages for Structured Documents as for Unified Process Methodology}{Official Documentation}{UPM-2025-01}
 
-\updateversion{23.0}{\makedate{17}{02}{2017}}{Replace the package \texttt{subfigure} by \texttt{subcaption}.}{\upmpublic}
-\incsubversion{\makedate{10}{03}{2017}}{Fixing subfigure invalid alignement.}{\upmpublic}
-\incsubversion{\makedate{08}{08}{2017}}{Fixing spelling errors and typos.}{\upmpublic}
-\incsubversion{\makedate{28}{11}{2017}}{Add 'standardlists' option.}{\upmpublic}
-\incsubversion{\makedate{04}{08}{2019}}{Add 'graphicspathcontext' option.}{\upmpublic}
-\incversion{\makedate{17}{09}{2019}}{Add class options to include optional packages.}{\upmpublic}
-\incversion{\makedate{06}{04}{2020}}{Add explainations for \texttt{{\textbackslash}Append} and \texttt{{\textbackslash}setdocumentpurpose}.}{\upmpublic}
+\updateversion{25.0}{\makedate{06}{04}{2020}}{Add explainations for \texttt{{\textbackslash}Append} and \texttt{{\textbackslash}setdocumentpurpose}.}{\upmpublic}
 \incversion{\makedate{03}{06}{2021}}{Add emphazing box with titles.}{\upmpublic}
 \incversion{\makedate{14}{03}{2025}}{Update the documentation for the \texttt{declareupmtheorem} macro and \texttt{definition} environment.}{\upmpublic}
 \incsubversion{\makedate{15}{03}{2025}}{Add the mention of the dependency to \texttt{tobibind} in the dependencies of \texttt{upmmethodology-fmt}.}{\upmpublic}
@@ -18,6 +12,7 @@
 \incversion{\makedate{15}{03}{2025}}{Add the optional "source text" to the macros \texttt{{\textbackslash}mfigure} and \texttt{{\textbackslash}mfigure*}.}{\upmpublic}
 \incversion{\makedate{15}{03}{2025}}{Add the macros \texttt{{\textbackslash}addsource} and \texttt{{\textbackslash}tablenote} for the \texttt{mtable} environment.}{\upmpublic}
 \incversion{\makedate{15}{03}{2025}}{Use the package \texttt{tcolorbox} for implementing \texttt{mtabular} and \texttt{mtable} environments.}{\upmpublic}
+\incversion{\makedate{23}{03}{2025}}{Add documentation of the algorithms' colors.}{\upmpublic}
 
 \addauthorvalidator*[galland@arakhne.org]{St{\'e}phane}{Galland}{Original Author}
 \addauthor*{Frans}{van Dunn\'e}{Reviewer}
@@ -1581,6 +1576,15 @@ produces:
 \begin{definition}{Name of the definition}{Label of the definition}
   Text of the definition.
 \end{definition}
+
+\section{Algorithms}\label{sec:algorithms}
+
+If you have included the \LaTeX\ packages for algorithm floatings, e.g., \texttt{algorithm}, the default style for the algorithms may e altered with the following colors:
+\begin{itemize}
+\item \texttt{algorithmcaptionlabel}: is the color of the text for the label of the algorithms, e.g., \texttt{Algorithm 1:};
+\item \texttt{algorithmcaption}: is the color of the text of the name of the description;
+\item \texttt{algorithmborder}: is the color of the rules that are drawn in the algorithm frame.
+\end{itemize}
 
 \section{Emphazing Box}
 
