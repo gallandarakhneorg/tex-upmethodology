@@ -1920,5 +1920,39 @@
     }%
 }
 
+%----------------------------------------
+% REDEFINE THE STYLE FOR THE ALGORITHMS
+%----------------------------------------
+
+\colorlet{algorithmcaptionlabel}{black}
+\colorlet{algorithmcaption}{black}
+\colorlet{algorithmborder}{gray}
+
+\AtBeginDocument{%
+    \@ifundefined{captionsetup}{}{%
+        \captionsetup[algorithm]{labelfont={bf,color=algorithmcaptionlabel}, font={color=algorithmcaption}, labelsep=colon, position=top}
+    }%
+    %
+    \@ifundefined{fs@ruled}{}{%
+        \gdef\fs@ruled{%
+            \def\@fs@cfont{\bfseries}\let\@fs@capt\floatc@toto%
+            % Define the code before the label
+            \def\@fs@pre{%
+                \begingroup\color{algorithmborder}\hrule height.8pt depth0pt \kern2pt\endgroup%
+            }%
+            % Define the code between the label and the float content
+            \def\@fs@mid{%
+                \begingroup\color{algorithmborder}\kern2pt\hrule\kern2pt\endgroup%
+            }%
+            % Define the code after the float content
+            \def\@fs@post{%
+                \begingroup\color{algorithmborder}\kern2pt\hrule\relax\endgroup%
+            }%
+            \let\@fs@iftopcapt\iftrue%
+        }%
+    }%
+}
+
 \endinput
+
 
