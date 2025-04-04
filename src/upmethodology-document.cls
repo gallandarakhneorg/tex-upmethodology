@@ -17,7 +17,7 @@
 % write to the Free Software Foundation, Inc., 59 Temple Place - Suite
 % 330, Boston, MA 02111-1307, USA.
 
-\global\edef\upm@package@docclazz@ver{2025/03/15}
+\global\edef\upm@package@docclazz@ver{2025/04/04}
 
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
 \ProvidesClass{upmethodology-document}[\upm@package@docclazz@ver]
@@ -189,6 +189,10 @@
 \RequirePackage{url}
 \urlstyle{same}
 
+\ifupmarticleformat\else%
+	\RequirePackage{fancyhdr}
+\fi
+
 \RequirePackage{upmethodology-document}
 \RequirePackage{upmethodology-extension}
 \RequirePackage{upmethodology-frontpage}
@@ -212,8 +216,28 @@
 % HEADERS AND FOOTERS
 %----------------------------------------
 
-\def\upm@header@fmt#1{\textsc{\scriptsize #1}}
-\def\upm@copyright@fmt#1{\textsc{\tiny #1}}
+% TODO REMOVE
+%\def\upm@header@fmt#1{\textsc{\scriptsize #1}}
+%\def\upm@copyright@fmt#1{\textsc{\tiny #1}}
+
+\colorlet{pageheadertext}{gray}
+\colorlet{pageheadersection}{darkgray}
+\colorlet{pagefootertext}{gray}
+\colorlet{pagefooterpage}{darkgray}
+\def\upm@footer@pagefmt@left#1{\textcolor{pagefootertext}{%
+	\sffamily%
+	{\bfseries\textcolor{pagefooterpage}{#1}}%
+	\hspace{5pt}\ensuremath{|}%
+}}
+\def\upm@footer@pagefmt@right#1{\textcolor{pagefootertext}{
+	\sffamily%
+	\ensuremath{|}\hspace{5pt}%
+	{\bfseries\textcolor{pagefooterpage}{#1}}%
+}}
+
+\def\upm@header@fmt#1{\textcolor{pageheadertext}{\sffamily{#1}}}
+\def\upm@header@sectionfmt@left#1#2{\textcolor{pageheadersection}{#2}\hspace{5pt}\ensuremath{|}\hspace{5pt}\textsc{#1}}
+\def\upm@header@sectionfmt@right#1#2{\textsc{#1}\hspace{5pt}\ensuremath{|}\hspace{5pt}\textcolor{pageheadersection}{#2}}
 
 \global\let\upm@package@docclazz@old@pagestyle\pagestyle
 \gdef\pagestyle#1{%
@@ -225,6 +249,40 @@
 
 \newdimen{\upm@smalllogo@height}
 \upm@smalllogo@height=1cm
+
+\renewcommand{\sectionmark}[1]{\markright{\upm@header@sectionfmt@right{#1}{\thesection}}}
+\ifupmarticleformat\else
+	\renewcommand{\chaptermark}[1]{\markboth{\upm@header@sectionfmt@left{#1}{\thechapter}}{}}
+\fi
+
+% Supported page styles:
+% empty: no header, no footer
+% facingtochapter: page that is on the left of the starting page of a chapter
+% plain: starting page of a chapter
+% headings: pages that are supposed to have header and footer
+
+% Define the header and footer style for books and reports
+\ifupmarticleformat\else%
+
+	% Style used for the first pages of the chapter
+	\fancypagestyle{plain}{
+		\fancyhf{}%
+		\renewcommand{\headrulewidth}{0pt}%
+		\renewcommand{\footrulewidth}{0pt}%
+		\fancyfoot[LE]{\upm@footer@pagefmt@left{\thepage}}%
+		\fancyfoot[RO]{\upm@footer@pagefmt@right{\thepage}}%
+	}
+	% Style used in chapters in which a standard heading is expected
+	\fancypagestyle{headings}{
+		\fancyhf{}%
+		\renewcommand{\headrulewidth}{0pt}%
+		\renewcommand{\footrulewidth}{0pt}%
+		\fancyhead[LE]{\upm@header@fmt{\leftmark}}%
+		\fancyhead[RO]{\upm@header@fmt{\rightmark}}%
+		\fancyfoot[LE]{\upm@footer@pagefmt@left{\thepage}}%
+		\fancyfoot[RO]{\upm@footer@pagefmt@right{\thepage}}%
+	}
+\fi
 
 %----------------------------------------
 % FRONT, MAIN AND BACK MATTERS
