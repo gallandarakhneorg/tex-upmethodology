@@ -17,7 +17,7 @@
 % write to the Free Software Foundation, Inc., 59 Temple Place - Suite
 % 330, Boston, MA 02111-1307, USA.
 
-\global\edef\upm@package@fmt@ver{2025/04/04}
+\global\edef\upm@package@fmt@ver{2025/04/05}
 
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
 \ProvidesPackage{upmethodology-fmt}[\upm@package@fmt@ver]
@@ -177,7 +177,7 @@
 \graphicspath{{./}}
 
 %-----------------------------------------
-% LOCAL DEFINITION OF TH GRAPHICS PATH
+% LOCAL DEFINITION OF THE GRAPHICS PATH
 %-----------------------------------------
 
 \newenvironment{graphicspathcontext}[1]{%
@@ -189,6 +189,33 @@
 }{%
 	\egroup%
 }
+
+%----------------------------------------
+% INTERNAL IMPLEMENTATION OF CAPTION MACRO
+%----------------------------------------
+\def\upm@format@caption{%
+   \ifx\@captype\@undefined
+     \@latex@error{\noexpand\upm@format@caption outside float}\@ehd
+     \expandafter\@gobble
+   \else
+     \refstepcounter\@captype
+     \expandafter\@firstofone
+   \fi
+   {\@dblarg{\upm@format@@caption\@captype}}%
+}
+\long\def\upm@format@@caption#1[#2]#3#4{%
+	\par%
+	\addcontentsline{\csname ext@#1\endcsname}{#1}%
+		{\protect\numberline{\csname the#1\endcsname}{\ignorespaces #2}}%
+	\begingroup%
+	\@parboxrestore%
+	\if@minipage%
+		\@setminipage%
+	\fi%
+	\normalsize%
+	\@makecaption{\csname fnum@#1\endcsname}{\ignorespaces #3\ignorespaces #4}\par%
+	\endgroup%
+ }
 
 %----------------------------------------
 % FIGURES
@@ -206,7 +233,7 @@
     \begin{#7}[#1]%
         \begin{center}%
             \protect\includegraphics[#2]{#3}%
-            \protect\caption{#4#6}%
+            \protect\upm@format@caption{#4}{#6}%
             \protect\label{fig:#5}%
         \end{center}%
     \end{#7}%
@@ -637,7 +664,7 @@
     \mtabular[#2]{#3}{#4}{}%
 }{%
     \endmtabular\relax%
-    \caption{\upm@table@caption\upm@table@source}%
+    \upm@format@caption{\upm@table@caption}{\upm@table@source}%
     \label{\upm@table@label}%
     \endcenter%
     \upm@table@note%
