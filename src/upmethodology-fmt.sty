@@ -17,7 +17,7 @@
 % write to the Free Software Foundation, Inc., 59 Temple Place - Suite
 % 330, Boston, MA 02111-1307, USA.
 
-\global\edef\upm@package@fmt@ver{2025/04/05}
+\global\edef\upm@package@fmt@ver{2025/04/06}
 
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
 \ProvidesPackage{upmethodology-fmt}[\upm@package@fmt@ver]
@@ -193,47 +193,60 @@
 %----------------------------------------
 % INTERNAL IMPLEMENTATION OF CAPTION MACRO
 %----------------------------------------
-\def\upm@format@caption{%
-   \ifx\@captype\@undefined
-     \@latex@error{\noexpand\upm@format@caption outside float}\@ehd
-     \expandafter\@gobble
-   \else
-     \refstepcounter\@captype
-     \expandafter\@firstofone
-   \fi
-   {\@dblarg{\upm@format@@caption\@captype}}%
+
+% Color of the figure/table explanation
+\colorlet{floatexplanationforeground}{gray}
+% Formating of the explanation text
+\newcommand{\upmfloatformatexplanation}[1]{%
+    \textcolor{floatexplanationforeground}{#1}%
 }
-\long\def\upm@format@@caption#1[#2]#3#4{%
-	\par%
-	\addcontentsline{\csname ext@#1\endcsname}{#1}%
-		{\protect\numberline{\csname the#1\endcsname}{\ignorespaces #2}}%
-	\begingroup%
-	\@parboxrestore%
-	\if@minipage%
-		\@setminipage%
-	\fi%
-	\normalsize%
-	\@makecaption{\csname fnum@#1\endcsname}{\ignorespaces #3\ignorespaces #4}\par%
-	\endgroup%
- }
+% Merging the explanation to the rest of the float label
+\newcommand{\upm@float@formatexplanation}[1]{%
+    \mbox{}\\%
+    \upmfloatformatexplanation{#1}%
+}
+
+% Color of the figure/table source
+\colorlet{floatsourceforeground}{gray}
+% Label prefix for the source
+\global\let\upmfloatsourcename\upm@format@lang@sourcename
+% Formating of the source text
+\newcommand{\upmfloatformatsource}[1]{%
+    \textcolor{floatsourceforeground}{\smaller\textit{#1}}%
+}
+% Merging the source to the rest of the float label
+\newcommand{\upm@float@formatsource}[1]{%
+    \mbox{}\\%
+    \upmfloatformatsource{\upmfloatsourcename\upm@format@lang@colonchar{#1}}%
+}
+
+% #1: Regular caption that will appear with the figure and the list-of lists.
+% #2: Explanation about the float that should not appear as the caption in the list-of lists.
+% #3: Source text
+\newcommand{\upmcaption}[3]{%
+    \caption[{#1}]{%
+        {#1}%
+        \Ifnotempty{#2}{\upm@float@formatexplanation{\ignorespaces #2}}%
+        \Ifnotempty{#3}{\upm@float@formatsource{\ignorespaces #3}}%
+    }%
+}
+
+% #1: Regular caption that will appear with the figure and the list-of lists.
+% #2: Explanation about the float that should not appear as the caption in the list-of lists.
+% #3: Source text
+\newcommand{\upm@caption}[3]{%
+    \caption[{#1}]{{#1}\ignorespaces #2\ignorespaces #3}%
+}
 
 %----------------------------------------
 % FIGURES
 %----------------------------------------
 
-\colorlet{figuresourceforeground}{gray}
-\global\let\figuresourcename\upm@format@lang@sourcename
-\newcommand{\mfigureformatsource}[1]{%
-    \centering\textcolor{figuresourceforeground}{\smaller\textit{#1}}%
-}%
-\newcommand{\upm@mfigure@formatsource}[1]{%
-    \\ \mfigureformatsource{\figuresourcename\upm@format@lang@colonchar{#1}}%
-}
 \newcommand{\upm@mfigure@internal@}[7]{%
     \begin{#7}[#1]%
         \begin{center}%
             \protect\includegraphics[#2]{#3}%
-            \protect\upm@format@caption{#4}{#6}%
+            \protect\upm@caption{#4}{}{#6}%
             \protect\label{fig:#5}%
         \end{center}%
     \end{#7}%
@@ -253,7 +266,7 @@
     \upm@tmp%
 }
 \gdef\upm@mfigure@sourcetext@reader[#1]{%
-    \gdef\upm@mfigure@argf{\upm@mfigure@formatsource{#1}}\upm@mfigure@internal%
+    \gdef\upm@mfigure@argf{\upm@float@formatsource{#1}}\upm@mfigure@internal%
 }
 \newcommand{\upm@mfigure}[5][ht]{%
     \gdef\upm@mfigure@arga{#1}%
@@ -281,7 +294,7 @@
     \upm@tmp%
 }
 \gdef\upm@mfigurestar@sourcetext@reader[#1]{%
-    \gdef\upm@mfigure@argf{\upm@mfigure@formatsource{#1}}\upm@mfigurestar@internal%
+    \gdef\upm@mfigure@argf{\upm@float@formatsource{#1}}\upm@mfigurestar@internal%
 }
 \newcommand{\upm@mfigurestar}[5][ht]{%
     \gdef\upm@mfigure@arga{#1}%
@@ -594,9 +607,6 @@
     \end{tcolorbox}%
 }
 
-\newcommand{\upm@mtable@formatsource}[1]{%
-    \mbox{}\\ \mfigureformatsource{\figuresourcename\upm@format@lang@colonchar{#1}}%
-}
 \gdef\upm@table@source{}
 
 %-----
@@ -657,14 +667,14 @@
         \errmessage{The macro {\string\captionastitle} is deprecated. Replace by the argument}%
     }%
     \newcommand{\tablenote}[1]{\gdef\upm@table@note{\bgroup ##1\egroup}}%
-    \newcommand{\addsource}[1]{\gdef\upm@table@source{\upm@mtable@formatsource{\bgroup ##1 \egroup}}}%
+    \newcommand{\addsource}[1]{\gdef\upm@table@source{\upm@float@formatsource{\bgroup ##1 \egroup}}}%
     %%
     \expandafter\table\@autolatex@mtable@position%
     \center\@autolatex@mtable@size%
     \mtabular[#2]{#3}{#4}{}%
 }{%
     \endmtabular\relax%
-    \upm@format@caption{\upm@table@caption}{\upm@table@source}%
+    \upm@caption{\upm@table@caption}{}{\upm@table@source}%
     \label{\upm@table@label}%
     \endcenter%
     \upm@table@note%
@@ -1981,5 +1991,4 @@
 }
 
 \endinput
-
 
