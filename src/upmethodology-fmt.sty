@@ -17,7 +17,7 @@
 % write to the Free Software Foundation, Inc., 59 Temple Place - Suite
 % 330, Boston, MA 02111-1307, USA.
 
-\global\edef\upm@package@fmt@ver{2025/04/06}
+\global\edef\upm@package@fmt@ver{2025/04/12}
 
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
 \ProvidesPackage{upmethodology-fmt}[\upm@package@fmt@ver]
@@ -33,6 +33,12 @@
 
 \newif\ifupm@use@override@standard@lists
 \global\upm@use@override@standard@liststrue
+
+\newif\ifupm@fmt@table@topcaption
+\global\upm@fmt@table@topcaptionfalse
+
+\newif\ifupm@fmt@figure@topcaption
+\global\upm@fmt@figure@topcaptionfalse
 
 %----------------------------------------
 % LOCALES
@@ -92,6 +98,12 @@
 }
 \DeclareOption{standardlists}{%
   \global\upm@use@override@standard@listsfalse
+}
+\DeclareOption{tablecaptionabove}{%
+  \global\upm@fmt@table@topcaptiontrue
+}
+\DeclareOption{figurecaptionabove}{%
+  \global\upm@fmt@figure@topcaptiontrue
 }
 \ExecuteOptions{english}
 \ProcessOptions
@@ -245,9 +257,15 @@
 \newcommand{\upm@mfigure@internal@}[7]{%
     \begin{#7}[#1]%
         \begin{center}%
+            \ifupm@fmt@figure@topcaption%
+            	\protect\upm@caption{#4}{}{#6}%
+            	\protect\label{fig:#5}%
+            \fi%
             \protect\includegraphics[#2]{#3}%
-            \protect\upm@caption{#4}{}{#6}%
-            \protect\label{fig:#5}%
+            \ifupm@fmt@figure@topcaption\else%
+            	\protect\upm@caption{#4}{}{#6}%
+            	\protect\label{fig:#5}%
+            \fi%
         \end{center}%
     \end{#7}%
 }
@@ -345,13 +363,19 @@
 	\gdef\upm@mfigurescaption{#3}%
 	\gdef\upm@mfigureslabel{fig:#4}%
 	\begin{#1}[#2]\centering %
+	\ifupm@fmt@figure@topcaption%
+		\upm@caption{\upm@mfigurescaption}{\upm@figure@note}{\upm@figure@source}%
+		\label{\upm@mfigureslabel}%
+	\fi%
 	\begingroup%
 }
 
 \newcommand{\upm@endsubfigure}[1]{%
 	\endgroup%
-	\caption{\upm@mfigurescaption}%
-	\label{\upm@mfigureslabel}%
+	\ifupm@fmt@figure@topcaption\else%
+		\upm@caption{\upm@mfigurescaption}{\upm@figure@note}{\upm@figure@source}%
+		\label{\upm@mfigureslabel}%
+	\fi%
 	\end{#1}%
 	\let\mfigure\upm@mfiguresaved
 }
@@ -671,13 +695,19 @@
     %%
     \expandafter\table\@autolatex@mtable@position%
     \center\@autolatex@mtable@size%
+    \ifupm@fmt@table@topcaption%
+    	\upm@caption{\upm@table@caption}{\upm@table@note}{\upm@table@source}%
+    	\label{\upm@table@label}%
+    \fi%
     \mtabular[#2]{#3}{#4}{}%
 }{%
     \endmtabular\relax%
-    \upm@caption{\upm@table@caption}{}{\upm@table@source}%
-    \label{\upm@table@label}%
+    \ifupm@fmt@table@topcaption\else%
+    	\upm@caption{\upm@table@caption}{\upm@table@note}{\upm@table@source}%
+    	\label{\upm@table@label}%
+    \fi%
     \endcenter%
-    \upm@table@note%
+    %\upm@table@note%
     \endtable%
     \global\let\upm@table@caption\relax%
     \global\let\upm@table@label\relax%

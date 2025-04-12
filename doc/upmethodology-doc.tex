@@ -44,6 +44,8 @@
 %\tracingmacros=2
 %\tracingcommands=1
 
+\usepackage{multirow}
+
 \declareupmtheorem{mytheorem}{My Theorem}{List of my Theorems}{thm}{mytheorem}{\textbf}
 
 \begin{document}
@@ -276,80 +278,44 @@ The \LaTeX\ class \texttt{upmethodology-document} provides the basic configurati
 
 \section{Class options}
 
-Table~\tabref{documentclassoptions} contains the options supported by \texttt{upmethodology-document}. Any option not explicitely supported by the class is directly passed to the underlying standard \LaTeX\ class (\texttt{book}, \texttt{report} or \texttt{article} according to the type of document, see~\ref{section:documentclass:doctype}).
+The tables \tabref{documentclassoptions} and \tabref{documentclassoptions2} contain the options supported by \texttt{upmethodology-document}. Any option not explicitely supported by the class is directly passed to the underlying standard \LaTeX\ class (\texttt{book}, \texttt{report} or \texttt{article} according to the type of document, see~\ref{section:documentclass:doctype}).
 
-\begin{mtable}{\linewidth}{2}{|l|X|}{Options of \texttt{upmethodology-document} class}{documentclassoptions}
-\tabularheader{Option}{Explanation}
-
-book & see section~\ref{section:documentclass:doctype}. \\
+\begin{mtable}{\linewidth}{3}{|c|l|X|}{Options (1/2) of \texttt{upmethodology-document} class}{documentclassoptions}
+\tabularheader{Cat.}{Option}{Explanation}
+\multirow{3}{*}{Document Type} & article & see section~\ref{section:documentclass:doctype} \\
+& book & see section~\ref{section:documentclass:doctype}. \\
+& report & see section~\ref{section:documentclass:doctype} \\
 \hline
-report & see section~\ref{section:documentclass:doctype}. \\
+\multirow{2}{*}{Page Type} & oneside & the document is generated assuming that each page will be printed on its recto side. This option overrides any previous occurrence of \texttt{twoside} option \\
+& twoside & the document is generated assuming that each page will be printed on both recto and verso sides. This option overrides any previous occurrence of \texttt{oneside} option \\
 \hline
-article & see section~\ref{section:documentclass:doctype}. \\
-
-\hline\hline
-
-oneside & the document is generated assuming that each page will be printed on its recto side. This option overrides any previous occurrence of \texttt{twoside} option. \\
+& english & the document is written in English. \texttt{upmethodology} packages use the English translations for the generated texts.  This option overrides any previous occurrence of \texttt{french} option \\
+\multirow{3}{*}{Language} & francais & same as \texttt{french} \\
+& french & the document is written in French. \texttt{upmethodology} packages use the French translations for the generated texts.  This option overrides any previous occurrence of \texttt{english} option \\
 \hline
-twoside & the document is generated assuming that each page will be printed on both recto and verso sides. This option overrides any previous occurrence of \texttt{oneside} option. \\
-
-\hline\hline
-
-francais & same as \texttt{french}. \\
+\multirow{4}{*}{Informations} & documentinfo & invoke \texttt{{\textbackslash}upmdocumentsummary}, \texttt{{\textbackslash}upmdocumentauthors}, \texttt{{\textbackslash}upmdocumentvalidators}, \texttt{{\textbackslash}upmdocumentinformedpeople}, and \texttt{{\textbackslash}upmhistory} commands at the begining of the document. This option overrides any previous occurrence of \texttt{nodocumentinfo} option \\
+& nodocumentinfo & do not invoke \texttt{{\textbackslash}upmdocumentsummary}, \texttt{{\textbackslash}upmdocumentauthors}, \texttt{{\textbackslash}upmdocumentvalidators}, \texttt{{\textbackslash}upmdocumentinformedpeople}, nor \texttt{{\textbackslash}upmhistory} commands at the begining of the document. This option overrides any previous occurrence of \texttt{documentinfo} option \\
 \hline
-french & the document is written in French. \texttt{upmethodology} packages use the French translations for the generated texts.  This option overrides any previous occurrence of \texttt{english} option. \\
-\hline
-english & the document is written in English. \texttt{upmethodology} packages use the English translations for the generated texts.  This option overrides any previous occurrence of \texttt{french} option. \\
+& nopubpage & do not invoke \texttt{{\textbackslash}upmpublicationpage} command at the begining of the document. This option overrides any previous occurrence of \texttt{pubpage} option \\
+& pubpage & invoke \texttt{{\textbackslash}upmpublicationpage} command at the begining of the document. This option overrides any previous occurrence of \texttt{nopubpage} option \\
+\end{mtable}
 
-\hline\hline
-
-documentinfo & invoke \texttt{{\textbackslash}upmdocumentsummary}, \texttt{{\textbackslash}upmdocumentauthors}, \texttt{{\textbackslash}upmdocumentvalidators}, \texttt{{\textbackslash}upmdocumentinformedpeople}, and \texttt{{\textbackslash}upmhistory} commands at the begining of the document. This option overrides any previous occurrence of \texttt{nodocumentinfo} option. \\
-\hline
-nodocumentinfo & do not invoke \texttt{{\textbackslash}upmdocumentsummary}, \texttt{{\textbackslash}upmdocumentauthors}, \texttt{{\textbackslash}upmdocumentvalidators}, \texttt{{\textbackslash}upmdocumentinformedpeople}, nor \texttt{{\textbackslash}upmhistory} commands at the begining of the document. This option overrides any previous occurrence of \texttt{documentinfo} option. \\
-
-\hline\hline
-
-pubpage & invoke \texttt{{\textbackslash}upmpublicationpage} command at the begining of the document. This option overrides any previous occurrence of \texttt{nopubpage} option. \\
-\hline
-nopubpage & do not invoke \texttt{{\textbackslash}upmpublicationpage} command at the begining of the document. This option overrides any 
-previous occurrence of \texttt{pubpage} option. \\
-
-\hline\hline
-
-standardlist & disable the override of the lists (enumeration, etc.) for restoring the standard \LaTeX\ lists. \\
-
-\hline\hline
-
-frontmatter & invoke \texttt{{\textbackslash}frontmatter} (and other related commands). \\
-nofrontmatter & do not invoke \texttt{{\textbackslash}frontmatter} (and other related commands). \\
-
-\hline\hline
-
-frontcover & put the cover page at the beginning of the document. \\
-nofrontcover & do not put a cover page at the beginning of the document. \\
-
-\hline\hline
-
-backcover & put the cover page at the end of the document. \\
-nobackcover & do not put a cover page at the end of the document. \\
-
-\hline\hline
-
-standardlists & The style does not override the standard list, description and enumeration definitions. \\
-
-\hline\hline
-
-codepackage & Include the \texttt{upmethodology-code} package. \\
-
-\hline
-
-specpackage & Include the \texttt{upmethodology-spec} package. \\
-
-\hline
-
-taskpackage & Include the \texttt{upmethodology-task} package. \\
-
-\hline
+\begin{mtable}{\linewidth}{3}{|c|l|X|}{Options (2/2) of \texttt{upmethodology-document} class}{documentclassoptions2}
+	\tabularheader{Cat.}{Option}{Explanation}
+	\multirow{9}{*}{Format} & backcover & put the cover page at the end of the document \\
+	& figurecaptionabove & By default, the labels of the figures are below the figures. This option permits to put the figure labels above the figures \\
+	& frontcover & put the cover page at the beginning of the document \\
+	& frontmatter & invoke \texttt{{\textbackslash}frontmatter} (and other related commands) \\
+	& nobackcover & do not put a cover page at the end of the document \\
+	& nofrontcover & do not put a cover page at the beginning of the document \\
+	& nofrontmatter & do not invoke \texttt{{\textbackslash}frontmatter} (and other related commands) \\
+	& standardlist & disable the override of the lists (enumeration, etc.) for restoring the standard \LaTeX\ lists \\
+	& standardlists & The style does not override the standard list, description and enumeration definitions \\
+	& tablecaptionbelow & By default, the labels of the tables are below the tables. This option permits to put the table labels above the tables \\
+	\hline
+	\multirow{3}{*}{Packages} & codepackage & Include the \texttt{upmethodology-code} package \\
+	& specpackage & Include the \texttt{upmethodology-spec} package \\
+	& taskpackage & Include the \texttt{upmethodology-task} package \\
 \end{mtable}
 
 \section{Additional Features}
