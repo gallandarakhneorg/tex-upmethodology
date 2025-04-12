@@ -114,6 +114,7 @@
 \RequirePackage{graphicx}
 \RequirePackage{subcaption}
 \RequirePackage{tabularx}
+\RequirePackage{xltabular}
 \RequirePackage{multicol}
 \RequirePackage{colortbl}
 \RequirePackage{tcolorbox}
@@ -556,19 +557,33 @@
     \arrayrulecolor{tablerule}%
 }
 
+\tcbuselibrary{breakable}
+
 \tcbset{
-	mtabular/.style={
-		attach title,
-            colbacktitle=tableheaderbackground,
-            coltitle=tableheaderforeground,
-		colback=tablebackground,
-		colframe=tablerule,
-		coltext=tableforeground,
-		rounded corners,
-		before upper=\tcbtitle,
-		fonttitle=\bfseries,
-		halign title=center,
-        }
+	mtabular*/.style 2 args={%
+		breakable,%
+		enhanced,%
+		attach title,%
+		colbacktitle=tableheaderbackground,%
+		coltitle=tableheaderforeground,%
+		colback=tablebackground,%
+		colframe=tablerule,%
+		coltext=tableforeground,%
+		rounded corners,%
+		before upper=\tcbtitle,%
+		fonttitle=\bfseries,%
+		halign title=center,%
+		% Below, adapted from the "tabularx" style from tcolorbox
+		boxsep=\z@,%
+		top=-1.1\topskip,% Remove extra top margin
+		bottom=\z@,%
+		leftupper=\z@,%
+		rightupper=\z@,%
+		toptitle=1mm,%
+		bottomtitle=1mm,%
+		boxrule=0.5mm,%
+	},
+	mtabular/.style={mtabular*={}{#1}}
 }
 
 %title of a table
@@ -630,8 +645,13 @@
     \newcommand{\tabularrowheader}[1]{%
         \centering\upm@fmt@table@column@title{\ignorespaces##1}%
     }%
-    \begin{tcolorbox}[mtabular,tabularx={#3},title={#4}]%
-        \BODY%
+    \begin{tcolorbox}[mtabular={#3},title={#4}]%
+	\let\tcb@CT@arc@save\CT@arc@%
+	\arrayrulecolor{tcbcolframe}\def\arraystretch{1.1}%
+	\tcb@hack@currenvir\begin{xltabular}{\linewidth}{#3}%
+	\BODY%
+	\end{xltabular}%
+	\global\let\CT@arc@\tcb@CT@arc@save%
     \end{tcolorbox}%
 }
 
