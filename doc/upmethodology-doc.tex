@@ -639,6 +639,58 @@ The references to the subfigures could be obtained in two way:\nopagebreak\begin
 \item using the label of the enclosing figure to which the index of the subfigure could be appended (in its Roman representation and prefixed by the character ``\texttt{:}''), eg. the label \texttt{example:msubfigure:b} corresponds to \figref{example:msubfigure:b};
 \end{itemize}
 
+\subsection{Add a Figures Note}
+
+A figures note is a note that is rendered below the figures and its caption.
+This command changes the text of the figures note.
+
+\paragraph{Syntax} \texttt{{\textbackslash}figurenote\{text\}}
+
+\begin{mfigures}{Example of subfigures with \texttt{mfigures} and a figures note}{example:msubfigurewithnote}
+	\figurenote{This is the text of the note}
+	\mfigure{width=.4\linewidth}{arakhne_org_logo}{First subfigure}{example:firstsubfigure}
+	\hspace{1cm}
+	\msubfigure{width=.4\linewidth}{figure_and_tex}{Second subfigure}
+\end{mfigures}
+
+
+\paragraph{Example} The figure \figref{example:msubfigurewithnote} is an illustration of the following \LaTeX\ code: \\
+\texttt{{\textbackslash}begin\{mfigures\}\{Example of subfigures with {\textbackslash}texttt\{msubfigures\}\}\{example:msubfigure\}}\\
+\texttt{{\textbackslash}figurenote\{This is the text of the note\}}\\
+\texttt{{\textbackslash}mfigure\{width=.4{\textbackslash}linewidth\}\{img1\}\{First subfigure\}\{example:firstsubfigure\}} \\
+\texttt{{\textbackslash}hspace\{1cm\}} \\
+\texttt{{\textbackslash}msubfigure\{width=.4{\textbackslash}linewidth\}\{img2\}\{Second subfigure\}} \\
+\texttt{{\textbackslash}end\{mfigures\}}
+
+\begin{upmcaution}
+	This command has no effect when the class option \texttt{figurecaptionabove} is provided
+\end{upmcaution}
+
+\subsubsection{Add a Figures Source}
+
+A figures source is a text that is describing the source of the content of the figures.
+
+\paragraph{Syntax} \texttt{{\textbackslash}addsource\{text\}}
+
+\paragraph{Example} The figure \figref{example:msubfigurewithsource} is an illustration of the following \LaTeX\ code: \\
+\texttt{{\textbackslash}begin\{mfigures\}\{Example of subfigures with {\textbackslash}texttt\{msubfigures\}\}\{example:msubfigure\}}\\
+\texttt{{\textbackslash}addsource\{This is the text of the source\}}\\
+\texttt{{\textbackslash}mfigure\{width=.4{\textbackslash}linewidth\}\{img1\}\{First subfigure\}\{example:firstsubfigure\}} \\
+\texttt{{\textbackslash}hspace\{1cm\}} \\
+\texttt{{\textbackslash}msubfigure\{width=.4{\textbackslash}linewidth\}\{img2\}\{Second subfigure\}} \\
+\texttt{{\textbackslash}end\{mfigures\}}
+
+\begin{mfigures}{Example of subfigures with \texttt{mfigures} and a figures source}{example:msubfigurewithsource}
+	\addsource{This is the text of the source}
+	\mfigure{width=.4\linewidth}{arakhne_org_logo}{First subfigure}{example:firstsubfigure}
+	\hspace{1cm}
+	\msubfigure{width=.4\linewidth}{figure_and_tex}{Second subfigure}
+\end{mfigures}
+
+\begin{upmcaution}
+	This command has no effect when the class option \texttt{figurecaptionabove} is provided
+\end{upmcaution}
+
 \section{Figures with embedded \TeX\xspace commands}
 
 In several cases it is useful to include \TeX\xspace commands inside a figure. It is possible to combine figures and \TeX\ commands. Several figure editors provide exporting features to obtain combined figures: \texttt{xfig}, \texttt{inkscape}, \texttt{GNU Plot}, etc. Basically, these tools create two files per source figure: \begin{itemize}
@@ -730,6 +782,7 @@ Figure~\figref{figure_and_tex} gives an example where the equation is written as
 
 
 \section{Tabulars}
+\label{section:mtabular}
 
 You could include a tabular inside your document with the following environment.
 
@@ -856,6 +909,14 @@ This command changes the text of the table note.
 
 \paragraph{Syntax} \texttt{{\textbackslash}tablenote\{text\}}
 
+\begin{mtable}{\linewidth}{4}{lXrX}{Example of \texttt{mtable} with a table note}{example:mtable2}
+	\tablenote{This is the text of the note}
+	\tabularheader{Col1}{Col2}{Col3}{Col4}
+	a & b & c & d \\
+	\hline
+	e & f & g & h \\
+\end{mtable}
+
 \paragraph{Example} The table~\tabref{example:mtable2} is an illustration of the following \LaTeX\ code: \\
 \texttt{{\textbackslash}begin\{mtable\}\{{\textbackslash}linewidth\}\{4\}\{lXrX\}\{Example of {\textbackslash}texttt{mtable} with a table note\}\{example:mtable2\}} \\
 \texttt{{\textbackslash}tablenote\{This is the text of the note\}} \\
@@ -865,13 +926,9 @@ This command changes the text of the table note.
 \texttt{e \& f \& g \& h {\textbackslash}{\textbackslash}} \\
 \texttt{{\textbackslash}end\{mtable\}}
 
-\begin{mtable}{\linewidth}{4}{lXrX}{Example of \texttt{mtable} with a table note}{example:mtable2}
-	\tablenote{This is the text of the note}
-	\tabularheader{Col1}{Col2}{Col3}{Col4}
-	a & b & c & d \\
-	\hline
-	e & f & g & h \\
-\end{mtable}
+\begin{upmcaution}
+	This command has no effect when the class option \texttt{tablecaptionabove} is provided
+\end{upmcaution}
 
 \subsubsection{Add a Table Source}
 
@@ -895,6 +952,10 @@ A table source is a text that is describing the source of the content of the tab
 	\hline
 	e & f & g & h \\
 \end{mtable}
+
+\begin{upmcaution}
+	This command has no effect when the class option \texttt{tablecaptionabove} is provided
+\end{upmcaution}
 
 \section{Enumerations}
 

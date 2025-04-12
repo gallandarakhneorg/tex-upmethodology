@@ -342,6 +342,8 @@
 
 \newcommand{\upm@beginsubfigure}[4]{%
 	\let\upm@mfiguresaved\mfigure%
+	\gdef\upm@figure@note{}%
+	\gdef\upm@figure@source{}%
 	%options,filename,caption,label
 	\renewcommand{\mfigure}[5][]{%
 		\xdef\upm@tmp@subfigure@label{\alph{upm@subfigure@count}}%
@@ -359,6 +361,8 @@
 		}{\includegraphics[##1]{##2}}%
 		\addtocounter{upm@subfigure@count}{1}%
 	}
+	\newcommand{\figurenote}[1]{\gdef\upm@figure@note{\upm@float@formatexplanation{\bgroup \ignorespaces ##1\egroup}}}%
+	\newcommand{\addsource}[1]{\gdef\upm@figure@source{\upm@float@formatsource{\bgroup \ignorespaces ##1 \egroup}}}%
 	\setcounter{upm@subfigure@count}{1}%
 	\gdef\upm@mfigurescaption{#3}%
 	\gdef\upm@mfigureslabel{fig:#4}%
@@ -690,8 +694,8 @@
     \newcommand{\captionastitle}{
         \errmessage{The macro {\string\captionastitle} is deprecated. Replace by the argument}%
     }%
-    \newcommand{\tablenote}[1]{\gdef\upm@table@note{\bgroup ##1\egroup}}%
-    \newcommand{\addsource}[1]{\gdef\upm@table@source{\upm@float@formatsource{\bgroup ##1 \egroup}}}%
+    \newcommand{\tablenote}[1]{\gdef\upm@table@note{\upm@float@formatexplanation{\bgroup \ignorespaces ##1\egroup}}}%
+    \newcommand{\addsource}[1]{\gdef\upm@table@source{\upm@float@formatsource{\bgroup \ignorespaces ##1 \egroup}}}%
     %%
     \expandafter\table\@autolatex@mtable@position%
     \center\@autolatex@mtable@size%
