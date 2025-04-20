@@ -17,7 +17,7 @@
 % write to the Free Software Foundation, Inc., 59 Temple Place - Suite
 % 330, Boston, MA 02111-1307, USA.
 
-\global\edef\upm@package@docclazz@ver{2025/04/12}
+\global\edef\upm@package@docclazz@ver{2025/04/20}
 
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
 \ProvidesClass{upmethodology-document}[\upm@package@docclazz@ver]
@@ -215,10 +215,6 @@
 %----------------------------------------
 % HEADERS AND FOOTERS
 %----------------------------------------
-
-% TODO REMOVE
-%\def\upm@header@fmt#1{\textsc{\scriptsize #1}}
-%\def\upm@copyright@fmt#1{\textsc{\tiny #1}}
 
 \colorlet{pageheadertext}{gray}
 \colorlet{pageheadersection}{darkgray}

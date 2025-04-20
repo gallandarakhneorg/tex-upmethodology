@@ -15,6 +15,7 @@
 \incversion{\makedate{23}{03}{2025}}{Add documentation of the algorithms' colors.}{\upmpublic}
 \incversion{\makedate{06}{04}{2025}}{Add macro \texttt{{\textbackslash}upmcaption}.}{\upmpublic}
 \incversion{\makedate{12}{04}{2025}}{Replace \texttt{tabularx} by \texttt{xltabular} and table options \texttt{figurecaptionabove} and \texttt{figurecaptionabove}.}{\upmpublic}
+\incversion{\makedate{20}{04}{2025}}{Extend the internal value definition API.}{\upmpublic}
 
 \addauthorvalidator*[galland@arakhne.org]{St{\'e}phane}{Galland}{Original Author}
 \addauthor*{Frans}{van Dunn\'e}{Reviewer}
@@ -2306,8 +2307,12 @@ where:
 
 The \texttt{upmethodology-frontpage} package is able to use a page layout defined in a document extension (see chapter~\ref{section:document:extension} for details on document extension).
 
-\pagebreak A \LaTeX\ command must be defined in the \texttt{upmext-NAME.cfg} file of the extension. The name of this command (for example \texttt{mylayout}) must be set with the \texttt{{\textbackslash}set} command in the same file:\\
-\texttt{{\textbackslash}Set\{frontpage\}\{mylayout\}}\\
+\pagebreak A \LaTeX\ command must be defined in the \texttt{upmext-NAME.cfg} file of the extension. The name of this command (for example \texttt{mylayout}) must be set with the \texttt{{\textbackslash}set} command in the same file:
+\begin{itemize}
+\item \texttt{{\textbackslash}Set\{frontpage\}\{mylayout\}} - for defining the entire content of the front page.
+\item \texttt{{\textbackslash}Set\{cfrontpage\}\{mycontent\}} - for defining the content of the front page using the white page layout.
+\item \texttt{{\textbackslash}Set\{cfrontpage2\}\{mycontent\}} - for defining the content of the second front page using the white page layout. The second page layout is rendered after the first front page.
+\end{itemize}
 
 \section{Localization}
 
@@ -2386,7 +2391,7 @@ This command also declares the \texttt{trademarks} value which contains the trad
 Additional commands are provided to redefine the \texttt{upmethodology-document} constants:\\
 \texttt{{\textbackslash}Set{[}lang{]}\{variable\_name\}\{value\}}\\
 
-The \texttt{variable\_name} is the name of the value to override. It must be taken in one of the names listed in table~\tabref{documentextension:names:set}. The \texttt{lang} parameter is a language identifier. It is used to restrict the definition to a specific language. If not given, the default language is used instead. The \texttt{image\_name} and \texttt{image\_scale} are the name of the image file and the scaling factor respectively.
+The \texttt{variable\_name} is the name of the value to override. It must be taken in one of the names listed in table~\tabref{documentextension:names:set}. The \texttt{lang} parameter is a language identifier. It is used to restrict the definition to a specific language. If not given, the default language is used instead. If it is given, the value is set only of the current language corresponds to the given \texttt{lang}. The \texttt{image\_name} and \texttt{image\_scale} are the name of the image file and the scaling factor respectively.
 
 \begin{mtable}{\linewidth}{2}{lX}{List of overiddable value names}{documentextension:names:set}
 	\hline
@@ -2411,8 +2416,14 @@ The \texttt{variable\_name} is the name of the value to override. It must be tak
 	\hline
 \end{mtable}
 
-The \texttt{{\textbackslash}Get} command allows you to retrieve the value defined by a \texttt{{\textbackslash}Set}:\\
+The \texttt{{\textbackslash}SetLangDefault} command allows you to define a value for a specific language. It also change the language-independent value for the given variable name: \\
+\texttt{{\textbackslash}SetLangDefault\{language\}\{variable\_name\}\{text\}} \\
+
+The \texttt{{\textbackslash}Get} command allows you to retrieve the value defined by a \texttt{{\textbackslash}Set} for the current language:\\
 \texttt{{\textbackslash}Get\{variable\_name\}} \\
+
+The \texttt{{\textbackslash}GetLang} command allows you to retrieve the value defined by a \texttt{{\textbackslash}Set} or \texttt{{\textbackslash}SetLangDefault} for a specific language:\\
+\texttt{{\textbackslash}GetLang\{language\}\{variable\_name\}} \\
 
 The \texttt{{\textbackslash}Append} command allows you to append text to an existing definition of a value:\\
 \texttt{{\textbackslash}Append\{variable\_name\}\{text to append\}} \\

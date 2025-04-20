@@ -18,7 +18,7 @@
 % 330, Boston, MA 02111-1307, USA.
 %
 
-\global\edef\upm@package@ext@ver{2025/04/12}
+\global\edef\upm@package@ext@ver{2025/04/20}
 
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
 \ProvidesPackage{upmethodology-extension}[\upm@package@ext@ver]
@@ -37,10 +37,14 @@
 % EXTENSION MANAGEMENT
 %----------------------------------------
 
-\newif\ifupm@extension@savealllang\upm@extension@savealllangfalse
+\newif\ifupm@extension@savealllang\upm@extension@savealllangtrue
 
 \newcommand{\Get}[1]{\@nameuse{upmext@extension@value@#1}}
 \newcommand{\GetLang}[2]{\@nameuse{upmext@extension@value@#1@#2}}
+\newcommand{\SetLangDefault}[3]{%
+	\@namedef{upmext@extension@value@#1@#2}{#3}%
+	\@namedef{upmext@extension@value@#2}{#3}%
+}
 
 \newcommand{\upm@extension@Set}[3][\upmcurrentlang]{%
 	% PREDEFINED FRONT PAGE
@@ -61,13 +65,17 @@
 			\gdef\upmext@extension@value@frontpage@custom{#3}%
 		}{}%
 	}{%			
-		\ifthenelse{\equal{\upmcurrentlang}{#1}}{%
-			\message{*** define the extension value #2 ****}%
-			\global\@namedef{upmext@extension@value@#2}{#3}%
-			}{}%
-		\ifupm@extension@savealllang%
-			\global\@namedef{upmext@extension@value@#2@#1}{#3}%
-		\fi
+		\ifthenelse{\equal{#2}{cfrontpage2}}{%
+			\gdef\upmext@extension@value@frontpage@custom@second{#3}%
+		}{%
+			\ifthenelse{\equal{\upmcurrentlang}{#1}}{%
+				\message{*** define the extension value #2 ****}%
+				\global\@namedef{upmext@extension@value@#2}{#3}%
+				}{}%
+			\ifupm@extension@savealllang%
+				\global\@namedef{upmext@extension@value@#2@#1}{#3}%
+			\fi
+		}%
 	}}}%
 }
 \let\Set\upm@extension@Set
