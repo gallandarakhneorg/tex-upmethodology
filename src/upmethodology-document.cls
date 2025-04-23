@@ -246,9 +246,13 @@
 \newdimen{\upm@smalllogo@height}
 \upm@smalllogo@height=1cm
 
-\renewcommand{\sectionmark}[1]{\markright{\upm@header@sectionfmt@right{#1}{\thesection}}}
+\def\upm@package@docclazz@numberorempty#1#2{%
+	\ifnum#1>0{#2}\fi%
+}
+
+\renewcommand{\sectionmark}[1]{\markright{\upm@header@sectionfmt@right{#1}{\upm@package@docclazz@numberorempty{\value{section}}{\thesection}}}}
 \ifupmarticleformat\else
-	\renewcommand{\chaptermark}[1]{\markboth{\upm@header@sectionfmt@left{#1}{\thechapter}}{}}
+	\renewcommand{\chaptermark}[1]{\markboth{\upm@header@sectionfmt@left{#1}{\upm@package@docclazz@numberorempty{\value{chapter}}{\thechapter}}}{}}
 \fi
 
 % Supported page styles:
