@@ -17,7 +17,7 @@
 % write to the Free Software Foundation, Inc., 59 Temple Place - Suite
 % 330, Boston, MA 02111-1307, USA.
 
-\global\edef\upm@package@fmt@ver{2025/04/20}
+\global\edef\upm@package@fmt@ver{2025/04/23}
 
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
 \ProvidesPackage{upmethodology-fmt}[\upm@package@fmt@ver]
@@ -997,20 +997,24 @@
 \def\@chaptertoc{\@ifstar\upm@chaptertoc@a\upm@chaptertoc@b}
 \def\upm@chaptertoc@a[#1]#2{%
     \chapter*[#1]{#2}%
+    \chaptermark{#2}%
     \addcontentsline{toc}{chapter}{#2}%
 }
 \def\upm@chaptertoc@b#1{%
     \chapter*{#1}%
+    \chaptermark{#1}%
     \addcontentsline{toc}{chapter}{#1}%
 }
 
 \def\@sectiontoc{\@ifstar\upm@sectiontoc@a\upm@sectiontoc@b}
 \def\upm@sectiontoc@a[#1]#2{%
     \section*[#1]{#2}%
+    \sectionmark{#2}%
     \addcontentsline{toc}{section}{#2}%
 }
 \def\upm@sectiontoc@b#1{%
     \section*{#1}%
+    \sectionmark{#1}%
     \addcontentsline{toc}{section}{#1}%
 }
 
@@ -2045,4 +2049,5 @@
 }
 
 \endinput
+
 
