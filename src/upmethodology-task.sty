@@ -23,7 +23,7 @@
 %   2007-03-19   Add localization.
 %
 
-\global\edef\upm@package@task@ver{2025/04/12}
+\global\edef\upm@package@task@ver{2025/04/25}
 
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
 \ProvidesPackage{upmethodology-task}[\upm@package@task@ver]
@@ -229,7 +229,7 @@
 		\def\upm@task@tmp@e{}%
 		\@for\reserved@a:=\upm@task@tmp@c\do{%
 			\edef\upm@task@tmp@d{\expandafter\@upm@trim\reserved@a}%
-			\protected@edef\upm@task@tmp@e{\upm@task@tmp@e \protect\item[\upm@task@tmp@d~:] \protect\thetaskmilestonecomment{#2}{\upm@task@tmp@d}}%
+			\protected@edef\upm@task@tmp@e{\upm@task@tmp@e \protect\item[\upm@task@tmp@d] \protect\thetaskmilestonecomment{#2}{\upm@task@tmp@d}}%
 		}%
 		\begin{description}\upm@task@tmp@e\end{description}%
 		}} \\}%

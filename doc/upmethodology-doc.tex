@@ -2339,7 +2339,7 @@ The back cover is displayed by invoking the following command: \\
 \section{Change Back Page Layout}
 
 It is possible to change the layout of the back page with the command: \\
-\texttt{{\textbackslash}setbacklayout\{layout\_name\}}\\
+\texttt{{\textbackslash}setbackcover\{layout\_name\}}\\
 where \texttt{layout\_name} must be one of:
 \begin{itemize}
 \item \texttt{none}: no back page.
@@ -2532,6 +2532,28 @@ The following commands defines some localized strings used by \texttt{upmethodol
 \item \texttt{{\textbackslash}upm@task@lang@Milestones}: Milestones;
 \item \texttt{{\textbackslash}upm@task@lang@subtask}: Sub-task of.
 \end{itemize}
+
+\section{Example of task}
+
+\begin{taskdescription}{id:tache}
+  \taskname{nom}
+  \tasksuper{id:tache:0}
+  
+  \taskcomment{description}
+
+  \taskprogress{percentage}
+
+  \taskstart{\makedate{24}{04}{2025}}
+  \taskend{\makedate{24}{04}{2026}}
+
+  \taskmanager{Stephane Galland}
+  \taskmember{Stephane Galland}
+
+  \taskmilestone
+    {\makedate{24}{07}{2025}}
+    {Description}
+\end{taskdescription}
+
 
 %###########################################################
 
