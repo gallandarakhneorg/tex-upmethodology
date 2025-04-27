@@ -16,6 +16,7 @@
 \incversion{\makedate{06}{04}{2025}}{Add macro \texttt{{\textbackslash}upmcaption}.}{\upmpublic}
 \incversion{\makedate{12}{04}{2025}}{Replace \texttt{tabularx} by \texttt{xltabular} and table options \texttt{figurecaptionabove} and \texttt{figurecaptionabove}.}{\upmpublic}
 \incversion{\makedate{20}{04}{2025}}{Extend the internal value definition API.}{\upmpublic}
+\incversion{\makedate{27}{04}{2025}}{Add option \texttt{pgf} for figure commands.}{\upmpublic}
 
 \addauthorvalidator*[galland@arakhne.org]{St{\'e}phane}{Galland}{Original Author}
 \addauthor*{Frans}{van Dunn\'e}{Reviewer}
@@ -551,7 +552,13 @@ These two commands make it possible to include an image in your document. The pa
 \begin{itemize}
 \item \texttt{position}: is the desired position of the figure (see {\textbackslash}begin\{figure\}[position]). It could be \texttt{t} (top of the page), \texttt{b} (bottom of the page), \texttt{h} (at the command location if possible) or \texttt{H} (at command location);
 
-\item \texttt{include\_graphics\_options}: are the options passed to \texttt{{\textbackslash}includegraphics};
+\item \texttt{include\_graphics\_options}: are the options passed to graphic inclusion command.
+	These options may be one of the followings:
+	\begin{itemize}
+	\item \texttt{pgf[=true|false]} : if it is evaluated to true, use the PGF commands \texttt{{\textbackslash}pgfdeclareimage} and \texttt{{\textbackslash}pgfuseimage} for including the image; Otherwise use the command \texttt{{\textbackslash}includegraphics} for including the image;
+	\end{itemize}
+	By default, the command \texttt{{\textbackslash}includegraphics} is used.
+	Depending on the use of the previous options, the rest of the options in \texttt{include\_graphics\_options} are those for \texttt{{\textbackslash}includegraphics} or for \texttt{{\textbackslash}pgfdeclareimage};
 
 \item \texttt{filename}: is the filename passed to \texttt{{\textbackslash}includegraphics};
 
