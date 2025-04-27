@@ -135,7 +135,7 @@
 \RequirePackage{tikz}
 \RequirePackage{fontawesome5}
 \RequirePackage{tocbibind} % To automatically the common "Listof" in the outline
-
+\RequirePackage[inline]{enumitem}
 
 %----------------------------------------
 % Exponent and indice
@@ -1461,17 +1461,10 @@
 % INLINE ENUMERATION
 %----------------------------------------
 
-\newcounter{@@upm@fmt@inlineenumeration}
-\newcommand{\inlineenumerationlabel}[1]{\textit{(#1)}}
-\let\upm@fmt@inlineenum@numberformat\roman
-\newenvironment{inlineenumeration}{%
-	\begingroup%
-	\let\upm@fmt@inlineenum@currentlabel\@currentlabel%
-	\renewcommand{\item}{\xdef\@currentlabel{\upm@fmt@inlineenum@numberformat{@@upm@fmt@inlineenumeration}}{\inlineenumerationlabel{\@currentlabel}{\addtocounter{@@upm@fmt@inlineenumeration}{1}}}~}%
-	\setcounter{@@upm@fmt@inlineenumeration}{1}%
-}{%
-	\global\let\@currentlabel\upm@fmt@inlineenum@currentlabel%
-	\endgroup%
+\NewEnviron{inlineenumeration}[1][label=\textit{(\roman*)},ref=\textit{(\roman*)}]{%
+	\begin{enumerate*}[#1]%
+	\BODY%
+	\end{enumerate*}%
 }
 
 %----------------------------------------

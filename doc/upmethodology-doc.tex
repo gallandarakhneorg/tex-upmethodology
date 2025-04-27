@@ -16,7 +16,8 @@
 \incversion{\makedate{06}{04}{2025}}{Add macro \texttt{{\textbackslash}upmcaption}.}{\upmpublic}
 \incversion{\makedate{12}{04}{2025}}{Replace \texttt{tabularx} by \texttt{xltabular} and table options \texttt{figurecaptionabove} and \texttt{figurecaptionabove}.}{\upmpublic}
 \incversion{\makedate{20}{04}{2025}}{Extend the internal value definition API.}{\upmpublic}
-\incversion{\makedate{27}{04}{2025}}{Add option \texttt{pgf} for figure commands.}{\upmpublic}
+\incsubversion{\makedate{27}{04}{2025}}{Add option \texttt{pgf} for figure commands.}{\upmpublic}
+\incsubversion{\makedate{27}{04}{2025}}{Include package \texttt{enumitem} for inline enumerations.}{\upmpublic}
 
 \addauthorvalidator*[galland@arakhne.org]{St{\'e}phane}{Galland}{Original Author}
 \addauthor*{Frans}{van Dunn\'e}{Reviewer}
@@ -187,6 +188,7 @@ This section contains the list of all the package dependencies for the \texttt{u
 \item \texttt{amsmath}
 \item \texttt{amsthm}
 \item \texttt{colortbl}
+\item \texttt{enumitem}
 \item \texttt{environ}
 \item \texttt{fontawesome5}
 \item \texttt{graphicx}
@@ -1140,6 +1142,30 @@ This is a second text in the between.
 
 In several document, an enumeration of things is written inside a paragraph instead of inside a list of points.
 
+\subsubsection{Standard inline enumeration from \texttt{enumitem}}
+
+The UPmethodology package includes the package \texttt{enumitem} with the \texttt{inline} option.
+Therefore, it is possible to obtain an inline (or horizontal) enumeration.
+
+\paragraph{Example:} The following \LaTeX~code produces the result below:
+\begin{verbatim}
+This is a text: \begin{enumerate*}
+\item first thing;
+\item second thing;
+\item etc.
+\end{enumerate*} This is the text after.
+\end{verbatim}
+
+This is a text: \begin{enumerate*}
+\item first thing;
+\item second thing;
+\item etc.
+\end{enumerate*} This is the text after.
+
+\subsubsection{Shortcut inline enumeration}
+
+The environment \texttt{inlineenumeration} is a shortcut to \texttt{enumerate*} with the options \texttt{label={\textbackslash}textit{({\textbackslash}roman*)},ref={\textbackslash}textit{({\textbackslash}roman*)}}.
+
 \paragraph{Example:} The following \LaTeX~code produces the result below:
 \begin{verbatim}
 This is a text: \begin{inlineenumeration}
@@ -1154,6 +1180,7 @@ This is a text: \begin{inlineenumeration}
 \item second thing;
 \item etc.
 \end{inlineenumeration} This is the text after.
+
 
 \section{Environment \texttt{description}}
 
