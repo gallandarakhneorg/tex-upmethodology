@@ -136,6 +136,7 @@
 \RequirePackage{fontawesome5}
 \RequirePackage{tocbibind} % To automatically the common "Listof" in the outline
 \RequirePackage[inline]{enumitem}
+\RequirePackage[usestackEOL]{stackengine}
 
 %----------------------------------------
 % Exponent and indice
@@ -627,7 +628,7 @@
 \newcommand{\tabularheaderstyle}[1]{%
 	\mbox{}{\cellcolor{tableheaderbackground} {\color{tableheaderforeground}\itshape\ignorespaces#1}}%
 }%
-\def\upm@fmt@table@column@title#1{\hfil{\color{tableheaderforeground} \cellcolor{tableheaderbackground} {\itshape#1}}\hfil}
+\def\upm@fmt@table@column@title#1{\hfil{\color{tableheaderforeground} \cellcolor{tableheaderbackground} {\itshape\raisebox{-.5\height}{\addstackgap{\shortstack{#1}}}}}\hfil}
 
 % Utility functions for mtabular
 \newcounter{upm@fmt@mtabular@columnnumber}

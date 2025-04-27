@@ -18,6 +18,7 @@
 \incversion{\makedate{20}{04}{2025}}{Extend the internal value definition API.}{\upmpublic}
 \incsubversion{\makedate{27}{04}{2025}}{Add option \texttt{pgf} for figure commands.}{\upmpublic}
 \incsubversion{\makedate{27}{04}{2025}}{Include package \texttt{enumitem} for inline enumerations.}{\upmpublic}
+\incsubversion{\makedate{27}{04}{2025}}{Enable multiple lines the column heads with \texttt{{\textbackslash}tabularheader}.}{\upmpublic}
 
 \addauthorvalidator*[galland@arakhne.org]{St{\'e}phane}{Galland}{Original Author}
 \addauthor*{Frans}{van Dunn\'e}{Reviewer}
@@ -827,9 +828,10 @@ The \texttt{mtabular} environment provides:
 
 \item \texttt{{\textbackslash}tabularheader\{$header_1$\}...\{$header_n$\}} \\
 	This command allows you to define the titles of the columns. It uses the colors \texttt{tableheaderbackground} and \texttt{tableheaderforeground} for the background and the foreground respectively. Because the count of columns was given to the environment this function takes the same count of parameters as the count of columns. This command adds a line after the header, \emph{BUT NOT BEFORE}.
-\begin{upmcaution}
-	Because \texttt{{\textbackslash}tabularheader} is adding a \texttt{{\textbackslash}hline} at the end of its expansion. You must put a \texttt{{\textbackslash}tabularheader} just after \texttt{{\textbackslash}tabularheader}. Otherwise you may obtain a \TeX\ error.
-\end{upmcaution}
+
+\begin{upmnote}
+	The header text $header_1$ to $header_n$ ould have multiple lines. It is allowed to use the command \texttt{{\textbackslash}{\textbackslash}} to add a line in the column's title.
+\end{upmnote}
 
 \item \texttt{{\textbackslash}tabularrowheader\{title\}} \\
 	This command is designed to be used in the first cell of a row. It is rendering the cell as a row's header. A row header is a cell that is an header for the row. Only the row header cell has the header background color.
