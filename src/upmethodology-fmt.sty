@@ -17,7 +17,7 @@
 % write to the Free Software Foundation, Inc., 59 Temple Place - Suite
 % 330, Boston, MA 02111-1307, USA.
 
-\global\edef\upm@package@fmt@ver{2025/04/28}
+\global\edef\upm@package@fmt@ver{2025/04/29}
 
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
 \ProvidesPackage{upmethodology-fmt}[\upm@package@fmt@ver]
@@ -605,7 +605,6 @@
 
 \tcbset{
 	mtabular*/.style 2 args={%
-		breakable,%
 		enhanced,%
 		attach title,%
 		colbacktitle=tableheaderbackground,%
@@ -652,8 +651,8 @@
 }
 
 %-----
-%\mtabular[width]{ncolumns}{columns}{table title}
-\global\NewEnviron{mtabular}[4][\linewidth]{%
+%\upm@fmt@mtabular@expandtabular{width}{ncolumns}{columns}{table title}{options for tcolorbox environment}{tabular content}
+\newcommand{\upm@fmt@mtabular@expandtabular}[6]{%
     \newcommand*{\upm@fmt@mtabular@column@next}[1]{%
         & \upm@fmt@table@column@title{\ignorespaces##1\ignorespaces}%
         \addtocounter{upm@fmt@mtabular@columnnumber}{-1}%
@@ -689,14 +688,26 @@
     \newcommand{\tabularrowheader}[1]{%
         \centering\upm@fmt@table@column@title{\ignorespaces##1}%
     }%
-    \begin{tcolorbox}[mtabular={#3},title={#4}]%
+    \begin{tcolorbox}[mtabular={#3},title={#4},#5]%
 	\let\tcb@CT@arc@save\CT@arc@%
 	\arrayrulecolor{tcbcolframe}\def\arraystretch{1.1}%
 	\tcb@hack@currenvir\begin{xltabular}{\linewidth}{#3}%
-	\BODY%
+	#6%
 	\end{xltabular}%
 	\global\let\CT@arc@\tcb@CT@arc@save%
     \end{tcolorbox}%
+}
+
+%-----
+%\mtabular[width]{ncolumns}{columns}{table title}
+\global\NewEnviron{mtabular}[4][\linewidth]{%
+	\expandafter\upm@fmt@mtabular@expandtabular{#1}{#2}{#3}{#4}{}{\BODY}%
+}
+
+%-----
+%\mlongtabular[width]{ncolumns}{columns}{table title}
+\global\NewEnviron{mlongtabular}[4][\linewidth]{%
+	\expandafter\upm@fmt@mtabular@expandtabular{#1}{#2}{#3}{#4}{breakable}{\BODY}%
 }
 
 \gdef\upm@table@source{}

@@ -4,9 +4,7 @@
 
 \declaredocument{\LaTeX\ Packages for Structured Documents as for Unified Process Methodology}{Official Documentation}{UPM-2025-01}
 
-\updateversion{25.0}{\makedate{06}{04}{2020}}{Add explainations for \texttt{{\textbackslash}Append} and \texttt{{\textbackslash}setdocumentpurpose}.}{\upmpublic}
-\incversion{\makedate{03}{06}{2021}}{Add emphazing box with titles.}{\upmpublic}
-\incversion{\makedate{14}{03}{2025}}{Update the documentation for the \texttt{declareupmtheorem} command and \texttt{definition} environment.}{\upmpublic}
+\updateversion{25.0}{\makedate{14}{03}{2025}}{Update the documentation for the \texttt{declareupmtheorem} command and \texttt{definition} environment.}{\upmpublic}
 \incsubversion{\makedate{15}{03}{2025}}{Add the mention of the dependency to \texttt{tobibind} in the dependencies of \texttt{upmmethodology-fmt}.}{\upmpublic}
 \incversion{\makedate{15}{03}{2025}}{Add the commands \texttt{{\textbackslash}defref} and \texttt{{\textbackslash}defpageref}.}{\upmpublic}
 \incversion{\makedate{15}{03}{2025}}{Add the optional "source text" to the commands \texttt{{\textbackslash}mfigure} and \texttt{{\textbackslash}mfigure*}.}{\upmpublic}
@@ -19,6 +17,7 @@
 \incsubversion{\makedate{27}{04}{2025}}{Add option \texttt{pgf} for figure commands.}{\upmpublic}
 \incsubversion{\makedate{27}{04}{2025}}{Include package \texttt{enumitem} for inline enumerations.}{\upmpublic}
 \incsubversion{\makedate{27}{04}{2025}}{Enable multiple lines the column heads with \texttt{{\textbackslash}tabularheader}.}{\upmpublic}
+\incversion{\makedate{29}{04}{2025}}{Add environment \texttt{mlongtable}.}{\upmpublic}
 
 \addauthorvalidator*[galland@arakhne.org]{St{\'e}phane}{Galland}{Original Author}
 \addauthor*{Frans}{van Dunn\'e}{Reviewer}
@@ -798,9 +797,29 @@ Figure~\figref{figure_and_tex} gives an example where the equation is written as
 \section{Tabulars}
 \label{section:mtabular}
 
-You could include a tabular inside your document with the following environment.
+You could include a tabular (nor not-floating table) inside your document with the following environment.
+The UPmethodology provides two types of tabular environments: regular tabular, long tabular and table.
+Table \tabref{tabulartablecomparison} provides a brief comparison of these three concepts, that are detailed in sections \ref{section:regulartabular}, \ref{section:longtabular} and \ref{section:mtable}, respectivelly.
 
-\paragraph{Syntax} \texttt{{\textbackslash}begin\{mtabular\}[width]\{ncolumns\}\{columns\}...{\textbackslash}end\{mtabular\}}
+\begin{mtable}{\linewidth}{4}{l|X|X|X}{Comparison of the concepts of regular tabular, long tabular and table}{tabulartablecomparison}
+	\tabularheader{Criterion}{Regular Tabular}{Long Tabular}{Table}
+	Purpose & Creating the structure of a table & Same as regular tabular & Used as a floating container for tabular material \\
+	\hline
+	Floating Behavior & No & No & Yes \\
+	\hline
+	Placement Control & Where the tabular is written & Where the tabular is written & \LaTeX\ decides according to provided position modifiers \\
+	\hline
+	Multiple pages & No & Yes & No \\
+	\hline
+\end{mtable}
+
+\subsection{Regular Tabular}
+\label{section:regulartabular}
+
+The regular tabular is designed to create tables by organizing data into rows and columns.
+According to Table \tabref{tabulartablecomparison}, a regular tabular cannot cover multiple pages.
+
+\paragraph{Syntax} \texttt{{\textbackslash}begin\{mtabular\}[width]\{ncolumns\}\{columns\}\{top title\}...{\textbackslash}end\{mtabular\}}
 
 This tabular is an extension of the \texttt{xltabular} environment which provides dynamic columns with the specifier \texttt{X}, mixing the \texttt{lontable} and \texttt{tabularx} standard packages. The parameters are:
 \begin{itemize}
@@ -808,7 +827,16 @@ This tabular is an extension of the \texttt{xltabular} environment which provide
 
 \item \texttt{ncolumns}: is the count of columns in the tabular. It must be consistent with the column description;
 
-\item \texttt{columns}: is the description of the columns according to the \texttt{tabular} and \texttt{tabularx} or \texttt{xltabular} packages.
+\item \texttt{columns}: is the description of the columns according to the \texttt{tabular} and \texttt{tabularx} or \texttt{xltabular} packages. The following characters are supported for representing a single column :
+	\begin{itemize}
+	\item \texttt{l}: the column is left aligned with a width that is corresponding to the maximum width of the column's content;
+	\item \texttt{r}: the column is right aligned with a width that is corresponding to the maximum width of the column's content;
+	\item \texttt{c}: the column is centered with a width that is corresponding to the maximum width of the column's content;
+	\item \texttt{p\{w\}}: the column is centered with a width equals to \texttt{w};
+	\item \texttt{X}: the column is centered with a width computed by \LaTeX.
+	\end{itemize}
+
+\item \texttt{top title}: is the text to be drawn as a title at the top of the table. This top title is not a caption, according to the definition of a caption in a table.
 
 \end{itemize}
 
@@ -848,7 +876,7 @@ The \texttt{mtabular} environment provides:
 
 The following example of table is obtained by: \\
 \begin{verbatim}
-\begin{mtabular}[\linewidth]{4}{lXrX}
+\begin{mtabular}[\linewidth]{4}{lXrX}{}
 	\tabularheader{Col1}{Col2}{Col3}{Col4}
 	a & b & c & d \\
 	\hline
@@ -873,11 +901,17 @@ The following example of table is obtained by: \\
 	m & n & o & p \\
 \end{mtabular}
 
-Long tables are assumed to be on multiple pages.
-The \texttt{mtabular} environment supports long tables.
-An example of a long table could be found below.
+\subsection{Long Tabular}
+\label{section:longtabular}
 
-\begin{mtabular}[\linewidth]{2}{|l|X|}{This is the long table title}
+Long tables could be rendered on multiple pages, according to Table \tabref{tabulartablecomparison}, page \tabpageref{tabulartablecomparison}.
+The \texttt{mlongtabular} environment supports long tables.
+
+\paragraph{Syntax} \texttt{{\textbackslash}begin\{mlongtabular\}[width]\{ncolumns\}\{columns\}\{top title\}...{\textbackslash}end\{mlongtabular\}}
+
+\paragraph{Example} An example of a long table could be found below.
+
+\begin{mlongtabular}[\linewidth]{2}{|l|X|}{This is the long table title}
 	\tabularheader{Col1}{Col2}
 	1 & 0 \\
 	2 & 0 \\
@@ -947,12 +981,15 @@ An example of a long table could be found below.
 	67 & 6 \\
 	68 & 6 \\
 	68 & 6 \\
-\end{mtabular}
+\end{mlongtabular}
 
 \section{Tables}
+\label{section:mtable}
 
 You could include a table inside your document with the following environment: \\
 \texttt{{\textbackslash}begin\{mtable\}[options]\{width\}\{ncolumns\}\{columns\}\{caption\}\{label\}...{\textbackslash}end\{mtable\}} \\
+
+According to Table \tabref{tabulartablecomparison}, page \tabpageref{tabulartablecomparison}, a table is a floating structure that contains data formatted in rows and columns.
 
 This environment is based on the \texttt{mtabular} environment (see Section \ref{section:mtabular}). The parameters are:
 \begin{itemize}
