@@ -17,7 +17,7 @@
 % write to the Free Software Foundation, Inc., 59 Temple Place - Suite
 % 330, Boston, MA 02111-1307, USA.
 
-\global\edef\upm@package@fmt@ver{2025/04/27}
+\global\edef\upm@package@fmt@ver{2025/04/28}
 
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
 \ProvidesPackage{upmethodology-fmt}[\upm@package@fmt@ver]
@@ -264,26 +264,34 @@
 % Include graphics or its previously loaded buffer
 % #1: options for graphic loading
 % #2: filename of the figure
-\newcommand{\upm@fmt@mfigure@internal@includegraphics}[2][]{%
+\newcommand{\upm@fmt@mfigure@internal@includegraphics}[2]{%
+	% Treat local options
 	\setkeys*[upm@fmt]{includegraphics}{#1}%
-	%
+	% Expand the remaining xkeyval options for both image loading functions
+	\protected@xdef\upm@fmt@mfigure@internal@includegraphics@invokea{\XKV@rm}%
+	\protected@xdef\upm@fmt@mfigure@internal@includegraphics@invokeb{upm@includegraphics@\the\upm@fmt@mfigure@internal@includegraphics@index}%
+	\protected@xdef\upm@fmt@mfigure@internal@includegraphics@invokec{\protect\includegraphics[\upm@fmt@mfigure@internal@includegraphics@invokea]{#2}}%
+	\protected@xdef\upm@fmt@mfigure@internal@includegraphics@invoked{%
+		\protect\pgfdeclareimage%
+		[\upm@fmt@mfigure@internal@includegraphics@invokea]%
+		{\upm@fmt@mfigure@internal@includegraphics@invokeb}%
+		{#2}%
+	}%
+	% Do the loading depending on the driver
 	\ifupm@fmt@mfigure@internal@ispgf%
 		\@ifundefined{upm@fmt@mfigure@internal@pfg@#2}{%
-			\protected@xdef\upm@tmp{%
-				\protect\pgfdeclareimage%
-				{upm@includegraphics@\the\upm@fmt@mfigure@internal@includegraphics@index}%
-				{#2}
-			}%
-			\upm@tmp%
+			\upm@fmt@mfigure@internal@includegraphics@invoked%
 			\expandafter\protected@xdef\csname upm@fmt@mfigure@internal@pfg@#2\endcsname{
 				\protect\pgfuseimage%
-				{upm@includegraphics@\the\upm@fmt@mfigure@internal@includegraphics@index}%
+				{\upm@fmt@mfigure@internal@includegraphics@invokeb}%
 			}%
-			\advance\upm@fmt@mfigure@internal@includegraphics@index by 1\relax%
-		}{}%
-		\csname upm@fmt@mfigure@internal@pfg@#2\endcsname%
+		}{%
+			%\show\upm@fmt@mfigure@internal@includegraphics@invokeb%
+		}%
+		\@nameuse{upm@fmt@mfigure@internal@pfg@#2}%
+		\global\advance\upm@fmt@mfigure@internal@includegraphics@index by 1\relax%
 	\else%
-		\includegraphics[\XKV@rm]{#2}%
+		\upm@fmt@mfigure@internal@includegraphics@invokec%
 	\fi%
 }
 
@@ -298,7 +306,7 @@
             	\protect\upm@caption{#4}{}{#6}%
             	\protect\label{fig:#5}%
             \fi%
-            \protect\upm@fmt@mfigure@internal@includegraphics[#2]{#3}%
+            \protect\upm@fmt@mfigure@internal@includegraphics{#2}{#3}%
             \ifupm@fmt@figure@topcaption\else%
             	\protect\upm@caption{#4}{}{#6}%
             	\protect\label{fig:#5}%
@@ -387,7 +395,7 @@
 		\subcaptionbox{##4%
 			\label{fig:##5}%
 			\label{fig:#4:\upm@tmp@subfigure@label}%
-		}{\upm@fmt@mfigure@internal@includegraphics[##2]{##3}}%
+		}{\upm@fmt@mfigure@internal@includegraphics{##2}{##3}}%
 		\addtocounter{upm@subfigure@count}{1}%
 	}
 	%options,filename,caption
@@ -395,7 +403,7 @@
 		\xdef\upm@tmp@subfigure@label{\alph{upm@subfigure@count}}%
 		\subcaptionbox{##3%
 			\label{fig:#4:\upm@tmp@subfigure@label}%
-		}{\upm@fmt@mfigure@internal@includegraphics[##1]{##2}}%
+		}{\upm@fmt@mfigure@internal@includegraphics{##1}{##2}}%
 		\addtocounter{upm@subfigure@count}{1}%
 	}
 	\newcommand{\figurenote}[1]{\gdef\upm@figure@note{\upm@float@formatexplanation{\bgroup \ignorespaces ##1\egroup}}}%
@@ -1297,7 +1305,7 @@
 %----------------------------------------
 
 \newenvironment{umlinpar}[2][width=.45\linewidth]{%
-\begin{window}[0,r,{\mbox{\hspace{.5cm}\upm@fmt@mfigure@internal@includegraphics[#1]{#2}\vspace{.5cm}}},{}]
+\begin{window}[0,r,{\mbox{\hspace{.5cm}\includegraphics[#1]{#2}\vspace{.5cm}}},{}]
 }{%
 \end{window}}
 

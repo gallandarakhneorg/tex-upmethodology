@@ -588,7 +588,7 @@ The figure~\figref{example:mfigure1} page~\figpageref{example:mfigure1} is obtai
 
 The reference and page reference are obtained with \texttt{{\textbackslash}figref\{example:mfigure1\}} and \texttt{{\textbackslash}figpageref\{example:mfigure1\}}.
 
-\mfigure[ht]{width=.4\linewidth}{arakhne_org_logo}{Example of figure inclusion with \texttt{{\textbackslash}mfigure}}{example:mfigure1}
+\mfigure[ht]{pgf,width=.4\linewidth}{arakhne_org_logo}{Example of figure inclusion with \texttt{{\textbackslash}mfigure}}{example:mfigure1}
 
 \subsection{Example with Source Text Only}
 
@@ -596,7 +596,7 @@ For illustrating the rendering of the source text argument, the figure~\figref{e
 
 \texttt{{\textbackslash}mfigure[ht]\{width=.4{\textbackslash}linewidth\}\{slogo\}\{Example of figure inclusion with {\textbackslash}texttt\{\{{\textbackslash}textbackslash\}mfigure with source text\}\}\{example:mfigure2\}[This text explain the source]}
 
-\mfigure[ht]{width=.4\linewidth}{arakhne_org_logo}{Example of figure inclusion with \texttt{{\textbackslash}mfigure with source text}}{example:mfigure2}[This text explain the source]
+\mfigure[ht]{pgf,width=.4\linewidth}{arakhne_org_logo}{Example of figure inclusion with \texttt{{\textbackslash}mfigure with source text}}{example:mfigure2}[This text explain the source]
 
 \subsection{Rendering of the source text}
 
@@ -643,9 +643,9 @@ The figure~\figref{example:msubfigure} page~\figpageref{example:msubfigure} is o
 The reference and page reference are obtained with \texttt{{\textbackslash}figref\{example:msubfigure\}} and \texttt{{\textbackslash}figpageref\{example:msubfigure\}}.
 
 \begin{mfigures}{Example of subfigures with \texttt{mfigures}}{example:msubfigure}
-	\mfigure{width=.4\linewidth}{arakhne_org_logo}{First subfigure}{example:firstsubfigure}
+	\mfigure{pgf,width=.4\linewidth}{arakhne_org_logo}{First subfigure}{example:firstsubfigure}
 	\hspace{1cm}
-	\msubfigure{width=.4\linewidth}{figure_and_tex}{Second subfigure}
+	\msubfigure{pgf,width=.4\linewidth}{figure_and_tex}{Second subfigure}
 \end{mfigures}
 
 The references to the subfigures could be obtained in two way:\nopagebreak\begin{itemize}
@@ -662,9 +662,9 @@ This command changes the text of the figures note.
 
 \begin{mfigures}{Example of subfigures with \texttt{mfigures} and a figures note}{example:msubfigurewithnote}
 	\figurenote{This is the text of the note}
-	\mfigure{width=.4\linewidth}{arakhne_org_logo}{First subfigure}{example:firstsubfigure}
+	\mfigure{pgf,width=.4\linewidth}{arakhne_org_logo}{First subfigure}{example:firstsubfigure}
 	\hspace{1cm}
-	\msubfigure{width=.4\linewidth}{figure_and_tex}{Second subfigure}
+	\msubfigure{pgf,width=.4\linewidth}{figure_and_tex}{Second subfigure}
 \end{mfigures}
 
 
@@ -696,9 +696,9 @@ A figures source is a text that is describing the source of the content of the f
 
 \begin{mfigures}{Example of subfigures with \texttt{mfigures} and a figures source}{example:msubfigurewithsource}
 	\addsource{This is the text of the source}
-	\mfigure{width=.4\linewidth}{arakhne_org_logo}{First subfigure}{example:firstsubfigure}
+	\mfigure{pgf,width=.4\linewidth}{arakhne_org_logo}{First subfigure}{example:firstsubfigure}
 	\hspace{1cm}
-	\msubfigure{width=.4\linewidth}{figure_and_tex}{Second subfigure}
+	\msubfigure{pgf,width=.4\linewidth}{figure_and_tex}{Second subfigure}
 \end{mfigures}
 
 \begin{upmcaution}
