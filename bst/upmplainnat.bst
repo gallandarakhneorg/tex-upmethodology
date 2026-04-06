@@ -2,6 +2,7 @@
 %%% A modification of `plainnat.bst' for use with upmethodology packages.
 %%%
 %%% Copyright (c) 2014 Nicolas GAUD <gaud@arakhne.org>
+%%% Copyright (c) 2026 Stephane GALLAND <galland@arakhne.org>
 %%% 
 %%% This program is free library; you can redistribute it and/or modify
 %%% it under the terms of the GNU Lesser General Public License as

@@ -1,6 +1,6 @@
 % Layout and Pagraph Format for Unified Process Methodology
 %
-% Copyright (c) 2006-2009, 2012-2025 Stephane GALLAND <galland@arakhne.org>
+% Copyright (c) 2006-2009, 2012-2026 Stephane GALLAND <galland@arakhne.org>
 % 
 % This program is free library; you can redistribute it and/or modify
 % it under the terms of the GNU Lesser General Public License as
@@ -17,7 +17,7 @@
 % write to the Free Software Foundation, Inc., 59 Temple Place - Suite
 % 330, Boston, MA 02111-1307, USA.
 
-\global\edef\upm@package@fmt@ver{2025/04/29}
+\global\edef\upm@package@fmt@ver{2026/04/06}
 
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
 \ProvidesPackage{upmethodology-fmt}[\upm@package@fmt@ver]
@@ -901,28 +901,56 @@
 \setlength\sectionhoffset{\dimexpr 1in+\hoffset\relax}
 \setlength\sectionhoffset{\dimexpr 1in+\leftmargin\relax}
 
+\newlength\sectionvtextsize
+\newlength\sectionvlinesize
+\newcounter{sectionlinecount}
+
 % implementation of sections.
 \titleformat{\section}
 	{\upm@format@sectiontitle}
 	{}
 	{0pt}
 	{%
-	\begin{tikzpicture}%
-		\hspace*{-\sectionhoffset}\llap{%
-		\node[%
-			text depth=0pt,%
-			anchor=east,%
-			sectiontitlenumcolor,ultra thick,fill=sectiontitleboxcolor!40,%
-			rectangle,%
-			inner sep=10pt, outer sep=0pt,%
-			align=right,%
-			text width=\dimexpr\sectionhoffset-20pt\relax]%
-			(O) at (0,0){\upm@format@sectionnum{\thesection}};%
-		\draw (O.east) node[text depth=0pt,anchor=west,inner sep=10pt,text width=\linewidth]{\nohyphens{#1}};%
-		\draw [sectiontitleboxcolor!40] (O.south east) --++ (\dimexpr\textwidth\relax,0);%
-		\fill [sectiontitleboxcolor] (O.south east) ++ (\dimexpr\textwidth\relax,0) circle(.1);%
-		}%
-	\end{tikzpicture}
+		% Compute the height of the title for extending the graphical view
+		\settoheight{\sectionvlinesize}{\begin{minipage}{\linewidth}{\upm@format@sectiontitle\nohyphens{Some text}}\end{minipage}}%
+		\settoheight{\sectionvtextsize}{\begin{minipage}{\linewidth}{\upm@format@sectiontitle\nohyphens{#1}}\end{minipage}}%
+		\setcounter{sectionlinecount}{\dimexpr\sectionvtextsize/\sectionvlinesize\relax}%
+		\ifnum\value{sectionlinecount}>1%
+			\begin{tikzpicture}%
+				\hspace*{-\sectionhoffset}\llap{%
+				\node[%
+					text depth=0pt,%
+					anchor=east,%
+					sectiontitlenumcolor,ultra thick,fill=sectiontitleboxcolor!40,%
+					rectangle,%
+					inner sep=10pt, outer sep=0pt,%
+					align=right,%
+					text height=\dimexpr\sectionvtextsize+\thesectionlinecount\parskip\relax,%
+					text width=\dimexpr\sectionhoffset-20pt\relax]%
+					(O) at (0,0){\upm@format@sectionnum{\thesection}};%
+				\draw (O.north east) node[text depth=0pt,anchor=north west,inner sep=10pt,text width=\linewidth]{\nohyphens{#1}};%
+				\draw [sectiontitleboxcolor!40] (O.south east) --++ (\dimexpr\textwidth\relax,0);%
+				\fill [sectiontitleboxcolor] (O.south east) ++ (\dimexpr\textwidth\relax,0) circle(.1);%
+				}%
+			\end{tikzpicture}
+		\else%
+			\begin{tikzpicture}%
+				\hspace*{-\sectionhoffset}\llap{%
+				\node[%
+					text depth=0pt,%
+					anchor=east,%
+					sectiontitlenumcolor,ultra thick,fill=sectiontitleboxcolor!40,%
+					rectangle,%
+					inner sep=10pt, outer sep=0pt,%
+					align=right,%
+					text width=\dimexpr\sectionhoffset-20pt\relax]%
+					(O) at (0,0){\upm@format@sectionnum{\thesection}};%
+				\draw (O.east) node[text depth=0pt,anchor=west,inner sep=10pt,text width=\linewidth]{\nohyphens{#1}};%
+				\draw [sectiontitleboxcolor!40] (O.south east) --++ (\dimexpr\textwidth\relax,0);%
+				\fill [sectiontitleboxcolor] (O.south east) ++ (\dimexpr\textwidth\relax,0) circle(.1);%
+				}%
+			\end{tikzpicture}
+		\fi%
 	}
 \titlespacing*{\section}{0pt}{*5}{*-2}
 
