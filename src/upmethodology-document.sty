@@ -17,7 +17,7 @@
 % write to the Free Software Foundation, Inc., 59 Temple Place - Suite
 % 330, Boston, MA 02111-1307, USA.
 
-\global\edef\upm@package@doc@ver{2026/04/06}
+\global\edef\upm@package@doc@ver{2026/04/10}
 
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
 \ProvidesPackage{upmethodology-document}[\upm@package@doc@ver]
@@ -548,12 +548,23 @@
 % WATERMARK
 %----------------------------------------
 
+\colorlet{watermarkcolor}{red!10}
+
 \AtBeginDocument{
-	\ifthenelse{\equal{\theupmstatus}{\upmrestricted}}{
-		\edef\upm@doc@tmp@watermark{\uppercase{\upm@lang@restricted}}
-		\RequirePackage{draftwatermark}
-		\SetWatermarkText{\upm@doc@tmp@watermark}
-		\SetWatermarkScale{\Get{watermarksize}}
+	\ifthenelse{\equal{\theupmstatus}{\upmrestricted}}{%
+		\edef\upm@doc@tmp@watermark{\uppercase{\upm@lang@restricted}}%
+		\edef\upm@doc@tmp@scale{\Get{watermarksize}}%
+		\RequirePackage[
+			color=watermarkcolor,
+			text={\normalfont\upm@doc@tmp@watermark},
+			angle=60,
+			fontsize={.2\paperwidth},
+			scale={\upm@doc@tmp@scale},
+			hpos={.6\paperwidth},
+			hanchor=c,
+			vpos={.58\paperheight},
+			vanchor=m,
+		]{draftwatermark}%
 	}{}
 }
 

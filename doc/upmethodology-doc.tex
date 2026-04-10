@@ -19,6 +19,7 @@
 \incsubversion{\makedate{27}{04}{2025}}{Enable multiple lines the column heads with \texttt{{\textbackslash}tabularheader}.}{\upmpublic}
 \incversion{\makedate{29}{04}{2025}}{Add environment \texttt{mlongtable}.}{\upmpublic}
 \incversion{\makedate{06}{04}{2026}}{Update the style of the section titles to support more than one line of text.}{\upmpublic}
+\incversion{\makedate{10}{04}{2026}}{Specify the configuration for the watermark.}{\upmpublic}
 
 \addauthorvalidator*[galland@arakhne.org]{St{\'e}phane}{Galland}{Original Author}
 \addauthor*{Frans}{van Dunn\'e}{Reviewer}
@@ -2330,6 +2331,15 @@ The following commands defines some localized strings used by \texttt{upmethodol
 \item \texttt{{\textbackslash}upm@lang@document@keywords}: Key-words.
 \end{itemize}
 
+\section{Watermark}
+
+If the document is marked as "restricted" (see \texttt{{\textbackslash}upmrestricted}), a watermark ``CONFIDENTIAL'' is automatically added on each page.
+
+It is possible to configure some elements for this watermark:
+\begin{description}
+\item[Color of the text] The color of the watermark text is defined by the color \texttt{watermarkcolor}. You could change the color by using the macros \texttt{{\textbackslash}definecolor} or \texttt{{\textbackslash}colorlet}.
+\item[Scale of the text] For changing the size of the watermark text, you could force the value of the scaling factor. This scaling factor is defined in the \texttt{watermarksize} global value. You could change it by invoking : \texttt{{\textbackslash}Set{watermarksize}{scale}}, where \texttt{scale} is a value strictly positive.
+\end{description}
 
 %###########################################################
 
