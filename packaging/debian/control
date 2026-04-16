@@ -1,0 +1,17 @@
+Source: tex-upmethodology
+Section: devel
+Priority: optional
+Build-Depends: debhelper (>= 4.0), debconf, texlive, texlive-extra-utils, texlive-latex-base
+Maintainer: Stephane Galland <galland@arakhne.org>
+Standards-Version: 3.9.6
+Homepage: http://www.arakhne.org/tex-upmethodology/
+
+Package: tex-upmethodology
+Architecture: all
+Depends: ${shlibs:Depends}, ${misc:Depends}, texlive, texlive-fonts-extra, texlive-extra-utils, texlive-latex-base
+Replaces: tetex-upmethodology
+Suggests: tex-thmtools (>= 63.0.0)
+Description: LaTeX style for UP methodology documents
+ This package provides LaTeX style for writing
+ UP methodology-based documents.
+

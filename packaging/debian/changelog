@@ -1,0 +1,705 @@
+tex-upmethodology (20260410-0arakhne1) noble; urgency=low
+
+  * Bug fix: Fixing invalid root folder name in source archive for debian repository.
+
+ -- Stephane GALLAND <galland@arakhne.org>  Thu, 16 Apr 2026 22:42:13 +0800
+
+tex-upmethodology (20260410-0arakhne0) noble; urgency=low
+
+  * CIAD Report: Add configuration for the watermark.
+
+ -- Stephane GALLAND <galland@arakhne.org>  Fri, 10 Apr 2026 16:34:56 +0800
+
+tex-upmethodology (20260406-0arakhne0) noble; urgency=low
+
+  * Bug fix: Properly render the section titles when they are one multiple lines.
+
+ -- Stephane GALLAND <galland@arakhne.org>  Tue, 07 Apr 2026 09:17:15 +0800
+
+tex-upmethodology (20250429-0arakhne0) noble; urgency=low
+
+  * Bug fix: To avoid rendering issues with mtabular and table that are caused by the
+automatic support of long tables, the "breakable" option is removed from
+the default mtabular style.
+  * The environment "mlongtable" is introduced for enabling to generate long tables when it is needed.
+
+ -- Stephane GALLAND <galland@arakhne.org>  Tue, 29 Apr 2025 00:01:00 +0200
+
+tex-upmethodology (20250428-0arakhne0) noble; urgency=low
+
+  * Add options 'pgf' for figure commands. This option permits to select PGF or Graphicsx as a driver for loading an image.
+  * Enable multiple lines in the tabular headers.
+  * Reimplement "inlineenumeration" with "enumerate*" from the enumitem package.
+
+ -- Stephane GALLAND <galland@arakhne.org>  Mon, 28 Apr 2025 22:23:46 +0200
+
+tex-upmethodology (20250426-0arakhne0) noble; urgency=low
+
+  * Remove unecessary column character for automatically built task list.
+  * Don't output the chapter/section numbers in headers when they are equal to zero.
+  * Add the missed header marks for the "listof" commands.
+
+ -- Stephane GALLAND <galland@arakhne.org>  Sat, 26 Apr 2025 10:59:35 +0200
+
+tex-upmethodology (20250420-0arakhne0) noble; urgency=low
+
+  * Define an optional second page title.
+
+ -- Stephane GALLAND <galland@arakhne.org>  Sun, 20 Apr 2025 21:04:20 +0200
+
+tex-upmethodology (20250412-0arakhne0) noble; urgency=low
+
+  * Replace 'tabularx' by 'xltabular'.
+  * Add \figurenote and \addsource for mfigures environment.
+  * Add class options "tablecaptionabove" and "figurecaptionabove".
+  * Add command \upmcaption
+
+ -- Stephane GALLAND <galland@arakhne.org>  Sat, 12 Apr 2025 13:32:33 +0200
+
+tex-upmethodology (20250405-0arakhne0) noble; urgency=low
+
+  * Hide in the lists of figures and tables the source text that could attached to any figure or table.
+
+ -- Stephane GALLAND <galland@arakhne.org>  Sat, 05 Apr 2025 19:13:41 +0200
+
+tex-upmethodology (20250404-0arakhne0) noble; urgency=low
+
+  * Change the default style for the headers and footers of the chapters and reports.
+
+ -- Stephane GALLAND <galland@arakhne.org>  Fri, 04 Apr 2025 21:20:20 +0200
+
+tex-upmethodology (20250323-0arakhne0) noble; urgency=low
+
+  * Add style for algorithms if the packages are included.
+  * Add formatting of the subparagraphs.
+
+ -- Stephane GALLAND <galland@arakhne.org>  Sun, 23 Mar 2025 20:59:38 +0100
+
+tex-upmethodology (20250315-0arakhne0) noble; urgency=low
+
+  * Use tcolorbox for mtable and mtabular environments.
+  * Add the macro \addsource inside the environment \begin{mtable}\end{mtable}.
+  * Disable hyphen of the UPM theorems' titles.
+  * Add the "source text" optional argument to \mfigure.
+  * Add macros \defref and \defpageref.
+  * Add the "listof" in the table of content.
+  * Fixing the label for the "List of figures".
+
+ -- Stephane GALLAND <galland@arakhne.org>  Sat, 15 Mar 2025 21:40:37 +0100
+
+tex-upmethodology (20250314-0arakhne1) noble; urgency=low
+
+  * Remove conflicting files from the deb.
+
+ -- Stephane GALLAND <galland@arakhne.org>  Fri, 14 Mar 2025 17:25:12 +0100
+
+tex-upmethodology (20250314-0arakhne0) noble; urgency=low
+
+  * Use the package tcolorbox for the definition of the upm theorems.
+  * Use the package tcolobox for the definition of the emphazing boxes.
+  * Use the package tcolobox for the definition of the cation/info/question boxes.
+  * Fixing the interline space for the chapter titles.
+  * Use italic font for the numbers in the inline enumeration lists.
+
+ -- Stephane GALLAND <galland@arakhne.org>  Fri, 14 Mar 2025 17:25:12 +0100
+
+tex-upmethodology (20250311-0arakhne0) noble; urgency=low
+
+  * jammy -> noble
+  * Fix the error caused by an improper inclusion of the hyperref package.
+  * Change the styles of the chapter and section titles.
+
+ -- Stephane GALLAND <galland@arakhne.org>  Tue, 11 Mar 2025 12:08:29 +0100
+
+tex-upmethodology (20221004-0arakhne0) jammy; urgency=low
+
+  * focal -> jammy
+  * Restore standard 'description' environment for generating glossaries.
+
+ -- Stephane GALLAND <galland@arakhne.org>  Tue, 04 Oct 2022 11:38:28 +0200
+
+tex-upmethodology (20220210-0arakhne0) focal; urgency=low
+
+  * Add macro \tabularheaderstyle.
+  * Remove unrelevant spaces in tabular cells.
+  * Fixing the invalid Babel-French options.
+
+ -- Stephane GALLAND <galland@arakhne.org>  Thu, 10 Feb 2022 17:42:30 +0100
+
+tex-upmethodology (20210708-0arakhne0) focal; urgency=low
+
+  * bionic -> focal
+  * Add emphazing box with title.
+
+ -- Stephane GALLAND <galland@arakhne.org>  Wed, 07 Jul 2021 20:47:10 +0200
+
+tex-upmethodology (20200406-0arakhne0) bionic; urgency=low
+
+  * Add the macros \Append and \setdocumentpurpose.
+
+ -- Stephane GALLAND <galland@arakhne.org>  Mon, 06 Apr 2020 13:41:09 +0200
+
+tex-upmethodology (20190928-1arakhne0) bionic; urgency=low
+
+  * Add the missed icons into the Debian package.
+
+ -- Stephane GALLAND <galland@arakhne.org>  Sat, 28 Sep 2019 18:07:17 +0800
+
+tex-upmethodology (20190928-0arakhne0) bionic; urgency=low
+
+  * Change icons for the highlight boxes.
+  * Add colors for the highlight boxes.
+
+ -- Stephane GALLAND <galland@arakhne.org>  Sat, 28 Sep 2019 18:05:14 +0800
+
+tex-upmethodology (20190917-0arakhne0) bionic; urgency=low
+
+  * Make optional the packages "task", "code" and "spec".
+
+ -- Stephane GALLAND <galland@arakhne.org>  Tue, 17 Sep 2019 19:46:05 +0800
+
+tex-upmethodology (20190804-0arakhne0) bionic; urgency=low
+
+  * Add "graphicspathcontext" environment.
+
+ -- Stephane GALLAND <galland@arakhne.org>  Sun, 04 Aug 2019 12:40:57 +0200
+
+tex-upmethodology (20171210-0arakhne0) xenial; urgency=low
+
+  * Rename the UPM icons.
+
+ -- Stephane GALLAND <galland@arakhne.org>  Sun, 10 Dec 2017 22:44:37 +0100
+
+tex-upmethodology (20171128-0arakhne0) xenial; urgency=low
+
+  * Add documentation on 'standardlists' option.
+
+ -- Stephane GALLAND <galland@arakhne.org>  Tue, 28 Nov 2017 14:34:32 +0100
+
+tex-upmethodology (201710113-0arakhne0) xenial; urgency=low
+
+  * Add macro \upmmakenamestar.
+
+ -- Stephane GALLAND <galland@arakhne.org>  Fri, 13 Oct 2017 15:13:44 +0200
+
+tex-upmethodology (20170808-0arakhne0) xenial; urgency=low
+
+  * Fixing spelling errors and typos.
+
+ -- Stephane GALLAND <galland@arakhne.org>  Tue, 08 Aug 2017 21:47:06 +0200
+
+tex-upmethodology (20170615-0arakhne0) xenial; urgency=low
+
+  * Add macro \upm@format@sectionnum@postfix for overriding the section number formatting.
+
+ -- Stephane GALLAND <galland@arakhne.org>  Thu, 15 Jun 2017 09:24:37 +0200
+
+tex-upmethodology (20170310-0arakhne0) xenial; urgency=low
+
+  * Fixing invalid subfigure alignment.
+
+ -- Stephane GALLAND <galland@arakhne.org>  Fri, 10 Mar 2017 18:50:50 +0100
+
+tex-upmethodology (20170217-0arakhne0) xenial; urgency=low
+
+  * trusty -> xenial
+  * Replace the package "subfigure" by "subcaption".
+
+ -- Stephane GALLAND <galland@arakhne.org>  Fri, 17 Feb 2017 18:02:28 +0100
+
+tex-upmethodology (20150810-0arakhne2) trusty; urgency=low
+
+  * Change compression format for old Ubuntu versions.
+
+ -- Stephane GALLAND <galland@arakhne.org>  Mon, 30 Nov 2015 14:07:26 +0100
+
+tex-upmethodology (20150810-0arakhne0) trusty; urgency=low
+
+  * Fixing issue #26 related to the saving.restoring of counter.
+
+ -- Stephane GALLAND <galland@arakhne.org>  Mon, 10 Aug 2015 15:57:20 +0200
+
+tex-upmethodology (20150701-0arakhne0) trusty; urgency=low
+
+  * Fixing issues related to mactex.
+
+ -- Stephane GALLAND <galland@arakhne.org>  Wed, 01 Jul 2015 19:56:54 +0200
+
+tex-upmethodology (20150626-0arakhne0) trusty; urgency=low
+
+  * Add support of TikZ externalizer.
+
+ -- Stephane GALLAND <galland@arakhne.org>  Fri, 26 Jun 2015 16:36:11 +0200
+
+tex-upmethodology (20150424-0arakhne0) trusty; urgency=low
+
+  * Replace the uses of the Babel macro \iflanguage.
+
+ -- Stephane GALLAND <galland@arakhne.org>  Fri, 24 Apr 2015 12:24:44 +0200
+
+tex-upmethodology (20150227-0arakhne0) trusty; urgency=low
+
+  * Bug fix in \chaptertoc.
+
+ -- Stephane GALLAND <galland@arakhne.org>  Fri, 27 Feb 2015 15:22:30 +0100
+
+tex-upmethodology (20141013-0arakhne0) trusty; urgency=low
+
+  * Bug fix in enumdescription.
+
+ -- Stephane GALLAND <galland@arakhne.org>  Mon, 13 Oct 2014 22:56:30 +0200
+
+tex-upmethodology (20140911-0arakhne0) trusty; urgency=low
+
+  * New class options.
+
+ -- Stephane GALLAND <galland@arakhne.org>  Thu, 11 Sep 2014 18:30:33 +0200
+
+tex-upmethodology (20140910-0arakhne0) trusty; urgency=low
+
+  * Bug fixes
+
+ -- Stephane GALLAND <galland@arakhne.org>  Wed, 10 Sep 2014 21:25:52 +0200
+
+tex-upmethodology (20140710-0arakhne0) trusty; urgency=low
+
+  * Add the NatBib style.
+
+ -- Stephane GALLAND <galland@arakhne.org>  Wed, 09 Jul 2014 21:21:13 +0200
+
+tex-upmethodology (20140709-0arakhne0) trusty; urgency=low
+
+  * Add the environment "emphbox".
+  * Set the float fractions.
+
+ -- Stephane GALLAND <galland@arakhne.org>  Wed, 09 Jul 2014 19:45:38 +0200
+
+tex-upmethodology (20140623-0arakhne0) trusty; urgency=low
+
+  * Fixing issue #20.
+
+ -- Stephane GALLAND <galland@arakhne.org>  Mon, 23 Jun 2014 20:33:43 +0200
+
+tex-upmethodology (20140620-0arakhne0) trusty; urgency=low
+
+  * Fixing issues #18 and #19.
+
+ -- Stephane GALLAND <galland@arakhne.org>  Fri, 20 Jun 2014 14:20:41 +0200
+
+tex-upmethodology (20140303-0arakhne1) raring; urgency=low
+
+  * Add missed package of the TeX live.
+
+ -- Stephane GALLAND <galland@arakhne.org>  Fri, 07 Mar 2014 12:14:00 +0100
+
+tex-upmethodology (20140303-0arakhne0) raring; urgency=low
+
+  * Fixing the internal version number.
+  * Issue #15.
+
+ -- Stephane GALLAND <galland@arakhne.org>  Mon, 03 Mar 2014 16:47:30 +0100
+
+tex-upmethodology (20140209-0arakhne0) raring; urgency=low
+
+  * Issue #14.
+  * Fixing typos in the documentation.
+
+ -- Stephane GALLAND <galland@arakhne.org>  Sun, 09 Feb 2014 19:32:19 +0100
+
+tex-upmethodology (20131214-0arakhne0) raring; urgency=low
+
+  * Add the macro "backcovermessage".
+
+ -- Stephane GALLAND <galland@arakhne.org>  Sat, 14 Dec 2013 17:37:36 +0100
+
+tex-upmethodology (20131016-0arakhne0) raring; urgency=low
+
+  * Update the environment 'description' with the specification of the item's separator.
+
+ -- Stephane GALLAND <galland@arakhne.org>  Wed, 16 Oct 2013 09:01:28 +0200
+
+tex-upmethodology (20131014-0arakhne0) raring; urgency=low
+
+  * Add the macros \chapterfull, \sectionfull, and \newpageintoc.
+
+ -- Stephane GALLAND <galland@arakhne.org>  Mon, 14 Oct 2013 18:35:00 +0200
+
+tex-upmethodology (20131009-0arakhne0) raring; urgency=low
+
+  * Remove references to fancyhdr.
+
+ -- Stephane GALLAND <galland@arakhne.org>  Wed, 09 Oct 2013 15:43:11 +0200
+
+tex-upmethodology (20131004-0arakhne0) raring; urgency=low
+
+  * Fixing issues #11 and #12.
+
+ -- Stephane GALLAND <galland@arakhne.org>  Fri, 04 Oct 2013 11:33:01 +0200
+
+tex-upmethodology (20131001-0arakhne1) raring; urgency=low
+
+  * Enable compilation with latex in addition to pdflatex.
+
+ -- Stephane GALLAND <galland@arakhne.org>  Tue, 01 Oct 2013 21:51:36 +0200
+
+tex-upmethodology (20131001-0arakhne0) raring; urgency=low
+
+  * Enable compilation with latex in addition to pdflatex.
+
+ -- Stephane GALLAND <galland@arakhne.org>  Tue, 01 Oct 2013 21:51:36 +0200
+
+tex-upmethodology (20130930.1-0arakhne0) raring; urgency=low
+
+  * upmethodology-fmt.sty: change the rendering of the first names.
+
+ -- Stephane GALLAND <galland@arakhne.org>  Mon, 30 Sep 2013 12:09:29 +0200
+
+tex-upmethodology (20130930-0arakhne1) raring; urgency=low
+
+  * upmethodology-fmt.sty: add the macro \makefirstname
+
+ -- Stephane GALLAND <galland@arakhne.org>  Mon, 30 Sep 2013 11:43:03 +0200
+
+tex-upmethodology (20130929-0arakhne1) raring; urgency=low
+
+  * UPVERSION.def: this file was missed in the package.
+
+ -- Stephane GALLAND <galland@arakhne.org>  Sun, 29 Sep 2013 19:50:56 +0200
+
+tex-upmethodology (20130929-0arakhne0) raring; urgency=low
+
+  * Issue #8.
+  * Add macro \UPMVERSION
+
+ -- Stephane GALLAND <galland@arakhne.org>  Sun, 29 Sep 2013 18:59:18 +0200
+
+tex-upmethodology (20130919-0arakhne0) raring; urgency=low
+
+  * Define the macro '\declareupmtheorem'.
+  * Redefine the environment 'definition'.
+  * Add math symbols and operators.
+
+ -- Stephane GALLAND <galland@arakhne.org>  Thu, 19 Sep 2013 17:14:33 +0200
+
+tex-upmethodology (20130905-0arakhne0) raring; urgency=low
+
+  * Add the environment 'definition'.
+  * Add the macro 'makelastname'.
+  * Fixing bug in \frontmatter.
+
+ -- Stephane GALLAND <galland@arakhne.org>  Thu, 05 Sep 2013 01:33:17 +0200
+
+tex-upmethodology (20130828.2-0arakhne0) raring; urgency=low
+
+  * Add the environment 'framedcolorminipage'.
+  * Add the theorem environment 'definition'.
+
+ -- Stephane GALLAND <galland@arakhne.org>  Tue, 27 Aug 2013 19:18:08 +0200
+
+tex-upmethodology (20130828.1-0arakhne0) raring; urgency=low
+
+  * Fixing issues #4.
+
+ -- Stephane GALLAND <galland@arakhne.org>  Mon, 26 Aug 2013 21:20:01 +0200
+
+tex-upmethodology (20130828-0arakhne0) raring; urgency=low
+
+  * Fixing issues #1, #2, and #3.
+
+ -- Stephane GALLAND <galland@arakhne.org>  Mon, 26 Aug 2013 18:58:00 +0200
+
+tex-upmethodology (20130823-0arakhne0) raring; urgency=low
+
+  * Fixing the documentation.
+  * Avoid double spacing in the chapter titles.
+
+ -- Stephane GALLAND <galland@arakhne.org>  Fri, 23 Aug 2013 22:24:04 +0200
+
+tex-upmethodology (20130817-0arakhne1) raring; urgency=low
+
+  * Fixing the documentation.
+
+ -- Stephane GALLAND <galland@arakhne.org>  Sat, 17 Aug 2013 13:11:24 +0200
+
+tex-upmethodology (20130817-0arakhne0) raring; urgency=low
+
+  * upmethodology-fmt.sty: Change the prototype of "\mfigurewtex".
+  * README: Put back this file to be compliant with CTAN requirements.
+
+ -- Stephane GALLAND <galland@arakhne.org>  Sat, 17 Aug 2013 13:03:31 +0200
+
+tex-upmethodology (20130815-0arakhne1) raring; urgency=low
+
+  * upmethodology-document.cls: Fixing the version of the class file.
+
+ -- Stephane GALLAND <galland@arakhne.org>  Thu, 15 Aug 2013 17:24:39 +0200
+
+tex-upmethodology (20130815-0arakhne0) raring; urgency=low
+
+  * upmethodology-document.sty: Better support of babel.
+  * upmethodology-fmt.sty: Add macros.
+  * upmethodology-p-common.sty: Remove the definition of "\copryright".
+
+ -- Stephane GALLAND <galland@arakhne.org>  Thu, 15 Aug 2013 16:38:30 +0200
+
+tex-upmethodology (20130706-0arakhne0) raring; urgency=low
+
+  * upmethodology-document.sty: Add the macro '\ifdocumentauthor'.
+  * upmethodology-p-common.sty: Redefine the macro '\underline' to obtain a line close to the text baseline.
+
+ -- Stephane GALLAND <galland@arakhne.org>  Sun, 07 Jul 2013 00:25:09 +0200
+
+tex-upmethodology (20130530-0arakhne0) raring; urgency=low
+
+  * upmethodology-fmt.sty: Add the macro '\includegraphicswtex'.
+
+ -- Stephane GALLAND <galland@arakhne.org>  Thu, 30 May 2013 19:26:05 +0200
+
+tex-upmethodology (20130518-0arakhne0) raring; urgency=low
+
+  * upmethodology-fmt.sty: Replace the image extension 'pstex_t' by 'pdftex_t'.
+
+ -- Stephane GALLAND <galland@arakhne.org>  Sat, 18 May 2013 23:02:41 +0200
+
+tex-upmethodology (20130517-0arakhne0) raring; urgency=low
+
+  * precise -> raring
+  * upmethodology-p-common.sty: fixing the name of the provided package.
+  * upmethodology-document.cls: Replace the option 'pdftex=true' by 'pdftex' for hyperref package.
+  * upmethodology-fmt.cls: Define the default graphic extensions: pdf, png, jpg, jpeg, tiff, gif.
+  * upmethodology-fmt.cls: Define the default graphic search path to the current directory.
+
+ -- Stephane GALLAND <galland@arakhne.org>  Fri, 17 May 2013 11:00:38 +0200
+
+tex-upmethodology (20130428-0arakhne0) precise; urgency=low
+
+  * upmethodology-p-common.sty: include xcolor.sty in place of color.sty
+
+ -- Stephane GALLAND <galland@arakhne.org>  Sun, 28 Apr 2013 14:47:48 +0200
+
+tex-upmethodology (20130401-0arakhne2) precise; urgency=low
+
+  * upmethodology-fmt.sty: Bug fix: invalid boolean assignment to
+    detect the bibliography style already provided.
+
+ -- Stephane GALLAND <galland@arakhne.org>  Mon, 01 Apr 2013 21:23:29 +0200
+
+tex-upmethodology (20130401-0arakhne1) precise; urgency=low
+
+  * upmethodology-fmt.sty: Bug fix: invalid boolean assignment to
+    detect the bibliography style already provided.
+
+ -- Stephane GALLAND <galland@arakhne.org>  Mon, 01 Apr 2013 21:23:29 +0200
+
+tex-upmethodology (20130401-0arakhne0) precise; urgency=low
+
+  * upmethodology-fmt.sty: Do not put the default bibliography
+    style if one was already given by the expanding of
+    \bibliographystyle.
+
+ -- Stephane GALLAND <galland@arakhne.org>  Mon, 01 Apr 2013 21:23:29 +0200
+
+tex-upmethodology (20121002-0arakhne0) precise; urgency=low
+
+  * upmethodology-document.cls: Process the class options in
+    the order given by the caller and not in the order given
+    in the ".cls" file.
+
+ -- Stephane GALLAND <galland@arakhne.org>  Wed, 03 Oct 2012 20:23:15 +0200
+
+tex-upmethodology (20120921-0arakhne3) precise; urgency=low
+
+  * Update the documentation.
+
+ -- Stephane GALLAND <galland@arakhne.org>  Fri, 21 Sep 2012 17:14:30 +0200
+
+tex-upmethodology (20120921-0arakhne2) precise; urgency=low
+
+  * upmethodology-extension.sty:
+    - Replace "(c)" by "\copyright"
+
+ -- Stephane GALLAND <galland@arakhne.org>  Fri, 21 Sep 2012 13:52:59 +0200
+
+tex-upmethodology (20120917-0arakhne0) precise; urgency=low
+
+  * karmic -> precise
+  * upmethodology-fmt.sty:
+    - Bug fix: Bug fix in the macros \makename and \upmmakename. The size of the
+               first name is now relative to the size of the name.
+
+ -- Stephane GALLAND <galland@arakhne.org>  Wed, 30 Dec 2009 21:49:54 +0100
+
+tex-upmethodology (20091230-0arakhne0) karmic; urgency=low
+
+  * jaunty -> karmic
+  * upmethodology-version.sty:
+    - Bug fix: incremention of major version number may reset the minor version number.
+
+ -- Stephane GALLAND <galland@arakhne.org>  Wed, 30 Dec 2009 21:49:54 +0100
+
+tex-upmethodology (20091103-0arakhne0) jaunty; urgency=low
+
+  * upmethodology-document.sty:
+    - Add star-ed macros for author, informed people
+      and validator addition macros.
+  * upmethodology-extension.cls:
+    - \If* macros are marked with \long.
+  * upmethodology-p-common.sty:
+    - \If* macros are marked with \long.
+
+ -- Stephane GALLAND <galland@arakhne.org>  Mon, 02 Nov 2009 15:21:25 +0100
+
+tex-upmethodology (20091102-0arakhne0) jaunty; urgency=low
+
+  * upmethodology-fmt.sty:
+    - Add support for book and report classes.
+    - Fixing footnote macros to allow to put any character as id.
+    - Add macros: \prname, \drname, \phdname, \scdname, 
+      \mdname, \pename, \iename.
+  * upmethodology-document.cls:
+    - Add "book", "report" and "article" options.
+  * upmethodology-document.sty:
+    - Allow to override the default document font.
+    - Add "book", "report" and "article" support.
+  * upmethodology-backpage.sty:
+    - Rename \setbacklayout to \setbackcover.
+    - Add \makebackcover.
+  * upmethodology-extension.sty:
+    - Bug fix: provides "upmethodology-extension" insteed of "upmethodology-document".
+  * upmethodology-frontpage.sty:
+    - Clean code.
+  * upmethodology-p-common.sty:
+    - First public release.
+
+ -- Stephane GALLAND <galland@arakhne.org>  Mon, 02 Nov 2009 09:57:07 +0100
+
+tex-upmethodology (20091029-0arakhne0) jaunty; urgency=low
+
+  * Allow to override the global document font from style extensions.
+  * Bug fix: invert order of the \setfrontillustration parameters.
+
+ -- Stephane GALLAND <galland@arakhne.org>  Thu, 29 Oct 2009 12:26:41 +0100
+
+tex-upmethodology (20091028-0arakhne0) jaunty; urgency=low
+
+  * Move the style extensions outside the source package.
+  * Major bug fix: the PDF bookmarks are now correctly generated.
+  * Set the color of the hyperlinks according to the extension's color.
+
+ -- Stephane GALLAND <galland@arakhne.org>  Wed, 28 Oct 2009 14:18:05 +0100
+
+tex-upmethodology (20091027-0arakhne0) jaunty; urgency=low
+
+  * upmethodology-extension.sty:
+    - Clean the extension API.
+    - Add publication page.
+  * upmethodology-frontpage.sty:
+    - Clean the extension API.
+  * upmethodology-document.sty:
+    - Clean the extension API.
+    - Fixing document synoptic.
+    - Add publication page.
+  * upmethodology-document.cls:
+    - Add publication page.
+  * upmethodology-fmt:
+    - Add framedminipage environment.
+  * Update setlab and utbm extensions.
+
+ -- Stephane GALLAND <galland@arakhne.org>  Tue, 27 Oct 2009 23:42:48 +0100
+
+tex-upmethodology (20091025-0arakhne1) jaunty; urgency=low
+
+  * Fixing package dependencies.
+
+ -- Stephane GALLAND <galland@arakhne.org>  Sun, 25 Oct 2009 14:07:31 +0100
+
+tex-upmethodology (20091025-0arakhne0) jaunty; urgency=low
+
+  * tetex-upmethodology -> tex-upmethodology
+  * upmethodology-extension.sty:
+    - first public release.
+  * upmethodology-backpage.sty:
+    - first public release.
+  * upmethodology-document.cls:
+    - add back page support.
+    - add "nodocumentinfo" option.
+  * upmethodology-document.sty:
+    - add abstract and keywords.
+    - add front/back pages in extensions.
+    - add \if commands on extension's values.
+    - add automatic watermarks.
+  * upmethodology-frontpage.sty:
+    - add support for front page UPM extensions.
+  * upmethodology-fmt.sty:
+    - add \tablenote in mtable environment.
+    - add upmcaution, upminfo and upmquestion environments.
+    - remove CR character.
+    - add \arakhneorg command.
+  * upmethodology-version.sty:
+    - update English words.
+
+ -- Stephane GALLAND <galland@arakhne.org>  Sun, 25 Oct 2009 09:33:27 +0100
+
+tetex-upmethodology (20090429-0arakhne0) jaunty; urgency=low
+
+  * feisty -> jaunty
+  * upmethodology-fmt.sty: Include package pifont (texlive distribution)
+
+ -- Stephane GALLAND <galland@arakhne.org>  Thu, 01 May 2008 12:31:46 +0200
+
+tetex-upmethodology (20070812-0arakhne2) feisty; urgency=low
+
+  * Depends on texlive instead of texlive.
+
+ -- Stephane GALLAND <galland@arakhne.org>  Thu, 01 May 2008 12:31:46 +0200
+
+tetex-upmethodology (20070812-0arakhne1) feisty; urgency=low
+
+  * Force the package to be for all the OS platforms.
+
+ -- Stephane GALLAND <galland@arakhne.org>  Mon, 13 Aug 2007 04:13:20 +0200
+
+tetex-upmethodology (20070812-0arakhne0) feisty; urgency=low
+
+  * Split the source tarballs to extract the extension sources.
+
+ -- Stephane GALLAND <galland@arakhne.org>  Sun, 12 Aug 2007 11:41:15 +0200
+
+tetex-upmethodology (20070707-1) unstable; urgency=low
+
+  * Add commands to set the bibliography style.
+
+ -- Stephane GALLAND <galland@arakhne.org>  Sat, 07 Jul 2007 23:47:35 +0200
+
+tetex-upmethodology (20070706-1) unstable; urgency=low
+
+  * Bug fix: use varioref for the footnote references.
+
+ -- Stephane GALLAND <galland@arakhne.org>  Fri, 06 Jul 2007 10:57:36 +0200
+
+tetex-upmethodology (20070705-1) unstable; urgency=low
+
+  * Add people name formatting function.
+
+ -- Stephane GALLAND <galland@arakhne.org>  Thu, 05 Jul 2007 11:34:50 +0200
+
+tetex-upmethodology (20070704-1) unstable; urgency=low
+
+  * Bug fix: the front page layout was fixed for the modern style.
+
+ -- Stephane GALLAND <galland@arakhne.org>  Wed, 04 Jul 2007 13:35:07 +0200
+
+tetex-upmethodology (20070703-2) unstable; urgency=low
+
+  * Bug fix: the directory /usr/share/texmf is no more used on Ubuntu.
+    Moving the files into /usr/share/texmf-tetex and
+    creating a symbolic link from /usr/share/texmf-tetex to
+    /usr/share/texmf
+
+ -- Stephane GALLAND <galland@arakhne.org>  Tue, 03 Jul 2007 19:15:03 +0200
+
+tetex-upmethodology (20070703-1) unstable; urgency=low
+
+  * New upstream
+
+ -- Stephane GALLAND <galland@arakhne.org>  Tue, 03 Jul 2007 16:13:25 +0200

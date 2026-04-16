@@ -1,0 +1,19 @@
+#!/bin/sh -e
+# 
+# postinst maintainer script for the Debian tex-upmethodology package.
+
+case "$1" in
+  configure|abort-*)
+
+    mktexlsr
+    echo "Creating missing formats."
+    update-updmap --quiet
+    ;;
+  *)
+    echo "tex-upmethodology: postinst called with unknown argument: '$1''" >&2
+    ;;
+esac
+
+
+#DEBHELPER#
+

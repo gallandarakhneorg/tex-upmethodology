@@ -1,0 +1,128 @@
+#!/usr/bin/make -f
+#
+# debian/rules file to build upmethodology package.
+#
+# Created 3 Jul 2007, by Stephane Galland <galland@arakhne.org>
+
+#export DH_VERBOSE=1
+
+include /usr/share/cdbs/1/rules/buildvars.mk
+
+top_dir      := $(shell pwd)
+
+upstream_dir := $(top_dir)/upstream
+build_dir    := $(top_dir)/build_dir
+patch_dir    := $(top_dir)/debian/patches
+install_dir  := $(top_dir)/debian/tmp
+
+install_target := usr/share/texmf/tex/latex/upmethodology
+install_doc_target := usr/share/texmf/doc/latex/upmethodology
+install_bst_target := usr/share/texmf/bibtex/bst/upmethodology
+
+build_src    := $(build_dir)/upmethodology
+
+showvars:
+	@echo "top_dir=$(top_dir)"
+	@echo "upstream_dir=$(upstream_dir)"
+	@echo "build_dir=$(build_dir)"
+	@echo "patch_dir=$(patch_dir)"
+	@echo "install_dir=$(install_dir)"
+	@echo "build_src=$(build_src)"
+
+build: build-stamp
+
+configure-stamp: unpack-stamp
+	dh_testdir
+	touch $@
+
+build-stamp: configure-stamp
+	dh_testdir
+	cd $(build_src)
+	touch $@
+
+unpack-stamp:
+	dh_testdir
+	mkdir -p $(build_src)
+
+	# Force updating of DebConf internationalization
+	#debconf-updatepo
+
+	# unpack upstream tarballs
+	@cd $(build_dir)\
+		&& for f in $(upstream_dir)/*.tar.gz ; do\
+			echo "unpacking $$f"; \
+			tar zxf "$$f"; \
+		   done;
+
+	# Check file permissions for ensuring that the input archive files
+	# have an expected permission rights
+	@cd $(build_dir) \
+		&& for f in `find -type d` ; do \
+			PERM=`stat --printf "%a" "$$f"`; \
+			if test "$$PERM" -ne 755; then \
+				echo "Invalid file permission $$PERM for $(build_dir)/$$f"; \
+				chmod 755 "$(build_dir)/$$f"; \
+			fi; \
+		done
+	@cd $(build_dir) \
+		&& for f in `find -type f` ; do \
+			PERM=`stat --printf "%a" "$$f"`; \
+			if test "$$PERM" -ne 755 -a "$$PERM" -ne 644; then \
+				echo "Invalid file permission $$PERM for $(build_dir)/$$f"; \
+				chmod g-w,o-w "$(build_dir)/$$f"; \
+			fi; \
+		done
+
+	# apply any patches
+	@cd $(build_src) \
+		&& for p in $(wildcard $(patch_dir)/*.patch); do \
+			patch -p0 < $$p; \
+		done;
+
+	touch $@
+
+binary-indep:
+binary-arch: build install
+	dh_testdir
+	dh_testroot
+	dh_installdirs
+	dh_install --sourcedir=debian/tmp --autodest --fail-missing
+	dh_installdocs
+	dh_installchangelogs
+	dh_installdebconf
+	dh_compress
+	dh_fixperms
+	dh_installdeb
+	dh_shlibdeps
+	dh_gencontrol
+	dh_md5sums
+	dh_builddeb -- -Zgzip
+
+binary: binary-indep binary-arch
+
+install: install-stamp
+
+install-stamp: build-stamp
+	dh_testdir
+	dh_testroot
+	dh_prep
+	install -d -m 0755 "$(install_dir)/$(install_target)"
+	install -d -m 0755 "$(install_dir)/$(install_doc_target)"
+	install -d -m 0755 "$(install_dir)/$(install_bst_target)"
+	cd $(build_src)/src && install -m 0644 *.def "$(install_dir)/$(install_target)/"
+	cd $(build_src)/src && install -m 0644 *.sty "$(install_dir)/$(install_target)/"
+	cd $(build_src)/src && install -m 0644 *.cls "$(install_dir)/$(install_target)/"
+	cd $(build_src)/src && install -m 0644 *.jpg "$(install_dir)/$(install_target)/"
+	cd $(build_src)/doc && install -m 0644 *-doc.pdf "$(install_dir)/$(install_doc_target)/"
+	cd $(build_src)/doc && install -m 0644 *-doc.tex "$(install_dir)/$(install_doc_target)/"
+	cd $(build_src)/bst && install -m 0644 *.bst "$(install_dir)/$(install_bst_target)/"
+	touch $@
+clean:
+	dh_testdir
+	dh_testroot
+	rm -rf $(build_dir) *-stamp
+	dh_clean
+
+
+.PHONY: binary-indep binary-arch binary clean build install
+
