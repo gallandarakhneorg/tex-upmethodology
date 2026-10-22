@@ -1,3 +1,10 @@
+tex-upmethodology (20261022-0arakhne0) noble; urgency=low
+
+  * Disabling the default import of the package "enumitem".
+  * Definition of a specific font color for the \Emph command.
+
+ -- Stephane GALLAND <galland@arakhne.org>  Thu, 22 Oct 2026 16:23:07 +0200
+
 tex-upmethodology (20260410-0arakhne1) noble; urgency=low
 
   * Bug fix: Fixing invalid root folder name in source archive for debian repository.
